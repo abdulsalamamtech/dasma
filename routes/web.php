@@ -26,13 +26,71 @@ require __DIR__.'/auth.php';
 // DASMA APP
 Route::get('/dasma', function () {
     return view('dasma.index');
-});
+})->name('index');
 
+Route::get('/dasma/search', function () {
+    return view('dasma.search');
+})->name('search');
 
 Route::get('/dasma/store', function () {
     return view('dasma.store');
-});
+})->name('store');
 
-Route::get('/dasma/collection', function () {
-    return view('dasma.collection-grid');
+Route::get('/dasma/product', function () {
+    return view('dasma.product');
+})->name('product');
+
+
+Route::get('/dasma/about', function () {
+    return view('dasma.about');
+})->name('about');
+
+Route::get('/dasma/contact', function () {
+    return view('dasma.contact');
+})->name('contact');
+
+Route::get('/dasma/terms-and-conditions', function () {
+    return view('dasma.terms-and-conditions');
+})->name('terms-and-conditions');
+
+
+
+
+// Authenticated user accounts
+Route::prefix('dasma/account')->group(function () {
+
+    Route::get('/', function () {
+        return view('dasma.account.dashboard');
+    })->name('account');
+
+
+    Route::get('/cart', function () {
+        return view('dasma.account.cart');
+    })->name('cart');
+
+    Route::get('/wishlist', function () {
+        return view('dasma.account.wishlist');
+    })->name('wishlist');
+
+    Route::get('/orders', function () {
+        return view('dasma.account.orders');
+    })->name('orders');
+
+    Route::get('/transactions', function () {
+        return view('dasma.account.transactions');
+    })->name('transactions');
+
+    Route::get('/history', function () {
+        return view('dasma.account.history');
+    })->name('history');
+
+    Route::get('/settings', function () {
+        return view('dasma.account.settings');
+    })->name('settings');
+
+
+    // More
+    Route::get('/shipping-methods', function () {
+        return view('dasma.account.shipping-methods');
+    })->name('shipping');
 });
