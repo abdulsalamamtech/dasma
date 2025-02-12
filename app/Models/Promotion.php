@@ -20,4 +20,22 @@ class Promotion extends Model
         'discount',
         'active',
     ];
+
+    protected $casts = [
+        'active' => 'boolean',
+        'discount' => 'integer',
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
+        'banner_id' => 'integer',
+    ];
+
+    public function banner(){
+        return $this->belongsTo(Asset::class, 'banner_id');
+    }
+
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
+
+    
 }

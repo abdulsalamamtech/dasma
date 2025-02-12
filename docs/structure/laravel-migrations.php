@@ -318,6 +318,7 @@ return new class extends Migration
             $table->decimal('total_amount', 10, 2);
             $table->string('coupon')->nullable();
             $table->text('note')->nullable();
+            $table->string('paid')->default('no');
             $table->enum('status', [
                 'pending',
                 'cancel',
@@ -438,6 +439,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('subject');
             $table->text('message');
+            $table->enum('status', ['unread', 'read', 'answered','replied'])->default('unread');
             $table->timestamps();
         });
     }

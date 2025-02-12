@@ -20,4 +20,8 @@ class Address extends Model
         'state',
         'country'
     ];    
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

@@ -99,6 +99,7 @@
     total_amount
     coupon_id [eg DASMA25 for 2% off]
     note [nullable]
+    paid
     status 
         [
             pending (not paid), 
@@ -137,6 +138,12 @@
     rating [1 to 5]
     status [pending, approved, rejected]
 
+
+## chat
+    user_id
+    admin_id
+    content
+    status [pending, viewed]
 
 ## messages
     name

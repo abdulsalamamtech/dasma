@@ -12,10 +12,10 @@ class ProductVariation extends Model
 
     protected $fillable = [
         'product_id',
+        'asset_id',
         'title',
         'color',
         'size',
-        'asset_id',
         'sku'
     ];
 

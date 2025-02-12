@@ -77,5 +77,15 @@ class User extends Authenticatable
     public function viewProducts()
     {
         return $this->hasMany(ViewProduct::class);
-    }    
+    }   
+    
+    public function transactions(){
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
+
+    
 }

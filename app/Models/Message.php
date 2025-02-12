@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Brand extends Model
+class Message extends Model
 {
-    use HasFactory, SoftDeletes;
-    
-    protected $fillable = [
-        'banner_id',
-        'name',
-        'slug'
-    ];
 
-    public function banner(){
-        return $this->belongsTo(Asset::class, 'banner_id');
-    }
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'name',
+        'email',
+        'subject',
+        'message',
+        // Add any other fields required for your application
+        'status', // Example field for message status
+    ];
 }
