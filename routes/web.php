@@ -4,7 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return view('dasma.index');
 });
 
 Route::get('/dashboard', function () {
@@ -57,7 +58,7 @@ Route::get('/dasma/terms-and-conditions', function () {
 
 
 // Authenticated user accounts
-Route::prefix('dasma/account')->group(function () {
+Route::prefix('/account')->group(function () {
 
     Route::get('/', function () {
         return view('dasma.account.dashboard');
@@ -93,4 +94,112 @@ Route::prefix('dasma/account')->group(function () {
     Route::get('/shipping-methods', function () {
         return view('dasma.account.shipping-methods');
     })->name('shipping');
+});
+
+
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Dashboard routes
+    Route::get('/', function () {
+        return view('dashboard.dashboard');
+    })->name('dashboard');
+
+    Route::get('/products', function () {
+        return view('dashboard.pages.products.index');
+    })->name('products.index');
+    Route::get('/centers', function () {
+        return view('dashboard.pages.centers.index');
+    })->name('');
+    Route::get('/centers', function () {
+        return view('dashboard.pages.centers.index');
+    })->name('');
+    Route::get('/centers', function () {
+        return view('dashboard.pages.centers.index');
+    })->name('');
+    Route::get('/centers', function () {
+        return view('dashboard.pages.centers.index');
+    })->name('');
+    Route::get('/centers', function () {
+        return view('dashboard.pages.centers.index');
+    })->name('');
+});
+
+
+Route::get('/fallback', function () {
+    return view('dashboard.index');
+})->name('fallback');
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('states', function(){
+    $states=[
+        "Abia",
+        "Adamawa",
+        "Akwa-Ibom",
+        "Anambra",
+        "Bauchi",
+        "Bayelsa",
+        "Benue",
+        "Borno",
+        "Cross-River",
+        "Delta",
+        "Ebonyi",
+        "Edo",
+        "Ekiti",
+        "Enugu",
+        "FCT-Abuja",
+        "Gombe",
+        "Imo",
+        "Jigawa",
+        "Kaduna",
+        "Kano",
+        "Katsina",
+        "Kebbi",
+        "Kogi",
+        "Kwara",
+        "Lagos",
+        "Nasarawa",
+        "Niger",
+        "Ogun",
+        "Ondo",
+        "Osun",
+        "Oyo",
+        "Plateau",
+        "Rivers",
+        "Sokoto",
+        "Taraba",
+        "Yobe",
+        "Zamfara"
+    ];
+    return $states;
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Last Route
+Route::fallback(function () {
+    // ...
+    return view('dashboard.dashboard')->with('error', 'page not found');
 });

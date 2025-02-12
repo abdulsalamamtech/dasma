@@ -7,6 +7,7 @@
     email [min:10| max:64]
     password [min:8, max:32]
     role [super-admin | admin | customer]
+    # default_address [yes | no]
 
 ## assets
     name
@@ -26,13 +27,21 @@
     city
     state
     country [Nigeria]
+    default_address [yes | no]
 
+## coupons [eg DASMA25 for 2% off]
+    name 
+    coupon_code [unique max: 20 ] 
+    expires [date]
 
 ## promotions [search a product that has this promotion id]
     banner [single image asset | 50 by 50]
     title [hot deal, happy new year]
     description [get our happy new year discount products]
     discount [min:0 | max:100, 10% discount]
+    show [yes| no]
+    start_date
+    end_date
 
 
 ## brands [vendors]
@@ -53,9 +62,11 @@
     initial_price [must be > price]
     price [< initial price]
     stock [number of products in stock]
-    sku [id + user + created_at]
+    sku [(id + user + created_at) nullable string]
     description
     tags [hot deal, new product, bags]
+    colors []
+    sizes []
     views [default 0]
         category_id [belongs to a category]
         brand_id [nullable belongs to a brand]
@@ -64,9 +75,9 @@
 ## product_variations [max of 4 asset images per product]
     product_id [belongs to a product]
     title [side-view |  back-view]
-    color
-    size
+    (color size)
     asset_id [single asset image]
+    sku [id + user + created_at]
 
 ## view_products
     user_id
@@ -86,7 +97,7 @@
 ## orders
     user_id
     total_amount
-    coupon [eg DASMA25 for 2% off]
+    coupon_id [eg DASMA25 for 2% off]
     note [nullable]
     status 
         [
@@ -102,6 +113,8 @@
             refunded (by admin), 
         ]
     address_id
+    // response data from payment server
+    data
 
 ## order_items
     user_id
@@ -130,6 +143,10 @@
     email
     subject
     message
+
+
+## newsletters
+    email
 
 ----------------------------------------------------------------------
 
