@@ -480,14 +480,14 @@ $app_brand = [
                                                             <select type="text" name="status" id="status"
                                                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                                 placeholder="confirmed" required="" value="">
-                                                                {{-- <option value="">select a status</option> --}}
-                                                                {{-- @forelse (App\Enums\OrderStatusEnum::cases() as $order_status->value)
-                                                                    <option value="{{ $order_status->value}}" @selected($order_status->value== $order->status)>
-                                                                        {{ $order_status->value}}
+                                                                <option value="">select a status</option>
+                                                                @forelse (App\Enums\OrderStatusEnum::cases() as $order_status)
+                                                                    <option value="{{ $order_status->value}}">
+                                                                        {{ $order_status->name}}
                                                                     </option>
                                                                 @empty
                                                                     <option value="">promotions unavailable</option>
-                                                                @endforelse --}}
+                                                                @endforelse
                                                             </select>
                                                         </div>
                                                         {{-- Product Items Image --}}

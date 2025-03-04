@@ -23,7 +23,7 @@ class Order extends Model
 
     protected $casts = [
         'total_amount' => 'decimal:2'
-        'status' => OrderStatusEnum::class,
+        // 'status' => OrderStatusEnum::class,
     ];
 
     public function user()
