@@ -41,9 +41,9 @@ class Order extends Model
         return $this->hasMany(OrderItems::class);
     }
 
-    public function transaction()
+    public function transactions()
     {
-        return $this->hasOne(Transaction::class);
+        return $this->hasMany(Transaction::class);
     }
 
     public function review()

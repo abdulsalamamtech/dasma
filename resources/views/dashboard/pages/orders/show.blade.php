@@ -11,7 +11,7 @@
 
 
                 {{-- Start order Info --}}
-                <div class="max-w-xlg xlg:mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                <div class="max-w-xlg xlg:mx-auto bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg">
 
 
                     {{-- Return back --}}
@@ -22,169 +22,184 @@
                       </a>
                     </div>
 
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Order Information
-                    </h3>
-
-                    <div class="space-y-3 pt-4">
-
-                      {{-- ID --}}
-                      <div class="flex justify-between items-start">
-                          <div class="w-1/3 text-gray-700 dark:text-gray-300">ID:</div>
-                          <div class="w-7/12 text-gray-500 dark:text-gray-400"> #{{ $order->id }}</div>
-                      </div>
-
-                      {{-- Name --}}
-                      <div class="flex justify-between items-start">
-                          <div class="w-1/3 text-gray-700 dark:text-gray-300">Name:</div>
-                          <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->name }}</div>
-                      </div>
-
-                      <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Coupon:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order?->coupon ?? 'NILL'}}</div>
-                      </div>
-
-                      <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Order Items No:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->items_count ?? 0 }}</div>
-                      </div>
-
-                      <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">total Amount:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ App\Helpers\Setup::currency()}} {{ $order->total_amount ?? 0 }}</div>
-                      </div>
-
-                      <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Status:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{$order->status}}</div>
-                      </div>
-
-                      <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Updated at:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->updated_at }}</div>
-                      </div>
-
-                      <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Created at:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->created_at }}</div>
-                      </div>
-
+                    <div id="accordion-collapse" data-accordion="collapse">
+                        {{-- Order Information --}}
+                        <h2 id="accordion-collapse-heading-1">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-1" aria-expanded="true" aria-controls="accordion-collapse-body-1">
+                            <span>Other Information</span>
+                            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                            </svg>
+                        </button>
+                        </h2>
+                        <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
+                        <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+                            <div class="space-y-3 pt-4">
+    
+                                {{-- ID --}}
+                                <div class="flex justify-between items-start">
+                                    <div class="w-1/3 text-gray-700 dark:text-gray-300">ID:</div>
+                                    <div class="w-7/12 text-gray-500 dark:text-gray-400"> #{{ $order->id }}</div>
+                                </div>
+    
+                                {{-- Name --}}
+                                <div class="flex justify-between items-start">
+                                    <div class="w-1/3 text-gray-700 dark:text-gray-300">Name:</div>
+                                    <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->name }}</div>
+                                </div>
+    
+                                <div class="flex justify-between items-start">
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Coupon:</div>
+                                <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order?->coupon ?? 'NILL'}}</div>
+                                </div>
+    
+                                <div class="flex justify-between items-start">
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Order Items No:</div>
+                                <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->items_count ?? 0 }}</div>
+                                </div>
+    
+                                <div class="flex justify-between items-start">
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">total Amount:</div>
+                                <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ App\Helpers\Setup::currency()}} {{ $order->total_amount ?? 0 }}</div>
+                                </div>
+    
+                                <div class="flex justify-between items-start">
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Status:</div>
+                                <div class="w-7/12 text-gray-500 dark:text-gray-400">{{$order->status}}</div>
+                                </div>
+    
+                                <div class="flex justify-between items-start">
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Updated at:</div>
+                                <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->updated_at }}</div>
+                                </div>
+    
+                                <div class="flex justify-between items-start">
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Created at:</div>
+                                <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->created_at }}</div>
+                                </div>
+    
+                            </div>
+                        </div>
+                        </div>
+    
+                        {{-- Delivery Information --}}
+                        <h2 id="accordion-collapse-heading-2">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-2" aria-expanded="false" aria-controls="accordion-collapse-body-2">
+                            <span>Delivery Information</span>
+                            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                            </svg>
+                        </button>
+                        </h2>
+                        <div id="accordion-collapse-body-2" class="hidden" aria-labelledby="accordion-collapse-heading-2">
+                        <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+                            <div class="space-y-3 pt-4">
+    
+                                {{-- ID --}}
+                                <div class="flex justify-between items-start">
+                                    <div class="w-1/3 text-gray-700 dark:text-gray-300">User ID:</div>
+                                    <div class="w-7/12 text-gray-500 dark:text-gray-400"> #{{ $order->user_id }}</div>
+                                </div>
+    
+                                <div class="flex justify-between items-start">
+                                    <div class="w-1/3 text-gray-700 dark:text-gray-300">Username:</div>
+                                    <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->user->name }}</div>
+                                </div>
+    
+                                <div class="flex justify-between items-start">
+                                    <div class="w-1/3 text-gray-700 dark:text-gray-300">Email:</div>
+                                    <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->user->email }}</div>
+                                </div>
+    
+                                {{-- Name --}}
+                                <div class="flex justify-between items-start">
+                                    <div class="w-1/3 text-gray-700 dark:text-gray-300">Name:</div>
+                                    <div class="w-7/12 text-gray-500 dark:text-gray-400">
+                                    {{$order->address?->first_name . '' . $order->address?->last_name . ' ' .$order->address?->other_name}}
+                                    </div>
+                                </div>
+    
+    
+    
+                                <div class="flex justify-between items-start">
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Phone:</div>
+                                <div class="w-7/12 text-gray-500 dark:text-gray-400">
+                                    {{$order->address?->phone_number}}
+                                </div>
+                                </div>
+    
+                                <div class="flex justify-between items-start">
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Address:</div>
+                                <div class="w-7/12 text-gray-500 dark:text-gray-400">
+                                    {{$order->address?->street . ' ' . $order->address?->city . ' ' . $order->address?->state . ' ' . $order->address?->country}}
+                                </div>
+                                </div>
+    
+                                <div class="flex justify-between items-start">
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Customer's Note:</div>
+                                <div class="w-7/12 text-gray-500 dark:text-gray-400">
+                                    {{$order->note}}
+                                </div>
+                                </div>
+    
+                                <div class="flex justify-between items-start">
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Updated at:</div>
+                                <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->address->updated_at }}</div>
+                                </div>
+    
+                                <div class="flex justify-between items-start">
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Created at:</div>
+                                <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->address->created_at }}</div>
+                                </div>
+    
+                            </div>
+                        </div>
+                        </div>
+    
+                        {{-- Other Items --}}
+                        <h2 id="accordion-collapse-heading-3">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-3" aria-expanded="false" aria-controls="accordion-collapse-body-3">
+                            <span>Other Items</span>
+                            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                            </svg>
+                        </button>
+                        </h2>
+                        <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
+                            <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                                <div class="grid grid-cols-4 gap-6">
+                                    @forelse ($order->items as $item)
+                                    <div class="border border-gray-400 shadow-sm p-3 text-gray-900 dark:text-white">
+                                        <img src="{{ $item->product->banner->url }}" alt="{{ $item->product->name }}" class="w-[100%] h-[250px] pb-4">
+                                        <h4><span class="text-gray-500 pb-2">Name: </span>{{ $item->product->name }}</h4>
+                                        <div class="flex items-center justify-between pb-2">
+                                            <div class="w-10 h-5 bg-[blue]"> color</div>
+                                            <h4><span class="text-gray-500">Size: </span>{{  $item?->size ?? 80 }}</h4>
+                                            <h4><span class="text-gray-500">Qty: </span>{{  $item->quantity }}</h4>
+                                        </div>
+                                        <h4><span class="text-gray-500 pb-2">Price: </span>{{  $item->price }}</h4>
+                                        <h4><span class="text-gray-500 pb-2">Total: </span>{{ App\Helpers\Setup::currency() .' '.  ($item->price * $item->quantity)}}</h4>
+                                    </div>
+                                    @empty
+                                        <div>unable to load order items</div>
+                                    @endforelse
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
+      
                 </div>
                 {{-- End order Info --}}
-
-                <div class="py-4">
-                    <hr/>
-                </div>
-
-                {{-- Delivery Information --}}
-                <div class="max-w-xlg xlg:mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-
-
-                    {{-- Title --}}
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Delivery Information
-                    </h3>
-                    <div class="space-y-3 pt-4">
-
-                      {{-- ID --}}
-                      <div class="flex justify-between items-start">
-                          <div class="w-1/3 text-gray-700 dark:text-gray-300">User ID:</div>
-                          <div class="w-7/12 text-gray-500 dark:text-gray-400"> #{{ $order->user_id }}</div>
-                        </div>
-
-                        <div class="flex justify-between items-start">
-                            <div class="w-1/3 text-gray-700 dark:text-gray-300">Username:</div>
-                            <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->user->name }}</div>
-                        </div>
-
-                        <div class="flex justify-between items-start">
-                          <div class="w-1/3 text-gray-700 dark:text-gray-300">Email:</div>
-                          <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->user->email }}</div>
-                        </div>
-
-                      {{-- Name --}}
-                      <div class="flex justify-between items-start">
-                          <div class="w-1/3 text-gray-700 dark:text-gray-300">Name:</div>
-                          <div class="w-7/12 text-gray-500 dark:text-gray-400">
-                            {{$order->address?->first_name . '' . $order->address?->last_name . ' ' .$order->address?->other_name}}
-                          </div>
-                      </div>
-
-
-
-                      <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Phone:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">
-                            {{$order->address?->phone_number}}
-                        </div>
-                      </div>
-
-                      <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Address:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">
-                            {{$order->address?->street . ' ' . $order->address?->city . ' ' . $order->address?->state . ' ' . $order->address?->country}}
-                        </div>
-                      </div>
-
-                      <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Customer's Note:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">
-                            {{$order->note}}
-                        </div>
-                      </div>
-
-                      <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Updated at:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->address->updated_at }}</div>
-                      </div>
-
-                      <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Created at:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->address->created_at }}</div>
-                      </div>
-
-                    </div>
-
-                </div>
-
-
-                {{-- Start Order Items --}}
-                <div class="rounded-lg dark:border-gray-700 mt-10">
-
-                    {{-- Tables --}}
-                    <div class="my-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
-                        <div class="grid grid-cols-4 gap-6">
-                            @forelse ($order->items as $item)
-                            <div class="border border-gray-400 shadow-sm p-3 text-gray-900 dark:text-white">
-                                <img src="{{ $item->product->banner->url }}" alt="{{ $item->product->name }}" class="w-[100%] h-[250px] pb-4">
-                                <h4><span class="text-gray-500 pb-2">Name: </span>{{ $item->product->name }}</h4>
-                                <div class="flex items-center justify-between pb-2">
-                                    <div class="w-10 h-5 bg-[blue]"> color</div>
-                                    <h4><span class="text-gray-500">Size: </span>{{  $item?->size ?? 80 }}</h4>
-                                    <h4><span class="text-gray-500">Qty: </span>{{  $item->quantity }}</h4>
-                                </div>
-                                <h4><span class="text-gray-500 pb-2">Price: </span>{{  $item->price }}</h4>
-                                <h4><span class="text-gray-500 pb-2">Total: </span>{{ App\Helpers\Setup::currency() .' '.  ($item->price * $item->quantity)}}</h4>
-                            </div>
-                            @empty
-                                <div>unable to load order items</div>
-                            @endforelse
-                        </div>
-                    </div>
-
-                </div>
-
 
             </div>
             {{-- End of Data Information --}}
 
 
+            
+            
             {{-- Start Payment Transactions --}}
             <div class="rounded-lg dark:border-gray-700 mt-10">
-
+                
                 {{-- Tables --}}
                 <div class="my-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
         
@@ -268,6 +283,9 @@
                                             User
                                         </th>
                                         <th scope="col" class="px-6 py-3">
+                                            Payment Method
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
                                             Amount Paid
                                         </th>
                                         <th scope="col" class="px-6 py-3">
@@ -281,7 +299,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @isset($product->variations)
+                {{{ $transactions }}}
+
+                                    @isset($transactions)
                                         @forelse ( $transactions as $transaction)
 
                                             <!-- User table record 1 -->
@@ -307,27 +327,28 @@
                                                     </div>
                                                 </th>
                                                 <td class="px-6 py-4">
-                                                    <div>
+                                                    {{$transaction->payment_method}}
+                                                </td>
+                                                <td class="px-6 py-4">
                                                         {{$transaction->amount}}
-                                                    </div>
                                                 </td>
                                                 <td class="px-6 py-4">
-                                                    {{$transaction->refrense}}
+                                                    {{$transaction->reference}}
                                                 </td>
                                                 <td class="px-6 py-4">
-                                                    {{$product->status}}
+                                                    {{$transaction->status}}
                                                 </td>
                                                 <td class="px-6 py-4">
         
-                                                    <button id="dropdownMenuIconButton{{ $product->id }}" data-dropdown-toggle="dropdownDots{{ $product->id }}" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
+                                                    <button id="dropdownMenuIconButton{{ $transaction->id }}" data-dropdown-toggle="dropdownDots{{ $transaction->id }}" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
                                                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
                                                         <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
                                                         </svg>
                                                     </button>
         
                                                         <!-- Dropdown menu -->
-                                                        <div id="dropdownDots{{ $product->id }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton{{ $product->id }}">
+                                                        <div id="dropdownDots{{ $transaction->id }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton{{ $transaction->id }}">
                                                                 <li>
                                                                     {{-- Deactivate --}}
                                                                     <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">

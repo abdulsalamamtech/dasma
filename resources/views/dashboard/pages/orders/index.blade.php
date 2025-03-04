@@ -418,7 +418,7 @@ $app_brand = [
                                         
                                         <!-- Edit user modal 1 -->
                                         <div id="editUserModal{{ $order->id }}" tabindex="-1" aria-hidden="true"
-                                            class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-white dark:bg-gray-700">
+                                            class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                             <div class="relative w-full max-w-2xl max-h-full bg-white">
                                                 <!-- Modal content -->
                                                 <form action="{{ route('admin.orders.update', $order->id) }}" method="POST" enctype="multipart/form-data"
@@ -467,7 +467,7 @@ $app_brand = [
                                                                     Total Items {{ App\Helpers\Setup::currency()}}</label>
                                                                 <input type="number" name="total_amount" id="total_amount" value="{{$order->total_amount}}"
                                                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                    placeholder="" required="">
+                                                                    placeholder="" required="" disabled>
                                                             </div>
 
                                                         </div>
@@ -475,14 +475,14 @@ $app_brand = [
                                                         <div class="col-span-12 bg-white dark:bg-gray-700">
                                                             <label for="description"
                                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                                Order Status
+                                                                Order Status Is ({{ $order->status }})
                                                             </label>
                                                             <select type="text" name="status" id="status"
                                                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                                 placeholder="confirmed" required="" value="">
                                                                 <option value="">select a status</option>
                                                                 @forelse (App\Enums\OrderStatusEnum::cases() as $order_status)
-                                                                    <option value="{{ $order_status->value}}">
+                                                                    <option value="{{ $order_status->value}}" @selected($order_status->value == $order->status)>
                                                                         {{ $order_status->name}}
                                                                     </option>
                                                                 @empty
@@ -490,26 +490,42 @@ $app_brand = [
                                                                 @endforelse
                                                             </select>
                                                         </div>
-                                                        {{-- Product Items Image --}}
-                                                        <div class="col-span-12 bg-white dark:bg-gray-700">
-                                                            <div class="grid grid-cols-4 gap-6">
-                                                                @forelse ($order->items as $item)
-                                                                <div class="border border-gray-400 shadow-sm p-3 text-gray-900 dark:text-white">
-                                                                    <img src="{{ $item->product->banner->url }}" alt="{{ $item->product->name }}" class="w-12 h-12">
-                                                                    <h4><span class="text-gray-500">Name: </span>{{ $item->product->name }}</h4>
-                                                                    <h4><span class="text-gray-500">Qty: </span>{{  $item->quantity }}</h4>
-                                                                    <h4><span class="text-gray-500">Price: </span>{{  $item->price }}</h4>
-                                                                    <h4><span class="text-gray-500">Total: </span>{{ App\Helpers\Setup::currency() .' '.  ($item->price * $item->quantity)}}</h4>
-                                                                </div>
-                                                                @empty
-                                                                    <div>unable to load order items</div>
-                                                                @endforelse
+                                                        <div id="accordion-collapse" data-accordion="collapse">
+                                                            {{-- Order Information --}}
+                                                            <h2 id="accordion-collapse-heading-1">
+                                                            <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-1" aria-expanded="false" aria-controls="accordion-collapse-body-1">
+                                                                <span>Other Items</span>
+                                                                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                                                </svg>
+                                                            </button>
+                                                            </h2>
+                                                            <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
+                                                            <div class="p-5 border border-gray-200 dark:border-gray-700">
+
+                                                                {{-- Product Items Image --}}
+                                                                <div class="col-span-12 bg-white dark:bg-gray-700">
+                                                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                                                        @forelse ($order->items as $item)
+                                                                        <div class="border border-gray-400 shadow-sm p-3 text-gray-900 dark:text-white">
+                                                                            <img src="{{ $item->product->banner->url }}" alt="{{ $item->product->name }}" class="w-12 h-12">
+                                                                            <h4><span class="text-gray-500">Name: </span>{{ $item->product->name }}</h4>
+                                                                            <h4><span class="text-gray-500">Qty: </span>{{  $item->quantity }}</h4>
+                                                                            <h4><span class="text-gray-500">Price: </span>{{  $item->price }}</h4>
+                                                                            <h4><span class="text-gray-500">Total: </span>{{ App\Helpers\Setup::currency() .' '.  ($item->price * $item->quantity)}}</h4>
+                                                                        </div>
+                                                                        @empty
+                                                                            <div>unable to load order items</div>
+                                                                        @endforelse
+                                                                    </div>
+                                                                </div> 
                                                             </div>
-                                                        </div> 
+                                                            </div>
+                                                        </div>
 
                                                         <div class=" bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
                                                             <div class="text-gray-900 dark:text-white">
-                                                                <span clas s="text-gray-500 pl-2">Name: </span>
+                                                                <span class="text-gray-500 pl-2">Name: </span>
                                                                 {{$order->address?->first_name . '' . $order->address?->last_name . ' ' .$order->address?->other_name}}
                                                             </div>
                                                             <div class="text-gray-900 dark:text-white">
@@ -530,7 +546,7 @@ $app_brand = [
                                                             </label>
                                                             <textarea type="description" name="description" id="description"
                                                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                placeholder="product description">{{ $order->note }}</textarea>
+                                                                placeholder="product description" disabled>{{ $order->note }}</textarea>
                                                         </div>
 
                                                     </div>

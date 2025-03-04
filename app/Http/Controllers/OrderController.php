@@ -10,6 +10,8 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Promotion;
+use App\Models\Transaction;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -31,21 +33,9 @@ class OrderController extends Controller
             'promotions' => Promotion::latest()->get(),
         ]);
 
-        // 'user_id',
-        // 'total_amount',
-        // 'coupon',
-        // 'note',
-        // 'status',
-        // 'address_id'
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -64,33 +54,40 @@ class OrderController extends Controller
             ->load('items')
             ->loadCount('items');
 
+        $transactions = Transaction::where('order_id', $order->id)->latest()->paginate();
+
         // return $order;
         return view('dashboard.pages.orders.show', [
-            'order' => $order
+            'order' => $order,
+            'transactions' => $transactions
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+        $data = $request->validated();
+
+        try {
+            //code...
+    
+            // Store the resource
+            $order->update($data);
+            info('Product updated successfully: ', [$order]);
+    
+            // return $product; 
+            $message = "order status updated successfully!";
+            return redirect()->back()->with('success', $message);
+        } catch (\Throwable $th) {
+            //throw $th;
+            Log::error("exception thrown", [$th->getMessage()]);
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
-    }
+
 }
