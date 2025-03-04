@@ -5,9 +5,9 @@
             // 'bg' => '#5508b9',
             // 'bg-dark' => '#550899',
             
-            'primary' => '#F65267',
-            'bg-accent' => '#F65278',
-            'bg-color' => '#F65267'
+            'primary' => '#854D0E', // 'yellow-800 primary
+            'bg-accent' => '#CA8A04', // yellow-600 border
+            'bg-color' => '#A16207' // yellow-700 hover
         ];
         // hover:bg-blue-700 == color : #0828ad accent : 0828b9
     @endphp
@@ -33,7 +33,7 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Dashboard</span>
                     </a>
                 </li>
-                <li class="" title="Event or Activity">
+                <li class="" title="Products">
                     <a href="{{ route('admin.products.index') }}"
                         class="{{ request()->routeIs('admin.products.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
                         flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-[{{ $app_brand['primary'] }}] dark:hover:bg-gray-700 group">
@@ -44,9 +44,9 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Products</span>
                     </a>
                 </li>
-                <li class="" title="Centers to host events">
-                    <a href="{{ route('fallback') }}"
-                        class="{{ request()->routeIs('fallback.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
+                <li class="" title="Orders">
+                    <a href="{{ route('admin.orders.index') }}"
+                        class="{{ request()->routeIs('admin.orders.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
                         flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-[{{ $app_brand['primary'] }}] dark:hover:bg-gray-700 group">
                         <div
                             class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
@@ -54,7 +54,7 @@
                         </div>
                         <span class="flex-1 ms-3 whitespace-nowrap">Orders</span>
                         <span
-                            class="inline-flex items-center justify-center w-3 h-3 p-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full ms-3 dark:bg-blue-900 dark:text-blue-300">
+                            class="inline-flex items-center justify-center w-3 h-3 p-3 text-sm font-medium text-yellow-800 bg-yellow-100 rounded-full ms-3 dark:bg-yellow-900 dark:text-yellow-300">
                             {{-- @if(Auth::user()->role == 'admin')
                                 {{ Number::abbreviate($lost_assets->count() ?? 0)}}
                             @else
@@ -65,7 +65,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="" title="Event or Activity">
+                <li class="" title="Transactions">
                     <a href="{{ route('fallback') }}"
                         class="{{ request()->routeIs('fallback.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
                         flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-[{{ $app_brand['primary'] }}] dark:hover:bg-gray-700 group">
@@ -80,8 +80,8 @@
                 <hr>
 
                 <li class="">
-                    <a href="{{ route('fallback') }}"
-                        class="{{ request()->routeIs('fallback.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
+                    <a href="{{ route('admin.brands.index') }}"
+                        class="{{ request()->routeIs('admin.brands.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
                         flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-[{{ $app_brand['primary'] }}] dark:hover:bg-gray-700 group">
                         <div
                             class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
@@ -92,8 +92,8 @@
                 </li>
 
                 <li class="">
-                    <a href="{{ route('fallback') }}"
-                        class="{{ request()->routeIs('fallback.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
+                    <a href="{{ route('admin.categories.index') }}"
+                        class="{{ request()->routeIs('admin.categories.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
                         flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-[{{ $app_brand['primary'] }}] dark:hover:bg-gray-700 group">
                         <div
                             class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
@@ -103,8 +103,8 @@
                     </a>
                 </li> 
                 <li class="">
-                    <a href="{{ route('fallback') }}"
-                        class="{{ request()->routeIs('fallback.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
+                    <a href="{{ route('admin.promotions.index') }}"
+                        class="{{ request()->routeIs('admin.promotions.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
                         flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-[{{ $app_brand['primary'] }}] dark:hover:bg-gray-700 group">
                         <div
                             class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
@@ -115,8 +115,8 @@
                 </li>   
                 
                 <li class="">
-                    <a href="{{ route('fallback') }}"
-                        class="{{ request()->routeIs('fallback.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
+                    <a href="{{ route('admin.assets.index') }}"
+                        class="{{ request()->routeIs('admin.assets.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
                         flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-[{{ $app_brand['primary'] }}] dark:hover:bg-gray-700 group">
                         <div
                             class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">

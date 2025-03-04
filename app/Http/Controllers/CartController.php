@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ActorHelper;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
 use App\Models\Cart;
+use Illuminate\Notifications\Action;
 
 class CartController extends Controller
 {
@@ -13,7 +15,10 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $carts = Cart::with(['product'])
+            ->latest()
+            ->paginate();
+        return $carts;
     }
 
     /**
@@ -21,7 +26,11 @@ class CartController extends Controller
      */
     public function store(StoreCartRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['user_id'] = ActorHelper::getUserId();
+
+        $cart = Cart::create($data);
+        return $cart;
     }
 
     /**
@@ -29,7 +38,8 @@ class CartController extends Controller
      */
     public function show(Cart $cart)
     {
-        //
+        $cart->load(['product']);
+        return $cart;
     }
 
     /**
@@ -37,7 +47,11 @@ class CartController extends Controller
      */
     public function update(UpdateCartRequest $request, Cart $cart)
     {
-        //
+        $data = $request->validated();
+        // $data['user_id'] = ActorHelper::getUserId();
+
+        $cart->update($data);
+        return $cart;
     }
 
     /**
@@ -45,6 +59,7 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+        $cart->delete();
+        return $message = "cart deleted successfully";
     }
 }

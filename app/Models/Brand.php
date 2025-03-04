@@ -19,4 +19,8 @@ class Brand extends Model
     public function banner(){
         return $this->belongsTo(Asset::class, 'banner_id');
     }
+
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 }

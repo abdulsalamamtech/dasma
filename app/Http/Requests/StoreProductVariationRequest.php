@@ -25,9 +25,9 @@ class StoreProductVariationRequest extends FormRequest
             'product_id' => ['required', 'exists:products,id'],
             'image' => ['required', 'image', 'max:2048'],
             'title' => ['required', 'string', 'max:50'],
+            'sku' => ['nullable', 'string', 'max:50'],
             'color' => ['nullable', 'string', 'max:50'],
             'size' => ['nullable', 'string', 'max:50'],
-            'sku' => ['nullable', 'string', 'max:50']
         ];
     }
 }

@@ -14,7 +14,7 @@ class Promotion extends Model
         'title',
         'description',
         'banner_id',
-        'discount',
+        // 'discount',
         'start_date',
         'end_date',
         'discount',

@@ -14,7 +14,7 @@
 
                     {{-- Return back --}}
                     <div class="flex justify-end py-2 mb-4">
-                      <a href="{{ route('admin.promotions.index') }}" class="flex gap-2 items-center text-xl text-green-500 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
+                      <a href="{{ route('admin.brands.index') }}" class="flex gap-2 items-center text-xl text-green-500 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
                         <i class="fa fa-arrow-left"></i>
                         <span>Back</span>
                       </a>
@@ -23,7 +23,7 @@
                       <!-- Map image placeholder, replace src with actual image link -->
                       {{-- <img src="https://srv.carbonads.net/static/30242/5553640155979510763aebb62751652e628b00e1" alt="Map" class="w-full h-48 object-cover" /> --}}
                       <a href="#">
-                          <img src="{{ $promotion->banner->url ?? '/images/world-map.png' }}" alt="Map" class="w-full h-48 object-cover" />
+                          <img src="{{ $brand->banner->url ?? '/images/world-map.png' }}" alt="Map" class="w-full h-48 object-cover" />
                       </a>
                     </div>
 
@@ -32,49 +32,34 @@
                       {{-- ID --}}
                       <div class="flex justify-between items-start">
                           <div class="w-1/3 text-gray-700 dark:text-gray-300">ID:</div>
-                          <div class="w-7/12 text-gray-500 dark:text-gray-400"> #{{ $promotion->id }}</div>
+                          <div class="w-7/12 text-gray-500 dark:text-gray-400"> #{{ $brand->id }}</div>
                       </div>
 
                       {{-- Name --}}
                       <div class="flex justify-between items-start">
-                          <div class="w-1/3 text-gray-700 dark:text-gray-300">Title:</div>
-                          <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $promotion->title }}</div>
+                          <div class="w-1/3 text-gray-700 dark:text-gray-300">Name:</div>
+                          <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $brand->name }}</div>
                       </div>
 
                       <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Description:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $promotion->description }}</div>
-                      </div>   
-
-                      <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Start Date:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $promotion->start_date->format('Y-m-d') }}</div>
-                      </div>  
-
-                      <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">End Date:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $promotion->end_date->format('Y-m-d') }}</div>
-                      </div>                                          
-
-                      <div class="flex justify-between items-start">
                         <div class="w-1/3 text-gray-700 dark:text-gray-300">Products No:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $promotion->products_count ?? 0 }}</div>
+                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $brand->products_count ?? 0 }}</div>
                       </div>
 
 
                       <div class="flex justify-between items-start">
                         <div class="w-1/3 text-gray-700 dark:text-gray-300">Status:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $promotion->active ? 'Active' : 'Inactive' }}</div>
+                        <div class="w-7/12 text-gray-500 dark:text-gray-400">Active</div>
                       </div>
 
                       <div class="flex justify-between items-start">
                         <div class="w-1/3 text-gray-700 dark:text-gray-300">Updated at:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $promotion->updated_at }}</div>
+                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $brand->updated_at }}</div>
                       </div>
 
                       <div class="flex justify-between items-start">
                         <div class="w-1/3 text-gray-700 dark:text-gray-300">Created at:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $promotion->created_at }}</div>
+                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $brand->created_at }}</div>
                       </div>
 
                     </div>

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('sku')->unique();
             $table->json('colors')->nullable();
             $table->json('sizes')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -16,7 +16,7 @@ class Product extends Model
         'promotion_id',
         'banner_id',
         'name',
-       'slug',
+        'slug',
         'description',
         'price',
         'initial_price',
@@ -25,7 +25,7 @@ class Product extends Model
         'views',
         'sku',
         'colors',
-       'sizes',
+        'sizes',
     ];
 
 

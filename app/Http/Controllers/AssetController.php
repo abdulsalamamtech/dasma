@@ -9,8 +9,8 @@ class AssetController extends Controller
 {
     //
     public function index(){
-        $assets = Asset::latest()->paginate();
-        return view('dashboard.pages.assets', [
+        $assets = Asset::latest()->paginate(9);
+        return view('dashboard.pages.assets.index', [
             'assets' => $assets
         ]);
     }

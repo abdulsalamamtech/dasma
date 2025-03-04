@@ -1,7 +1,11 @@
 <?php
 
+
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+
+
 
 Route::get('/', function () {
     // return view('welcome');
@@ -19,6 +23,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';
 
 
 
@@ -99,46 +104,11 @@ Route::prefix('/account')->group(function () {
 
 
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    // Dashboard routes
-    Route::get('/', function () {
-        return view('dashboard.dashboard');
-    })->name('dashboard');
-
-    Route::get('/products', function () {
-        return view('dashboard.pages.products.index');
-    })->name('products.index');
-    Route::get('/centers', function () {
-        return view('dashboard.pages.centers.index');
-    })->name('');
-    Route::get('/centers', function () {
-        return view('dashboard.pages.centers.index');
-    })->name('');
-    Route::get('/centers', function () {
-        return view('dashboard.pages.centers.index');
-    })->name('');
-    Route::get('/centers', function () {
-        return view('dashboard.pages.centers.index');
-    })->name('');
-    Route::get('/centers', function () {
-        return view('dashboard.pages.centers.index');
-    })->name('');
-});
 
 
 Route::get('/fallback', function () {
-    return view('dashboard.index');
+    return view('dashboard.dashboard');
 })->name('fallback');
-
-
-
-
-
-
-
-
-
-
 
 
 Route::get('states', function(){
@@ -183,19 +153,6 @@ Route::get('states', function(){
     ];
     return $states;
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Last Route

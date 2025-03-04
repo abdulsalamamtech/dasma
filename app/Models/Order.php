@@ -23,6 +23,7 @@ class Order extends Model
 
     protected $casts = [
         'total_amount' => 'decimal:2'
+        'status' => OrderStatusEnum::class,
     ];
 
     public function user()
@@ -37,7 +38,7 @@ class Order extends Model
 
     public function items()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(OrderItems::class);
     }
 
     public function transaction()

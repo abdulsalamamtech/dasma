@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ActorHelper;
 use App\Http\Requests\StoreWishlistRequest;
 use App\Http\Requests\UpdateWishlistRequest;
 use App\Models\Wishlist;
@@ -13,7 +14,10 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        //
+        $wishlists = Wishlist::with(['product'])
+            ->latest()
+            ->paginate();
+        return $wishlists;
     }
 
     /**
@@ -21,7 +25,11 @@ class WishlistController extends Controller
      */
     public function store(StoreWishlistRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['user_id'] = ActorHelper::getUserId();
+
+        $wishlist = Wishlist::create($data);
+        return $wishlist;
     }
 
     /**
@@ -29,7 +37,7 @@ class WishlistController extends Controller
      */
     public function show(Wishlist $wishlist)
     {
-        //
+        return $wishlist;
     }
 
     /**
@@ -37,7 +45,10 @@ class WishlistController extends Controller
      */
     public function update(UpdateWishlistRequest $request, Wishlist $wishlist)
     {
-        //
+        $data = $request->validated();
+
+        $wishlist->update($data);
+        return $wishlist;
     }
 
     /**
@@ -45,6 +56,7 @@ class WishlistController extends Controller
      */
     public function destroy(Wishlist $wishlist)
     {
-        //
+        $wishlist->delete();
+        return $message = "wishlist deleted successfully";
     }
 }

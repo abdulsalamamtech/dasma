@@ -13,7 +13,8 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        $reviews = Review::latest()->paginate();
+        return $reviews;
     }
 
     /**
@@ -21,7 +22,10 @@ class ReviewController extends Controller
      */
     public function store(StoreReviewRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $review = Review::create($data);
+        return $review;
     }
 
     /**
@@ -29,7 +33,7 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        //
+        return $review;
     }
 
     /**
@@ -37,7 +41,10 @@ class ReviewController extends Controller
      */
     public function update(UpdateReviewRequest $request, Review $review)
     {
-        //
+        $data = $request->validated();
+
+        $review->update($data);
+        return $review;
     }
 
     /**
@@ -45,6 +52,7 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        //
+        $review->delete();
+        return $message = "review deleted successfully";
     }
 }

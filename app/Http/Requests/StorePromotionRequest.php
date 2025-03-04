@@ -24,11 +24,11 @@ class StorePromotionRequest extends FormRequest
         return [
             'banner' => ['required', 'image', 'max:2048'],
             'discount' => ['required', 'between:1,100'],
-            'name' => ['required','string','max:255'],
+            'title' => ['required','string','max:255'],
             'description' => ['required','string'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
-            // 'discount_percentage' => ['required','numeric','between:0,100'],
+            'discount' => ['required','numeric','between:0,100'],
             // 'min_purchase_amount' => ['required','numeric','min:0'],
             // 'products' => ['required','array'],
             // 'products.*' => ['integer']

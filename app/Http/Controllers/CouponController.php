@@ -13,7 +13,8 @@ class CouponController extends Controller
      */
     public function index()
     {
-        //
+        $coupon = Coupon::latest()->paginate();
+        return $coupon;
     }
 
     /**
@@ -21,7 +22,10 @@ class CouponController extends Controller
      */
     public function store(StoreCouponRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $coupon = Coupon::create($data);
+        return $coupon;
     }
 
     /**
@@ -29,7 +33,7 @@ class CouponController extends Controller
      */
     public function show(Coupon $coupon)
     {
-        //
+        return $coupon;
     }
 
     /**
@@ -37,7 +41,10 @@ class CouponController extends Controller
      */
     public function update(UpdateCouponRequest $request, Coupon $coupon)
     {
-        //
+        $data = $request->validated();
+
+        $coupon->update($data);
+        return $coupon;
     }
 
     /**
@@ -45,6 +52,7 @@ class CouponController extends Controller
      */
     public function destroy(Coupon $coupon)
     {
-        //
+        $coupon->delete();
+        return $message = "coupon deleted successfully";
     }
 }

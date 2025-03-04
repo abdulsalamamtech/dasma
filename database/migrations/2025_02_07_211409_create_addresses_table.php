@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('state');
             $table->string('country')->default('Nigeria');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

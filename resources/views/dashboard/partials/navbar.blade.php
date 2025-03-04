@@ -39,7 +39,7 @@ $brand = [
 
                     <a href="">
                         <div class="w-8 sm:w-8 text-3xl p-2 font-bold">
-                            <span class="text-[#2D1B15]">DAS</span><span class="text-[#F65267]">MA</span>
+                            <span class="text-[#2D1B15]">DAS</span><span class="text-[#854D0E]">MA</span>
                         </div>
                     </a>
                 </div>

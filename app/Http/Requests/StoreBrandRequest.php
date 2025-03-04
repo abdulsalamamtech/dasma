@@ -23,7 +23,7 @@ class StoreBrandRequest extends FormRequest
     {
         return [
             'banner' => ['required', 'image', 'max:2048'],
-            'name' => ['required', 'string','max:255', 'unique:brands,name'],
+            'name' => ['required', 'string','max:32', 'unique:brands,name'],
             // 'slug' => ['required', 'string','max:255', 'unique:brands,slug'],
         ];
     }

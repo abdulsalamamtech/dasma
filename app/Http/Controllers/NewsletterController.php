@@ -13,7 +13,8 @@ class NewsletterController extends Controller
      */
     public function index()
     {
-        //
+        $newsletters = Newsletter::latest()->paginate();
+        return $newsletters;
     }
 
     /**
@@ -21,7 +22,10 @@ class NewsletterController extends Controller
      */
     public function store(StoreNewsletterRequest $request)
     {
-        //
+        $data = $request->validated();
+        $newsletter = Newsletter::create($data);
+
+        return $newsletter;
     }
 
     /**
@@ -29,7 +33,7 @@ class NewsletterController extends Controller
      */
     public function show(Newsletter $newsletter)
     {
-        //
+        return $newsletter;
     }
 
     /**
@@ -37,7 +41,10 @@ class NewsletterController extends Controller
      */
     public function update(UpdateNewsletterRequest $request, Newsletter $newsletter)
     {
-        //
+        $data = $request->validated();
+        $newsletter->update($data);
+
+        return $newsletter;
     }
 
     /**
@@ -45,6 +52,7 @@ class NewsletterController extends Controller
      */
     public function destroy(Newsletter $newsletter)
     {
-        //
+        $newsletter->delete();
+        return $message = "newsletter deleted successfully";
     }
 }
