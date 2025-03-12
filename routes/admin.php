@@ -1,16 +1,20 @@
-<?php 
+<?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductVariationController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -72,6 +76,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Orders routes
     Route::apiResource('orders', OrderController::class);
     
+
+    // Transactions routes
+    Route::apiResource('transactions', TransactionController::class)
+    ->except(['edit', 'store', 'update', 'destroy']);
+
+    // Customers routes
+    Route::apiResource('users', UserController::class);
+
+    // Transactions routes
+    Route::apiResource('newsletters', NewsletterController::class)
+    ->except(['show', 'edit', 'store', 'update', 'destroy']);
     // Cart routes
     // Route::apiResource('carts', CartController::class);
     // Wishlist routes
@@ -89,9 +104,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Route::get('notifications', [NotificationController::class, 'index']);
     // Route::get('notifications/{notification}', [NotificationController::class, 'show']);
 
-
-    // Transactions routes
-    // Route::apiResource('transactions', TransactionController::class);
     // Customers routes
     // Route::apiResource('customers', CustomerController::class);
 

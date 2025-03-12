@@ -13,7 +13,19 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        // Search for transaction
+        if(request()->filled('search')){
+            $search = request('search');
+            $transactions = $this->search($search);
+        }else{
+            $transactions = Transaction::with(['user'])
+                ->latest()
+                ->paginate();
+        }
+        // return $brands;
+        return view('dashboard.pages.transactions.index', [
+            'transactions' => $transactions
+        ]);
     }
 
     /**
@@ -40,13 +52,7 @@ class TransactionController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Transaction $transaction)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -56,11 +62,20 @@ class TransactionController extends Controller
         //
     }
 
+
+
+
     /**
-     * Remove the specified resource from storage.
+     * Search a specified resource from storage.
      */
-    public function destroy(Transaction $transaction)
-    {
-        //
+    private function search($search){
+        return Transaction::where('id', 'LIKE', "%{$search}%")
+            ->orWhere('payment_method', 'LIKE', "%{$search}%")
+            ->orWhere('amount', 'LIKE', "%{$search}%")
+            ->orWhere('reference', 'LIKE', "%{$search}%")
+            ->orWhere('created_at', 'LIKE', "%{$search}%")
+            ->orWhere('status', 'LIKE', "%{$search}%")
+            ->latest()
+            ->paginate();
     }
 }

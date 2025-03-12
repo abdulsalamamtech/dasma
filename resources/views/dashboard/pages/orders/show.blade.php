@@ -290,6 +290,10 @@
                                         </th>
                                         <th scope="col" class="px-6 py-3">
                                             Ref No.
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Date
+                                        </th>
                                         <th scope="col" class="px-6 py-3">
                                             Status
                                         </th>
@@ -299,8 +303,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                {{{ $transactions }}}
-
                                     @isset($transactions)
                                         @forelse ( $transactions as $transaction)
 
@@ -334,6 +336,9 @@
                                                 </td>
                                                 <td class="px-6 py-4">
                                                     {{$transaction->reference}}
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    {{$transaction->created_at->format('D d, M Y')}}
                                                 </td>
                                                 <td class="px-6 py-4">
                                                     {{$transaction->status}}

@@ -24,11 +24,11 @@
                         </div>
                         <div class="p-4 text-right">
                             <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
-                                Users
+                                newsletters
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['users']['total'] ?? 0) }} --}}
+                                {{-- {{ Number::abbreviate(auth()->newsletter()->statistics()['admin']['newsletters']['total'] ?? 0) }} --}}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -51,11 +51,11 @@
                         </div>
                         <div class="p-4 text-right">
                             <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
-                                New Users
+                                New newsletters
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['users']['new_users'] ?? 0) }} --}}
+                                {{-- {{ Number::abbreviate(auth()->newsletter()->statistics()['admin']['newsletters']['new_newsletters'] ?? 0) }} --}}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -70,14 +70,14 @@
                         class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
                         <div
                             class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
-                            <i class="fa fa-user-circle text-white text-xl"></i>
+                            <i class="fa fa-newsletter-circle text-white text-xl"></i>
                         </div>
                         <div class="p-4 text-right">
                             <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
-                                Verified Users</p>
+                                Verified newsletters</p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['users']['verified'] ?? 0) }} --}}
+                                {{-- {{ Number::abbreviate(auth()->newsletter()->statistics()['admin']['newsletters']['verified'] ?? 0) }} --}}
                             </h4>
                         </div>
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
@@ -92,14 +92,14 @@
                         class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
                         <div
                             class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
-                            <i class="fa fa-user-plus text-white text-xl"></i>
+                            <i class="fa fa-newsletter-plus text-white text-xl"></i>
                         </div>
                         <div class="p-4 text-right">
                             <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
-                                Pending Users</p>
+                                Pending newsletters</p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['users']['pending'] ?? 0) }}                                 --}}
+                                {{-- {{ Number::abbreviate(auth()->newsletter()->statistics()['admin']['newsletters']['pending'] ?? 0) }}                                 --}}
                             </h4>
                         </div>
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
@@ -123,11 +123,11 @@
                 <div class="relative p-8 overflow-x-auto shadow-md sm:rounded-lg">
                     <!-- Header Section -->
                     <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300">All Users</h2>
+                        <h2 class="text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300">All newsletters</h2>
                         
                         <a href="{{ route('admin.orders.index') }}">
                             <button class="px-3 md:px-4 py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700"
-                                data-modal-target="addUserModal" data-modal-show="addUserModal">
+                                data-modal-target="addnewsletterModal" data-modal-show="addnewsletterModal">
                                     <i class="fa fa-th-large"></i>
                                     <span class="pl-2">View Orders</span>
                             </button>
@@ -172,7 +172,7 @@
                             </div>
                         </div>
 
-                        <form class="w-full max-w-md mx-auto" action="{{ route('admin.users.index') }}" method="GET">
+                        <form class="w-full max-w-md mx-auto" action="{{ route('admin.newsletters.index') }}" method="GET">
                             <label for="default-search" class="mb-1 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -200,16 +200,10 @@
                                     </div>
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    User
+                                    newsletter
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Created At
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Role
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Orders
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Status
@@ -220,8 +214,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($users as $user)
-                                <!-- User table record 1 -->
+                            @forelse ($newsletters as $newsletter)
+                                <!-- newsletter table record 1 -->
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td class="w-4 p-4">
@@ -231,28 +225,15 @@
                                             <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                                         </div>
                                     </td>
-                                    <th scope="row"
-                                        class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                        <img class="w-10 h-10 rounded-full" src="/images/default-profile.png"
-                                            alt="Jese image">
-                                        <div class="ps-3">
-                                            <div class="text-base font-semibold">{{ $user->name }}</div>
-                                            <div class="font-normal text-gray-500">({{ $user->role }})</div>
-                                            <div class="font-normal text-gray-500">{{ $user->email }}</div>
-                                        </div>
-                                        <td class="px-6 py-4">
-                                            {{ $user->created_at->format('D, d M Y') }}
-                                        </td>
-                                    </th>
                                     <td class="px-6 py-4">
-                                        {{ 'customer' }}
+                                        {{ $newsletter->email }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $user->orders->count() }}
+                                        {{ $newsletter->created_at }}
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
-                                            @if ($user->email_verified_at)
+                                            @if ($newsletter->deleted_at)
                                                 <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Verified
                                             @else
                                                 <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Pending
@@ -261,23 +242,23 @@
                                     </td>
                                     <td class="px-6 py-4">
 
-                                        <button id="dropdownMenuIconButton{{ $user->id }}" data-dropdown-toggle="dropdownDots{{ $user->id }}" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
+                                        <button id="dropdownMenuIconButton{{ $newsletter->id }}" data-dropdown-toggle="dropdownDots{{ $newsletter->id }}" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
                                             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
                                             <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
                                             </svg>
                                             </button>
 
                                             <!-- Dropdown menu -->
-                                            <div id="dropdownDots{{ $user->id }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton{{ $user->id }}">
+                                            <div id="dropdownDots{{ $newsletter->id }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton{{ $newsletter->id }}">
                                                     <li>
-                                                        <a href="{{ route('admin.users.show', $user->id) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">View</a>
+                                                        <a href="{{ route('admin.newsletters.show', $newsletter->id) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">View</a>
                                                     </li>
                                                     <li class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                         <!-- Modal toggle -->
                                                         <div href="#" type="button"
-                                                            data-modal-target="editUserModal{{ $user->id }}"
-                                                            data-modal-show="editUserModal{{ $user->id }}"
+                                                            data-modal-target="editnewsletterModal{{ $newsletter->id }}"
+                                                            data-modal-show="editnewsletterModal{{ $newsletter->id }}"
                                                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
                                                         </div>
                                                     </li> 
@@ -285,7 +266,7 @@
                                                                                                                         {{-- Deactivate --}}
                                                         {{-- Delete Button --}}
                                                         <div href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                            <button data-modal-target="popup-modal{{ $user->id }}" data-modal-toggle="popup-modal{{ $user->id }}" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:red-blue-800" type="button">
+                                                            <button data-modal-target="popup-modal{{ $newsletter->id }}" data-modal-toggle="popup-modal{{ $newsletter->id }}" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:red-blue-800" type="button">
                                                                 Delete
                                                             </button>
                                                         </div>
@@ -296,15 +277,15 @@
                                 </tr>
 
                                 {{-- Delete Popup Modal --}}
-                                <div id="popup-modal{{ $user->id }}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                <div id="popup-modal{{ $newsletter->id }}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                     <div class="relative p-4 w-full max-w-md max-h-full">
                                         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700" >
                                         <form 
-                                            action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
+                                            action="{{ route('admin.newsletters.destroy', $newsletter->id) }}" method="POST">
                                             @csrf
                                             @method("DELETE")
 
-                                            <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal{{ $user->id }}">
+                                            <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal{{ $newsletter->id }}">
                                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                                 </svg>
@@ -314,34 +295,34 @@
                                                 <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                                 </svg>
-                                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this resource? (User Id: {{ $user->id }})</h3>
-                                                <button data-modal-hide="popup-modal{{ $user->id }}" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this resource? (newsletter Id: {{ $newsletter->id }})</h3>
+                                                <button data-modal-hide="popup-modal{{ $newsletter->id }}" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                                     Yes, I'm sure
                                                 </button>
-                                                <button data-modal-hide="popup-modal{{ $user->id }}" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                                                <button data-modal-hide="popup-modal{{ $newsletter->id }}" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
                                             </div>
                                         </form>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Edit user modal 1 -->
-                                <div id="editUserModal{{ $user->id }}" tabindex="-1" aria-hidden="true"
+                                <!-- Edit newsletter modal 1 -->
+                                <div id="editnewsletterModal{{ $newsletter->id }}" tabindex="-1" aria-hidden="true"
                                     class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                     <div class="relative w-full max-w-2xl max-h-full bg-white">
                                         <!-- Modal content -->
                                         <form class="relative bg-white rounded-lg shadow dark:bg-gray-700" 
-                                            action="{{ route('admin.users.update', $user->id) }}" method="POST">
+                                            action="{{ route('admin.newsletters.update', $newsletter->id) }}" method="POST">
                                             @method('PUT')
                                             @csrf
                                             <!-- Modal header -->
                                             <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
                                                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                                    Edit user {{ $user->id }}
+                                                    Edit newsletter {{ $newsletter->id }}
                                                 </h3>
                                                 <button type="button"
                                                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                    data-modal-hide="editUserModal{{ $user->id }}">
+                                                    data-modal-hide="editnewsletterModal{{ $newsletter->id }}">
                                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                         fill="none" viewBox="0 0 14 14">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -360,7 +341,7 @@
                                                         </label>
                                                         <input type="text" name="first_name" id="first-name"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                            placeholder="Bonnie" required="" value="{{ $user->name }}" disabled>
+                                                            placeholder="Bonnie" required="" value="{{ $newsletter->name }}" disabled>
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="last-name"
@@ -369,14 +350,14 @@
                                                         </label>
                                                         <input type="text" name="last_name" id="last-name"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                            placeholder="Green" required="" value="{{ $user?->created_at->format('D. d M Y. h:i:s a') }}" disabled>
+                                                            placeholder="Green" required="" value="{{ $newsletter?->created_at->format('D. d M Y. h:i:s a') }}" disabled>
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="email"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                                         <input type="email" name="email" id="email"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                            placeholder="example@company.com" required="" value="{{ $user->email }}" disabled>
+                                                            placeholder="example@company.com" required="" value="{{ $newsletter->email }}" disabled>
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="phone"
@@ -384,7 +365,7 @@
                                                             Number</label>
                                                         <input type="tel" name="phone" id="phone"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                            placeholder="e.g. +(12)3456 789" required="" value="{{$user->addresses->first()?->phone_number}}" disabled>
+                                                            placeholder="e.g. +(12)3456 789" required="" value="{{$newsletter->addresses->first()?->phone_number}}" disabled>
                                                     </div>                                                
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="verified"
@@ -392,7 +373,7 @@
                                                         <select type="text" name="status" id="verified"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                             placeholder="Development" required="">
-                                                            @if ($user->email_verified_at)
+                                                            @if ($newsletter->email_verified_at)
                                                                 <option value="active" selected="true">yes</option>
                                                                 <option value="pending">no</option>
                                                             @else
@@ -407,7 +388,7 @@
                                                         <select type="text" name="status" id="verified"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                             placeholder="Development" required="">
-                                                            @if ($user->email_verified_at)
+                                                            @if ($newsletter->email_verified_at)
                                                                 <option value="active" selected="true">Admin</option>
                                                                 <option value="customer">Customer</option>
                                                             @else
@@ -433,7 +414,7 @@
                                 </div>
                             @empty
                                 <tr class="text-center">
-                                    <td colspan="7" class="p-4">Users unavailable</td>
+                                    <td colspan="7" class="p-4">newsletters unavailable</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -443,8 +424,8 @@
                     {{-- Paginate --}}
                     <div class="text-center pt-4 bg-white dark:text-gray-100 dark:bg-gray-800">
                         <div class="px-8">
-                            @if (isset($users) && !empty($users) && $users->links())
-                                {{ $users->withQueryString()->links() }}
+                            @if (isset($newsletters) && !empty($newsletters) && $newsletters->links())
+                                {{ $newsletters->withQueryString()->links() }}
                             @endif
                         </div>
                     </div>

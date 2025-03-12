@@ -14,7 +14,9 @@ class NewsletterController extends Controller
     public function index()
     {
         $newsletters = Newsletter::latest()->paginate();
-        return $newsletters;
+        return view('dashboard.pages.newsletters.index', [
+            'newsletters' => $newsletters,
+        ]);
     }
 
     /**

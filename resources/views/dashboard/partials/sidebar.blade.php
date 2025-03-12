@@ -66,8 +66,8 @@
                     </a>
                 </li>
                 <li class="" title="Transactions">
-                    <a href="{{ route('fallback') }}"
-                        class="{{ request()->routeIs('fallback.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
+                    <a href="{{ route('admin.transactions.index') }}"
+                        class="{{ request()->routeIs('admin.transactions.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
                         flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-[{{ $app_brand['primary'] }}] dark:hover:bg-gray-700 group">
                         <div
                             class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
@@ -129,8 +129,8 @@
                 <hr>
 
                 <li class="">
-                    <a href="{{ route('fallback') }}"
-                        class="{{ request()->routeIs('fallback.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
+                    <a href="{{ route('admin.users.index') }}"
+                        class="{{ request()->routeIs('admin.users.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
                         flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-[{{ $app_brand['primary'] }}] dark:hover:bg-gray-700 group">
                         <div
                             class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
