@@ -12,7 +12,7 @@
                 <div class="grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
                     <!-- Card -->
                     <div
-                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-yellow-gray-100 shadow-sm">
                         <div
                             class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -23,23 +23,23 @@
                             </svg>
                         </div>
                         <div class="p-4 text-right">
-                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-yellow-gray-600">
                                 messages
                             </p>
                             <h4
-                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-yellow-gray-900">
                                 {{-- {{ Number::abbreviate(auth()->message()->statistics()['admin']['messages']['total'] ?? 0) }} --}}
                             </h4>
                         </div>
-                        <div class="border-t border-blue-gray-50 p-4">
-                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                        <div class="border-t border-yellow-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-yellow-gray-600">
                                 <strong class="text-green-500">+3%</strong>&nbsp;than last month
                             </p>
                         </div>
                     </div>
 
                     <div
-                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-yellow-gray-100 shadow-sm">
                         <div
                             class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -50,16 +50,16 @@
                             </svg>
                         </div>
                         <div class="p-4 text-right">
-                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-yellow-gray-600">
                                 New messages
                             </p>
                             <h4
-                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-yellow-gray-900">
                                 {{-- {{ Number::abbreviate(auth()->message()->statistics()['admin']['messages']['new_messages'] ?? 0) }} --}}
                             </h4>
                         </div>
-                        <div class="border-t border-blue-gray-50 p-4">
-                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                        <div class="border-t border-yellow-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-yellow-gray-600">
                                 <strong class="text-red-500">-0.1%</strong>&nbsp;than yesterday
                             </p>
                         </div>
@@ -67,21 +67,21 @@
 
                     <!-- Card -->
                     <div
-                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-yellow-gray-100 shadow-sm">
                         <div
                             class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
                             <i class="fa fa-message-circle text-white text-xl"></i>
                         </div>
                         <div class="p-4 text-right">
-                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-yellow-gray-600">
                                 Verified messages</p>
                             <h4
-                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-yellow-gray-900">
                                 {{-- {{ Number::abbreviate(auth()->message()->statistics()['admin']['messages']['verified'] ?? 0) }} --}}
                             </h4>
                         </div>
-                        <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
-                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                        <div class="dark:border-gray-500 border-t border-yellow-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-yellow-gray-600">
                                 <strong class="text-green-500">+0.1%</strong>&nbsp;than last week
                             </p>
                         </div>
@@ -89,21 +89,21 @@
 
                     <!-- Card -->
                     <div
-                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-yellow-gray-100 shadow-sm">
                         <div
                             class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
                             <i class="fa fa-message-plus text-white text-xl"></i>
                         </div>
                         <div class="p-4 text-right">
-                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-yellow-gray-600">
                                 Pending messages</p>
                             <h4
-                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-yellow-gray-900">
                                 {{-- {{ Number::abbreviate(auth()->message()->statistics()['admin']['messages']['pending'] ?? 0) }}                                 --}}
                             </h4>
                         </div>
-                        <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
-                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                        <div class="dark:border-gray-500 border-t border-yellow-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-yellow-gray-600">
                                 <strong class="text-green-500">+0.1%</strong>&nbsp;than last week
                             </p>
                         </div>
@@ -126,7 +126,7 @@
                         <h2 class="text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300">All messages</h2>
                         
                         <a href="{{ route('admin.orders.index') }}">
-                            <button class="px-3 md:px-4 py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700"
+                            <button class="px-3 md:px-4 py-2 bg-yellow-800 text-white rounded-md hover:bg-yellow-700"
                                 data-modal-target="addmessageModal" data-modal-show="addmessageModal">
                                     <i class="fa fa-th-large"></i>
                                     <span class="pl-2">View Orders</span>
@@ -180,9 +180,9 @@
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                     </svg>
                                 </div>
-                                <input type="search" name="search" id="default-search" class="@error('search') {{ 'border-red-500' }} @enderror block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                <input type="search" name="search" id="default-search" class="@error('search') {{ 'border-red-500' }} @enderror block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500" 
                                     placeholder="Search..." required  value="{{ request()->old('search', '') }}" />
-                                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Search</button>
                             </div>
                         </form>
 
@@ -195,7 +195,7 @@
                                 <th scope="col" class="p-4">
                                     <div class="flex items-center">
                                         <input id="checkbox-all-search" type="checkbox"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            class="w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         <label for="checkbox-all-search" class="sr-only">checkbox</label>
                                     </div>
                                 </th>
@@ -227,7 +227,7 @@
                                     <td class="w-4 p-4">
                                         <div class="flex items-center">
                                             <input id="checkbox-table-search-1" type="checkbox"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                class="w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                             <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                                         </div>
                                     </td>
@@ -265,14 +265,14 @@
                                                         <div href="#" type="button"
                                                             data-modal-target="editmessageModal{{ $message->id }}"
                                                             data-modal-show="editmessageModal{{ $message->id }}"
-                                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
+                                                            class="font-medium text-yellow-600 dark:text-yellow-500 hover:underline">Edit
                                                         </div>
                                                     </li> 
                                                     <li>
                                                                                                                         {{-- Deactivate --}}
                                                         {{-- Delete Button --}}
                                                         <div href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                            <button data-modal-target="popup-modal{{ $message->id }}" data-modal-toggle="popup-modal{{ $message->id }}" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:red-blue-800" type="button">
+                                                            <button data-modal-target="popup-modal{{ $message->id }}" data-modal-toggle="popup-modal{{ $message->id }}" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:red-yellow-800" type="button">
                                                                 Delete
                                                             </button>
                                                         </div>
@@ -305,7 +305,7 @@
                                                 <button data-modal-hide="popup-modal{{ $message->id }}" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                                     Yes, I'm sure
                                                 </button>
-                                                <button data-modal-hide="popup-modal{{ $message->id }}" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                                                <button data-modal-hide="popup-modal{{ $message->id }}" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-yellow-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
                                             </div>
                                         </form>
                                         </div>
@@ -346,7 +346,7 @@
                                                             Name
                                                         </label>
                                                         <input type="text" name="first_name" id="first-name"
-                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                             placeholder="Bonnie" required="" value="{{ $message->name }}" disabled>
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-3">
@@ -355,14 +355,14 @@
                                                             Created Acc On.
                                                         </label>
                                                         <input type="text" name="last_name" id="last-name"
-                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                             placeholder="Green" required="" value="{{ $message?->created_at->format('D. d M Y. h:i:s a') }}" disabled>
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="email"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                                         <input type="email" name="email" id="email"
-                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                             placeholder="example@company.com" required="" value="{{ $message->email }}" disabled>
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-3">
@@ -370,14 +370,14 @@
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
                                                             Number</label>
                                                         <input type="tel" name="phone" id="phone"
-                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                             placeholder="e.g. +(12)3456 789" required="" value="{{$message->addresses->first()?->phone_number}}" disabled>
                                                     </div>                                                
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="verified"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Verified</label>
                                                         <select type="text" name="status" id="verified"
-                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                             placeholder="Development" required="">
                                                             @if ($message->email_verified_at)
                                                                 <option value="active" selected="true">yes</option>
@@ -392,7 +392,7 @@
                                                         <label for="verified"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
                                                         <select type="text" name="status" id="verified"
-                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                             placeholder="Development" required="">
                                                             @if ($message->email_verified_at)
                                                                 <option value="active" selected="true">Admin</option>
@@ -410,7 +410,7 @@
                                             <div
                                                 class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
                                                 <button type="submit"
-                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                    class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
                                                     Save
                                                 </button>
                                             </div>

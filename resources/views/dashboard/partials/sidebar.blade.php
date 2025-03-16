@@ -141,8 +141,8 @@
                 </li>
 
                 <li class="">
-                    <a href="{{ route('fallback') }}"
-                        class="{{ request()->routeIs('fallback.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
+                    <a href="{{ route('admin.newsletters.index') }}"
+                        class="{{ request()->routeIs('admin.newsletters.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
                         flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-[{{ $app_brand['primary'] }}] dark:hover:bg-gray-700 group">
                         <div
                             class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
@@ -151,35 +151,16 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Subscribers</span>
                     </a>
                 </li>
-
-
-                <hr>
               
                 <li class="">
-                    <a href="{{ route('fallback') }}"
-                        class="{{ request()->routeIs('fallback.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
+                    <a href="{{ route('admin.messages.index') }}"
+                        class="{{ request()->routeIs('admin.messages.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
                         flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-[{{ $app_brand['primary'] }}] dark:hover:bg-gray-700 group">
                         <div
                             class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
                             <i class="fa fa-comments"></i>
                         </div>
                         <span class="flex-1 ms-3 whitespace-nowrap">Messages</span>
-                        <span
-                            class="inline-flex items-center justify-center w-3 h-3 p-3 text-sm font-medium text-red-800 bg-red-100 rounded-full ms-3 dark:bg-red-900 dark:text-red-300">
-                            {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['user']['unverified']?? 0) }} --}}
-                        </span>
-                    </a>
-                </li>
-
-                <li class="">
-                    <a href="{{ route('fallback') }}"
-                        class="{{ request()->routeIs('fallback.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
-                        flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-[{{ $app_brand['primary'] }}] dark:hover:bg-gray-700 group">
-                        <div
-                            class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
-                            <i class="fa fa-question-circle"></i>
-                        </div>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Supports</span>
                         <span
                             class="inline-flex items-center justify-center w-3 h-3 p-3 text-sm font-medium text-red-800 bg-red-100 rounded-full ms-3 dark:bg-red-900 dark:text-red-300">
                             {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['user']['unverified']?? 0) }} --}}
@@ -200,6 +181,7 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Profile</span>
                     </a>
                 </li>
+
                 <li class="">
                     <a href="{{ route('fallback') }}"
                         class="{{ request()->routeIs('fallback.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}

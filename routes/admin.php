@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -12,8 +12,10 @@ use App\Http\Controllers\ProductVariationController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -87,6 +89,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Transactions routes
     Route::apiResource('newsletters', NewsletterController::class)
     ->except(['show', 'edit', 'store', 'update', 'destroy']);
+
     // Cart routes
     // Route::apiResource('carts', CartController::class);
     // Wishlist routes
@@ -95,8 +98,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Route::apiResource('reviews', ReviewController::class);
     // Returns routes
     // Route::apiResource('returns', ReturnController::class);
+
     // Messages routes
-    // Route::get('messages', [MessageController::class, 'index']);
+    Route::apiResource('messages', MessageController::class);
     // Route::get('messages/{message}', [MessageController::class, 'show']);
     // Route::delete('messages/{message}', [MessageController::class, 'destroy']);
 

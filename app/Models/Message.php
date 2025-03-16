@@ -19,4 +19,10 @@ class Message extends Model
         // Add any other fields required for your application
         'status', // Example field for message status
     ];
+
+
+    public function messageReplies()
+    {
+        return $this->hasMany(MessageReplies::class);
+    }
 }

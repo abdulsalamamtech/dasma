@@ -11,11 +11,17 @@ class MessageReplies extends Model
     use HasFactory, SoftDeletes;
     
     protected $fillable = [
+        'user_id',
         'message_id',
         'message',
     ];
 
     public function message(){
         return $this->belongsTo(Message::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

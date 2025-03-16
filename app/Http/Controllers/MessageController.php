@@ -13,7 +13,10 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        $messages = Message::with(['messageReplies.user'])->latest()->paginate();
+        return view('dashboard.pages.messages.index', [
+            'messages' => $messages,
+        ]);
     }
 
     /**

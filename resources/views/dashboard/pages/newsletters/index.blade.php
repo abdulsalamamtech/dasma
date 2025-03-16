@@ -125,11 +125,11 @@
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300">All newsletters</h2>
                         
-                        <a href="{{ route('admin.orders.index') }}">
-                            <button class="px-3 md:px-4 py-2 bg-blue-800 text-white rounded-md hover:bg-blue-700"
+                        <a href="{{ route('admin.dashboard') }}">
+                            <button class="px-3 md:px-4 py-2 bg-yellow-800 text-white rounded-md hover:bg-yellow-700"
                                 data-modal-target="addnewsletterModal" data-modal-show="addnewsletterModal">
                                     <i class="fa fa-th-large"></i>
-                                    <span class="pl-2">View Orders</span>
+                                    <span class="pl-2">Dashboard</span>
                             </button>
                         </a>
 
@@ -180,9 +180,9 @@
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                     </svg>
                                 </div>
-                                <input type="search" name="search" id="default-search" class="@error('search') {{ 'border-red-500' }} @enderror block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                <input type="search" name="search" id="default-search" class="@error('search') {{ 'border-red-500' }} @enderror block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500" 
                                     placeholder="Search..." required  value="{{ request()->old('search', '') }}" />
-                                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Search</button>
                             </div>
                         </form>
 
