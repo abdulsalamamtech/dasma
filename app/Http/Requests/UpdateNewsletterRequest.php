@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateNewsletterRequest extends FormRequest
 {
@@ -22,7 +23,7 @@ class UpdateNewsletterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email', 'unique:newsletters,email,' . $this->route('newsletter')],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($this->user)],
         ];
     }
 }

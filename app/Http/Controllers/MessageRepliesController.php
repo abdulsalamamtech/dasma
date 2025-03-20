@@ -8,43 +8,37 @@ use App\Models\MessageReplies;
 
 class MessageRepliesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreMessageRepliesRequest $request)
     {
-        //
+        $data = $request->validated();
+        // Testing purpose
+        $data['user_id'] = auth()?->user()?->id() ?? 1;
+        $messageReplies = MessageReplies::create($data);
+        $messageReplies->message()->update([
+            'status' => 'replied',
+        ]);
+
+        // return redirect to message route
+        return redirect()->route('admin.messages.index')->with('success', 'Reply created successfully');
+
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(MessageReplies $messageReplies)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateMessageRepliesRequest $request, MessageReplies $messageReplies)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(MessageReplies $messageReplies)
     {
-        //
+        $messageReplies->delete();
+
+        // redirect to message route
+        return redirect()->route('admin.messages.index')->with('success', 'Reply deleted successfully');
+
+
     }
 }

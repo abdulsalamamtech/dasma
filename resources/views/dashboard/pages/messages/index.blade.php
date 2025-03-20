@@ -28,7 +28,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-yellow-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->message()->statistics()['admin']['messages']['total'] ?? 0) }} --}}
+                                {{ Number::abbreviate($messages?->total  ?? 0) }}
                             </h4>
                         </div>
                         <div class="border-t border-yellow-gray-50 p-4">
@@ -206,13 +206,10 @@
                                     Content [subject | message]
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    message
-                                </th>
-                                <th scope="col" class="px-6 py-3">
                                     Created At
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Status [pending | reply]
+                                    Status [Replied | Unread]
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Action
@@ -232,17 +229,24 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $message->email }}
+                                        <div>{{ $message->name }}</div>
+                                        <div>{{ $message->email }}</div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div>{{ $message->subject }}</div>
+                                        <div>{{ Str::limit($message->message, 50, '...') }}</div>
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $message->created_at }}
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
-                                            @if ($message->deleted_at)
-                                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Verified
+                                            @if ($message->status == 'replied')
+                                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Replied
+                                            @elseif ($message->status == 'read')
+                                            <div class="h-2.5 w-2.5 rounded-full bg-blue-500 me-2"></div> Read
                                             @else
-                                                <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Pending
+                                                <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Unread
                                             @endif
                                         </div>
                                     </td>
@@ -257,19 +261,18 @@
                                             <!-- Dropdown menu -->
                                             <div id="dropdownDots{{ $message->id }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton{{ $message->id }}">
-                                                    <li>
+                                                    {{-- <li>
                                                         <a href="{{ route('admin.messages.show', $message->id) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">View</a>
-                                                    </li>
+                                                    </li> --}}
                                                     <li class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                         <!-- Modal toggle -->
                                                         <div href="#" type="button"
                                                             data-modal-target="editmessageModal{{ $message->id }}"
                                                             data-modal-show="editmessageModal{{ $message->id }}"
-                                                            class="font-medium text-yellow-600 dark:text-yellow-500 hover:underline">Edit
+                                                            class="font-medium text-yellow-600 dark:text-yellow-500 hover:underline">View Message
                                                         </div>
                                                     </li> 
-                                                    <li>
-                                                                                                                        {{-- Deactivate --}}
+                                                    <li>            
                                                         {{-- Delete Button --}}
                                                         <div href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                             <button data-modal-target="popup-modal{{ $message->id }}" data-modal-toggle="popup-modal{{ $message->id }}" class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:red-yellow-800" type="button">
@@ -312,19 +315,19 @@
                                     </div>
                                 </div>
 
-                                <!-- Edit message modal 1 -->
+                                <!-- View message modal 1 -->
                                 <div id="editmessageModal{{ $message->id }}" tabindex="-1" aria-hidden="true"
                                     class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                     <div class="relative w-full max-w-2xl max-h-full bg-white">
                                         <!-- Modal content -->
                                         <form class="relative bg-white rounded-lg shadow dark:bg-gray-700" 
-                                            action="{{ route('admin.messages.update', $message->id) }}" method="POST">
-                                            @method('PUT')
+                                            action="{{ route('admin.message-replies.store') }}" method="POST">
+                                            @method('POST')
                                             @csrf
                                             <!-- Modal header -->
                                             <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
                                                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                                    Edit message {{ $message->id }}
+                                                    View message {{ $message->id }}
                                                 </h3>
                                                 <button type="button"
                                                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -345,18 +348,9 @@
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                             Name
                                                         </label>
-                                                        <input type="text" name="first_name" id="first-name"
+                                                        <input type="text" name="" id="first-name"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                             placeholder="Bonnie" required="" value="{{ $message->name }}" disabled>
-                                                    </div>
-                                                    <div class="col-span-6 sm:col-span-3">
-                                                        <label for="last-name"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                            Created Acc On.
-                                                        </label>
-                                                        <input type="text" name="last_name" id="last-name"
-                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                            placeholder="Green" required="" value="{{ $message?->created_at->format('D. d M Y. h:i:s a') }}" disabled>
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="email"
@@ -364,56 +358,83 @@
                                                         <input type="email" name="email" id="email"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                             placeholder="example@company.com" required="" value="{{ $message->email }}" disabled>
-                                                    </div>
+                                                    </div>  
                                                     <div class="col-span-6 sm:col-span-3">
-                                                        <label for="phone"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
-                                                            Number</label>
-                                                        <input type="tel" name="phone" id="phone"
+                                                        <label for="last-name"
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                            Subject
+                                                        </label>
+                                                        <input type="text" name="" id="subject"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                            placeholder="e.g. +(12)3456 789" required="" value="{{$message->addresses->first()?->phone_number}}" disabled>
-                                                    </div>                                                
+                                                            placeholder="Subject" required="" value="{{ $message?->subject}}" disabled>
+                                                    </div>                                           
                                                     <div class="col-span-6 sm:col-span-3">
-                                                        <label for="verified"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Verified</label>
-                                                        <select type="text" name="status" id="verified"
+                                                        <label for="last-name"
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                            Sent On.
+                                                        </label>
+                                                        <input type="text" name="" id="last-name"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                            placeholder="Development" required="">
-                                                            @if ($message->email_verified_at)
-                                                                <option value="active" selected="true">yes</option>
-                                                                <option value="pending">no</option>
-                                                            @else
-                                                                <option value="active">yes</option>
-                                                                <option value="pending" selected="true">no</option>
-                                                            @endif
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-span-6 sm:col-span-3">
-                                                        <label for="verified"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-                                                        <select type="text" name="status" id="verified"
-                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                            placeholder="Development" required="">
-                                                            @if ($message->email_verified_at)
-                                                                <option value="active" selected="true">Admin</option>
-                                                                <option value="customer">Customer</option>
-                                                            @else
-                                                                <option value="active">Admin</option>
-                                                                <option value="admin" selected="true">Customer</option>
-                                                            @endif
-                                                        </select>
+                                                            placeholder="Green" required="" value="{{ $message?->created_at->format('D. d M Y. h:i:s a') }}" disabled>
                                                     </div>
                                                 </div>
+                                                <div id="accordion-collapse" data-accordion="collapse">
+                                                    {{-- Order Information --}}
+                                                    <h2 id="accordion-collapse-heading-1">
+                                                    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-1" aria-expanded="false" aria-controls="accordion-collapse-body-1">
+                                                        <span>Message</span>
+                                                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                                                        </svg>
+                                                    </button>
+                                                    </h2>
+                                                    <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
+                                                    <div class="p-5 border border-gray-200 dark:border-gray-700">
+
+                                                        {{-- Product Items Image --}}
+                                                        <div class="col-span-12 bg-white dark:bg-gray-700">
+                                                            <strong>Subject</strong>
+                                                            <div class="p-2">
+                                                                <p>{{ $message->subject }}</p>
+                                                            </div>
+                                                            <strong>Message</strong>
+                                                            <div class="p-2">
+                                                                <p>{{ $message->message }}</p>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                    </div>
+                                                </div>
+
+                                                {{-- Hidden message id --}}
+                                                <input type="hidden" name="message_id" value="{{ $message->id }}">
+                                                {{-- Reply content textarea--}}
+                                                <div class="col-span-12 bg-white dark:bg-gray-700">
+                                                    <div class="px-3">
+                                                        <label for="reply-content"
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                            Reply Content
+                                                        </label>
+                                                        <textarea id="reply-content" name="message" rows="4"
+                                                        class="shadow-sm border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:
+                                                        border-yellow-500"
+                                                        placeholder="Reply to the message" required @disabled($message?->messageReplies?->message)>{{ $message?->messageReplies?->message }}</textarea>
+                                                    </div>
+                                                </div>
+
                                                 
                                             </div>
                                             <!-- Modal footer -->
-                                            <div
-                                                class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                                                <button type="submit"
-                                                    class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
-                                                    Save
-                                                </button>
-                                            </div>
+                                            {{-- Check if message has been replied to --}}
+                                            @if (!$message?->messageReplies?->message)
+                                                <div
+                                                    class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600 bg-white dark:bg-gray-700">
+                                                    <button type="submit"
+                                                        class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
+                                                        Reply
+                                                    </button>
+                                                </div>
+                                            @endif
                                         </form>
                                     </div>
 

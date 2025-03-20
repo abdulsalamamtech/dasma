@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\MessageRepliesController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -14,7 +16,10 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -34,28 +39,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // Dashboard routes
-    Route::get('/', function () {
-        return view('dashboard.dashboard');
-    })->name('dashboard');
-
-    // Route::get('/products', function () {
-    //     return view('dashboard.pages.products.index');
-    // })->name('products.index');
-    Route::get('/centers', function () {
-        return view('dashboard.pages.centers.index');
-    })->name('');
-    Route::get('/centers', function () {
-        return view('dashboard.pages.centers.index');
-    })->name('');
-    Route::get('/centers', function () {
-        return view('dashboard.pages.centers.index');
-    })->name('');
-    Route::get('/centers', function () {
-        return view('dashboard.pages.centers.index');
-    })->name('');
-    Route::get('/centers', function () {
-        return view('dashboard.pages.centers.index');
-    })->name('');
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
     // Brands routes
     Route::apiResource('brands', BrandController::class);
@@ -64,17 +48,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Promotions routes
     Route::apiResource('promotions', PromotionController::class);
     // Assets routes
-    Route::apiResource('assets', AssetController::class);
-    // Route::any('assets', [AssetController::class, 'index']);
+    Route::apiResource('assets', AssetController::class)
+    ->only(['index']);
 
 
     // Products routes
     Route::apiResource('products', ProductController::class);
-
     // Product Variations routes   
     Route::apiResource('products.product-variations', ProductVariationController::class);
-
-
     // Orders routes
     Route::apiResource('orders', OrderController::class);
     
@@ -85,10 +66,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Customers routes
     Route::apiResource('users', UserController::class);
-
     // Transactions routes
     Route::apiResource('newsletters', NewsletterController::class)
-    ->except(['show', 'edit', 'store', 'update', 'destroy']);
+    ->except(['store']);
 
     // Cart routes
     // Route::apiResource('carts', CartController::class);
@@ -101,8 +81,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Messages routes
     Route::apiResource('messages', MessageController::class);
-    // Route::get('messages/{message}', [MessageController::class, 'show']);
-    // Route::delete('messages/{message}', [MessageController::class, 'destroy']);
+    // Message Reply routes
+    Route::apiResource('message-replies', MessageRepliesController::class);
 
     // Notifications routes
     // Route::get('notifications', [NotificationController::class, 'index']);
@@ -111,15 +91,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Customers routes
     // Route::apiResource('customers', CustomerController::class);
 
-    // Settings routes
-    // Route::get('/settings', function () {
-    //     return view('dashboard.pages.settings.index');
-    // })->name('settings.index');
-    // Route::get('/settings/general', function () {
-    //     return view('dashboard.pages.settings.general');
-    // })->name('settings.general');
-    // Route::get('/settings/payment', function () {
-    //     return view('dashboard.pages.settings.payment');
-    // })->name('settings.payment');
-
+    // Profile routes
+    Route::get('/profile', function () {
+        return view('dashboard.profile.show');
+    })->name('profile');
+    // Setting routes
+    Route::get('/settings', function () {
+        return view('dashboard.profile.edit');
+    })->name('settings');
 });
+
+

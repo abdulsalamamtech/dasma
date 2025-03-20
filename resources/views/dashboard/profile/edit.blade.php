@@ -25,15 +25,15 @@
                             </header>
 
 
-                            <form method="post" action="{{ route('dashboard.profile.update', $user_profile->id) }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('admin.dashboard') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
                                 
                                 <div class="flex items-center gap-4">
                                     <div class="block w-10 h-10 mt-1 profileimage" style="border-radius:50%;">
                                         <img  class="w-100" src="
-                                            @isset($user_profile->image->path)
-                                                {{asset('storage/profiles/'.$user_profile->image->path)}}
+                                            @isset($user_profile?->image->path)
+                                                {{asset('storage/profiles/'.$user_profile?->image->path)}}
                                             @else
                                                 {{'/img/img1.jpg'}}
                                             @endisset
@@ -49,12 +49,12 @@
                                 <div class="flex items-center gap-4">
                                     <div>
                                         <x-input-label for="name" :value="__('Name')" />
-                                        <x-text-input id="name" name="name" type="text" class="block w-full mt-1" :value="old('name', Auth::user()->name)" required autofocus autocomplete="name" disabled/>
+                                        <x-text-input id="name" name="name" type="text" class="block w-full mt-1" :value="old('name', Auth::user()?->name)" required autofocus autocomplete="name" disabled/>
                                         <x-input-error class="mt-2" :messages="$errors->get('name')" />
                                     </div>
                                     <div>
                                         <x-input-label for="emai" :value="__('Email')" />
-                                        <x-text-input id="email" name="email" type="text" class="block w-full mt-1" :value="old('email', Auth::user()->email)" required autofocus autocomplete="name"  disabled/>
+                                        <x-text-input id="email" name="email" type="text" class="block w-full mt-1" :value="old('email', Auth::user()?->email)" required autofocus autocomplete="name"  disabled/>
                                         <x-input-error class="mt-2" :messages="$errors->get('email')" />
                                     </div>
                                 </div>
@@ -74,19 +74,19 @@
 
                                 <div class="block w-full mt-1">
                                     <x-input-label for="address" :value="__('Enter your address')" />
-                                    <x-text-input id="address" name="address" type="text" class="block w-full mt-1" :value="old('address', $user_profile->address ?? '')" autofocus autocomplete="name" />
+                                    <x-text-input id="address" name="address" type="text" class="block w-full mt-1" :value="old('address', $user_profile?->address ?? '')" autofocus autocomplete="name" />
                                     <x-input-error class="mt-2" :messages="$errors->get('address')" />
                                 </div>
                                 
                                 <div class="flex items-center w-full gap-4 mt-1">
                                     <div>
                                         <x-input-label for="lga" :value="__('Local Government Area')" />
-                                        <x-text-input id="lga" name="lga" type="text" class="block w-full mt-1" :value="old('lga', $user_profile->lga ?? '')" required autofocus autocomplete="name" />
+                                        <x-text-input id="lga" name="lga" type="text" class="block w-full mt-1" :value="old('lga', $user_profile?->lga ?? '')" required autofocus autocomplete="name" />
                                         <x-input-error class="mt-2" :messages="$errors->get('lga')" />
                                     </div>
                                     <div>
                                         <x-input-label for="state" :value="__('State')" />
-                                        <x-text-input id="state" name="state" type="text" class="block w-full mt-1" :value="old('state', $user_profile->state ?? '')" required autofocus autocomplete="name" />
+                                        <x-text-input id="state" name="state" type="text" class="block w-full mt-1" :value="old('state', $user_profile?->state ?? '')" required autofocus autocomplete="name" />
                                         <x-input-error class="mt-2" :messages="$errors->get('state')" />
                                     </div>
                                 </div>

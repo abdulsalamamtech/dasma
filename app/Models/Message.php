@@ -23,6 +23,7 @@ class Message extends Model
 
     public function messageReplies()
     {
-        return $this->hasMany(MessageReplies::class);
+        return $this->hasOne(MessageReplies::class);
     }
+
 }

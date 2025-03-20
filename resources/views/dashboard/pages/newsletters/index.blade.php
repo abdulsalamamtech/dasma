@@ -200,6 +200,9 @@
                                     </div>
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    ID
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     newsletter
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -221,9 +224,12 @@
                                     <td class="w-4 p-4">
                                         <div class="flex items-center">
                                             <input id="checkbox-table-search-1" type="checkbox"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                             <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                                         </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        #{{ $newsletter->id }}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $newsletter->email }}
@@ -251,9 +257,6 @@
                                             <!-- Dropdown menu -->
                                             <div id="dropdownDots{{ $newsletter->id }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton{{ $newsletter->id }}">
-                                                    <li>
-                                                        <a href="{{ route('admin.newsletters.show', $newsletter->id) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">View</a>
-                                                    </li>
                                                     <li class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                         <!-- Modal toggle -->
                                                         <div href="#" type="button"
@@ -337,65 +340,27 @@
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="first-name"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                            Name
+                                                            Email
                                                         </label>
-                                                        <input type="text" name="first_name" id="first-name"
+                                                        <input type="email" name="email" id="email-name"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                            placeholder="Bonnie" required="" value="{{ $newsletter->name }}" disabled>
+                                                            placeholder="email" required="" value="{{ $newsletter->email ?? null }}">
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="last-name"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                             Created Acc On.
                                                         </label>
-                                                        <input type="text" name="last_name" id="last-name"
+                                                        <input type="text" name="" id="last-name"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                             placeholder="Green" required="" value="{{ $newsletter?->created_at->format('D. d M Y. h:i:s a') }}" disabled>
                                                     </div>
-                                                    <div class="col-span-6 sm:col-span-3">
-                                                        <label for="email"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                                        <input type="email" name="email" id="email"
+                                                    <div class="col-span-6 sm:col-span-6">
+                                                        <label for="no-mails"
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. Email</label>
+                                                        <input type="number" name="" id="no-mails"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                            placeholder="example@company.com" required="" value="{{ $newsletter->email }}" disabled>
-                                                    </div>
-                                                    <div class="col-span-6 sm:col-span-3">
-                                                        <label for="phone"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
-                                                            Number</label>
-                                                        <input type="tel" name="phone" id="phone"
-                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                            placeholder="e.g. +(12)3456 789" required="" value="{{$newsletter->addresses->first()?->phone_number}}" disabled>
-                                                    </div>                                                
-                                                    <div class="col-span-6 sm:col-span-3">
-                                                        <label for="verified"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Verified</label>
-                                                        <select type="text" name="status" id="verified"
-                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                            placeholder="Development" required="">
-                                                            @if ($newsletter->email_verified_at)
-                                                                <option value="active" selected="true">yes</option>
-                                                                <option value="pending">no</option>
-                                                            @else
-                                                                <option value="active">yes</option>
-                                                                <option value="pending" selected="true">no</option>
-                                                            @endif
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-span-6 sm:col-span-3">
-                                                        <label for="verified"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-                                                        <select type="text" name="status" id="verified"
-                                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                            placeholder="Development" required="">
-                                                            @if ($newsletter->email_verified_at)
-                                                                <option value="active" selected="true">Admin</option>
-                                                                <option value="customer">Customer</option>
-                                                            @else
-                                                                <option value="active">Admin</option>
-                                                                <option value="admin" selected="true">Customer</option>
-                                                            @endif
-                                                        </select>
+                                                            placeholder="example@company.com" required="" value="{{ $newsletter->id }}" disabled>
                                                     </div>
                                                 </div>
                                                 

@@ -32,7 +32,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validated data
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $data['password'] = bcrypt($data['password']);
+        $user = User::create($data);
+
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully');
     }
 
     /**
@@ -48,17 +58,27 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'email_verified_at' => ['nullable'],
+            'role' => ['required', 'in:customer,admin'],
+        ]);
+
+        $user->email_verified_at = time();
+        $user->role = $request->role ?? 'customer';
+        $user->save();
+
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully');
     }
 
     /**

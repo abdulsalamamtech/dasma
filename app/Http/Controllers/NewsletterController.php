@@ -13,7 +13,15 @@ class NewsletterController extends Controller
      */
     public function index()
     {
-        $newsletters = Newsletter::latest()->paginate();
+
+        // Search for newsletters
+        if(request()->filled('search')){
+            $search = request('search');
+            $newsletters = $this->search($search);
+        } else{
+            $newsletters = Newsletter::latest()->paginate();
+        }
+        // return $newsletters;
         return view('dashboard.pages.newsletters.index', [
             'newsletters' => $newsletters,
         ]);
@@ -27,7 +35,8 @@ class NewsletterController extends Controller
         $data = $request->validated();
         $newsletter = Newsletter::create($data);
 
-        return $newsletter;
+        // return $newsletter;
+        return redirect()->route('admin.newsletters.index')->with('success', 'newsletter created successfully');
     }
 
     /**
@@ -35,7 +44,8 @@ class NewsletterController extends Controller
      */
     public function show(Newsletter $newsletter)
     {
-        return $newsletter;
+        // return $newsletter;
+        return redirect()->route('admin.newsletters.index');
     }
 
     /**
@@ -46,7 +56,8 @@ class NewsletterController extends Controller
         $data = $request->validated();
         $newsletter->update($data);
 
-        return $newsletter;
+        // return $newsletter;
+        return redirect()->route('admin.newsletters.index')->with('success', 'newsletter updated successfully');
     }
 
     /**
@@ -55,6 +66,18 @@ class NewsletterController extends Controller
     public function destroy(Newsletter $newsletter)
     {
         $newsletter->delete();
-        return $message = "newsletter deleted successfully";
+        $message = "newsletter deleted successfully";
+        return redirect()->route('admin.newsletters.index')->with('success', $message);
+    }
+
+
+    /**
+     * Remove Search specified resource from storage.
+     */
+    public function search(string $search){
+        return Newsletter::where('email', 'like', '%'.$search.'%')
+            ->orWhere('id', 'like', '%'.$search.'%')
+            ->latest()
+            ->paginate();
     }
 }
