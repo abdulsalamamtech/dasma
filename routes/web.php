@@ -1,8 +1,10 @@
 <?php
 
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -24,6 +26,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
+require __DIR__.'/account.php';
+
 
 
 
@@ -38,9 +42,8 @@ Route::get('/dasma/search', function () {
     return view('dasma.search');
 })->name('search');
 
-Route::get('/dasma/store', function () {
-    return view('dasma.store');
-})->name('store');
+
+Route::get('stores', [ProductController::class, 'listProduct'])->name('store');
 
 Route::get('/dasma/product', function () {
     return view('dasma.product');
@@ -62,44 +65,6 @@ Route::get('/dasma/terms-and-conditions', function () {
 
 
 
-// Authenticated user accounts
-Route::prefix('/account')->group(function () {
-
-    Route::get('/', function () {
-        return view('dasma.account.dashboard');
-    })->name('account');
-
-
-    Route::get('/cart', function () {
-        return view('dasma.account.cart');
-    })->name('cart');
-
-    Route::get('/wishlist', function () {
-        return view('dasma.account.wishlist');
-    })->name('wishlist');
-
-    Route::get('/orders', function () {
-        return view('dasma.account.orders');
-    })->name('orders');
-
-    Route::get('/transactions', function () {
-        return view('dasma.account.transactions');
-    })->name('transactions');
-
-    Route::get('/history', function () {
-        return view('dasma.account.history');
-    })->name('history');
-
-    Route::get('/settings', function () {
-        return view('dasma.account.settings');
-    })->name('settings');
-
-
-    // More
-    Route::get('/shipping-methods', function () {
-        return view('dasma.account.shipping-methods');
-    })->name('shipping');
-});
 
 
 

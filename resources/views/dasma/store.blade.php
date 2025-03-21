@@ -23,6 +23,64 @@
           </div>
 
           <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+
+
+            {{-- Product --}}
+            @forelse ($products as $product)
+                <div class="group relative w-full lg:last:hidden xl:last:block">
+                    <div class="relative flex items-center justify-center rounded">
+                        <div class="h-68 w-full bg-cover bg-center bg-no-repeat"
+                            style="background-image:url({{ $product->banner->url }})"></div>
+                        <span
+                            class="absolute top-0 right-0 bg-white px-5 py-1 mt-4 mr-4 rounded-full font-hk font-bold  text-v-green text-sm uppercase tracking-wide">New</span>
+                        <div
+                            class="group absolute inset-0 flex items-center justify-center bg-secondary bg-opacity-85 py-28 opacity-0 transition-opacity group-hover:opacity-100">
+                            <a href="cart.html"
+                                class="mr-3 flex items-center rounded-full bg-white px-3 py-3 transition-all hover:bg-primary-light">
+                                <img src="/assets/img/icons/icon-cart.svg" class="h-6 w-6" alt="icon cart" />
+                            </a>
+                            <a href="product.html"
+                                class="mr-3 flex items-center rounded-full bg-white px-3 py-3 transition-all hover:bg-primary-light">
+                                <img src="/assets/img/icons/icon-search.svg" class="h-6 w-6" alt="icon search" />
+                            </a>
+                            <a href="account/wishlist.html"
+                                class="flex items-center rounded-full bg-white px-3 py-3 transition-all hover:bg-primary-light">
+                                <img src="/assets/img/icons/icon-heart.svg" class="h-6 w-6" alt="icon heart" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-6">
+                        <div>
+                            <h3 class="font-hk text-base text-secondary">{{ $product->name }}</h3>
+                            <div class="flex items-center">
+                                <div class="flex items-center">
+                                    <i class="bx bxs-star text-primary"></i>
+                                    <i class="bx bxs-star text-primary"></i>
+                                    <i class="bx bxs-star text-primary"></i>
+                                    <i class="bx bxs-star text-primary"></i>
+                                    <i class="bx bxs-star text-primary"></i>
+                                </div>
+                                <p class="ml-2 font-hk text-sm text-secondary">
+                                    (45)
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 items-center">
+                            <del class="font-hk text-sm font-bold text-primary">${{ $product->initial_price }}</del>
+                            <span class="font-hk text-xl font-bold text-primary">${{ $product->price }}</span>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <p>No products found.</p>
+            @endforelse
+
+
+            <div>
+                {{ $products }}
+            </div>
+
+
               <div class="group relative w-full lg:last:hidden xl:last:block">
                   <div class="relative flex items-center justify-center rounded">
                       <div class="h-68 w-full bg-cover bg-center bg-no-repeat"
@@ -680,6 +738,7 @@
                   </div>
               </div>
           </div>
+
           <div class="mx-auto flex justify-center py-16">
               <span
                   class="cursor-pointer pr-5 font-hk font-semibold text-grey-darkest transition-colors hover:text-black">Previous</span>
