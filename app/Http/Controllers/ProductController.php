@@ -184,14 +184,12 @@ class ProductController extends Controller
     /**
      * Display a product.
      */
-    public function showProduct()
+    public function showProduct(Product $product)
     {
-        $products = Product::with(['category', 'brand', 'promotion', 'banner', 'variations'])
-            ->latest()
-            ->paginate();
-        // return $products;
-        return view('dasma.store', [
-            'products' => $products
+        $product->load(['category', 'brand', 'promotion', 'banner', 'variations.asset']);
+        // return $product;
+        return view('dasma.product', [
+            'product' => $product
         ]);
     }
 }

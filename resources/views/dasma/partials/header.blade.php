@@ -31,6 +31,38 @@
   {{-- <script src="{{ asset('cdn.tailwindcss.com.3.4.5.js') }}"></script> --}}
   <script src="/cdn.tailwindcss.com.3.4.5.js"></script>
 
+  {{-- Axios --}}
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  
+  {{--  --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="/js/jquery.min-3.7.1.js"></script>
+  <script src="/js/main.js"></script>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  {{-- Vite Resource --}}
+  {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+
+
+  {{-- START ALERTIFY JS --}}
+  <!-- JavaScript -->
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+  <!-- CSS -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+  <!-- Default theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+  <!-- Semantic UI theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+  <!-- Bootstrap theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
+  <script>
+      alertify.set('notifier','position', 'top-right')
+  </script>
+  {{-- END ALERTIFY JS --}}
+  
+
+
 </head>
 
 <body x-data="{

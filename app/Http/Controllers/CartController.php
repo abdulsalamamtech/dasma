@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ActorHelper;
+use App\Helpers\ApiResponse;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Notifications\Action;
 
 class CartController extends Controller
@@ -15,10 +17,29 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = Cart::with(['product'])
+        $carts = Cart::with(['product.banner'])
             ->latest()
-            ->paginate();
-        return $carts;
+            ->paginate(4);
+        // return $carts;
+        // $total = $carts->sum()
+        // Get cart total quantity * product price
+        // $total = Cart::sum(function ($item) {
+        //     return $item->quantity * $item->product->price;
+        // });
+
+        $total = Cart::with('product')
+                            ->get()
+                            ->sum(fn($cart) => $cart->quantity * $cart->product->price);
+        // $total = Cart::join('products', 'carts.product_id', '=', 'products.id')
+        // ->selectRaw('SUM(carts.quantity * products.price) as total')
+        // ->value('total');
+    
+        // return $total;
+        return view('dasma.account.carts',[
+                'carts' => $carts,
+                'total' => $total
+        ]);
+
     }
 
     /**
@@ -30,7 +51,9 @@ class CartController extends Controller
         $data['user_id'] = ActorHelper::getUserId();
 
         $cart = Cart::create($data);
-        return $cart;
+        // dd($cart);
+        // return ApiResponse::success($cart);
+        return ApiResponse::success($cart);
     }
 
     /**
@@ -59,7 +82,10 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
+        // return redirect()->away('http://localhost:8000?id=' . $cart->id);
         $cart->delete();
-        return $message = "cart deleted successfully";
+        $message = "cart deleted successfully";
+        return ApiResponse::success($cart, $message);
+
     }
 }

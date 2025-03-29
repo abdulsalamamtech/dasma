@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,6 +23,9 @@ Route::prefix('/account')->group(function () {
     Route::get('/cart', function () {
         return view('dasma.account.cart');
     })->name('cart');
+
+    Route::apiResource('carts', CartController::class);
+
 
     Route::get('/wishlist', function () {
         return view('dasma.account.wishlist');

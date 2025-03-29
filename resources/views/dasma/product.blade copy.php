@@ -11,50 +11,29 @@
                     <div class="c-hero-gradient-bg absolute top-0 left-0 h-56 w-full bg-cover bg-no-repeat lg:h-68">
                     <div class="py-20 px-6 sm:px-12 lg:px-20">
                         <h1 class="font-butler text-2xl text-white sm:text-3xl md:text-4.5xl lg:text-5xl">
-                        {{ $product->name }}
+                        Woodie Blake
                         </h1>
                         <div class="flex pt-2">
                         <a href="{{ route('index') }}" class="font-hk text-base text-white transition-colors hover:text-primary">Home</a>
                         <span class="px-2 font-hk text-base text-white">.</span>
-                        <span class="font-hk text-base text-white">{{ $product->name }}</span>
+                        <span class="font-hk text-base text-white">Woodie Blake</span>
                         </div>
                     </div>
-                  </div>
-            </div>
+                    </div>
+              </div>
               
               
                 <div class="-mx-5 flex flex-col justify-between pt-16 pb-24 lg:flex-row">
-                  <div class="flex flex-col-reverse justify-between px-5 sm:flex-row-reverse lg:w-1/2 lg:flex-row" x-data="{ selectedImage: '{{ $product->banner->url }}' }">
+                  <div class="flex flex-col-reverse justify-between px-5 sm:flex-row-reverse lg:w-1/2 lg:flex-row" x-data="{ selectedImage: '/assets/img/unlicensed/backpack-2.png' }">
                     <div class="flex flex-row sm:flex-col sm:pl-5 md:pl-4 lg:pl-0 lg:pr-2 xl:pr-3">
-                      {{-- Get color and size --}}
-                      @php
-                          $colors[] = $product->colors;
-                          $sizes[] = $product->sizes;
-                      @endphp
+                      
                       <div class="relative mr-3 w-28 pb-5 sm:w-32 sm:pr-0 lg:w-24 xl:w-28">
                         <div class="relative flex w-full items-center justify-center rounded border border-grey bg-v-pink">
-                          <img class="cursor-pointer object-cover" @click="selectedImage = $event.target.src" alt="product image {{ $product->name }}" src="{{ $product->banner->url }}">
+                          <img class="cursor-pointer object-cover" @click="selectedImage = $event.target.src" alt="product image" src="/assets/img/unlicensed/backpack-2.png">
                         </div>
                       </div>
-                      @forelse ($product->variations as $pro_variation)
-                        @php
-                            $colors[] = $pro_variation->color;
-                            $sizes[] = $pro_variation->size;
-                        @endphp
-                        <div class="relative mr-3 w-28 pb-5 sm:w-32 sm:pr-0 lg:w-24 xl:w-28">
-                          <div class="relative flex w-full items-center justify-center rounded border border-grey bg-v-pink">
-                            <img class="cursor-pointer object-cover" @click="selectedImage = $event.target.src" alt="product image {{ $pro_variation->title }}" src="{{ $pro_variation->asset->url }}">
-                          </div>
-                        </div>
-                      @empty
-                        <div class="relative mr-3 w-28 pb-5 sm:w-32 sm:pr-0 lg:w-24 xl:w-28">
-                          <div class="relative flex w-full items-center justify-center rounded border border-grey bg-v-pink">
-                            <img class="cursor-pointer object-cover" @click="selectedImage = $event.target.src" alt="product image {{ $product->name }}" src="{{ $product->banner->url }}">
-                          </div>
-                        </div>
-                      @endforelse
                       
-                      {{-- <div class="relative mr-3 w-28 pb-5 sm:w-32 sm:pr-0 lg:w-24 xl:w-28">
+                      <div class="relative mr-3 w-28 pb-5 sm:w-32 sm:pr-0 lg:w-24 xl:w-28">
                         <div class="relative flex w-full items-center justify-center rounded border border-grey bg-v-pink">
                           <img class="cursor-pointer object-cover" @click="selectedImage = $event.target.src" alt="product image" src="/assets/img/unlicensed/backpack-2.png">
                         </div>
@@ -70,12 +49,12 @@
                         <div class="relative flex w-full items-center justify-center rounded border border-grey bg-v-pink">
                           <img class="cursor-pointer object-cover" @click="selectedImage = $event.target.src" alt="product image" src="/assets/img/unlicensed/backpack-2.png">
                         </div>
-                      </div>                       --}}
+                      </div>                      
                       
                     </div>
                     <div class="relative w-full pb-5 sm:pb-0">
                       <div class="aspect-w-1 aspect-h-1 relative flex items-center justify-center rounded border border-grey bg-v-pink">
-                        <img class="object-cover" alt="product image" :src="selectedImage" src="{{ $product->banner->url }}">
+                        <img class="object-cover" alt="product image" :src="selectedImage" src="https://elyssi.redpixelthemes.com/assets/img/unlicensed/backpack-03-2.png">
                       </div>
                     </div>
                   </div>
@@ -84,16 +63,15 @@
                     <div class="mb-8 border-b border-grey-dark">
                       <div class="flex items-center">
                         <h2 class="font-butler text-3xl md:text-4xl lg:text-4.5xl">
-                          {{ $product->name }}
+                          Woodie Blake
                         </h2>
                         <p class="ml-8 rounded-full bg-primary px-5 py-2 font-hk text-sm font-bold uppercase leading-none text-white">
-                          {{-- 20% off --}}
-                          {{ Number::abbreviate(($product->initial_price - $product->price )/ $product->initial_price, 2) }}%
+                          20% off
                         </p>
                       </div>
                       <div class="flex items-center pt-3">
-                        <span class="font-hk text-2xl text-secondary">${{ $product->price }}</span>
-                        <span class="pl-5 font-hk text-xl text-grey-darker line-through">${{ $product->initial_price }}</span>
+                        <span class="font-hk text-2xl text-secondary">$110.0</span>
+                        <span class="pl-5 font-hk text-xl text-grey-darker line-through">$35.0</span>
                       </div>
                       <div class="flex items-center pt-3 pb-8">
                         <div class="flex items-center">
@@ -112,28 +90,55 @@
                         In Stock
                       </p>
                     </div>
-                    <p class="pb-5 font-hk text-secondary">
-                          {{ Str::limit($product->description, 50, '...') }}           
-                    </p>
-
+                    <p class="pb-5 font-hk text-secondary">Versatile, comfortable, and chic! Three words that describe Blake by Elyssi.</p>
                     <div class="flex justify-between pb-4">
                       <div class="w-1/3 sm:w-1/5">
                         <p class="font-hk text-secondary">Color</p>
                       </div>
-                      <div class="w-2/3 sm:w-5/6 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
-                        @forelse (array_unique($colors) as $color)
-                          <!-- Color Option 1 -->
-                          <label class="cursor-pointer">
-                            <input type="radio" name="color" value="red" class="peer hidden" />
-                            <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-[{{ $color }}] peer-checked:ring-2 peer-checked:ring-[{{ $color }}] peer-checked:border-[{{ $color }}]"></div>
-                          </label>
-                        @empty
-                          <label class="cursor-pointer">
-                            <input type="radio" name="color" value="black" class="peer hidden" />
-                            <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-black peer-checked:ring-2 peer-checked:ring-gray-700 peer-checked:border-gray-700"></div>
-                          </label> 
-                        @endforelse
-                        {{-- <!-- Color Option 2 -->
+                      <div class="flex w-2/3 items-center sm:w-5/6">
+                        <div class="mr-2 cursor-pointer rounded-full border-2 border-transparent bg-primary px-2 py-2 transition-colors hover:border-black"></div>
+                        <div class="mr-2 cursor-pointer rounded-full border-2 border-transparent bg-secondary-light px-2 py-2 transition-colors hover:border-black"></div>
+                        <div class="mr-2 cursor-pointer rounded-full border-2 border-transparent bg-v-green px-2 py-2 transition-colors hover:border-black"></div>
+                        <div class="cursor-pointer rounded-full border-2 border-transparent bg-v-blue px-2 py-2 transition-colors hover:border-black"></div>
+                      </div>
+                    </div>
+
+                    <!-- Color -->
+                    <div class="flex justify-between pb-4">
+                      <div class="w-1/3 sm:w-1/5">
+                        <p class="font-hk text-secondary">Color</p>
+                      </div>
+                      <div class="flex w-2/3 items-center sm:w-5/6">
+                        <!-- @forelse (array_unique($colors) as $color) -->
+                            <div>
+                              <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="radio" name="color" class="peer hidden" />
+                                <div class="w-6 h-6 mr-2 cursor-pointer rounded-full border-2 border-transparent hover:border-black peer-checked:bg-[{{ $color }}] accent-[{{ $color }}]"></div>
+                                <span class="bg-[{{ $color }}] accent-[{{ $color }}]">{{ $color }}</span>
+                              </label>
+                            </div>
+                        <!-- @empty -->
+                            
+                        <!-- @endforelse -->
+                        <div class="mr-2 cursor-pointer rounded-full border-2 border-transparent bg-primary px-2 py-2 transition-colors hover:border-black"></div>
+                        <div class="mr-2 cursor-pointer rounded-full border-2 border-transparent bg-secondary-light px-2 py-2 transition-colors hover:border-black"></div>
+                        <div class="mr-2 cursor-pointer rounded-full border-2 border-transparent bg-v-green px-2 py-2 transition-colors hover:border-black"></div>
+                        <div class="cursor-pointer rounded-full border-2 border-transparent bg-v-blue px-2 py-2 transition-colors hover:border-black"></div>
+                      </div>
+                    </div>
+
+                    <!-- Color -->
+                    <div class="flex flex-col items-center space-y-4">
+                      <h3 class="text-lg font-semibold">Choose a Color</h3>
+                    
+                      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+                        <!-- Color Option 1 -->
+                        <label class="cursor-pointer">
+                          <input type="radio" name="color" value="red" class="peer hidden" />
+                          <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-red-500 peer-checked:ring-2 peer-checked:ring-red-600 peer-checked:border-red-600"></div>
+                        </label>
+                    
+                        <!-- Color Option 2 -->
                         <label class="cursor-pointer">
                           <input type="radio" name="color" value="blue" class="peer hidden" />
                           <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-blue-500 peer-checked:ring-2 peer-checked:ring-blue-600 peer-checked:border-blue-600"></div>
@@ -155,23 +160,11 @@
                         <label class="cursor-pointer">
                           <input type="radio" name="color" value="black" class="peer hidden" />
                           <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-black peer-checked:ring-2 peer-checked:ring-gray-700 peer-checked:border-gray-700"></div>
-                        </label> --}}
+                        </label>
                       </div>
-                      {{-- <div class="flex w-2/3 items-center sm:w-5/6">
-                        @forelse (array_unique($colors) as $color)
-                            <div>
-                              <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="color" class="peer hidden" />
-                                <div class="w-6 h-6 mr-2 cursor-pointer rounded-full border-2 border-transparent hover:border-black peer-checked:bg-[{{ $color }}] accent-[{{ $color }}]"></div>
-                                <span class="bg-[{{ $color }}] accent-[{{ $color }}]">{{ $color }}</span>
-                              </label>
-                            </div>
-                        @empty
-                            
-                        @endforelse
-
-                      </div> --}}
                     </div>
+                  <!-- End color -->
+                    
 
 
                     <div class="flex items-center justify-between pb-4">
@@ -179,18 +172,13 @@
                         <p class="font-hk text-secondary">Size</p>
                       </div>
                       <div class="w-2/3 sm:w-5/6">
-                        <select name="size" class="form-select w-2/3">
-                          @forelse (array_unique($sizes) as $size)
-                            <option value="{{ $size }}">{{ $size }}</option>
-                          @empty
-                            <option value="default">Default</option>
-                          @endforelse
+                        <select class="form-select w-2/3">
+                          <option value="0">Small</option>
+                          <option value="1">Medium</option>
+                          <option value="2">Large</option>
                         </select>
                       </div>
                     </div>
-
-
-
                     <div class="flex items-center justify-between pb-8">
                       <div class="w-1/3 sm:w-1/5">
                         <p class="font-hk text-secondary">Quantity</p>
@@ -215,11 +203,11 @@
                     <div class="flex pb-2">
                       <p class="font-hk text-secondary">SKU:</p>
                       <p class="font-hkbold pl-3 text-secondary">
-                        PKH{{ $product->sku }}
+                        KH12345
                       </p>
                     </div>
                     <p class="font-hk text-secondary">
-                      <span class="pr-2">Categories:</span>{{ $product->category->name }}
+                      <span class="pr-2">Categories:</span>Bag, Hand bag, Travel bag, Black
                     </p>
                   </div>
                 </div>
@@ -244,20 +232,16 @@
                     <div :class="{ 'active': activeTab=== 'description' }" class="tab-pane bg-grey-light py-10 transition-opacity md:py-16" role="tabpanel">
                       <div class="mx-auto w-5/6 text-center sm:text-left">
                         <div class="font-hk text-base text-secondary">
-                          {{ $product->description }}              
+                          Versatile, comfortable, and chic! Three words that describe Blake by Elyssi. This backpack purse is A durable leather backpack with two large compartments and 2 smaller compartments on the front and back of it so you can carry all your belongings.
+              
                         </div>
                       </div>
                     </div>
                     <div :class="{ 'active': activeTab=== 'additional-information' }" class="tab-pane bg-grey-light py-10 transition-opacity md:py-16 active" role="tabpanel">
                       <div class="mx-auto w-5/6">
                         <div class="font-hk text-base text-secondary">
-                          {{ $product->name }}<br>
-                            <br> Size::13.4”Lx 6.5”W x 15.4”H. 
-                            <br> Weight: 1.57 KG
-                            <br> Color: light brown.
-                            <br> Brand: {{ $product->brand->name }}
-                            <br> Category: {{ $product->category->name }}
-                            <br> promotion: {{ $product->promotion->description }}
+                          On the main compartment has multiple pockets available for your tools, chargers, make up, keys, etc. <br><br>  Size::13.4”Lx 6.5”W x 15.4”H. <br> Weight: 1.57pounds. <br> Color: light brown.
+              
                         </div>
                       </div>
                     </div>

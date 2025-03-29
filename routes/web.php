@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +43,15 @@ Route::get('/dasma/search', function () {
 })->name('search');
 
 
-Route::get('stores', [ProductController::class, 'listProduct'])->name('store');
+// Store Routes
+Route::get('stores', [ProductController::class, 'listProduct'])->name('stores.list');
+Route::get('stores/{product:slug}', [ProductController::class, 'showProduct'])->name('stores.show');
+
+
+// Carts Routes
+Route::post('carts', [CartController::class, 'store'])->name('carts.store');
+Route::delete('carts/{cart}', [CartController::class, 'destroy'])->name('carts.delete');
+
 
 Route::get('/dasma/product', function () {
     return view('dasma.product');

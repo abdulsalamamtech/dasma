@@ -33,14 +33,23 @@
             </div>
           
             <div
+              x-data="{totalProductPrice : 999, 
+              coupon: 0,
+              get totalPurchasePrice() {
+                return totalProductPrice + coupon;
+              }}"
               class="flex flex-col-reverse justify-between pb-16 sm:pb-20 lg:flex-row lg:pb-24">
+
+              {{-- Cart Items --}}
               <div class="lg:w-3/5">
                 <div class="pt-10">
                   <h1
                     class="font-hkbold pb-3 text-center text-2xl text-secondary sm:text-left">
                     Cart Items
                   </h1>
+                  {{-- Product Items --}}
                   <div class="pt-8">
+                    {{-- Title --}}
                     <div class="hidden sm:block">
                       <div class="flex justify-between border-b border-grey-darker">
                         <div class="w-1/2 pl-8 pb-2 sm:pl-12 lg:w-3/5 xl:w-1/2">
@@ -55,95 +64,120 @@
                         </div>
                       </div>
                     </div>
-                    <div
-                      class="mb-0 hidden flex-row items-center justify-between border-b border-grey-dark py-3 md:flex">
-                      <i
-                        class="bx bx-x mr-6 cursor-pointer text-2xl text-grey-darkest sm:text-3xl"></i>
+                    {{-- Items --}}
+                    <div data-id="5"
+                      x-data="{ productQuantity: 1,
+                       itemPrice: 60,
+                       get itemTotal() {  
+                        total = parseFloat(this.productQuantity) * parseFloat(this.itemPrice); 
+                        totalProductPrice += total;
+                        return total; 
+                      }}">
+                      {{-- Start of cart item desktop --}}
                       <div
-                        class="flex w-1/2 flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left lg:w-3/5 xl:w-1/2">
-                        <div class="relative mx-0 w-20 pr-0">
-                          <div class="flex h-20 items-center justify-center rounded">
-                            <div class="aspect-w-1 aspect-h-1 w-full">
-                              <img
-                                src="/assets/img/unlicensed/shoes-3.png"
-                                alt="product image"
-                                class="object-cover"/>
+                        class="mb-0 hidden flex-row items-center justify-between border-b border-grey-dark py-3 md:flex">
+                        <i
+                          class="removeFromCart bx bx-x mr-6 cursor-pointer text-2xl text-grey-darkest sm:text-3xl"></i>
+                        <div
+                          class="flex w-1/2 flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left lg:w-3/5 xl:w-1/2">
+                          <div class="relative mx-0 w-20 pr-0">
+                            <div class="flex h-20 items-center justify-center rounded">
+                              <div class="aspect-w-1 aspect-h-1 w-full">
+                                <img
+                                  src="/assets/img/unlicensed/shoes-3.png"
+                                  alt="product image"
+                                  class="object-cover"/>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="mt-2 ml-4 font-hk text-base text-secondary">DESK Classic Beige</span>
+                        </div>
+                        <div
+                          class="w-full border-b-0 border-grey-dark pb-0 text-center sm:w-1/5 xl:w-1/4">
+                          <div class="mx-auto mr-8 xl:mr-4">
+                            <div
+                              class="flex justify-center">
+                              <input
+                                type="number"
+                                id="quantity-form-desktop"
+                                class="form-quantity form-input w-16 rounded-r-none py-0 px-2 text-center"
+                                {{-- product quantity --}}
+                                x-model="productQuantity"
+                                min="1"/>
+                              <div class="flex flex-col">
+                                <span
+                                  class="flex-1 cursor-pointer rounded-tr border border-l-0 border-grey-darker bg-white px-1"
+                                  {{-- Increment qty --}}
+                                  @click="productQuantity++"><i
+                                    class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
+                                <span
+                                  class="flex-1 cursor-pointer rounded-br border border-t-0 border-l-0 border-grey-darker bg-white px-1"
+                                  {{-- Decrement qty --}}
+                                  @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
+                                  ><i
+                                    class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
+                              </div>
                             </div>
                           </div>
                         </div>
-                        <span class="mt-2 ml-4 font-hk text-base text-secondary">Classic Beige</span>
+                        <div 
+                          class="w-1/4 pr-10 pb-4 text-right lg:w-1/5 xl:w-1/4 xl:pr-10">
+                          <span class="font-hk text-secondary">$
+                            <span class="item-total-price"
+                            x-text="itemTotal">900</span>
+                          </span>
+                        </div>
                       </div>
+                      {{-- Start of cart item mobile --}}
                       <div
-                        class="w-full border-b-0 border-grey-dark pb-0 text-center sm:w-1/5 xl:w-1/4">
-                        <div class="mx-auto mr-8 xl:mr-4">
+                        class="mb-5 flex items-center justify-center border-b border-grey-dark pb-5 md:hidden">
+                        <div class="relative w-1/3">
+                          <div class="aspect-w-1 aspect-h-1 w-full">
+                            <img
+                              src="/assets/img/unlicensed/shoes-3.png"
+                              alt="product image"
+                              class="object-cover"/>
+                          </div>
                           <div
-                            class="flex justify-center"
-                            x-data="{ productQuantity: 1 }">
+                            class="removeFromCart absolute top-0 right-0 -mt-2 -mr-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-grey-dark bg-white shadow">
+                            <i class="bx bx-x text-xl text-grey-darkest"></i>
+                          </div>
+                        </div>
+                        <div class="pl-4">
+                          <span class="mt-2 font-hk text-base font-bold text-secondary">MOB Classic Beige</span>
+                          <span class="block font-hk text-secondary">$
+                            <span class="item-total-price"
+                            x-text="itemTotal">100</span>
+                          </span>
+                          </span>
+                          <div
+                            class="mt-2 flex w-2/3 sm:w-5/6">
                             <input
                               type="number"
-                              id="quantity-form-desktop"
-                              class="form-quantity form-input w-16 rounded-r-none py-0 px-2 text-center"
+                              id="quantity-form-mobile"
+                              class="form-quantity form-input w-12 rounded-r-none py-1 px-2 text-center"
+                              {{-- product qty --}}
                               x-model="productQuantity"
                               min="1"/>
-                            <div class="flex flex-col">
+                            <div class="flex flex-row">
                               <span
-                                class="flex-1 cursor-pointer rounded-tr border border-l-0 border-grey-darker bg-white px-1"
-                                @click="productQuantity++"><i
-                                  class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
-                              <span
-                                class="flex-1 cursor-pointer rounded-br border border-t-0 border-l-0 border-grey-darker bg-white px-1"
+                                class="flex flex-1 cursor-pointer items-center justify-center border border-l-0 border-grey-darker bg-white px-2"
+                                {{-- Decrement qty --}}
                                 @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
                                 ><i
                                   class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
+                              <span
+                                class="flex flex-1 cursor-pointer items-center justify-center rounded-r border border-l-0 border-grey-darker bg-white px-2"
+                                {{-- Increment qty --}}
+                                @click="productQuantity++">
+                                <i
+                                  class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="w-1/4 pr-10 pb-4 text-right lg:w-1/5 xl:w-1/4 xl:pr-10">
-                        <span class="font-hk text-secondary">$1045</span>
-                      </div>
                     </div>
-                    <div
-                      class="mb-5 flex items-center justify-center border-b border-grey-dark pb-5 md:hidden">
-                      <div class="relative w-1/3">
-                        <div class="aspect-w-1 aspect-h-1 w-full">
-                          <img
-                            src="/assets/img/unlicensed/shoes-3.png"
-                            alt="product image"
-                            class="object-cover"/>
-                        </div>
-                        <div
-                          class="absolute top-0 right-0 -mt-2 -mr-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-grey-dark bg-white shadow">
-                          <i class="bx bx-x text-xl text-grey-darkest"></i>
-                        </div>
-                      </div>
-                      <div class="pl-4">
-                        <span class="mt-2 font-hk text-base font-bold text-secondary">Classic Beige</span>
-                        <span class="block font-hk text-secondary">$1045</span>
-                        <div
-                          class="mt-2 flex w-2/3 sm:w-5/6"
-                          x-data="{ productQuantity: 1 }">
-                          <input
-                            type="number"
-                            id="quantity-form-mobile"
-                            class="form-quantity form-input w-12 rounded-r-none py-1 px-2 text-center"
-                            x-model="productQuantity"
-                            min="1"/>
-                          <div class="flex flex-row">
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
-                              ><i
-                                class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center rounded-r border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity++">
-                              <i
-                                class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {{-- End of cart item --}}
                     <div
                       class="mb-0 hidden flex-row items-center justify-between border-b border-grey-dark py-3 md:flex">
                       <i
@@ -281,492 +315,6 @@
                         <span class="font-hk text-secondary">$3045</span>
                       </div>
                     </div>
-                    <div
-                      class="mb-5 flex items-center justify-center border-b border-grey-dark pb-5 md:hidden">
-                      <div class="relative w-1/3">
-                        <div class="aspect-w-1 aspect-h-1 w-full">
-                          <img
-                            src="/assets/img/unlicensed/watch-4.png"
-                            alt="product image"
-                            class="object-cover"/>
-                        </div>
-                        <div
-                          class="absolute top-0 right-0 -mt-2 -mr-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-grey-dark bg-white shadow">
-                          <i class="bx bx-x text-xl text-grey-darkest"></i>
-                        </div>
-                      </div>
-                      <div class="pl-4">
-                        <span class="mt-2 font-hk text-base font-bold text-secondary">Princess</span>
-                        <span class="block font-hk text-secondary">$3045</span>
-                        <div
-                          class="mt-2 flex w-2/3 sm:w-5/6"
-                          x-data="{ productQuantity: 1 }">
-                          <input
-                            type="number"
-                            id="quantity-form-mobile"
-                            class="form-quantity form-input w-12 rounded-r-none py-1 px-2 text-center"
-                            x-model="productQuantity"
-                            min="1"/>
-                          <div class="flex flex-row">
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
-                              ><i
-                                class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center rounded-r border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity++">
-                              <i
-                                class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class="mb-0 hidden flex-row items-center justify-between border-b border-grey-dark py-3 md:flex">
-                      <i
-                        class="bx bx-x mr-6 cursor-pointer text-2xl text-grey-darkest sm:text-3xl"></i>
-                      <div
-                        class="flex w-1/2 flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left lg:w-3/5 xl:w-1/2">
-                        <div class="relative mx-0 w-20 pr-0">
-                          <div class="flex h-20 items-center justify-center rounded">
-                            <div class="aspect-w-1 aspect-h-1 w-full">
-                              <img
-                                src="/assets/img/unlicensed/sunglass-1.png"
-                                alt="product image"
-                                class="object-cover"/>
-                            </div>
-                          </div>
-                        </div>
-                        <span class="mt-2 ml-4 font-hk text-base text-secondary">Cat Eye</span>
-                      </div>
-                      <div
-                        class="w-full border-b-0 border-grey-dark pb-0 text-center sm:w-1/5 xl:w-1/4">
-                        <div class="mx-auto mr-8 xl:mr-4">
-                          <div
-                            class="flex justify-center"
-                            x-data="{ productQuantity: 1 }">
-                            <input
-                              type="number"
-                              id="quantity-form-desktop"
-                              class="form-quantity form-input w-16 rounded-r-none py-0 px-2 text-center"
-                              x-model="productQuantity"
-                              min="1"/>
-                            <div class="flex flex-col">
-                              <span
-                                class="flex-1 cursor-pointer rounded-tr border border-l-0 border-grey-darker bg-white px-1"
-                                @click="productQuantity++"><i
-                                  class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
-                              <span
-                                class="flex-1 cursor-pointer rounded-br border border-t-0 border-l-0 border-grey-darker bg-white px-1"
-                                @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
-                                ><i
-                                  class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w-1/4 pr-10 pb-4 text-right lg:w-1/5 xl:w-1/4 xl:pr-10">
-                        <span class="font-hk text-secondary">$980</span>
-                      </div>
-                    </div>
-                    <div
-                      class="mb-5 flex items-center justify-center border-b border-grey-dark pb-5 md:hidden">
-                      <div class="relative w-1/3">
-                        <div class="aspect-w-1 aspect-h-1 w-full">
-                          <img
-                            src="/assets/img/unlicensed/sunglass-1.png"
-                            alt="product image"
-                            class="object-cover"/>
-                        </div>
-                        <div
-                          class="absolute top-0 right-0 -mt-2 -mr-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-grey-dark bg-white shadow">
-                          <i class="bx bx-x text-xl text-grey-darkest"></i>
-                        </div>
-                      </div>
-                      <div class="pl-4">
-                        <span class="mt-2 font-hk text-base font-bold text-secondary">Cat Eye</span>
-                        <span class="block font-hk text-secondary">$980</span>
-                        <div
-                          class="mt-2 flex w-2/3 sm:w-5/6"
-                          x-data="{ productQuantity: 1 }">
-                          <input
-                            type="number"
-                            id="quantity-form-mobile"
-                            class="form-quantity form-input w-12 rounded-r-none py-1 px-2 text-center"
-                            x-model="productQuantity"
-                            min="1"/>
-                          <div class="flex flex-row">
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
-                              ><i
-                                class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center rounded-r border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity++">
-                              <i
-                                class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class="mb-0 hidden flex-row items-center justify-between border-b border-grey-dark py-3 md:flex">
-                      <i
-                        class="bx bx-x mr-6 cursor-pointer text-2xl text-grey-darkest sm:text-3xl"></i>
-                      <div
-                        class="flex w-1/2 flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left lg:w-3/5 xl:w-1/2">
-                        <div class="relative mx-0 w-20 pr-0">
-                          <div class="flex h-20 items-center justify-center rounded">
-                            <div class="aspect-w-1 aspect-h-1 w-full">
-                              <img
-                                src="/assets/img/unlicensed/backpack-1.png"
-                                alt="product image"
-                                class="object-cover"/>
-                            </div>
-                          </div>
-                        </div>
-                        <span class="mt-2 ml-4 font-hk text-base text-secondary">Black Blake</span>
-                      </div>
-                      <div
-                        class="w-full border-b-0 border-grey-dark pb-0 text-center sm:w-1/5 xl:w-1/4">
-                        <div class="mx-auto mr-8 xl:mr-4">
-                          <div
-                            class="flex justify-center"
-                            x-data="{ productQuantity: 1 }">
-                            <input
-                              type="number"
-                              id="quantity-form-desktop"
-                              class="form-quantity form-input w-16 rounded-r-none py-0 px-2 text-center"
-                              x-model="productQuantity"
-                              min="1"/>
-                            <div class="flex flex-col">
-                              <span
-                                class="flex-1 cursor-pointer rounded-tr border border-l-0 border-grey-darker bg-white px-1"
-                                @click="productQuantity++"><i
-                                  class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
-                              <span
-                                class="flex-1 cursor-pointer rounded-br border border-t-0 border-l-0 border-grey-darker bg-white px-1"
-                                @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
-                                ><i
-                                  class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w-1/4 pr-10 pb-4 text-right lg:w-1/5 xl:w-1/4 xl:pr-10">
-                        <span class="font-hk text-secondary">$2348</span>
-                      </div>
-                    </div>
-                    <div
-                      class="mb-5 flex items-center justify-center border-b border-grey-dark pb-5 md:hidden">
-                      <div class="relative w-1/3">
-                        <div class="aspect-w-1 aspect-h-1 w-full">
-                          <img
-                            src="/assets/img/unlicensed/backpack-1.png"
-                            alt="product image"
-                            class="object-cover"/>
-                        </div>
-                        <div
-                          class="absolute top-0 right-0 -mt-2 -mr-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-grey-dark bg-white shadow">
-                          <i class="bx bx-x text-xl text-grey-darkest"></i>
-                        </div>
-                      </div>
-                      <div class="pl-4">
-                        <span class="mt-2 font-hk text-base font-bold text-secondary">Black Blake</span>
-                        <span class="block font-hk text-secondary">$2348</span>
-                        <div
-                          class="mt-2 flex w-2/3 sm:w-5/6"
-                          x-data="{ productQuantity: 1 }">
-                          <input
-                            type="number"
-                            id="quantity-form-mobile"
-                            class="form-quantity form-input w-12 rounded-r-none py-1 px-2 text-center"
-                            x-model="productQuantity"
-                            min="1"/>
-                          <div class="flex flex-row">
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
-                              ><i
-                                class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center rounded-r border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity++">
-                              <i
-                                class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class="mb-0 hidden flex-row items-center justify-between border-b border-grey-dark py-3 md:flex">
-                      <i
-                        class="bx bx-x mr-6 cursor-pointer text-2xl text-grey-darkest sm:text-3xl"></i>
-                      <div
-                        class="flex w-1/2 flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left lg:w-3/5 xl:w-1/2">
-                        <div class="relative mx-0 w-20 pr-0">
-                          <div class="flex h-20 items-center justify-center rounded">
-                            <div class="aspect-w-1 aspect-h-1 w-full">
-                              <img
-                                src="/assets/img/unlicensed/backpack-3.png"
-                                alt="product image"
-                                class="object-cover"/>
-                            </div>
-                          </div>
-                        </div>
-                        <span class="mt-2 ml-4 font-hk text-base text-secondary">Party Blake</span>
-                      </div>
-                      <div
-                        class="w-full border-b-0 border-grey-dark pb-0 text-center sm:w-1/5 xl:w-1/4">
-                        <div class="mx-auto mr-8 xl:mr-4">
-                          <div
-                            class="flex justify-center"
-                            x-data="{ productQuantity: 1 }">
-                            <input
-                              type="number"
-                              id="quantity-form-desktop"
-                              class="form-quantity form-input w-16 rounded-r-none py-0 px-2 text-center"
-                              x-model="productQuantity"
-                              min="1"/>
-                            <div class="flex flex-col">
-                              <span
-                                class="flex-1 cursor-pointer rounded-tr border border-l-0 border-grey-darker bg-white px-1"
-                                @click="productQuantity++"><i
-                                  class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
-                              <span
-                                class="flex-1 cursor-pointer rounded-br border border-t-0 border-l-0 border-grey-darker bg-white px-1"
-                                @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
-                                ><i
-                                  class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w-1/4 pr-10 pb-4 text-right lg:w-1/5 xl:w-1/4 xl:pr-10">
-                        <span class="font-hk text-secondary">$3045</span>
-                      </div>
-                    </div>
-                    <div
-                      class="mb-5 flex items-center justify-center border-b border-grey-dark pb-5 md:hidden">
-                      <div class="relative w-1/3">
-                        <div class="aspect-w-1 aspect-h-1 w-full">
-                          <img
-                            src="/assets/img/unlicensed/backpack-3.png"
-                            alt="product image"
-                            class="object-cover"/>
-                        </div>
-                        <div
-                          class="absolute top-0 right-0 -mt-2 -mr-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-grey-dark bg-white shadow">
-                          <i class="bx bx-x text-xl text-grey-darkest"></i>
-                        </div>
-                      </div>
-                      <div class="pl-4">
-                        <span class="mt-2 font-hk text-base font-bold text-secondary">Party Blake</span>
-                        <span class="block font-hk text-secondary">$3045</span>
-                        <div
-                          class="mt-2 flex w-2/3 sm:w-5/6"
-                          x-data="{ productQuantity: 1 }">
-                          <input
-                            type="number"
-                            id="quantity-form-mobile"
-                            class="form-quantity form-input w-12 rounded-r-none py-1 px-2 text-center"
-                            x-model="productQuantity"
-                            min="1"/>
-                          <div class="flex flex-row">
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
-                              ><i
-                                class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center rounded-r border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity++">
-                              <i
-                                class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class="mb-0 hidden flex-row items-center justify-between border-b border-grey-dark py-3 md:flex">
-                      <i
-                        class="bx bx-x mr-6 cursor-pointer text-2xl text-grey-darkest sm:text-3xl"></i>
-                      <div
-                        class="flex w-1/2 flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left lg:w-3/5 xl:w-1/2">
-                        <div class="relative mx-0 w-20 pr-0">
-                          <div class="flex h-20 items-center justify-center rounded">
-                            <div class="aspect-w-1 aspect-h-1 w-full">
-                              <img
-                                src="/assets/img/unlicensed/backpack-2.png"
-                                alt="product image"
-                                class="object-cover"/>
-                            </div>
-                          </div>
-                        </div>
-                        <span class="mt-2 ml-4 font-hk text-base text-secondary">Woodie Blake</span>
-                      </div>
-                      <div
-                        class="w-full border-b-0 border-grey-dark pb-0 text-center sm:w-1/5 xl:w-1/4">
-                        <div class="mx-auto mr-8 xl:mr-4">
-                          <div
-                            class="flex justify-center"
-                            x-data="{ productQuantity: 1 }">
-                            <input
-                              type="number"
-                              id="quantity-form-desktop"
-                              class="form-quantity form-input w-16 rounded-r-none py-0 px-2 text-center"
-                              x-model="productQuantity"
-                              min="1"/>
-                            <div class="flex flex-col">
-                              <span
-                                class="flex-1 cursor-pointer rounded-tr border border-l-0 border-grey-darker bg-white px-1"
-                                @click="productQuantity++"><i
-                                  class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
-                              <span
-                                class="flex-1 cursor-pointer rounded-br border border-t-0 border-l-0 border-grey-darker bg-white px-1"
-                                @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
-                                ><i
-                                  class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w-1/4 pr-10 pb-4 text-right lg:w-1/5 xl:w-1/4 xl:pr-10">
-                        <span class="font-hk text-secondary">$980</span>
-                      </div>
-                    </div>
-                    <div
-                      class="mb-5 flex items-center justify-center border-b border-grey-dark pb-5 md:hidden">
-                      <div class="relative w-1/3">
-                        <div class="aspect-w-1 aspect-h-1 w-full">
-                          <img
-                            src="/assets/img/unlicensed/backpack-2.png"
-                            alt="product image"
-                            class="object-cover"/>
-                        </div>
-                        <div
-                          class="absolute top-0 right-0 -mt-2 -mr-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-grey-dark bg-white shadow">
-                          <i class="bx bx-x text-xl text-grey-darkest"></i>
-                        </div>
-                      </div>
-                      <div class="pl-4">
-                        <span class="mt-2 font-hk text-base font-bold text-secondary">Woodie Blake</span>
-                        <span class="block font-hk text-secondary">$980</span>
-                        <div
-                          class="mt-2 flex w-2/3 sm:w-5/6"
-                          x-data="{ productQuantity: 1 }">
-                          <input
-                            type="number"
-                            id="quantity-form-mobile"
-                            class="form-quantity form-input w-12 rounded-r-none py-1 px-2 text-center"
-                            x-model="productQuantity"
-                            min="1"/>
-                          <div class="flex flex-row">
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
-                              ><i
-                                class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center rounded-r border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity++">
-                              <i
-                                class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class="mb-0 hidden flex-row items-center justify-between border-b border-grey-dark py-3 md:flex">
-                      <i
-                        class="bx bx-x mr-6 cursor-pointer text-2xl text-grey-darkest sm:text-3xl"></i>
-                      <div
-                        class="flex w-1/2 flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left lg:w-3/5 xl:w-1/2">
-                        <div class="relative mx-0 w-20 pr-0">
-                          <div class="flex h-20 items-center justify-center rounded">
-                            <div class="aspect-w-1 aspect-h-1 w-full">
-                              <img
-                                src="/assets/img/unlicensed/shoes-4.png"
-                                alt="product image"
-                                class="object-cover"/>
-                            </div>
-                          </div>
-                        </div>
-                        <span class="mt-2 ml-4 font-hk text-base text-secondary">Siberian Boots</span>
-                      </div>
-                      <div
-                        class="w-full border-b-0 border-grey-dark pb-0 text-center sm:w-1/5 xl:w-1/4">
-                        <div class="mx-auto mr-8 xl:mr-4">
-                          <div
-                            class="flex justify-center"
-                            x-data="{ productQuantity: 1 }">
-                            <input
-                              type="number"
-                              id="quantity-form-desktop"
-                              class="form-quantity form-input w-16 rounded-r-none py-0 px-2 text-center"
-                              x-model="productQuantity"
-                              min="1"/>
-                            <div class="flex flex-col">
-                              <span
-                                class="flex-1 cursor-pointer rounded-tr border border-l-0 border-grey-darker bg-white px-1"
-                                @click="productQuantity++"><i
-                                  class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
-                              <span
-                                class="flex-1 cursor-pointer rounded-br border border-t-0 border-l-0 border-grey-darker bg-white px-1"
-                                @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
-                                ><i
-                                  class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w-1/4 pr-10 pb-4 text-right lg:w-1/5 xl:w-1/4 xl:pr-10">
-                        <span class="font-hk text-secondary">$990</span>
-                      </div>
-                    </div>
-                    <div
-                      class="mb-5 flex items-center justify-center border-b border-grey-dark pb-5 md:hidden">
-                      <div class="relative w-1/3">
-                        <div class="aspect-w-1 aspect-h-1 w-full">
-                          <img
-                            src="/assets/img/unlicensed/shoes-4.png"
-                            alt="product image"
-                            class="object-cover"/>
-                        </div>
-                        <div
-                          class="absolute top-0 right-0 -mt-2 -mr-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-grey-dark bg-white shadow">
-                          <i class="bx bx-x text-xl text-grey-darkest"></i>
-                        </div>
-                      </div>
-                      <div class="pl-4">
-                        <span class="mt-2 font-hk text-base font-bold text-secondary">Siberian Boots</span>
-                        <span class="block font-hk text-secondary">$990</span>
-                        <div
-                          class="mt-2 flex w-2/3 sm:w-5/6"
-                          x-data="{ productQuantity: 1 }">
-                          <input
-                            type="number"
-                            id="quantity-form-mobile"
-                            class="form-quantity form-input w-12 rounded-r-none py-1 px-2 text-center"
-                            x-model="productQuantity"
-                            min="1"/>
-                          <div class="flex flex-row">
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity> 1 ? productQuantity-- : productQuanity=1"
-                              ><i
-                                class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
-                            <span
-                              class="flex flex-1 cursor-pointer items-center justify-center rounded-r border border-l-0 border-grey-darker bg-white px-2"
-                              @click="productQuantity++">
-                              <i
-                                class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
                 <div
@@ -775,6 +323,9 @@
                   <a href="../index.html" class="btn btn-primary mt-5 sm:mt-0">Update Cart </a>
                 </div>
               </div>
+
+
+              {{-- Cart Total --}}
               <div class="mx-auto mt-16 sm:w-2/3 md:w-full lg:mx-0 lg:mt-0 lg:w-1/3">
                 <div class="bg-grey-light py-8 px-8">
                   <h4
@@ -825,6 +376,7 @@
                     <div class="flex justify-between pt-3">
                       <span class="font-hkbold text-secondary">Total</span>
                       <span class="font-hkbold text-secondary">$200</span>
+                      <span x-text="totalPurchasePrice"></span>
                     </div>
                   </div>
                   <a href="../cart/customer-info.html" class="btn btn-primary w-full">Proceed to checkout</a>

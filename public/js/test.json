@@ -1,0 +1,68 @@
+{
+    "0": {
+        "_x_marker": 226,
+        "_x_attributeCleanups": {
+            "x-data": [
+                null
+            ]
+        },
+        "_x_cleanups": [
+            null,
+            null,
+            null
+        ],
+        "_x_dataStack": [
+            {
+                "productQuantity": 1,
+                "itemPrice": 46,
+                "itemTotal": 46
+            },
+            {
+                "totalProductPrice": 999,
+                "coupon": 0,
+                "totalPurchasePrice": 999
+            },
+            {
+                "modal": false,
+                "mobileMenu": false,
+                "mobileSearch": false,
+                "mobileCart": false,
+                "accountMenu": false
+            }
+        ],
+        "jQuery37106797741512506292": {
+            "id": 1
+        },
+        "jQuery37106797741512506291": {
+            "hasDataAttrs": true
+        }
+    },
+    "length": 1,
+    "prevObject": {
+        "0": {
+            "_x_marker": 260,
+            "_x_attributeCleanups": {
+                "@click": [
+                    null
+                ]
+            },
+            "_x_cleanups": [
+                null
+            ],
+            "jQuery37106797741512506291": {
+                "events": {
+                    "click": [
+                        {
+                            "type": "click",
+                            "origType": "click",
+                            "data": null,
+                            "guid": 3,
+                            "namespace": ""
+                        }
+                    ]
+                }
+            }
+        },
+        "length": 1
+    }
+}

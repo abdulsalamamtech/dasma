@@ -84,7 +84,7 @@
             <h4 class="pb-8 font-hk text-xl font-bold text-white">Link</h4>
             <ul class="list-reset">
               <li class="block pb-2">
-                <a href="{{ route('store') }}"
+                <a href="{{ route('stores.list') }}"
                   class="font-hk text-base tracking-wide text-white transition-colors hover:text-primary">Store</a>
               </li>
               <li class="block pb-2">

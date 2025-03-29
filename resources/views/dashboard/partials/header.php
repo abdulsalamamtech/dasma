@@ -15,7 +15,8 @@
     <!-- Fontawesome cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 
-
+    
+    <!-- START ALERTIFY JS -->
     <!-- JavaScript -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <!-- CSS -->
@@ -30,6 +31,7 @@
     <script>
         alertify.set('notifier','position', 'top-right')
     </script>
+    <!-- START ALERTIFY JS -->
 
 
 

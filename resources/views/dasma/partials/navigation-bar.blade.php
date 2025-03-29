@@ -67,7 +67,7 @@
 
               {{-- Store --}}
               <li class="mr-10">
-                <a href="{{ route('store') }}"
+                <a href="{{ route('stores.list') }}"
                   class="block border-b-2 border-white px-2 font-hk text-lg text-secondary transition-all hover:border-primary hover:font-bold hover:text-primary">Store</a>
               </li>
 
@@ -269,7 +269,7 @@
             </div>
           </div>
           <a class='block w-full cursor-pointer border-b border-grey-dark py-3 font-hk font-medium text-secondary'
-            href='{{ route('store') }}'>Store
+            href='{{ route('stores.list') }}'>Store
           </a>
           <a href="{{ route('contact') . '#faq' }}"
             class="block w-full cursor-pointer border-b border-grey-dark py-3 font-hk font-medium text-secondary">FAQ

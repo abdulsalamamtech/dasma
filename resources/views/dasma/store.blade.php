@@ -22,31 +22,33 @@
               </div>
           </div>
 
-          <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div id="productList" class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
 
             {{-- Product --}}
             @forelse ($products as $product)
                 <div class="group relative w-full lg:last:hidden xl:last:block">
-                    <div class="relative flex items-center justify-center rounded">
+                    <div class="relative flex items-center justify-center rounded" data-id="{{ $product->id }}">
                         <div class="h-68 w-full bg-cover bg-center bg-no-repeat"
                             style="background-image:url({{ $product->banner->url }})"></div>
                         <span
                             class="absolute top-0 right-0 bg-white px-5 py-1 mt-4 mr-4 rounded-full font-hk font-bold  text-v-green text-sm uppercase tracking-wide">New</span>
                         <div
                             class="group absolute inset-0 flex items-center justify-center bg-secondary bg-opacity-85 py-28 opacity-0 transition-opacity group-hover:opacity-100">
-                            <a href="cart.html"
-                                class="mr-3 flex items-center rounded-full bg-white px-3 py-3 transition-all hover:bg-primary-light">
+                            {{-- Add product to cart --}}
+                            <div
+                                class="addToCart mr-3 flex items-center rounded-full bg-white px-3 py-3 transition-all hover:bg-primary-light">
                                 <img src="/assets/img/icons/icon-cart.svg" class="h-6 w-6" alt="icon cart" />
-                            </a>
-                            <a href="product.html"
+                            </div>
+                            <a href="{{ route('stores.show', $product->slug) }}"
                                 class="mr-3 flex items-center rounded-full bg-white px-3 py-3 transition-all hover:bg-primary-light">
                                 <img src="/assets/img/icons/icon-search.svg" class="h-6 w-6" alt="icon search" />
                             </a>
-                            <a href="account/wishlist.html"
-                                class="flex items-center rounded-full bg-white px-3 py-3 transition-all hover:bg-primary-light">
+                            {{-- Add to wishlist --}}
+                            <div
+                                class="addToWishlist flex items-center rounded-full bg-white px-3 py-3 transition-all hover:bg-primary-light">
                                 <img src="/assets/img/icons/icon-heart.svg" class="h-6 w-6" alt="icon heart" />
-                            </a>
+                            </div>
                         </div>
                     </div>
                     <div class="flex items-center justify-between pt-6">
@@ -76,11 +78,7 @@
             @endforelse
 
 
-            <div>
-                {{ $products }}
-            </div>
-
-
+           
               <div class="group relative w-full lg:last:hidden xl:last:block">
                   <div class="relative flex items-center justify-center rounded">
                       <div class="h-68 w-full bg-cover bg-center bg-no-repeat"

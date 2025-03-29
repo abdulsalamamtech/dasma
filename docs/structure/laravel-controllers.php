@@ -114,7 +114,7 @@ class CartController extends Controller
         $carts = Cart::with(['product'])
             ->where('user_id', Auth::id())
             ->get();
-        return CartResource::collection($carts);
+        $carts CartResource::collection($carts);
     }
 
     public function store(CartRequest $request)
