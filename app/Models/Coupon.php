@@ -14,5 +14,8 @@ class Coupon extends Model
         'name',
         'code',
         'expires',
+        'discount',
+        'min_order_amount',
+        'created_by',
     ];
 }
