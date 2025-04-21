@@ -1,6 +1,4 @@
 
-
-
   <!-- Start Promotion Sticker -->
   <div class="sticky top-0 left-0 text-center w-screen flex items-center justify-center p-2" style="background-color: #24c790">
     <img src="/assets/img/logo-r.svg" alt="red pixel themes logo" class="mr-4 h-7 w-auto md:h-10" />

@@ -1,5 +1,4 @@
 
-
     {{-- Start: Fixed Navigation Bar --}}
     <nav class="fixed top-0 left-0 w-full z-50 text-center shadow-md bg-white">
 
@@ -22,7 +21,7 @@
                 <img src="{{ asset('assets/img/icons/icon-search-hover.svg') }}"
                   class="hidden h-5 w-5 group-hover:block sm:h-6 sm:w-6 md:h-8 md:w-8" alt="icon search hover" />
               </button>
-              <a href="{{ route('wishlist') }}"
+              <a href="{{ route('wishlists.index') }}"
                 class="group hidden rounded-full border-2 border-transparent p-2 transition-all hover:border-primary sm:p-4 lg:block">
                 <img src="{{ asset('assets/img/icons/icon-heart.svg') }}"
                   class="block h-5 w-5 group-hover:hidden sm:h-6 sm:w-6 md:h-8 md:w-8" alt="icon heart" />
@@ -37,12 +36,14 @@
               </div>
             </a>
             <div class="flex items-center">
-              <a href="{{ route('cart') }}"
+              <a href="{{ route('carts.index') }}"
                 class="group ml-2 rounded-full border-2 border-transparent p-2 transition-all hover:border-primary sm:ml-3 sm:p-4 md:ml-5 lg:ml-8 lg:block">
                 <img src="/assets/img/icons/icon-cart.svg"
                   class="block h-5 w-5 group-hover:hidden sm:h-6 sm:w-6 md:h-8 md:w-8" alt="icon cart" />
                 <img src="/assets/img/icons/icon-cart-hover.svg"
                   class="hidden h-5 w-5 group-hover:block sm:h-6 sm:w-6 md:h-8 md:w-8" alt="icon cart hover" />
+                  {{-- <div class="absolute right-20 bottom-24 bg-gray-200 rounded-full p-1 -z-10 font-bold text-primary border border-red-800">10</div> --}}
+                  <div class="hidden xl:block absolute right-20 bottom-24 rounded-full p-1 -z-10 font-bold text-primary">10</div>
               </a>              
               <button @click="accountMenu = !accountMenu"
                 class="group rounded-full border-2 border-transparent p-2 transition-all hover:border-primary sm:p-4">
@@ -213,7 +214,7 @@
             class="block w-full cursor-pointer border-b border-grey-dark py-3 font-hk font-medium text-secondary">Home
           </a>
           <a class='block w-full cursor-pointer border-b border-grey-dark py-3 font-hk font-medium text-secondary'
-            href='{{ route('wishlist') }}'>Wishlist
+            href='{{ route('wishlists.index') }}'>Wishlist
           </a>
           <div class="block w-full border-b border-grey-dark py-3" x-data="{
                   isParentAccordionOpen: false
@@ -295,8 +296,3 @@
 
     </nav>
     {{-- End: Fixed Navigation Bar --}}
-
-
-
-
-

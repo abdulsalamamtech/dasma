@@ -43,7 +43,7 @@
                         class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">Orders</a>
                         <a href="{{ route('cart')}}"
                         class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">Cart</a>
-                        <a href="{{ route('wishlist') }}"
+                        <a href="{{ route('wishlists.index') }}"
                         class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">Wishlist</a>                    
                       <a href="{{ route('transactions') }}"
                         class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">Transactions</a>
@@ -68,5 +68,5 @@
           </div>
         </div>
         <!-- End: Account Icon -->   
-      </div>
+    </div>
     {{-- End: Modal content for search and account menu --}}

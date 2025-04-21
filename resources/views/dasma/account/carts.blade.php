@@ -33,15 +33,10 @@
             </div>
           
             <div
-              x-data="{totalProductPrice : {{ $total }}, 
-              coupon: 10,
-              get subTotalPurchase() {  
-                total = parseFloat(this.totalProductPrice);
-                return total; 
-              },
-              get totalPurchasePrice() {
-                return parseFloat(this.totalProductPrice) - parseFloat(this.coupon);
-              }}"
+            x-data="{
+              totalProductPrice: @json($details['total'] ?? 0),
+              discount: @json($details['discount'] ?? 0),
+            }"
               class="flex flex-col-reverse justify-between pb-16 sm:pb-20 lg:flex-row lg:pb-24">
 
               {{-- Cart Items --}}
@@ -74,7 +69,7 @@
                     @forelse ($carts as $cart)                        
                       {{-- Items --}}
                       <div data-id="{{ $cart->id }}"
-                        x-data="{ productQuantity: 1,
+                        x-data="{ productQuantity: {{ $cart->quantity }},
                         itemPrice: {{ $cart->product->price }},
                         get itemTotal() {  
                           total = parseFloat(this.productQuantity) * parseFloat(this.itemPrice);
@@ -84,7 +79,7 @@
                         <div
                           class="mb-0 hidden flex-row items-center justify-between border-b border-grey-dark py-3 md:flex">
                           <i
-                            class="removeFromCart bx bx-x mr-6 cursor-pointer text-2xl text-grey-darkest sm:text-3xl"></i>
+                            class="removeFromCartPage bx bx-x mr-6 cursor-pointer text-2xl text-grey-darkest sm:text-3xl"></i>
                           <div
                             class="flex w-1/2 flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left lg:w-3/5 xl:w-1/2">
                             <div class="relative mx-0 w-20 pr-0">
@@ -121,7 +116,7 @@
                                   <span
                                     class="decrement flex-1 cursor-pointer rounded-br border border-t-0 border-l-0 border-grey-darker bg-white px-1"
                                     {{-- Decrement qty --}}
-                                    @click="(productQuantity> 1 )? (productQuantity--; ): (productQuantity=1)"
+                                    @click="productQuantity> 1 ? productQuantity-- : productQuantity=1"
                                     ><i
                                       class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i></span>
                                 </div>
@@ -148,13 +143,14 @@
                                 class="object-cover"/>
                             </div>
                             <div
-                              class="removeFromCart absolute top-0 right-0 -mt-2 -mr-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-grey-dark bg-white shadow">
+                              class="removeFromCartPage absolute top-0 right-0 -mt-2 -mr-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-grey-dark bg-white shadow">
                               <i class="bx bx-x text-xl text-grey-darkest"></i>
                             </div>
                           </div>
                           <div class="pl-4">
                             <span class="mt-2 font-hk text-base font-bold text-secondary">MB: {{ $cart->product->name }}</span>
-                            <span class="block font-hk text-secondary">$
+                            <span class="block font-hk text-secondary">
+                              {{ App\Helpers\Setup::currency('sign') }}
                               <span class="item-total-price"
                               x-text="itemTotal">{{ $cart->product->price }}</span>
                             </span>
@@ -202,19 +198,7 @@
                   {{-- End of Product Items --}}
                 </div>
 
-                {{-- Update Cart --}}
-                <div
-                  class="flex flex-col pt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-12">
-                  <div class="flex justify-between pt-3 gap-4">
-                    <span class="font-hkbold text-secondary">Total</span>
-                    <span class="font-hkbold text-secondary">
-                      {{ App\Helpers\Setup::currency('sign') }}
-                      <span x-text="subTotalPurchase"></span>
-                    </span>
-                  </div>
-                  <button id="updateShoppingCart" class="btn btn-primary mt-5 sm:mt-0">Update Cart </button>
-                </div>
-
+               
                 {{-- Continue Shopping --}}
                 <div class="pt-8 sm:pt-12 w-100">
                   <a href="{{ route('stores.list') }}" class="btn btn-outline">Continue Shopping</a>
@@ -229,7 +213,7 @@
                     class="font-hkbold pb-3 text-center text-2xl text-secondary sm:text-left">
                     Cart Totals
                   </h4>
-                  <div>
+                  {{-- <div>
                     <p class="font-hkbold pt-1 pb-2 text-secondary">Cart Note</p>
                     <p class="pb-4 font-hk text-sm text-secondary">
                       Special instructions for us
@@ -240,51 +224,57 @@
                       placeholder="Enter your text"
                       class="form-textarea"
                       id="cart_note"></textarea>
-                  </div>
-                  <div class="pt-4">
+                  </div> --}}
+                  <form method="GET" class="pt-4">
                     <p class="font-hkbold pt-1 pb-4 text-secondary">Add Coupon</p>
                     <div class="flex justify-between">
                       <label
                         for="discount_code"
                         class="relative block h-0 w-0 overflow-hidden">Discount Code</label>
                       <input
+                        value="{{request('coupon')}}"
                         type="text"
-                        placeholder="Discount code"
+                        name="coupon"
+                        placeholder="coupon code"
                         class="form-input w-3/5 xl:w-2/3"
-                        id="discount_code"/>
+                        id="inputCouponCode"/>
                       <button
                         class="btn btn-outline btn-sm ml-4 w-2/5 lg:ml-2 xl:ml-4 xl:w-1/3"
                         aria-label="Apply button">
                         Apply
                       </button>
                     </div>
-                  </div>
+                    <p class="p-2 text-sm text-primary" id="couponCodeStatus">Get Discount!</p>
+                  </form>
                   <div class="mb-12 pt-4">
                     <p class="font-hkbold pt-1 pb-2 text-secondary">Cart Total</p>
                     <div class="flex justify-between border-b border-grey-darker pb-1">
                       <span class="font-hk text-secondary">Subtotal</span>
                       <span class="font-hk text-secondary">
                         {{ App\Helpers\Setup::currency('sign') }}
-                        <span x-text="subTotalPurchase"></span>
+                        <span id="cartTotal">{{ $details['total'] }}</span>
+                        {{-- <span x-text="subTotalPurchase">{{ $details['total'] }}</span> --}}
                       </span>
                     </div>
                     <div
                       class="flex justify-between border-b border-grey-darker pt-2 pb-1">
-                      <span class="font-hk text-secondary">Coupon applied</span>
+                      <span class="font-hk text-secondary">Discount applied</span>
                       <span class="font-hk text-secondary">
                         - {{ App\Helpers\Setup::currency('sign') }}
-                        <span x-text="coupon"></span>
+                        <span id="cartDiscount">{{ $details['discount'] ?? 0 }}</span>
+                        {{-- <span x-text="discount">{{ $details['discount'] ?? 0 }}</span> --}}
                       </span>
                     </div>
                     <div class="flex justify-between pt-3">
                       <span class="font-hkbold text-secondary">Total</span>
                       <span class="font-hkbold text-secondary">
                         {{ App\Helpers\Setup::currency('sign') }}
-                        <span x-text="totalPurchasePrice"></span>
+                        <span id="cartTotalPurchasePrice"> {{ $details['total_after_discount'] }}</span>
+                        {{-- <span x-text="totalPurchasePrice"> {{ $details['total_after_discount'] }}</span> --}}
                       </span>
                     </div>
                   </div>
-                  <a href="../cart/customer-info.html" class="btn btn-primary w-full">Proceed to checkout</a>
+                  <a href="#" class="btn btn-primary w-full">Proceed to checkout</a>
                 </div>
               </div>
             </div>

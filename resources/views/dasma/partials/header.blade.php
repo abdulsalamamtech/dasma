@@ -60,8 +60,6 @@
       alertify.set('notifier','position', 'top-right')
   </script>
   {{-- END ALERTIFY JS --}}
-  
-
 
 </head>
 
@@ -73,12 +71,6 @@
         accountMenu: false
     }" :class="{ 'overflow-hidden max-h-screen': modal || mobileMenu }" @keydown.escape="modal = false">
 
-
     {{-- <nav class="fixed top-0 left-0 w-full h-20 bg-primary-dark z-10 text-center shadow-md" style="background-color: #96c724">
-
       <span>World Navbar</span>
-        
     </nav>   --}}
-
-
-

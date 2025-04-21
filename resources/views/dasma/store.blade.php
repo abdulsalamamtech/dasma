@@ -78,7 +78,9 @@
             @endforelse
 
 
-           
+
+
+{{--            
               <div class="group relative w-full lg:last:hidden xl:last:block">
                   <div class="relative flex items-center justify-center rounded">
                       <div class="h-68 w-full bg-cover bg-center bg-no-repeat"
@@ -734,20 +736,16 @@
                       </div>
                       <span class="font-hk text-xl font-bold text-primary">$140.0</span>
                   </div>
-              </div>
+              </div> 
+--}}
+
+
+
           </div>
 
-          <div class="mx-auto flex justify-center py-16">
-              <span
-                  class="cursor-pointer pr-5 font-hk font-semibold text-grey-darkest transition-colors hover:text-black">Previous</span>
-              <span
-                  class="mr-3 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full font-hk text-sm font-semibold text-black transition-colors hover:bg-primary hover:text-white">1</span>
-              <span
-                  class="mr-3 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full font-hk text-sm font-semibold text-black transition-colors hover:bg-primary hover:text-white">2</span>
-              <span
-                  class="mr-3 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full font-hk text-sm font-semibold text-black transition-colors hover:bg-primary hover:text-white">3</span>
-              <span
-                  class="cursor-pointer pl-2 font-hk font-semibold text-grey-darkest transition-colors hover:text-black">Next</span>
+          {{-- Pagination --}}
+          <div class="mx-auto py-16">
+            {{ $products->links() }}
           </div>
       </div>
     </div>
