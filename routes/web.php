@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -51,6 +52,11 @@ Route::get('stores/{product:slug}', [ProductController::class, 'showProduct'])->
 // Carts Routes
 Route::post('carts', [CartController::class, 'store'])->name('carts.store');
 Route::delete('carts/{cart}', [CartController::class, 'destroy'])->name('carts.delete');
+
+
+// Wishlists Route
+// Route::post('wishlists', [WishlistController::class, 'store'])->name('wishlists.store');
+// Route::delete('wishlists/{wishlist}', [WishlistController::class, 'destroy'])->name('wishlists.delete');
 
 
 Route::get('/dasma/product', function () {
