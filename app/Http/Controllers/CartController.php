@@ -7,6 +7,7 @@ use App\Helpers\ApiResponse;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
 use App\Models\Cart;
+use App\Models\Coupon;
 use App\Models\Product;
 use Illuminate\Notifications\Action;
 
@@ -17,28 +18,24 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = Cart::with(['product.banner'])
+        $userID = ActorHelper::getUserId();
+        $carts = Cart::where('user_id', $userID)
+            ->with(['product.banner'])
             ->latest()
-            ->paginate(4);
-        // return $carts;
-        // $total = $carts->sum()
-        // Get cart total quantity * product price
-        // $total = Cart::sum(function ($item) {
-        //     return $item->quantity * $item->product->price;
-        // });
+            ->paginate(10);
 
-        $total = Cart::with('product')
-                            ->get()
-                            ->sum(fn($cart) => $cart->quantity * $cart->product->price);
-        // $total = Cart::join('products', 'carts.product_id', '=', 'products.id')
-        // ->selectRaw('SUM(carts.quantity * products.price) as total')
-        // ->value('total');
-    
-        // return $total;
-        return view('dasma.account.carts',[
-                'carts' => $carts,
-                'total' => $total
-        ]);
+        $total = Cart::where('user_id', $userID)
+            ->with('product')
+            ->get()
+            ->sum(fn($cart) => $cart->quantity * $cart->product->price);
+
+        $data = [
+            'carts' => $carts,
+            'total' => $total,
+            'details' => $this->cartDetails(),
+        ];
+        // return dd($data);
+        return view('dasma.account.carts', $data);
 
     }
 
@@ -50,10 +47,21 @@ class CartController extends Controller
         $data = $request->validated();
         $data['user_id'] = ActorHelper::getUserId();
 
+        // Check if the product is already in the cart
+        $existingCart = Cart::where('user_id', $data['user_id'])
+            ->where('product_id', $data['product_id'])
+            ->first();
+        if ($existingCart) {
+            // If the product is already in the cart, update the quantity
+            // $existingCart->increment('quantity', $data['quantity']);
+            $message = "product already added to the cart";
+            return ApiResponse::success($existingCart, $message);
+        }
+        // If the product is not in the cart, create a new cart item
         $cart = Cart::create($data);
-        // dd($cart);
-        // return ApiResponse::success($cart);
-        return ApiResponse::success($cart);
+        $message = "product added to the cart successfully";
+        // return $cart;
+        return ApiResponse::success($cart, $message);
     }
 
     /**
@@ -71,10 +79,11 @@ class CartController extends Controller
     public function update(UpdateCartRequest $request, Cart $cart)
     {
         $data = $request->validated();
-        // $data['user_id'] = ActorHelper::getUserId();
+        $data['user_id'] = ActorHelper::getUserId();
 
         $cart->update($data);
-        return $cart;
+        // return $cart;
+        return ApiResponse::success($cart);
     }
 
     /**
@@ -82,10 +91,56 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        // return redirect()->away('http://localhost:8000?id=' . $cart->id);
-        $cart->delete();
+        // $cart->delete();
         $message = "cart deleted successfully";
-        return ApiResponse::success($cart, $message);
+        return ApiResponse::success([], $message);
 
+    }
+
+    /**
+     * Display cart details.
+     */
+    public function cartDetails()
+    {
+        // Get the user ID from the ActorHelper
+        $userID = ActorHelper::getUserId();
+        // Total price of the cart
+        $total = Cart::where('user_id', $userID)
+            ->with('product')
+            ->get()
+            ->sum(fn($cart) => $cart->quantity * $cart->product->price);
+
+        $data = [
+            'total' => $total,
+            'coupon' => request('coupon'),
+            'min_order_amount' => trim($this->coupon() && $total >= $this->coupon()?->min_order_amount  ? $this->coupon()?->min_order_amount : 100000),
+            'discount' => trim($this->coupon() ? $this->coupon()?->discount : 0),
+            // Calculate the total after applying the coupon discount
+            'total_after_discount' => trim($this->coupon() && $total >= $this->coupon()?->min_order_amount ? ($total - ($this->coupon()?->discount)) : $total),
+        ];
+        // dd($data);
+        return $data;
+    }
+
+    /**
+     * Display coupon.
+     */
+    public function coupon()
+    {
+        // check if the coupon is valid
+        $coupon = request('coupon');
+        $validCoupons  = Coupon::where('code', $coupon)
+            ->where('expires', '>=', now())
+            ->first();
+        return $validCoupons ?? null;
+    }
+
+
+    /**
+     * Display cart card details.
+     */
+    public function cartCardDetails(){
+        $cardDetails = $this->cartDetails();
+        return ApiResponse::success($cardDetails);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ActorHelper;
+use App\Helpers\ApiResponse;
 use App\Http\Requests\StoreWishlistRequest;
 use App\Http\Requests\UpdateWishlistRequest;
 use App\Models\Wishlist;
@@ -14,10 +15,13 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        $wishlists = Wishlist::with(['product'])
+        $wishlists = Wishlist::with(['product.banner'])
             ->latest()
-            ->paginate();
-        return $wishlists;
+            ->paginate(10);
+        // return $wishlists;
+        return view('dasma.account.wishlists',[
+            'wishlists' => $wishlists
+        ]);
     }
 
     /**
@@ -29,7 +33,9 @@ class WishlistController extends Controller
         $data['user_id'] = ActorHelper::getUserId();
 
         $wishlist = Wishlist::create($data);
-        return $wishlist;
+        $message = "product added to the wishlist";
+        // return $wishlist;
+        return ApiResponse::success($wishlist, $message);
     }
 
     /**
@@ -57,6 +63,7 @@ class WishlistController extends Controller
     public function destroy(Wishlist $wishlist)
     {
         $wishlist->delete();
-        return $message = "wishlist deleted successfully";
+        $message = "wishlist deleted successfully";
+        return ApiResponse::success([], $message);
     }
 }

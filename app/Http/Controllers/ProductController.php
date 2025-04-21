@@ -175,7 +175,7 @@ class ProductController extends Controller
     {
         $products = Product::with(['banner'])
             ->latest()
-            ->paginate();
+            ->paginate(1);
         // return $products;
         return view('dasma.store', [
             'products' => $products
