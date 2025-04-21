@@ -33,6 +33,9 @@
     name 
     coupon_code [unique max: 20 ] 
     expires [date]
+    discount
+    min_order_amount
+    created_by
 
 ## promotions [search a product that has this promotion id]
     banner [single image asset | 50 by 50]

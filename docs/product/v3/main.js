@@ -90,3 +90,17 @@ $(document).ready(function () {
             });
     });
 });
+
+
+$(document).on('click', '.removeFromWishlist', function () {
+    var $card = $(this).closest('[data-id]');
+    var productId = $card.data('id');
+
+    axios.post('/wishlist/remove', { productId: productId })
+        .then(function (response) {
+            $(this).text('Add to Wishlist').removeClass('removeFromWishlist').addClass('addToWishlist');
+        })
+        .catch(function (error) {
+            console.error('There was an error removing the item from the wishlist!', error);
+        });
+});
