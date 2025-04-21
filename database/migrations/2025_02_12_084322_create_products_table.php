@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->decimal('initial_price', 10, 2);
             $table->integer('stock')->default(0);
-            $table->string('tags')->nullable();
+            $table->string('tag')->nullable()->default('new');
             $table->integer('views')->default(0);
             $table->string('sku')->unique();
             $table->json('colors')->nullable();

@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('code')->unique();
             $table->timestamp('expires');
+            $table->integer('discount')->default(100);
+            $table->integer('min_order_amount')->default(10000);
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
