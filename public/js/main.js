@@ -43,6 +43,8 @@ $(document).ready(function () {
             product_id: productId,
             quantity: quantity
         };
+        console.log(data);
+        
 
         let url = routes.addToCart;
         console.log("Add cart url", url);
@@ -277,7 +279,7 @@ $(document).ready(function () {
 
         var $card = $(this).closest('[data-id]');
         var productId = $card.data('id');
-        alert(`Adding product id:${productId} to wishlist`);
+        // alert(`Adding product id:${productId} to wishlist`);
 
        
         let data = {
@@ -311,9 +313,8 @@ $(document).ready(function () {
             .catch(function (error) {
                 console.log(error);
                 alertify.error(error.message ?? 'There was an error!', 'successful!');
-                console.error('There was an error adding the item to the cart!', error.message);
-            });
-        return;    
+                console.error('There was an error adding the item to the wishlist!', error.message);
+            });  
     });
 
     // Remove item from wishlist page
@@ -413,6 +414,94 @@ $(document).ready(function () {
                 console.error('There was an error populating cart card details!', error.message);
             });
     }
+
+
+    // Add item to cart from product page with color and quantity
+    $('.addToCartFromProduct').click(function () {
+
+        var $card = $(this).closest('[data-id]');
+        console.log($card);
+        
+        var productId = $card.data('id');
+        alert(productId);
+        let data = {
+            product_id: productId,
+            quantity : $('#quantity-form').val(),
+            size : $('#productSize').val(),
+            color : $('#productColor').val(),
+        };
+        console.log(data);
+        
+
+        let url = routes.addToCart;
+        console.log("Add product to cart url", url);
+        axios.post(url, data, headers)
+            .then(function (response) {
+                console.log(response);
+                // Check response status
+                if (response?.data?.success) {
+                    if (window.location.hash == "") {
+                        window.location = window.location + "#productList";
+                    }
+                    // Notify the user
+                    alertify.success(response?.data?.message, 'successful!');
+                    // Remove the class name and replace it with the new class name
+                    // $card.find('.removeFromCart').addClass('addToCart').removeClass('removeFromCart');
+                    $card.find('.addToCart').addClass('removeFromCart').removeClass('addToCart');
+
+                    
+                }else{
+                    // alert('Failed to remove item from cart!');
+                    alertify.error(response?.data?.message || 'There was an error', 'successful!');
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+                console.error('There was an error adding the item to the cart!', error.message);
+                // Notify the user
+                alertify.error(error.message ?? 'There was an error!', 'successful!');
+            });
+    });
+
+
+    // Update cart item from product page with color and quantity
+    // https://domain.com/stores/{productId}
+    $('.updateCartFromProduct').click(function () {
+
+        let data = {
+            quantity : $('#quantity-form').val(),
+            size : $('#productSize').val(),
+            color : $('#productColor').val(),
+            color_div : $('#productColorDiv').text(),
+        };
+        console.log(data);
+        return;
+        let cartId = $('#cartId').val();
+        let url = routes.updateCart+ `/${cartId}`;
+        console.log("Update cart url", url);
+        axios.put(url, data, headers)
+            .then(function (response) {
+                console.log(response);
+                // Check response status
+                if (response?.data?.success) {
+                    if (window.location.hash == "") {
+                        window.location = window.location + "#productList";
+                    }
+                    // Notify the user
+                    alertify.success("Cart updated " + response?.data?.message, 'successful!');
+
+                }else{
+                    // alert('Failed to remove item from cart!');
+                    alertify.error(response?.data?.message || 'There was an error', 'successful!');
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+                console.error('There was an error updating the cart!', error.message);
+                // Notify the user
+                alertify.error(error.message ?? 'There was an error!', 'successful!');
+            });
+    });
 });
 
 

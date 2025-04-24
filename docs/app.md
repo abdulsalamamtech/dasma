@@ -67,9 +67,9 @@
     stock [number of products in stock]
     sku [(id + user + created_at) nullable string]
     description
-    tags [hot deal, new product, bags]
-    colors []
-    sizes []
+    tag [hot deal, new product, bags]
+    color
+    size
     views [default 0]
         category_id [belongs to a category]
         brand_id [nullable belongs to a brand]
@@ -96,6 +96,8 @@
     user_id
     product_id
     quantity
+    color
+    size
 
 ## orders
     user_id
@@ -126,6 +128,8 @@
     product_id
     quantity
     price
+    color
+    size
 
 ## transactions
     order_id

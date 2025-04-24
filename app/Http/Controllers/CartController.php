@@ -57,6 +57,14 @@ class CartController extends Controller
             $message = "product already added to the cart";
             return ApiResponse::success($existingCart, $message);
         }
+
+        // Get the product size and color
+        $product = Product::findOrFail($data['product_id']);
+        if($product){
+            $data['size'] = $product->size ?? null;
+            $data['color'] = $product->color ?? null;
+        }
+
         // If the product is not in the cart, create a new cart item
         $cart = Cart::create($data);
         $message = "product added to the cart successfully";
@@ -78,9 +86,14 @@ class CartController extends Controller
      */
     public function update(UpdateCartRequest $request, Cart $cart)
     {
+        // validated data
         $data = $request->validated();
-        $data['user_id'] = ActorHelper::getUserId();
-
+        $userId = ActorHelper::getUserId();
+        // check if user is owner of cart
+        if($cart->user_id !== $userId){
+            return ApiResponse::error([], 'permission denied', 403);
+        }
+        // update data
         $cart->update($data);
         // return $cart;
         return ApiResponse::success($cart);
@@ -91,6 +104,12 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
+        // get login user
+        $userId = ActorHelper::getUserId();
+        // check if user is owner of cart
+        if($cart->user_id !== $userId){
+            return ApiResponse::error([], 'permission denied', 403);
+        }
         // $cart->delete();
         $message = "cart deleted successfully";
         return ApiResponse::success([], $message);

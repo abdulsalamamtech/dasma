@@ -37,8 +37,8 @@ class StoreProductRequest extends FormRequest
             // 'tags' => ['nullable','array'],
             // 'views' => ['nullable','integer','min:0'],
             // 'sku' => ['required','string','unique:products,sku'],
-            'colors' => ['nullable','string'],
-            'sizes' => ['nullable','string'],
+            'color' => ['nullable','string'],
+            'size' => ['nullable','string'],
             // 'tags.*' => ['required','string'],
         ];
     }

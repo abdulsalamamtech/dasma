@@ -24,6 +24,8 @@ class UpdateCartRequest extends FormRequest
         return [
             // 'product_id' => ['required', 'exists:products,id'],
             'quantity' => ['required', 'integer', 'min:1'],
+            'color' => ['nullable', 'string'],
+            'size' => ['nullable', 'string'],
         ];
     }
 }

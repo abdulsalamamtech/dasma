@@ -3,7 +3,7 @@
 @section('content')
     <!-- Start: Main Page Content -->
     <div>
-        <div class="container pt-10 lg:w-100">
+        <div id="productList" class="container pt-10 lg:w-100"  data-id="{{ $product->id }}">
 
             <div class="container">
                 <div class="relative flex">
@@ -26,16 +26,17 @@
                 <div class="-mx-5 flex flex-col justify-between pt-16 pb-24 lg:flex-row">
                   <div class="flex flex-col-reverse justify-between px-5 sm:flex-row-reverse lg:w-1/2 lg:flex-row" x-data="{ selectedImage: '{{ $product->banner->url }}' }">
                     <div class="flex flex-row sm:flex-col sm:pl-5 md:pl-4 lg:pl-0 lg:pr-2 xl:pr-3">
-                      {{-- Get color and size --}}
+                      {{-- Get color and size from product --}}
                       @php
-                          $colors[] = $product->colors;
-                          $sizes[] = $product->sizes;
+                          $colors[] = $product->color;
+                          $sizes[] = $product->size;
                       @endphp
                       <div class="relative mr-3 w-28 pb-5 sm:w-32 sm:pr-0 lg:w-24 xl:w-28">
                         <div class="relative flex w-full items-center justify-center rounded border border-grey bg-v-pink">
                           <img class="cursor-pointer object-cover" @click="selectedImage = $event.target.src" alt="product image {{ $product->name }}" src="{{ $product->banner->url }}">
                         </div>
                       </div>
+                      {{-- Get color and size from product variation --}}
                       @forelse ($product->variations as $pro_variation)
                         @php
                             $colors[] = $pro_variation->color;
@@ -116,6 +117,7 @@
                           {{ Str::limit($product->description, 50, '...') }}           
                     </p>
 
+                    {{-- Product Color --}}
                     <div class="flex justify-between pb-4">
                       <div class="w-1/3 sm:w-1/5">
                         <p class="font-hk text-secondary">Color</p>
@@ -124,62 +126,27 @@
                         @forelse (array_unique($colors) as $color)
                           <!-- Color Option 1 -->
                           <label class="cursor-pointer">
-                            <input type="radio" name="color" value="red" class="peer hidden" />
+                            <input id="productColor" type="radio" name="color" value="{{ $color }}" class="peer hidden" />
                             <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-[{{ $color }}] peer-checked:ring-2 peer-checked:ring-[{{ $color }}] peer-checked:border-[{{ $color }}]"></div>
                           </label>
                         @empty
                           <label class="cursor-pointer">
-                            <input type="radio" name="color" value="black" class="peer hidden" />
+                            <input id="productColor" type="radio" name="color" value="#000000" class="peer hidden" />
                             <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-black peer-checked:ring-2 peer-checked:ring-gray-700 peer-checked:border-gray-700"></div>
                           </label> 
                         @endforelse
-                        {{-- <!-- Color Option 2 -->
-                        <label class="cursor-pointer">
-                          <input type="radio" name="color" value="blue" class="peer hidden" />
-                          <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-blue-500 peer-checked:ring-2 peer-checked:ring-blue-600 peer-checked:border-blue-600"></div>
-                        </label>
-                    
-                        <!-- Color Option 3 -->
-                        <label class="cursor-pointer">
-                          <input type="radio" name="color" value="green" class="peer hidden" />
-                          <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-green-500 peer-checked:ring-2 peer-checked:ring-green-600 peer-checked:border-green-600"></div>
-                        </label>
-                    
-                        <!-- Color Option 4 -->
-                        <label class="cursor-pointer">
-                          <input type="radio" name="color" value="yellow" class="peer hidden" />
-                          <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-yellow-500 peer-checked:ring-2 peer-checked:ring-yellow-600 peer-checked:border-yellow-600"></div>
-                        </label>
-                    
-                        <!-- Color Option 5 -->
-                        <label class="cursor-pointer">
-                          <input type="radio" name="color" value="black" class="peer hidden" />
-                          <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-black peer-checked:ring-2 peer-checked:ring-gray-700 peer-checked:border-gray-700"></div>
-                        </label> --}}
+                        
                       </div>
-                      {{-- <div class="flex w-2/3 items-center sm:w-5/6">
-                        @forelse (array_unique($colors) as $color)
-                            <div>
-                              <label class="flex items-center space-x-2 cursor-pointer">
-                                <input type="radio" name="color" class="peer hidden" />
-                                <div class="w-6 h-6 mr-2 cursor-pointer rounded-full border-2 border-transparent hover:border-black peer-checked:bg-[{{ $color }}] accent-[{{ $color }}]"></div>
-                                <span class="bg-[{{ $color }}] accent-[{{ $color }}]">{{ $color }}</span>
-                              </label>
-                            </div>
-                        @empty
-                            
-                        @endforelse
-
-                      </div> --}}
+                     
                     </div>
 
-
+                    {{-- Product Size --}}
                     <div class="flex items-center justify-between pb-4">
                       <div class="w-1/3 sm:w-1/5">
                         <p class="font-hk text-secondary">Size</p>
                       </div>
                       <div class="w-2/3 sm:w-5/6">
-                        <select name="size" class="form-select w-2/3">
+                        <select id="productSize" name="size" class="form-select w-2/3">
                           @forelse (array_unique($sizes) as $size)
                             <option value="{{ $size }}">{{ $size }}</option>
                           @empty
@@ -190,28 +157,41 @@
                     </div>
 
 
-
+                    {{-- Product Quantity --}}
                     <div class="flex items-center justify-between pb-8">
                       <div class="w-1/3 sm:w-1/5">
                         <p class="font-hk text-secondary">Quantity</p>
                       </div>
                       <div class="flex w-2/3 sm:w-5/6" x-data="{ productQuantity: 1 }">
                         <label for="quantity-form" class="relative block h-0 w-0 overflow-hidden">Quantity form</label>
-                        <input type="number" id="quantity-form" class="form-quantity form-input w-16 rounded-r-none py-0 px-2 text-center" x-model="productQuantity" min="1">
+                        <input name="quantity" type="number" id="quantity-form" class="quantity form-quantity form-input w-16 rounded-r-none py-0 px-2 text-center" x-model="productQuantity" min="1">
                         <div class="flex flex-col">
-                          <span class="flex-1 cursor-pointer rounded-tr border border-l-0 border-grey-darker bg-white px-1" @click="productQuantity++">
+                          <span class="increment-cart flex-1 cursor-pointer rounded-tr border border-l-0 border-grey-darker bg-white px-1" @click="productQuantity++">
                             <i class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i>
                           </span>
-                          <span class="flex-1 cursor-pointer rounded-br border border-t-0 border-l-0 border-grey-darker bg-white px-1" @click="productQuantity> 1 ? productQuantity-- : productQuantity=1">
+                          <span class="decrement-cart flex-1 cursor-pointer rounded-br border border-t-0 border-l-0 border-grey-darker bg-white px-1" @click="productQuantity> 1 ? productQuantity-- : productQuantity=1">
                             <i class="bx bxs-down-arrow pointer-events-none text-xs text-primary"></i>
                           </span>
                         </div>
                       </div>
                     </div>
+
+                    {{-- Product Action --}}
                     <div class="group flex pb-8">
-                      <a href="/cart" class="btn btn-outline mr-4 md:mr-6">Add to cart</a>
-                      <a href="/cart" class="btn btn-primary">BUY NOW</a>
+                      @if ($product->cartItem() )
+                        {{-- update cart --}}
+                        <input type="hidden" id="cartId" value="{{ $product->cartItem()->id }}">
+                        <input id="productId" type="hidden" name="productId" value="{{ $product->id }}">
+                        <div id="updateCartFromProduct" class="updateCartFromProduct btn btn-primary py-4">
+                          <span>Update Cart</span>
+                        </div>
+                      @else
+                        <div class="addToCartFromProduct btn btn-outline mr-4 md:mr-6">Add to cart</div>
+                        <a href="{{ route('carts.index') }}" class="btn btn-primary">BUY NOW</a>
+                      @endif
                     </div>
+
+                    {{-- Product SKU --}}
                     <div class="flex pb-2">
                       <p class="font-hk text-secondary">SKU:</p>
                       <p class="font-hkbold pl-3 text-secondary">
@@ -224,6 +204,8 @@
                   </div>
                 </div>
               
+
+                {{-- Description and Review --}}
                 <div class="pb-16 sm:pb-20 md:pb-24" x-data="{ activeTab: 'description' }">
                   <div class="tabs flex flex-col sm:flex-row" role="tablist">
                     
@@ -244,7 +226,9 @@
                     <div :class="{ 'active': activeTab=== 'description' }" class="tab-pane bg-grey-light py-10 transition-opacity md:py-16" role="tabpanel">
                       <div class="mx-auto w-5/6 text-center sm:text-left">
                         <div class="font-hk text-base text-secondary">
-                          {{ $product->description }}              
+                          {{ $product->description }} 
+                          <br>   
+                          {{ $product->cartItem() }}          
                         </div>
                       </div>
                     </div>

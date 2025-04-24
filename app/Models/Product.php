@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\ActorHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,11 +22,11 @@ class Product extends Model
         'price',
         'initial_price',
         'stock',
-        'tags',
+        'tag',
         'views',
         'sku',
-        'colors',
-        'sizes',
+        'color',
+        'size',
     ];
 
 
@@ -34,9 +35,7 @@ class Product extends Model
         'initial_price' => 'decimal:2',
         'stock' => 'integer',
         'views' => 'integer',
-        'tags' => 'array',
-        'colors' => 'array',
-       'sizes' => 'array',
+        'tag' => 'array',
     ];
 
     public function category(){
@@ -87,5 +86,33 @@ class Product extends Model
         return $this->hasMany(OrderItem::class);
     }
 
+    public function cartItem(){
+        // Check if the user is authenticated
+        // if (!auth()->check()) {
+        //     return null; // or handle the case when the user is not authenticated
+        // }
+        // Retrieve the cart item for the authenticated user
+        // and the current product
+
+        return Cart::where('user_id', ActorHelper::getUserId())
+            ->where('product_id', $this->id)
+            ->first();
+    }
+
+    public function tagDesign(){
+        // [trend, 10%, 20%, hot, new]
+        $productTag = $this?->tag;
+        if($productTag == 'trend'){
+            return 'text-v-blue';
+        }elseif ($productTag == '10%' || $productTag == '20%') {
+            return 'text-primary-light';
+        }elseif ($productTag == 'hot') {
+            return 'text-v-red';
+        }elseif ($productTag == 'new') {
+            return 'text-v-green';
+        }else{
+            return 'text-v-green';
+        }
+    }
     
 }

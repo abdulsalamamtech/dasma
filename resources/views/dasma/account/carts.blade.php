@@ -83,14 +83,14 @@
                           <div
                             class="flex w-1/2 flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left lg:w-3/5 xl:w-1/2">
                             <div class="relative mx-0 w-20 pr-0">
-                              <div class="flex h-20 items-center justify-center rounded">
+                              <a href="{{ route('stores.show', $cart?->product?->slug) }}" class="flex h-20 items-center justify-center rounded">
                                 <div class="aspect-w-1 aspect-h-1 w-full">
                                   <img
                                     src="{{ $cart->product->banner->url }}"
                                     alt="product image"
                                     class="object-cover"/>
                                 </div>
-                              </div>
+                              </a>
                             </div>
                             <span class="mt-2 ml-4 font-hk text-base text-secondary">DK: {{ $cart->product->name }}</span>
                           </div>

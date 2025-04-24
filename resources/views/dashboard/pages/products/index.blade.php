@@ -190,7 +190,7 @@ $app_brand = [
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                     Color
                                                 </label>
-                                                <input type="color" name="colors" id="color"
+                                                <input type="color" name="color" id="color"
                                                     class="w-full p-2.5 h-10" value="#ffffff" 
                                                     class="shadow-sm bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                     placeholder="#ffffff" required="">
@@ -199,7 +199,7 @@ $app_brand = [
                                                 <label for="sizes"
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                     Size</label>
-                                                <input type="number" name="sizes" id="sizes"
+                                                <input type="number" name="size" id="sizes"
                                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                     placeholder="XL or 40" required="">
                                             </div>
@@ -357,9 +357,9 @@ $app_brand = [
                                             </td>
                                             <td class="px-6 py-4">
                                                 <div>
-                                                    <div class="w-10 h-5 bg-[{{ $product->colors }}]"> color</div>
+                                                    <div class="w-10 h-5 bg-[{{ $product->color }}]"> color</div>
                                                     <div>
-                                                        {{$product->sizes}}
+                                                        {{$product->size}}
                                                     </div>
                                                 </div>
                                             </td>
@@ -590,8 +590,8 @@ $app_brand = [
                                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                                     Color
                                                                 </label>
-                                                                <input type="color" name="colors" id="color"
-                                                                    class="w-full p-2.5 h-10" value="{{ $product->colors }}"
+                                                                <input type="color" name="color" id="color"
+                                                                    class="w-full p-2.5 h-10" value="{{ $product->color }}"
                                                                     class="shadow-sm bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                                     placeholder="#ffffff" required="">
                                                             </div>
@@ -599,7 +599,7 @@ $app_brand = [
                                                                 <label for="sizes"
                                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                                     Size</label>
-                                                                <input type="number" name="sizes" id="sizes" value="{{ $product->sizes }}"
+                                                                <input type="number" name="size" id="sizes" value="{{ $product->sizes }}"
                                                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                                     placeholder="XL or 40" required="">
                                                             </div>

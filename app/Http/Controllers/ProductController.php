@@ -80,7 +80,7 @@ class ProductController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             Log::error("exception thrown", [$th->getMessage()]);
-            return redirect()->back()->with('error', $th->getMessage());
+            // return redirect()->back()->with('error', $th->getMessage());
             return redirect()->back()->with('error', $th->getMessage());
         }
     }
@@ -175,7 +175,7 @@ class ProductController extends Controller
     {
         $products = Product::with(['banner'])
             ->latest()
-            ->paginate(1);
+            ->paginate();
         // return $products;
         return view('dasma.store', [
             'products' => $products
