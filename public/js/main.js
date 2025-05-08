@@ -3,6 +3,25 @@
 // There is Alertify JS implementation on this file
 $(document).ready(function () {
 
+    // Add Axios response interceptor
+    axios.interceptors.response.use(
+        function (response) {
+            // If the response is successful, just return it
+            return response;
+        },
+        function (error) {
+            // Check if the error response status is 401
+            if (error.response && error.response.status === 401) {
+                console.log('Unauthorized! Redirecting to login...');
+                // Redirect to the login page
+                window.location.href = '/login';
+            }
+            // Return the error to be handled by the specific API call
+            return Promise.reject(error);
+        }
+    );
+
+    
     // For testing purpose
     // alertify.success('document is ready', 'Good!');
     console.log('Document is ready: ', new Date().toLocaleString(),  window.location.href);
@@ -15,6 +34,66 @@ $(document).ready(function () {
     }
 
 
+
+
+
+    // Populate the cart card
+    function populateCartCard() {
+
+        // alert("Populate cart card");
+
+        let inputCouponCode = $('#inputCouponCode');
+        let couponCode = inputCouponCode.val();
+        let cartTotal = $('#cartTotal');
+        let cartDiscount = $('#cartDiscount');
+        let cartTotalPurchasePrice = $('#cartTotalPurchasePrice');
+
+        let url = routes.updateCartCardDetails + `?coupon=${couponCode}`;
+        console.log("Populate cart url", url);
+        axios.get(url, [], headers)
+            .then(function (response) {
+                console.log(response.data);
+                // Update cart count in header this should come from the response
+                // Check response status
+                if (response?.data?.success) {
+                    // Update cart count in header
+                    // alert('Item added to cart successfully!');
+                    // alertify.success(response?.data?.message, 'successful!');
+                    console.log(response?.data?.message, 'successful!');
+                    
+                    // $("#productList").load(location.href+" #productList");
+                    if (window.location.hash == "") {
+                        window.location = window.location + "#productList";
+                    }
+
+                    // populate cart card with database values
+                    cartTotalPurchasePrice.text(response?.data?.data?.total_after_discount);
+                    cartTotal.text(response?.data?.data?.total);
+                    cartDiscount.text(response?.data?.data?.discount);
+                    if(couponCode != ""){
+                        inputCouponCode.val(response?.data?.data?.coupon);
+                        $('#couponCodeStatus').text(`Coupon code applied: ${response?.data?.data?.coupon_message}`);
+                    }
+
+                    // total_cart_items
+                    $('#totalCartItems').text(response?.data?.data?.total_cart_items);
+
+                    // Cart updated
+                    console.log('cart updated');
+                }else{
+                    // alert('Failed to remove item from cart!');
+                    // alertify.error(response?.data?.message || 'There was an error', 'successful!');
+                    console.log(response?.data?.message || 'There was an error', 'successful!');
+                    
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+                // alertify.error(error.message ?? 'There was an error!', 'successful!');
+                console.error('There was an error populating cart card details!', error.message);
+            });
+    }
+
     // Set Api Headers
     const headers ={  
         'Content-Type': 'application/json',  
@@ -26,15 +105,23 @@ $(document).ready(function () {
     const routes = {
         addToWishlist: '/account/wishlists',
         removeFromWishlist: '/account/wishlists',
-        addToCart: '/carts',
+        addToCart: '/account/carts',
         updateCart: '/account/carts',
         removeFromCart: '/account/carts',
         updateCartCardDetails : '/account/cart-card-details'
     };
 
+
+    // Apply Coupon Code
+    $(document).on('click', '#applyCoupon', function () {    
+        console.log('Applying coupon code');
+        // Apply coupon and update cart card
+        populateCartCard();
+    });
     
     // Add item to cart from product listing page
-    $('.addToCart').click(function () {
+    // $('.addToCart').click(function () {
+    $(document).on('click', '.addToCart', function () {    
 
         var $card = $(this).closest('[data-id]');
         var productId = $card.data('id');
@@ -60,7 +147,15 @@ $(document).ready(function () {
                     alertify.success(response?.data?.message, 'successful!');
                     // Remove the class name and replace it with the new class name
                     // $card.find('.removeFromCart').addClass('addToCart').removeClass('removeFromCart');
-                    $card.find('.addToCart').addClass('removeFromCart').removeClass('addToCart');
+                    // $card.find('.addToCart').addClass('removeFromCart').removeClass('addToCart');
+                    let NewContent = `<div  data-cart-id="${response?.data?.data?.id}" data-product-id="${productId}"
+                                        class="removeFromCart mr-3 flex items-center rounded-full bg-primary px-3 py-3 transition-all hover:bg-white">
+                                        <img src="/assets/img/icons/icon-cart.svg" class="h-6 w-6" alt="icon cart" />
+                                    </div>`;
+                    $card.find('#productRemoveAndAddToCart').html(NewContent);
+
+                    // update total cart items
+                    populateCartCard();
 
                     
                 }else{
@@ -76,20 +171,26 @@ $(document).ready(function () {
             });
     });
 
+    
     // Remove item from cart
-    $('.removeFromCart').click(function () {
+    // $('.removeFromCart').click(function () {
+    $(document).on('click', '.removeFromCart', function () {    
 
         var $card = $(this).closest('[data-id]');
-        var productId = $card.data('id');
 
-        let data = {
-            product_id: productId,
-            // quantity: quantity
-        };
+        // Get the cartId and productId from the clicked element
+        let cartId = $(this).data('cart-id');
+        let productId = $(this).data('product-id');
 
-        let url = routes.addToCart + `/${productId}`;
+        console.log('Cart ID:', cartId);
+        console.log('Product ID 1:', productId);
+        console.log($card);
+        console.log(`Removing cart id ${cartId} and product id ${productId} from cart`);
+        
+
+        let url = routes.removeFromCart + `/${cartId}`;
         console.log("Remove cart url", url);
-        axios.delete(url, data, headers)
+        axios.delete(url, [], headers)
             .then(function (response) {
                 console.log(response);
                 // Check response status
@@ -106,7 +207,9 @@ $(document).ready(function () {
                     // $card.find('.addToCart').addClass('removeFromCart').removeClass('addToCart');
 
                     console.log($card.find('.removeFromCart'));
-                    
+
+                    // update total cart items
+                    populateCartCard();
 
                 }else{
                     // Notify the user
@@ -121,53 +224,46 @@ $(document).ready(function () {
             });
     });
 
+
     // Remove item from cart page
-    $('.removeFromCartPage').click(function () {
+    // $('.removeFromCartPage').click(function () {
+    $(document).on('click', '.removeFromCartPage', function () {    
         var $card = $(this).closest('[data-id]');
         var cartId = $card.data('id');
-        var $quantity = $card.find('.quantity');
-        var quantity = parseInt($quantity[0]?.value) || 1;
-
+    
         let url = routes.removeFromCart + `/${cartId}`;
         console.log("Remove cart url", url);
-        // return;
+    
         axios.delete(url, [], headers)
             .then(function (response) {
-                // $card.find('.addToCart').hide();
-                // $card.find('.cartControls').show();
                 console.log(response);
-                // Update cart count in header
-                // Check response status
                 if (response?.data?.success) {
-                    // Update cart count in header
-                    // alert('Item added to cart successfully!');
-                    alertify.success(response?.data?.message, 'successful!');
-                    // $("#productList").load(location.href+" #productList");
-                    if (window.location.hash == "") {
-                        window.location = window.location + "#productList";
-                    }
-
-                    // Remove the cart details
-                    // $card.hide();
+                    // Remove the cart item from the DOM
                     $card.remove();
-                    // Remove the class name and replace it with the new class name
-                    // $card.find('.removeFromCart').addClass('addToCart').removeClass('removeFromCart');
-                    // $card.find('.addToCart').addClass('removeFromCart').removeClass('addToCart');
+    
+                    // Notify the user
+                    alertify.success(response?.data?.message, 'successful!');
+    
+                    // Update the cart summary
+                    // Call the function to recalculate the cart summary
+                    populateCartCard(); 
 
-                }else{
-                    // alert('Failed to remove item from cart!');
+                } else {
                     alertify.error(response?.data?.message || 'There was an error', 'successful!');
                 }
             })
             .catch(function (error) {
                 console.log(error);
                 alertify.error(error.message ?? 'There was an error!', 'successful!');
-                console.error('There was an error adding the item to the cart!', error.message);
+                console.error('There was an error removing the item from the cart!', error.message);
             });
     });
 
+
     // Increment cart quantity
-    $('.increment').click(function () {
+    // $('.increment').click(function () {
+    $(document).on('click', '.increment', function () {    
+
         var $card = $(this).closest('[data-id]');
         var cartId = $card.data('id');
         var $quantity = $card.find('.quantity');
@@ -217,8 +313,11 @@ $(document).ready(function () {
 
     });
 
+
     // Decrement cart quantity
-    $('.decrement').click(function () {
+    // $('.decrement').click(function () {
+    $(document).on('click', '.decrement', function () { 
+
         var $card = $(this).closest('[data-id]');
         var cartId = $card.data('id');
         var $quantity = $card.find('.quantity');
@@ -274,8 +373,11 @@ $(document).ready(function () {
             });
     });
 
+
     // Add to wishlist from product list page
-    $('.addToWishlist').click(function () {
+    // $('.addToWishlist').click(function () {
+    $(document).on('click', '.addToWishlist', function () {    
+
 
         var $card = $(this).closest('[data-id]');
         var productId = $card.data('id');
@@ -317,8 +419,11 @@ $(document).ready(function () {
             });  
     });
 
+
     // Remove item from wishlist page
-    $('.removeFromWishlist').click(function () {
+    // $('.removeFromWishlist').click(function () {
+    $(document).on('click', '.removeFromWishlist', function () {    
+
         var $card = $(this).closest('[data-id]');
         var productId = $card.data('id');
         var wishlistId = $card.data('wishlistId');
@@ -366,75 +471,28 @@ $(document).ready(function () {
     });
 
 
-    // Populate the cart card
-    function populateCartCard() {
-
-        let inputCouponCode = $('#inputCouponCode');
-        let couponCode = inputCouponCode.val();
-        let cartTotal = $('#cartTotal');
-        let cartDiscount = $('#cartDiscount');
-        let cartTotalPurchasePrice = $('#cartTotalPurchasePrice');
-
-        let url = routes.updateCartCardDetails + `?coupon=${couponCode}`;
-        console.log("Populate cart url", url);
-        axios.get(url, [], headers)
-            .then(function (response) {
-                console.log(response.data);
-                // Update cart count in header this should come from the response
-                // Check response status
-                if (response?.data?.success) {
-                    // Update cart count in header
-                    // alert('Item added to cart successfully!');
-                    // alertify.success(response?.data?.message, 'successful!');
-                    console.log(response?.data?.message, 'successful!');
-                    
-                    // $("#productList").load(location.href+" #productList");
-                    if (window.location.hash == "") {
-                        window.location = window.location + "#productList";
-                    }
-
-                    // populate cart card with database values
-                    cartTotalPurchasePrice.text(response?.data?.data?.total_after_discount);
-                    cartTotal.text(response?.data?.data?.total);
-                    cartDiscount.text(response?.data?.data?.discount);
-                    if(couponCode != ""){
-                        inputCouponCode.val(response?.data?.data?.coupon);
-                        $('#couponCodeStatus').text('Coupon code applied');
-                    }
-                }else{
-                    // alert('Failed to remove item from cart!');
-                    // alertify.error(response?.data?.message || 'There was an error', 'successful!');
-                    console.log(response?.data?.message || 'There was an error', 'successful!');
-                    
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-                // alertify.error(error.message ?? 'There was an error!', 'successful!');
-                console.error('There was an error populating cart card details!', error.message);
-            });
-    }
-
-
     // Add item to cart from product page with color and quantity
-    $('.addToCartFromProduct').click(function () {
+    // $('.addToCartFromProduct').click(function () {
+    $(document).on('click', '.addToCartFromProduct', function () {    
+
 
         var $card = $(this).closest('[data-id]');
         console.log($card);
         
         var productId = $card.data('id');
-        alert(productId);
+        // alert(productId);
         let data = {
             product_id: productId,
             quantity : $('#quantity-form').val(),
             size : $('#productSize').val(),
-            color : $('#productColor').val(),
+            color : $('#selectedColor').val(),
         };
         console.log(data);
         
 
         let url = routes.addToCart;
         console.log("Add product to cart url", url);
+        // return;
         axios.post(url, data, headers)
             .then(function (response) {
                 console.log(response);
@@ -445,9 +503,31 @@ $(document).ready(function () {
                     }
                     // Notify the user
                     alertify.success(response?.data?.message, 'successful!');
-                    // Remove the class name and replace it with the new class name
-                    // $card.find('.removeFromCart').addClass('addToCart').removeClass('removeFromCart');
-                    $card.find('.addToCart').addClass('removeFromCart').removeClass('addToCart');
+
+                    // update total cart items
+                    populateCartCard();
+
+                    // Change the content of product action div
+                    // let NewContent = `<input type="hidden" id="cartId" value="{{ $product?->cartItem()?->id }}">
+                    //     <input id="productId" type="hidden" name="productId" value="{{ $product->id }}">
+                    //     <div id="updateCartFromProduct" class="updateCartFromProduct btn btn-primary py-4">
+                    //       <span>Update Cart</span>
+                    //     </div>`;
+                    let NewContent = `<div>
+                            <input type="hidden" id="cartId" value="${response?.data?.data?.id}">
+                            <input id="productId" type="hidden" name="productId" value="${productId}">
+                            <div id="updateCartFromProduct" class="updateCartFromProduct btn btn-primary py-4 cursor-pointer">
+                                <span>Update Cart</span>
+                            </div>
+                        </div>`;
+                    $card.find('#productAction').html(NewContent);
+                    let data = {
+                        quantity : $('#quantity-form').val(),
+                        size : $('#productSize').val(),
+                        color : $('#selectedColor').val(),
+                        selected_color : $('#selectedColor').val(),
+                    };
+                    console.log(data);
 
                     
                 }else{
@@ -466,16 +546,18 @@ $(document).ready(function () {
 
     // Update cart item from product page with color and quantity
     // https://domain.com/stores/{productId}
-    $('.updateCartFromProduct').click(function () {
+    // $('.updateCartFromProduct').click(function () {
+    // Delegate the click event to dynamically added elements
+    $(document).on('click', '.updateCartFromProduct', function () {    
 
+        // alert("Update cart from product page");
         let data = {
             quantity : $('#quantity-form').val(),
             size : $('#productSize').val(),
-            color : $('#productColor').val(),
-            color_div : $('#productColorDiv').text(),
+            color : $('#selectedColor').val(),
+            selected_color : $('#selectedColor').val(),
         };
         console.log(data);
-        return;
         let cartId = $('#cartId').val();
         let url = routes.updateCart+ `/${cartId}`;
         console.log("Update cart url", url);
@@ -490,6 +572,8 @@ $(document).ready(function () {
                     // Notify the user
                     alertify.success("Cart updated " + response?.data?.message, 'successful!');
 
+                    // update total cart items
+                    populateCartCard();
                 }else{
                     // alert('Failed to remove item from cart!');
                     alertify.error(response?.data?.message || 'There was an error', 'successful!');
@@ -527,6 +611,6 @@ $(document).ready(function () {
 //   console.error(error);
 // }
 
-                // $card.find('.addToCart').show();
-                // $card.find('.removeFromCart').hide();
-                // $card.find('.quantity').text(1);
+// $card.find('.addToCart').show();
+// $card.find('.removeFromCart').hide();
+// $card.find('.quantity').text(1);
