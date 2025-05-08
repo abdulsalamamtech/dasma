@@ -33,11 +33,11 @@
                 <span class="font-hkbold block pb-2 text-center text-sm uppercase text-secondary sm:hidden">Product
                   Name</span>
                 <div class="relative mx-auto w-20 sm:mx-0 sm:mr-3 sm:pr-0">
-                  <div class="flex h-20 items-center justify-center rounded">
+                  <a href="{{ route('stores.show', $wishlist?->product?->slug) }}" class="flex h-20 items-center justify-center rounded">
                     <div class="aspect-w-1 aspect-h-1 w-full">
                       <img src="{{$wishlist?->product?->banner->url ?? '/assets/img/unlicensed/shoes-3.png'}}" alt="product image" class="object-cover" />
                     </div>
-                  </div>
+                  </a>
                 </div>
                 <span class="mt-2 font-hk text-base text-secondary">Classic Beige</span>
               </div>

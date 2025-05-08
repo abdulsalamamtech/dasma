@@ -32,11 +32,12 @@ class UpdateProductRequest extends FormRequest
             'price' => ['required','numeric','min:0'],
             'initial_price' => ['required','numeric','min:0'],
             'stock' => ['required','integer','min:0'],
+            'weight' => ['required','numeric'],
             'tags' => ['nullable','array'],
             'views' => ['nullable','integer','min:0'],
             // 'sku' => ['required','string','unique:products,sku,'.$this->route('product')],
-            'colors' => ['nullable','string'],
-            'sizes' => ['nullable','string'],
+            'color' => ['nullable','string'],
+            'size' => ['nullable','string'],
             'tags.*' => ['required','string'],
         ];
     }

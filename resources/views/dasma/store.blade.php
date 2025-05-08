@@ -27,6 +27,7 @@
 
             {{-- Product --}}
             @forelse ($products as $product)
+                {{-- START: Product Card --}}
                 <div class="group relative w-full lg:last:hidden xl:last:block">
                     <div class="relative flex items-center justify-center rounded" data-id="{{ $product->id }}">
                         <div class="h-68 w-full bg-cover bg-center bg-no-repeat"
@@ -40,9 +41,21 @@
                         <div
                             class="group absolute inset-0 flex items-center justify-center bg-secondary bg-opacity-85 py-28 opacity-0 transition-opacity group-hover:opacity-100">
                             {{-- Add product to cart --}}
-                            <div
-                                class="addToCart mr-3 flex items-center rounded-full bg-white px-3 py-3 transition-all hover:bg-primary-light">
-                                <img src="/assets/img/icons/icon-cart.svg" class="h-6 w-6" alt="icon cart" />
+                            <div id="productRemoveAndAddToCart">
+                                {{-- If product is in cart --}}
+                                @if ($product?->cartItem() )
+                                    {{-- Remove from cart --}}
+                                    <div  data-cart-id="{{ $product?->cartItem()?->id }}" data-product-id="{{ $product->id }}"
+                                        class="removeFromCart mr-3 flex items-center rounded-full bg-primary px-3 py-3 transition-all hover:bg-white">
+                                        <img src="/assets/img/icons/icon-cart.svg" class="h-6 w-6" alt="icon cart" />
+                                    </div>
+                                @else
+                                    {{-- Add to cart --}}
+                                    <div
+                                        class="addToCart mr-3 flex items-center rounded-full bg-white px-3 py-3 transition-all hover:bg-primary-light">
+                                        <img src="/assets/img/icons/icon-cart.svg" class="h-6 w-6" alt="icon cart" />
+                                    </div>
+                                @endif
                             </div>
                             <a href="{{ route('stores.show', $product->slug) }}"
                                 class="mr-3 flex items-center rounded-full bg-white px-3 py-3 transition-all hover:bg-primary-light">
@@ -64,19 +77,33 @@
                                     <i class="bx bxs-star text-primary"></i>
                                     <i class="bx bxs-star text-primary"></i>
                                     <i class="bx bxs-star text-primary"></i>
-                                    <i class="bx bxs-star text-primary"></i>
+                                    <i class="bx bxs-star-half text-primary"></i>
                                 </div>
                                 <p class="ml-2 font-hk text-sm text-secondary">
-                                    (45)
+                                    ({{ 50 + $product->id }})
                                 </p>
                             </div>
                         </div>
-                        <div class="flex gap-2 items-center">
-                            <del class="font-hk text-sm font-bold text-primary">${{ $product->initial_price }}</del>
-                            <span class="font-hk text-xl font-bold text-primary">${{ $product->price }}</span>
+                        {{-- Display product price --}}
+                        <div class="text-left">
+                            {{-- initial price --}}
+                            <div>
+                                <del class="font-hk text-base font-bold text-primary">
+                                    {{ App\Helpers\Setup::currency('sign') }}
+                                    {{ $product->initial_price }}
+                                </del>
+                            </div>
+                            {{-- selling price --}}
+                            <div>
+                                <span class="font-hk text-xl font-bold text-primary">
+                                    {{ App\Helpers\Setup::currency('sign') }}
+                                    {{ $product->price }}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {{-- END: Product Card --}}
             @empty
                 <p>No products found.</p>
             @endforelse
@@ -88,7 +115,7 @@
                 @if (isset($products) && !empty($products) && $products->links())
                     {{ $products->links() }}
                 @endif
-        </div>
+          </div> 
       </div>
     </div>
     <!-- End: Main Page Content -->

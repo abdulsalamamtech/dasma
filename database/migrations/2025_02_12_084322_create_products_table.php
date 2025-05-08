@@ -26,8 +26,10 @@ return new class extends Migration
             $table->string('tag')->nullable()->default('new');
             $table->integer('views')->default(0);
             $table->string('sku')->unique();
-            $table->json('colors')->nullable();
-            $table->json('sizes')->nullable();
+            $table->string('color')->nullable();
+            // Weight
+            $table->double('weight')->default(0.01);
+            $table->string('size')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();

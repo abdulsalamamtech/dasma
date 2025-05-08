@@ -3,33 +3,20 @@
 @section('content')
     <!-- Start: Main Page Content -->
     <div>
-        <div class="container border-t border-grey-dark pt-10 sm:pt-12 lg:w-100">
+        <div id="productList" class="container border-t border-grey-dark pt-10 sm:pt-12 lg:w-100">
 
             <div class="flex flex-wrap items-center">
-                <a href="../cart/index.html"
+                <a href="{{ route('account.carts.index') }}"
                     class="transition-all border-b border-transparent hover:border-primary text-sm text-secondary hover:text-primary font-hk
                     font-bold ">
                     Cart
                 </a>
                 <i class="bx bx-chevron-right text-sm text-secondary px-2"></i>
-                <a href="../cart/customer-info.html"
+                <a href="#"
                     class="transition-all border-b border-transparent hover:border-primary text-sm text-secondary hover:text-primary font-hk
                     ">
-                    Customer information & Shipping method
+                    Order summary & Payment method
                 </a>
-                {{-- <i class="bx bx-chevron-right text-sm text-secondary px-2"></i> --}}
-                {{-- <a href="../cart/shipping-method.html"
-                    class="transition-all border-b border-transparent hover:border-primary text-sm text-secondary hover:text-primary font-hk
-                    ">
-                    Shipping method
-                </a> --}}
-                <i class="bx bx-chevron-right text-sm text-secondary px-2"></i>
-                <a href="../cart/payment-method.html"
-                    class="transition-all border-b border-transparent hover:border-primary text-sm text-secondary hover:text-primary font-hk
-                    ">
-                    Checkout method
-                </a>
-                {{-- <i class="bx bx-chevron-right text-sm text-transparent px-2"></i> --}}
             </div>
           
             <div
@@ -48,7 +35,7 @@
                   </h1>
 
                   {{-- Start Product Items --}}
-                  <div id="productList" class="pt-8">
+                  <div class="pt-8">
                     {{-- Title --}}
                     <div class="hidden sm:block">
                       <div class="flex justify-between border-b border-grey-darker">
@@ -184,7 +171,7 @@
                       </div>
                       {{-- End of cart item --}}
                     @empty
-                        <div class="flex justify-center items-center text-center text-secondary">
+                        <div class="flex justify-center items-center text-center text-secondary p-4">
                           Your cart is empty
                         </div>
                     @endforelse
@@ -208,24 +195,26 @@
 
               {{-- Cart Total --}}
               <div class="mx-auto mt-16 sm:w-2/3 md:w-full lg:mx-0 lg:mt-0 lg:w-1/3">
-                <div class="bg-grey-light py-8 px-8">
+                <form class="bg-grey-light py-8 px-8" action="{{ route('account.carts.checkout') }}" method="POST">
+                  @csrf
                   <h4
                     class="font-hkbold pb-3 text-center text-2xl text-secondary sm:text-left">
                     Cart Totals
                   </h4>
-                  {{-- <div>
+                  <div>
                     <p class="font-hkbold pt-1 pb-2 text-secondary">Cart Note</p>
                     <p class="pb-4 font-hk text-sm text-secondary">
                       Special instructions for us
                     </p>
                     <label for="cart_note" class="relative block h-0 w-0 overflow-hidden">Cart Note</label>
                     <textarea
-                      rows="5"
+                      name="note"
+                      rows="3"
                       placeholder="Enter your text"
                       class="form-textarea"
                       id="cart_note"></textarea>
-                  </div> --}}
-                  <form method="GET" class="pt-4">
+                  </div>
+                  {{-- <form method="GET" class="pt-4"> --}}
                     <p class="font-hkbold pt-1 pb-4 text-secondary">Add Coupon</p>
                     <div class="flex justify-between">
                       <label
@@ -238,14 +227,15 @@
                         placeholder="coupon code"
                         class="form-input w-3/5 xl:w-2/3"
                         id="inputCouponCode"/>
-                      <button
-                        class="btn btn-outline btn-sm ml-4 w-2/5 lg:ml-2 xl:ml-4 xl:w-1/3"
+                      <div
+                        id="applyCoupon"
+                        class="btn btn-outline btn-sm ml-4 w-2/5 lg:ml-2 xl:ml-4 xl:w-1/3 cursor-pointer"
                         aria-label="Apply button">
                         Apply
-                      </button>
+                      </div>
                     </div>
-                    <p class="p-2 text-sm text-primary" id="couponCodeStatus">Get Discount!</p>
-                  </form>
+                    <p class="p-2 text-sm text-primary" id="couponCodeStatus">{{ request('coupon') ? 'Coupon code applied' : 'Get Discount! '}}</p>
+                  {{-- </form> --}}
                   <div class="mb-12 pt-4">
                     <p class="font-hkbold pt-1 pb-2 text-secondary">Cart Total</p>
                     <div class="flex justify-between border-b border-grey-darker pb-1">
@@ -274,8 +264,14 @@
                       </span>
                     </div>
                   </div>
-                  <a href="#" class="btn btn-primary w-full">Proceed to checkout</a>
-                </div>
+                  {{-- Check if cart items are available --}}
+                  @if (!$carts->isEmpty())
+                    {{-- <button type="submit" class="btn btn-primary w-full">Proceed to checkout</button> --}}
+                    <button type="submit" class="btn bg-[#F33300] text-white transition-all hover:bg-primary w-full">Proceed to checkout</button>
+                  @else
+                    <p class="text-center text-secondary">Your cart is empty. Please add items to proceed.</p>
+                  @endif
+                </form>
               </div>
             </div>
           </div>

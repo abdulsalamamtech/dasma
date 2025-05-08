@@ -67,7 +67,10 @@
               </div>
             </div>
           </div>
+
+          {{-- Contact info and form --}}
           <div class="flex flex-col justify-between pb-16 md:pb-20 lg:flex-row lg:pb-24">
+            {{-- Contact info --}}
             <div
               class="mx-auto w-full border border-grey-darker px-6 py-10 text-center shadow lg:mx-0 lg:w-3/8 lg:py-8 lg:text-left xl:w-1/3 xl:px-8">
               <h2 class="border-b border-grey-dark pb-6 font-butler text-2xl text-secondary sm:text-3xl md:text-4xl">
@@ -76,25 +79,25 @@
               <h4 class="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">
                 Email
               </h4>
-              <p class="font-hk text-secondary">information@elyssi.com</p>
+              <p class="font-hk text-secondary">dasmacollection@gmail.com</p>
               <h4 class="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">
                 Phone
               </h4>
-              <p class="font-hk text-secondary">+0 321-654-0987</p>
+              <p class="font-hk text-secondary">+234 80 9135 3393</p>
               <h4 class="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">
                 WORKING HOURS
               </h4>
               <p class="pt-3 font-hk text-lg font-bold text-secondary">
-                Summer
+                Week-days
               </p>
               <p class="font-hk text-secondary">
-                <span class="text-primary">(May to Nov) :</span>Mon - Sat: 9.00 to 18.00
+                <span class="text-primary">(Online) :</span>Mon - Fri: 8.00 AM to 6.00 PM
               </p>
               <p class="pt-3 font-hk text-lg font-bold text-secondary">
-                Winter
+                Weekend
               </p>
               <p class="font-hk text-secondary">
-                <span class="text-primary">(Dic to Apr) :</span>Mon - Sat: 9.00 to 17.00
+                <span class="text-primary">(Chat) :</span>Sat - Sun: 9.00 AM to 4.00 PM
               </p>
               <div class="pt-8">
                 <h4 class="font-hk text-lg font-bold uppercase text-secondary sm:text-xl">
@@ -117,36 +120,68 @@
                 </div>
               </div>
             </div>
+            {{-- Contact form --}}
             <div class="mt-10 border border-grey-darker px-8 py-10 shadow md:mt-12 lg:mt-0 lg:w-3/5 lg:py-8">
-              <form>
-                <p class="pb-8 font-hk text-lg text-secondary">Any questions? Contact us through Whatsapp or on our
-                  contact from below.</p>
-                <div class="mb-5 grid grid-cols-1 justify-between md:grid-cols-2 md:gap-10">
-                  <div class="mb-5 sm:mb-0">
-                    <label for="name" class="mb-2 block font-hk text-secondary">Name</label>
-                    <input type="text" placeholder="Enter your name" class="form-input" id="name" />
+              {{-- Message Sent --}}
+              @if ($message ?? null)
+              <div
+                class="mx-auto w-full text-center lg:text-left">
+                <h2 class="border-b border-grey-dark pb-6 font-butler text-2xl text-secondary sm:text-3xl md:text-4xl">
+                  Message Sent
+                </h2>
+                <h4 class="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">
+                  Name
+                </h4>
+                <p class="font-hk text-secondary">{{ $message->name }}</p>
+                <h4 class="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">
+                  Email
+                </h4>
+                <p class="font-hk text-secondary">{{ $message->email }}</p>
+                <h4 class="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">
+                  Subject
+                </h4>
+                <p class="font-hk text-secondary">{{ $message->subject }}</p>
+                <div>
+                  <h5 class="pt-10 font-hk text-lg font-bold text-secondary">
+                    Thank you very much, we will get back to you as soon as possible!
+                  </h5>
+                </div>
+              </div>
+              @else
+              {{-- New Message --}}
+                <form action="{{ route('message.store') }}" method="POST">
+                  @csrf
+                  <p class="pb-8 font-hk text-lg text-secondary">Any questions? Contact us through Whatsapp or on our
+                    contact from below.</p>
+                  <div class="mb-5 grid grid-cols-1 justify-between md:grid-cols-2 md:gap-10">
+                    <div class="mb-5 sm:mb-0">
+                      <label for="name" class="mb-2 block font-hk text-secondary">Name</label>
+                      <input type="text" placeholder="Enter your name" class="form-input" name="name" id="name" />
+                    </div>
+                    <div class="">
+                      <label for="email" class="mb-2 block font-hk text-secondary">Email address</label>
+                      <input type="text" placeholder="Enter your email" class="form-input" name="email" id="email" />
+                    </div>
                   </div>
-                  <div class="">
-                    <label for="email" class="mb-2 block font-hk text-secondary">Email address</label>
-                    <input type="text" placeholder="Enter your email" class="form-input" id="email" />
+                  <div class="mb-8 w-full">
+                    <label for="subject" class="mb-2 block font-hk text-secondary">Subject</label>
+                    <input type="text" placeholder="Enter your subject" class="form-input" name="subject" id="subject" />
                   </div>
-                </div>
-                <div class="mb-8 w-full">
-                  <label for="subject" class="mb-2 block font-hk text-secondary">Subject</label>
-                  <input type="text" placeholder="Enter your subject" class="form-input" id="subject" />
-                </div>
-                <div class="mb-8 w-full">
-                  <label for="message" class="mb-2 block font-hk text-secondary">Message</label>
-                  <textarea rows="5" placeholder="Enter your message" class="form-textarea" id="message"></textarea>
-                </div>
-                <button class="btn btn-primary" aria-label="Submit button">
-                  SUBMIT
-                </button>
-              </form>
+                  <div class="mb-8 w-full">
+                    <label for="message" class="mb-2 block font-hk text-secondary">Message</label>
+                    <textarea rows="5" placeholder="Enter your message" class="form-textarea" name="message" id="message"></textarea>
+                  </div>
+                  <button class="btn btn-primary" aria-label="Submit button">
+                    SUBMIT
+                  </button>
+                </form>
+              @endif
               {{-- FAQ --}}
-              <span id="faq"></span>
+              {{-- <span id="faq"></span> --}}
             </div>
           </div>
+
+          {{-- Frequently ask questions --}}
           <div class="pb-16 md:pb-20 lg:pb-24">
             <div class="mx-auto text-center sm:w-5/6 md:mx-0 md:w-full">
               <h2 class="font-butler text-2xl text-secondary sm:text-3xl md:text-4.5xl lg:text-5xl">

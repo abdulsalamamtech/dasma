@@ -22,6 +22,7 @@ class Product extends Model
         'price',
         'initial_price',
         'stock',
+        'weight',
         'tag',
         'views',
         'sku',
@@ -35,7 +36,9 @@ class Product extends Model
         'initial_price' => 'decimal:2',
         'stock' => 'integer',
         'views' => 'integer',
-        'tag' => 'array',
+        'tag' => 'string',
+        'color' => 'string',
+        'size' => 'string',
     ];
 
     public function category(){

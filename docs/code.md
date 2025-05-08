@@ -1,3 +1,24 @@
+
+
+-----------------------------------------------
+Chat Library
+
+https://apexcharts.com/
+
+------------------------------------------------
+Security
+
+https://cloud.google.com/security/products/recaptcha
+https://www.hcaptcha.com/
+https://www.cloudflare.com/en-gb/
+
+
+
+
+
+------------------------------------------------
+
+
 use App\Http\Controllers\LocationsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;

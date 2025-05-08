@@ -55,24 +55,6 @@
                         </div>
                       @endforelse
                       
-                      {{-- <div class="relative mr-3 w-28 pb-5 sm:w-32 sm:pr-0 lg:w-24 xl:w-28">
-                        <div class="relative flex w-full items-center justify-center rounded border border-grey bg-v-pink">
-                          <img class="cursor-pointer object-cover" @click="selectedImage = $event.target.src" alt="product image" src="/assets/img/unlicensed/backpack-2.png">
-                        </div>
-                      </div>
-                      
-                      <div class="relative mr-3 w-28 pb-5 sm:w-32 sm:pr-0 lg:w-24 xl:w-28">
-                        <div class="relative flex w-full items-center justify-center rounded border border-grey bg-v-pink">
-                          <img class="cursor-pointer object-cover" @click="selectedImage = $event.target.src" alt="product image" src="/assets/img/unlicensed/backpack-2.png">
-                        </div>
-                      </div>
-
-                      <div class="relative mr-3 w-28 pb-5 sm:w-32 sm:pr-0 lg:w-24 xl:w-28">
-                        <div class="relative flex w-full items-center justify-center rounded border border-grey bg-v-pink">
-                          <img class="cursor-pointer object-cover" @click="selectedImage = $event.target.src" alt="product image" src="/assets/img/unlicensed/backpack-2.png">
-                        </div>
-                      </div>                       --}}
-                      
                     </div>
                     <div class="relative w-full pb-5 sm:pb-0">
                       <div class="aspect-w-1 aspect-h-1 relative flex items-center justify-center rounded border border-grey bg-v-pink">
@@ -117,28 +99,39 @@
                           {{ Str::limit($product->description, 50, '...') }}           
                     </p>
 
-                    {{-- Product Color --}}
+                    {{-- START: Product Color --}}
                     <div class="flex justify-between pb-4">
-                      <div class="w-1/3 sm:w-1/5">
-                        <p class="font-hk text-secondary">Color</p>
+                      <div class="w-1/3 sm:w-1/6">
+                          <p class="font-hk text-secondary">Color</p>
                       </div>
-                      <div class="w-2/3 sm:w-5/6 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
-                        @forelse (array_unique($colors) as $color)
-                          <!-- Color Option 1 -->
-                          <label class="cursor-pointer">
-                            <input id="productColor" type="radio" name="color" value="{{ $color }}" class="peer hidden" />
-                            <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-[{{ $color }}] peer-checked:ring-2 peer-checked:ring-[{{ $color }}] peer-checked:border-[{{ $color }}]"></div>
-                          </label>
-                        @empty
-                          <label class="cursor-pointer">
-                            <input id="productColor" type="radio" name="color" value="#000000" class="peer hidden" />
-                            <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-black peer-checked:ring-2 peer-checked:ring-gray-700 peer-checked:border-gray-700"></div>
-                          </label> 
-                        @endforelse
-                        
+                      <div class="w-2/3 sm:w-5/6 grid grid-cols-6 sm:grid-cols-6 md:grid-cols-6 gap-2">
+                          @forelse (array_unique($colors) as $color)
+                              <!-- Color Option -->
+                              <label class="cursor-pointer">
+                                  <input id="productColor-{{ $loop->index }}" type="radio" name="color" value="{{ $color }}" class="peer hidden" onchange="updateHiddenInput(this)" />
+                                  <div class="w-8 h-8 rounded-full border-2 border-gray-300 bg-[{{ $color }}] peer-checked:ring-2 peer-checked:ring-[{{ $color }}] peer-checked:border-[{{ $color }}]"></div>
+                              </label>
+                          @empty
+                              <label class="cursor-pointer">
+                                  <input id="productColor-default" type="radio" name="color" value="#000000" class="peer hidden" onchange="updateHiddenInput(this)" />
+                                  <div class="w-8 h-8 rounded-full border-2 border-gray-300 bg-black peer-checked:ring-2 peer-checked:ring-gray-700 peer-checked:border-gray-700"></div>
+                              </label>
+                          @endforelse
                       </div>
-                     
                     </div>
+                  
+                    <!-- Hidden Input -->
+                    <input type="hidden" id="selectedColor" name="selectedColor" value="{{ $product->color }}">
+                    {{-- Update the selected color --}}
+                    <script>
+                        function updateHiddenInput(radio) {
+                            const hiddenInput = document.getElementById('selectedColor');
+                            hiddenInput.value = radio.value;
+                            console.log('Selected Color:', hiddenInput.value);
+                        }
+                    </script>
+                    {{-- END: Product Color --}}
+
 
                     {{-- Product Size --}}
                     <div class="flex items-center justify-between pb-4">
@@ -160,11 +153,11 @@
                     {{-- Product Quantity --}}
                     <div class="flex items-center justify-between pb-8">
                       <div class="w-1/3 sm:w-1/5">
-                        <p class="font-hk text-secondary">Quantity</p>
+                        <p class="font-hk text-secondary">Quantity <br>(Max: {{ $product->stock }})</p>
                       </div>
                       <div class="flex w-2/3 sm:w-5/6" x-data="{ productQuantity: 1 }">
                         <label for="quantity-form" class="relative block h-0 w-0 overflow-hidden">Quantity form</label>
-                        <input name="quantity" type="number" id="quantity-form" class="quantity form-quantity form-input w-16 rounded-r-none py-0 px-2 text-center" x-model="productQuantity" min="1">
+                        <input name="quantity" type="number" id="quantity-form" class="quantity form-quantity form-input w-16 rounded-r-none py-0 px-2 text-center" x-model="productQuantity" min="1" max="{{ $product->stock }}">
                         <div class="flex flex-col">
                           <span class="increment-cart flex-1 cursor-pointer rounded-tr border border-l-0 border-grey-darker bg-white px-1" @click="productQuantity++">
                             <i class="bx bxs-up-arrow pointer-events-none text-xs text-primary"></i>
@@ -177,17 +170,17 @@
                     </div>
 
                     {{-- Product Action --}}
-                    <div class="group flex pb-8">
-                      @if ($product->cartItem() )
+                    <div id="productAction" class="group flex pb-8">
+                      @if ($product?->cartItem() )
                         {{-- update cart --}}
-                        <input type="hidden" id="cartId" value="{{ $product->cartItem()->id }}">
+                        <input type="hidden" id="cartId" value="{{ $product?->cartItem()?->id }}">
                         <input id="productId" type="hidden" name="productId" value="{{ $product->id }}">
-                        <div id="updateCartFromProduct" class="updateCartFromProduct btn btn-primary py-4">
+                        <div id="updateCartFromProduct" class="updateCartFromProduct btn btn-primary py-4 cursor-pointer">
                           <span>Update Cart</span>
                         </div>
                       @else
-                        <div class="addToCartFromProduct btn btn-outline mr-4 md:mr-6">Add to cart</div>
-                        <a href="{{ route('carts.index') }}" class="btn btn-primary">BUY NOW</a>
+                        <div class="addToCartFromProduct btn btn-outline mr-4 md:mr-6 cursor-pointer">Add to cart</div>
+                        <a href="{{ route('account.carts.index') }}" class="btn btn-primary">BUY NOW</a>
                       @endif
                     </div>
 
@@ -332,6 +325,8 @@
                   </div>
                 </div>
               
+
+                {{-- Related Products --}}
                 <div class="pb-20 md:pb-32">
                   <div class="mb-12 text-center">
                     <h2 class="font-butler text-3xl text-secondary md:text-4xl lg:text-4.5xl">

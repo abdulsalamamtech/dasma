@@ -61,6 +61,10 @@
   </script>
   {{-- END ALERTIFY JS --}}
 
+
+  <!-- Flowbite cdn -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />  
+
 </head>
 
 <body x-data="{

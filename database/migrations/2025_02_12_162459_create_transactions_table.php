@@ -27,7 +27,7 @@ return new class extends Migration
                 ->default('pending');
             $table->string('reference')->unique();
             $table->string('payment_method')->default('online');
-            $table->text('data')->nullable(); // response data from payment server
+            $table->json('data')->nullable(); // response data from payment server
             $table->timestamps();
             $table->softDeletes();
         });

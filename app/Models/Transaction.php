@@ -36,4 +36,20 @@ class Transaction extends Model
         return $this->belongsTo(Order::class);
     }
 
+    public function statusColor()
+    {
+        $status = $this->status;
+        $color = [
+            'pending' => 'orange',
+            'cancel' => 'red',
+            'processing' => 'purple',
+            'confirmed' => 'green',
+            'shipped' => 'yellow',
+            'successful' => 'green',
+            'rejected' => 'red',
+            'returned' => 'brown',
+            'refunded' => 'blue',
+        ];
+        return $color[$status];
+    }
 }

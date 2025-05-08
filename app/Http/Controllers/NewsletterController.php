@@ -28,15 +28,14 @@ class NewsletterController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * [Public] Store a newly created resource in storage.
      */
     public function store(StoreNewsletterRequest $request)
     {
         $data = $request->validated();
         $newsletter = Newsletter::create($data);
-
         // return $newsletter;
-        return redirect()->route('admin.newsletters.index')->with('success', 'newsletter created successfully');
+        return redirect()->back()->with('success', 'You have successfully subscribe to our newsletter');
     }
 
     /**

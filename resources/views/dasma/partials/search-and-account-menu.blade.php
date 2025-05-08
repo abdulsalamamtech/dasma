@@ -1,5 +1,6 @@
     {{-- Start: Modal content for search and account menu --}}
-    <div class="container  pt-10 lg:w-100">
+    {{-- <div class="container  pt-10 lg:w-100"> --}}
+    <div class="container lg:w-100">
 
         <!-- Start: Search Icon and Form -->
         {{-- Adjust the top (eg. from 20 + 10 to 30) value when the promotion is enable for better UI/UX --}}
@@ -37,19 +38,21 @@
                       My Account
                     </p>
                     <div class="flex flex-col pl-3">
-                      <a href="{{ route('account') }}"
+                      <a href="{{ route('account.index') }}"
                         class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk font-bold text-primary border-primary ">Dashboard</a>
-                      <a href="{{ route('orders') }}"
+                      <a href="{{ route('account.orders.index') }}"
                         class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">Orders</a>
-                        <a href="{{ route('cart')}}"
+                        <a href="{{ route('account.orders.items.index') }}"
+                        class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">Order Items</a>                        
+                        <a href="{{ route('account.carts.index')}}"
                         class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">Cart</a>
-                        <a href="{{ route('wishlists.index') }}"
+                        <a href="{{ route('account.wishlists.index') }}"
                         class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">Wishlist</a>                    
-                      <a href="{{ route('transactions') }}"
+                      <a href="{{ route('account.transactions.index') }}"
                         class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">Transactions</a>
-                        <a href="{{ route('history') }}"
+                        <a href="{{ route('account.history.index') }}"
                         class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">History</a>
-                      <a href="{{ route('settings') }}"
+                      <a href="{{ route('account.settings.index') }}"
                         class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">Setting</a>
                     </div>
                     <a href="{{ route('register') }}"

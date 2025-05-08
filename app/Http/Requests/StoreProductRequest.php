@@ -34,6 +34,7 @@ class StoreProductRequest extends FormRequest
             'initial_price' => ['required','numeric','min:0'],
             // 'end_date' => ['required','date','after:start_date'],
             'stock' => ['required','integer','min:0'],
+            'weight' => ['required','numeric'],
             // 'tags' => ['nullable','array'],
             // 'views' => ['nullable','integer','min:0'],
             // 'sku' => ['required','string','unique:products,sku'],

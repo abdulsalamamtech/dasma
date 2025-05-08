@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('country')->default('Nigeria');
+            $table->string('default_address')->default('no');
             $table->timestamps();
             $table->softDeletes();
         });

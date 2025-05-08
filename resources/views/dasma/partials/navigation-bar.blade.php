@@ -21,7 +21,7 @@
                 <img src="{{ asset('assets/img/icons/icon-search-hover.svg') }}"
                   class="hidden h-5 w-5 group-hover:block sm:h-6 sm:w-6 md:h-8 md:w-8" alt="icon search hover" />
               </button>
-              <a href="{{ route('wishlists.index') }}"
+              <a href="{{ route('account.wishlists.index') }}"
                 class="group hidden rounded-full border-2 border-transparent p-2 transition-all hover:border-primary sm:p-4 lg:block">
                 <img src="{{ asset('assets/img/icons/icon-heart.svg') }}"
                   class="block h-5 w-5 group-hover:hidden sm:h-6 sm:w-6 md:h-8 md:w-8" alt="icon heart" />
@@ -29,21 +29,21 @@
                   class="hidden h-5 w-5 group-hover:block sm:h-6 sm:w-6 md:h-8 md:w-8" alt="icon heart hover" />
               </a>
             </div>
-            <a href="index.html">
+            <a href="#">
               {{-- <img src="/assets/img/logo-elyssi.svg" class="h-auto w-28 sm:w-48" alt="logo" /> --}}
               <div class="h-auto w-28 sm:w-48 text-3xl p-4 font-bold">
                 <span class="text-secondary">DAS</span><span class="text-primary">MA</span>
               </div>
             </a>
             <div class="flex items-center">
-              <a href="{{ route('carts.index') }}"
-                class="group ml-2 rounded-full border-2 border-transparent p-2 transition-all hover:border-primary sm:ml-3 sm:p-4 md:ml-5 lg:ml-8 lg:block">
+              <a href="{{ route('account.carts.index') }}"
+                class="relative group ml-2 rounded-full border-2 border-transparent p-2 transition-all hover:border-primary sm:ml-3 sm:p-4 md:ml-5 lg:ml-8 lg:block">
+                {{-- Count total product in cart --}}
+                <div id="totalCartItems" class="absolute ml-3  bottom-3 md:bottom-8 z-10 text-primary border border-primary rounded-full p-1">{{ request()?->user()?->carts?->count() ?? '0' }}</div>
                 <img src="/assets/img/icons/icon-cart.svg"
                   class="block h-5 w-5 group-hover:hidden sm:h-6 sm:w-6 md:h-8 md:w-8" alt="icon cart" />
                 <img src="/assets/img/icons/icon-cart-hover.svg"
                   class="hidden h-5 w-5 group-hover:block sm:h-6 sm:w-6 md:h-8 md:w-8" alt="icon cart hover" />
-                  {{-- <div class="absolute right-20 bottom-24 bg-gray-200 rounded-full p-1 -z-10 font-bold text-primary border border-red-800">10</div> --}}
-                  <div class="hidden xl:block absolute right-20 bottom-24 rounded-full p-1 -z-10 font-bold text-primary">10</div>
               </a>              
               <button @click="accountMenu = !accountMenu"
                 class="group rounded-full border-2 border-transparent p-2 transition-all hover:border-primary sm:p-4">
@@ -214,7 +214,7 @@
             class="block w-full cursor-pointer border-b border-grey-dark py-3 font-hk font-medium text-secondary">Home
           </a>
           <a class='block w-full cursor-pointer border-b border-grey-dark py-3 font-hk font-medium text-secondary'
-            href='{{ route('wishlists.index') }}'>Wishlist
+            href='{{ route('account.wishlists.index') }}'>Wishlist
           </a>
           <div class="block w-full border-b border-grey-dark py-3" x-data="{
                   isParentAccordionOpen: false

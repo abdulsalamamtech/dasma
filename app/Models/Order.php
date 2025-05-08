@@ -10,14 +10,20 @@ class Order extends Model
 {
 
     use HasFactory, SoftDeletes;
-    
+
     protected $fillable = [
         'user_id',
         'total_amount',
         'coupon',
         'note',
         'status',
-        'address_id'
+        'address_id',
+        'discount',
+        'total_after_discount',
+        'coupon_id',
+        'shipping_fee',
+        'total_payable_amount',
+        'total_weight',
     ];
 
 
@@ -46,8 +52,34 @@ class Order extends Model
         return $this->hasMany(Transaction::class);
     }
 
+    public function lastTransaction()
+    {
+        return $this->hasOne(Transaction::class)->latest();
+    }
+
+    public function lastPayment(){
+        return $this?->transactions()?->latest()?->first();
+    }
+
     public function review()
     {
         return $this->hasOne(Review::class);
-    }    
+    }
+
+    public function statusColor()
+    {
+        $status = $this->status;
+        $color = [
+            'pending' => 'orange',
+            'cancel' => 'red',
+            'processing' => 'purple',
+            'confirmed' => 'green',
+            'shipped' => 'yellow',
+            'received' => 'green',
+            'rejected' => 'red',
+            'returned' => 'brown',
+            'refunded' => 'blue',
+        ];
+        return $color[$status];
+    }
 }

@@ -357,7 +357,7 @@
                                                     </div>
                                                     <div class="col-span-6 sm:col-span-6">
                                                         <label for="no-mails"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. Email</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email S/N</label>
                                                         <input type="number" name="" id="no-mails"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                             placeholder="example@company.com" required="" value="{{ $newsletter->id }}" disabled>

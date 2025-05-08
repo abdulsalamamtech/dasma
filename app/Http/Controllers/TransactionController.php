@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ActorHelper;
+use App\Helpers\Paystack;
+// use App\Http\Controllers\AccountController;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
+use App\Models\Order;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
@@ -52,8 +57,6 @@ class TransactionController extends Controller
         //
     }
 
-
-
     /**
      * Update the specified resource in storage.
      */
@@ -61,8 +64,6 @@ class TransactionController extends Controller
     {
         //
     }
-
-
 
 
     /**
@@ -77,5 +78,56 @@ class TransactionController extends Controller
             ->orWhere('status', 'LIKE', "%{$search}%")
             ->latest()
             ->paginate();
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function userTransactions(Request $request)
+    {
+
+                // http://127.0.0.1:8000/events/8?trxref=soq9s7fxmf&reference=soq9s7fxmf
+        // Verify payment transaction
+        if ($request?->filled('trxref') || $request?->filled('reference')) {
+            $reference = $request->reference;
+            $PSP = Paystack::verify($reference);
+            $message = $PSP['message'];
+            info('verify payment message: ', [$message]);
+            if ($PSP['success']) {
+                $transaction = Transaction::where('reference', $reference)->first();
+                if ($transaction) {
+                    $transaction->status = 'successful';
+                    $transaction->save();
+
+                    // update order
+                    $order = Order::where('id', $transaction->order_id)->first();
+                    $order->paid = 'yes';
+                    if ($order->status == 'pending') {
+                        $order->status = 'confirmed';
+                        // Decrement available stock from order items
+                        info('START: decrement available stock from order');
+                        defer(app('App\Http\Controllers\AccountController')->decrementAvailableStockFromOrder($order), 'decrement available stock');
+                        info('PROCESSING: decrement available stock processing');
+                    }
+                    $order->save();
+                }
+            }
+        }
+
+
+        // Search for transaction
+        if(request()->filled('search')){
+            $search = request('search');
+            $transactions = $this->search($search);
+        }else{
+            $transactions = Transaction::with(['order'])
+                ->where('user_id', ActorHelper::getUserId())
+                ->latest()
+                ->paginate();
+        }
+        // return $brands;
+        return view('dasma.account.transactions', [
+            'transactions' => $transactions
+        ]);
     }
 }

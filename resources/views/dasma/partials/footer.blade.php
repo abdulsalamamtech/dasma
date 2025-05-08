@@ -11,13 +11,14 @@
           <p class="px-6 pt-3 font-hk text-lg text-white sm:text-xl">
             Join our list and save 15% off your first order.
           </p>
-          <form class="pt-10 sm:pt-12">
+          <form class="pt-10 sm:pt-12" action="{{ route('newsletters.store') }}" method="POST">
+            @csrf
             <div
               class="mx-auto flex w-5/6 flex-col items-center justify-center sm:w-3/4 sm:flex-row lg:w-3/5 xl:w-1/2">
               <label for="cta_email" class="relative block h-0 w-0 overflow-hidden">Email</label>
-              <input type="email" name="cta_email" id="cta_email" placeholder="ENTER YOUR EMAIL"
-                class="form-input border-white bg-transparent text-sm uppercase text-white placeholder-grey-dark" />
-              <button type="button" class="btn btn-primary mt-4 w-full sm:ml-5 sm:mt-0 sm:w-auto"
+              <input type="email" name="email" id="cta_email" placeholder="ENTER YOUR EMAIL"
+                class="form-input border-white bg-transparent text-sm uppercase text-white placeholder-grey-dark"  required/>
+              <button type="submit" class="btn btn-primary mt-4 w-full sm:ml-5 sm:mt-0 sm:w-auto"
                 aria-label="Subscribe button">
                 SUBSCRIBE
               </button>
@@ -37,7 +38,7 @@
             <ul class="list-reset">
               <li class="block pb-2">
                 <a href="mailto:test.email0123@dasma.com"
-                  class="font-hk text-base tracking-wide text-white transition-colors hover:text-primary">info@dasmastore.com</a>
+                  class="font-hk text-base tracking-wide text-white transition-colors hover:text-primary">dasmacollection@gmail.com</a>
               </li>
               <li class="block pb-2">
                 <a href="tel:2340991922440"
@@ -122,6 +123,10 @@
   <script src="/npm/-splidejs/splide-3.6.12/dist/js/splide.min.js"></script>
   <script src="/assets/js/main.js"></script>
   <script src="/guanaco-sub/script.js" data-site="NUAESTQS" defer></script>
+
+
+  <!-- Flowbite Javascript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 
 </body>
 

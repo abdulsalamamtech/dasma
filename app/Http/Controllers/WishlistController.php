@@ -32,6 +32,15 @@ class WishlistController extends Controller
         $data = $request->validated();
         $data['user_id'] = ActorHelper::getUserId();
 
+        // Check if the product is already in the wishlist
+        $existingWishlist = Wishlist::where('user_id', $data['user_id'])
+            ->where('product_id', $data['product_id'])
+            ->first();
+        if ($existingWishlist) {
+            $message = "product already added to the wishlist";
+            return ApiResponse::success($existingWishlist, $message);
+        }
+
         $wishlist = Wishlist::create($data);
         $message = "product added to the wishlist";
         // return $wishlist;

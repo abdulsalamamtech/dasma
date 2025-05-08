@@ -31,15 +31,15 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- ₦ {{ Number::abbreviate($dashboard['transactions']['amount'] ?? 0, 1) }} --}}
+                                ₦ {{ Number::abbreviate($data['transactions']['amount'] ?? 0, 1) }}
                             </h4>
                         </div>
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
                             <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
                                 <strong class="text-green-500">
-                                    {{-- {{ Number::abbreviate((
-                                    (($dashboard['transactions']['amount'] + 100)/ $dashboard['transactions']['amount'])
-                                    ), 2) }}% --}}
+                                    {{ Number::abbreviate((
+                                    (($data['transactions']['amount'] + 100)/ $data['transactions']['amount'])
+                                    ), 2) }}%
                                 </strong>&nbsp;than last week
                             </p>
                         </div>
@@ -62,7 +62,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate($dashboard['users']['total'] ?? 0, 1) }} --}}
+                                {{ Number::abbreviate($data['wishlists']['total'] ?? 0, 0) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -84,7 +84,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate($dashboard['products']['total'] ?? 0, 1) }} --}}
+                                {{ Number::abbreviate($data['carts']['total'] ?? 0, 0) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -105,7 +105,7 @@
                                 Orders</p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{ Number::abbreviate($dashboard['orders']['total'] ?? 0, 1) }}
+                                {{ Number::abbreviate($data['orders']['total'] ?? 0, 0) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">

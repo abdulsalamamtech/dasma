@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ActorHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Models\Address;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Order;
-use App\Models\Product;
 use App\Models\Promotion;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Log;
@@ -24,18 +25,16 @@ class OrderController extends Controller
             ->withCount('items')
             ->latest()
             ->paginate();
-        // return $products;
+        // return $orders;
         return view('dashboard.pages.orders.index', [
             'orders' => $orders,
-            'products' => $orders,
+            // 'products' => $orders,
             'brands' => Brand::latest()->get(),
             'categories' => Category::latest()->get(),
             'promotions' => Promotion::latest()->get(),
         ]);
 
     }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -87,6 +86,18 @@ class OrderController extends Controller
             Log::error("exception thrown", [$th->getMessage()]);
             return redirect()->back()->with('error', $th->getMessage());
         }
+    }
+
+    // Proceed to checkout page after placing unpaid order
+    public function proceedToCheckout(Order $order){
+        // Get all user addresses
+        $addresses = Address::where('user_id', ActorHelper::getUserId())->get();
+
+        // Redirect to add customer info
+        return view('dasma.account.customer-info', [
+            'order' => $order,
+            'addresses' => $addresses
+        ]);
     }
 
 

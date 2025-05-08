@@ -9,7 +9,7 @@ use App\Models\Message;
 class MessageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * [Admin] Display a listing of the resource.
      */
     public function index()
     {
@@ -24,15 +24,29 @@ class MessageController extends Controller
      */
     public function store(StoreMessageRequest $request)
     {
-        //
+        $data = $request->validated();
+        $message = Message::create($data);
+        return $this->show($message);
     }
+
+    /**
+     * Display the form resource.
+     */
+    public function create()
+    {
+        return view('dasma.contact');
+    }    
 
     /**
      * Display the specified resource.
      */
-    public function show(Message $message)
+    public function show(?Message $message)
     {
-        //
+        // It's taking two request to go away
+        // session()->flash('success', 'message sent!');
+        return view('dasma.contact', [
+            'message' => $message,
+        ]);
     }
 
     /**
@@ -44,7 +58,7 @@ class MessageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * [Admin] Remove the specified resource from storage.
      */
     public function destroy(Message $message)
     {

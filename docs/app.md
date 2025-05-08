@@ -59,6 +59,7 @@
 
 
 ## products
+    weight (kg)
     banner [single image]
     name
     slug
@@ -102,9 +103,15 @@
 ## orders
     user_id
     total_amount
-    coupon_id [eg DASMA25 for 2% off]
+    discount
+    total_after_discount
+    coupon [eg DASMA25 for 2% off]
+    coupon_id
+    shipping_fee
+    total_payable_amount
     note [nullable]
     paid
+    total_weight
     status 
         [
             pending (not paid), 
@@ -119,8 +126,6 @@
             refunded (by admin), 
         ]
     address_id
-    // response data from payment server
-    data
 
 ## order_items
     user_id
@@ -137,6 +142,8 @@
     status [pending, successful, cancelled, suspended, rejected]
     reference
     payment_method
+    // response data from payment server
+    data
 
 
 ## reviews
@@ -238,3 +245,41 @@
         orders
         transactions
         
+
+
+------------------------
+## Log Viewer
+```sh
+    composer require opcodesio/log-viewer
+    php artisan log-viewer:publish
+```
+Adding Middleware and auth
+- Docs: [middleware](https://log-viewer.opcodes.io/docs/3.x/configuration/middleware)
+- Docs: [auth](https://log-viewer.opcodes.io/docs/3.x/configuration/access-to-log-viewer)
+```php
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        LogViewer::auth(function ($request) {
+            // return true to allow viewing the Log Viewer.
+            return ($request->user()->role == 'admin') ?? false;
+        });
+    
+    }
+        /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        LogViewer::auth(function ($request) {
+            // return true to allow viewing the Log Viewer.
+            return ($request->user()->role == 'admin') ?? $request->user()
+            && in_array($request->user()->email, [
+                'abdulsalamamtech@gmail.com',
+            ]);;
+        });
+    
+    }
+```

@@ -167,7 +167,6 @@ class ProductController extends Controller
     }
 
 
-
     /**
      * Display listing of product.
      */
@@ -190,6 +189,41 @@ class ProductController extends Controller
         // return $product;
         return view('dasma.product', [
             'product' => $product
+        ]);
+    }
+
+
+    /**
+     * Display listing of search product.
+     */
+    public function searchProduct()
+    {
+        $query = request('query');
+        $products = Product::with(['banner'])
+            ->whereAny([
+                'category_id',
+                'brand_id',
+                'promotion_id',
+                'banner_id',
+                'name',
+                'slug',
+                'description',
+                'price',
+                'initial_price',
+                'stock',
+                'weight',
+                'tag',
+                'views',
+                'sku',
+                'color',
+                'size',
+            ], 'LIKE', "%$query%")
+            ->latest()
+            ->paginate();
+
+        // return $products;
+        return view('dasma.search', [
+            'products' => $products
         ]);
     }
 }

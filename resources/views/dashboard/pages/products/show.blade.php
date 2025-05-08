@@ -42,9 +42,21 @@
                           <div class="w-1/3 text-gray-700 dark:text-gray-300">Name:</div>
                           <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $product->name }}</div>
                       </div>
-
                       <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Product Variations No:</div>
+                            <div class="w-1/3 text-gray-700 dark:text-gray-300">Brand:</div>
+                            <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $product->brand->name }}</div>
+                        </div>
+                        
+                        <div class="flex justify-between items-start">
+                            <div class="w-1/3 text-gray-700 dark:text-gray-300">Category:</div>
+                            <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $product->category->name }}</div>
+                        </div>       
+                        <div class="flex justify-between items-start">
+                            <div class="w-1/3 text-gray-700 dark:text-gray-300">Total views:</div>
+                            <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $product->views }}</div>
+                        </div>              
+                      <div class="flex justify-between items-start">
+                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Product variations no:</div>
                         <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $product->variations_count ?? 0 }}</div>
                       </div>
 
@@ -61,7 +73,7 @@
 
                       <div class="flex justify-between items-start">
                         <div class="w-1/3 text-gray-700 dark:text-gray-300">Created at:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $product->created_at }}</div>
+                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $product->created_at }} - ({{ $product->created_at->diffForHumans() }})</div>
                       </div>
 
                     </div>

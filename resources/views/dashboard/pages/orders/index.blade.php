@@ -351,8 +351,8 @@ $app_brand = [
                                                         @endif
                                                     </div>
                                                     <div class="ms-3 text-sm font-normal">
-                                                        <div class="text-sm font-semibold text-gray-900 dark:text-white">{{$order?->items->first()->product->name}}</div>
-                                                        <div class="text-sm font-normal">{{$order?->items->first()->product->category->name}}</div> 
+                                                        <div class="text-sm font-semibold text-gray-900 dark:text-white">{{$order?->items->first()?->product->name}}</div>
+                                                        <div class="text-sm font-normal">{{$order?->items?->first()?->product?->category?->name}}</div> 
                                                         <span class="text-xs font-medium text-blue-600 dark:text-blue-500">{{$order->created_at->diffForHumans()}}</span>   
                                                     </div>
                                                 </div>                                                
@@ -499,26 +499,26 @@ $app_brand = [
                                                         <div id="accordion-collapse" data-accordion="collapse">
                                                             {{-- Order Information --}}
                                                             <h2 id="accordion-collapse-heading-1">
-                                                            <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-1" aria-expanded="false" aria-controls="accordion-collapse-body-1">
+                                                            <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-{{ $order->id }}" aria-expanded="false" aria-controls="accordion-collapse-body-{{ $order->id }}">
                                                                 <span>Other Items</span>
                                                                 <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
                                                                 </svg>
                                                             </button>
                                                             </h2>
-                                                            <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
+                                                            <div id="accordion-collapse-body-{{ $order->id }}" class="hidden" aria-labelledby="accordion-collapse-heading-{{ $order->id }}">
                                                             <div class="p-5 border border-gray-200 dark:border-gray-700">
 
                                                                 {{-- Product Items Image --}}
                                                                 <div class="col-span-12 bg-white dark:bg-gray-700">
                                                                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                                                                        @forelse ($order->items as $item)
+                                                                        @forelse ($order?->items as $item)
                                                                         <div class="border border-gray-400 shadow-sm p-3 text-gray-900 dark:text-white">
-                                                                            <img src="{{ $item->product->banner->url }}" alt="{{ $item->product->name }}" class="w-12 h-12">
-                                                                            <h4><span class="text-gray-500">Name: </span>{{ $item->product->name }}</h4>
-                                                                            <h4><span class="text-gray-500">Qty: </span>{{  $item->quantity }}</h4>
-                                                                            <h4><span class="text-gray-500">Price: </span>{{  $item->price }}</h4>
-                                                                            <h4><span class="text-gray-500">Total: </span>{{ App\Helpers\Setup::currency() .' '.  ($item->price * $item->quantity)}}</h4>
+                                                                            <img src="{{ $item?->product?->banner?->url }}" alt="{{ $item?->product?->name }}" class="w-12 h-12">
+                                                                            <h4><span class="text-gray-500">Name: </span>{{ $item?->product?->name }}</h4>
+                                                                            <h4><span class="text-gray-500">Qty: </span>{{  $item?->quantity }}</h4>
+                                                                            <h4><span class="text-gray-500">Price: </span>{{  $item?->price }}</h4>
+                                                                            <h4><span class="text-gray-500">Total: </span>{{ App\Helpers\Setup::currency() .' '.  ($item?->price * $item?->quantity)}}</h4>
                                                                         </div>
                                                                         @empty
                                                                             <div>unable to load order items</div>

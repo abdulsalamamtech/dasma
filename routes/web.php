@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -16,7 +19,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    // return view('dashboard');
+    return redirect()->route('account.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -39,10 +43,9 @@ Route::get('/dasma', function () {
     return view('dasma.index');
 })->name('index');
 
-Route::get('/dasma/search', function () {
-    return view('dasma.search');
-})->name('search');
 
+// Search product
+Route::get('search', [ProductController::class, 'searchProduct'])->name('search');
 
 // Store Routes
 Route::get('stores', [ProductController::class, 'listProduct'])->name('stores.list');
@@ -50,8 +53,8 @@ Route::get('stores/{product:slug}', [ProductController::class, 'showProduct'])->
 
 
 // Carts Routes
-Route::post('carts', [CartController::class, 'store'])->name('carts.store');
-Route::delete('carts/{cart}', [CartController::class, 'destroy'])->name('carts.delete');
+// Route::post('carts', [CartController::class, 'store'])->name('carts.store');
+// Route::delete('carts/{cart}', [CartController::class, 'destroy'])->name('carts.delete');
 
 
 // Wishlists Route
@@ -71,6 +74,13 @@ Route::get('/dasma/about', function () {
 Route::get('/dasma/contact', function () {
     return view('dasma.contact');
 })->name('contact');
+
+Route::get('contact', [MessageController::class, 'create'])->name('message.create');
+Route::post('contact', [MessageController::class, 'store'])->name('message.store');
+
+// Newsletter
+Route::post('newsletters', [NewsletterController::class, 'store'])->name('newsletters.store');
+
 
 Route::get('/dasma/terms-and-conditions', function () {
     return view('dasma.terms-and-conditions');
