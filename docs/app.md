@@ -23,6 +23,7 @@
     last_name
     other_name
     phone_number
+    post_code
     street
     city
     state

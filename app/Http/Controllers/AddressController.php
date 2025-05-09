@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ActorHelper;
 use App\Http\Requests\StoreAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
 use App\Models\Address;
@@ -29,7 +30,11 @@ class AddressController extends Controller
      */
     public function store(StoreAddressRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['user_id'] = ActorHelper::getUserId();
+        Address::create($data);
+        return redirect()->route('account.settings.index')->with('success', 'Address added successfully!');
+        
     }
 
     /**

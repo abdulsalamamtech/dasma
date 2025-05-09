@@ -53,7 +53,9 @@
                         <a href="{{ route('account.history.index') }}"
                         class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">History</a>
                       <a href="{{ route('account.settings.index') }}"
-                        class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">Setting</a>
+                        class="transition-all hover:font-bold hover:text-primary px-4 py-3 border-l-2 border-primary-lighter hover:border-primary  font-hk text-grey-darkest ">
+                        Setting
+                      </a>
                     </div>
                     <a href="{{ route('register') }}"
                       class="mt-8 inline-block rounded border border-primary px-8 py-3 font-hk font-bold text-primary transition-all hover:bg-primary hover:text-white">Log Out</a>

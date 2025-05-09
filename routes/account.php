@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TransactionController;
@@ -62,7 +63,7 @@ Route::prefix('/account')->name('account.')->middleware('auth')->group(function 
         // return view('dasma.account.history');
     })->name('history.index');
 
-    Route::get('/settings', function () {
-        return view('dasma.account.settings');
-    })->name('settings.index');
+    Route::get('/settings', [AccountController::class, 'settings'])->name('settings.index');
+    Route::post('/addresses', [AddressController::class, 'store'])->name('addresses.store');
+
 });

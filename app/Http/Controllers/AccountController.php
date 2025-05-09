@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ActorHelper;
 use App\Helpers\Paystack;
+use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItems;
@@ -216,5 +217,16 @@ class AccountController extends Controller
         }
         info('END: decrement available stock', [$order]);
 
+    }
+
+    // Settings for user account
+    public function settings(){
+        $addresses = Address::where('user_id', ActorHelper::getUserId())
+            ->latest()
+            ->paginate(10);
+
+        return view('dasma.account.settings', [
+            'addresses' => $addresses,
+        ]);
     }
 }
