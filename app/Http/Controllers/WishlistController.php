@@ -16,6 +16,7 @@ class WishlistController extends Controller
     public function index()
     {
         $wishlists = Wishlist::with(['product.banner'])
+            ->where('user_id', ActorHelper::getUserId())
             ->latest()
             ->paginate(10);
         // return $wishlists;
@@ -61,6 +62,9 @@ class WishlistController extends Controller
     public function update(UpdateWishlistRequest $request, Wishlist $wishlist)
     {
         $data = $request->validated();
+        $wishlist = Wishlist::where('id', $wishlist->id)
+            ->where('user_id', ActorHelper::getUserId())
+            ->first();
 
         $wishlist->update($data);
         return $wishlist;
@@ -71,6 +75,9 @@ class WishlistController extends Controller
      */
     public function destroy(Wishlist $wishlist)
     {
+        $wishlist = Wishlist::where('id', $wishlist->id)
+            ->where('user_id', ActorHelper::getUserId())
+            ->first();
         $wishlist->delete();
         $message = "wishlist deleted successfully";
         return ApiResponse::success([], $message);

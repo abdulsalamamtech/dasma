@@ -37,9 +37,14 @@
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
                             <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
                                 <strong class="text-green-500">
-                                    {{ Number::abbreviate((
-                                    (($data['transactions']['amount'] + 100)/ $data['transactions']['amount'])
-                                    ), 2) }}%
+                                    @if ($data['transactions']['amount'] > 0)
+                                        {{ Number::abbreviate((
+                                        (($data['transactions']['amount'] + 100)/ $data['transactions']['amount'])
+                                        ), 2) }}%
+                                        
+                                    @else
+                                        0%
+                                    @endif
                                 </strong>&nbsp;than last week
                             </p>
                         </div>

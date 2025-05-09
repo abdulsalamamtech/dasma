@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Action;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Number;
 
 class CartController extends Controller
@@ -176,65 +177,79 @@ class CartController extends Controller
             'note' => ['nullable'],
             'coupon' => ['nullable']
         ]);
-        
-        // get user cart items, add to order items and make an order
-        $user = request()->user();
-        $carts = Cart::where('user_id', $user->id)->get();
-        // Redirect user to orders page
-        if ($carts->count() < 1) {
-            return redirect()->route('account.orders.index')->with('error', 'No items on your cart!');
-        }
 
-
-        $cart_details = $this->cartDetails();
-        $address = Address::where('user_id', ActorHelper::getUserId())
-            ->where('default_address', 'yes')
-            ->first();
-
-        // Calculate the entire order product
-        $data['user_id'] = $user->id;
-        $data['address_id'] = $address?->id;
-        $data['total_amount'] = 0;
-        $data['total_weight'] = 0;
-        $data['total_after_discount'] = $cart_details['total_after_discount'];
-        $data['discount'] = $cart_details['discount'];
-
-        $order_items = [];
-        foreach ($carts as $cart) {
-            $product = Product::findOrFail($cart['product_id']);
-            $order_items[] = [
-                'user_id' => $user->id,
-                'product_id' => $cart['product_id'],
-                'quantity' => $cart['quantity'],
-                'size' => $cart['size'],
-                'color' => $cart['color'],
-                'price' => $product->price,
-                'total_price' => $product->price * $cart['quantity'],
-            ];
-            $data['total_amount'] += $product->price * $cart['quantity'];
-            $data['total_weight'] += $product->weight * $cart['quantity'];
-            info(__FILE__ . " " . __LINE__ . ': deleting cart item: ' .$cart->id);
-            $cart->delete();
-        }
+        try {
+            //code...
+            DB::beginTransaction();
+            
+            // get user cart items, add to order items and make an order
+            $user = request()->user();
+            $carts = Cart::where('user_id', $user->id)->get();
+            // Redirect user to orders page
+            if ($carts->count() < 1) {
+                return redirect()->route('account.orders.index')->with('error', 'No items on your cart!');
+            }
     
-        // return $data;
-        // create order
-        $order = Order::create($data);
+    
+            $cart_details = $this->cartDetails();
+            $address = Address::where('user_id', ActorHelper::getUserId())
+                ->where('default_address', 'yes')
+                ->first();
+    
+            // Calculate the entire order product
+            $data['user_id'] = $user->id;
+            if($address?->id > 0){
+                $data['address_id'] = $address?->id;
+            }
+            $data['total_amount'] = 0;
+            $data['total_weight'] = 0;
+            $data['total_after_discount'] = $cart_details['total_after_discount'];
+            $data['discount'] = $cart_details['discount'];
+    
+            $order_items = [];
+            foreach ($carts as $cart) {
+                $product = Product::findOrFail($cart['product_id']);
+                $order_items[] = [
+                    'user_id' => $user->id,
+                    'product_id' => $cart['product_id'],
+                    'quantity' => $cart['quantity'],
+                    'size' => $cart['size'],
+                    'color' => $cart['color'],
+                    'price' => $product->price,
+                    'total_price' => $product->price * $cart['quantity'],
+                ];
+                $data['total_amount'] += $product->price * $cart['quantity'];
+                $data['total_weight'] += $product->weight * $cart['quantity'];
+                info(__FILE__ . " " . __LINE__ . ': deleting cart item: ' .$cart->id);
+                $cart->delete();
+            }
+        
+            // return $data;
+            // create order
+            $order = Order::create($data);
+    
+            // return "Cart deleted and order created";
+    
+            // Create many order items
+            $order->items()->createMany($order_items);
+            $order->load(['items']);
+    
+            // Get all user addresses
+            $addresses = Address::where('user_id', ActorHelper::getUserId())->get();
+    
+            // Commit changes to DB
+            DB::commit();
 
-        // return "Cart deleted and order created";
-
-        // Create many order items
-        $order->items()->createMany($order_items);
-        $order->load(['items']);
-
-        // Get all user addresses
-        $addresses = Address::where('user_id', ActorHelper::getUserId())->get();
-
-        // Redirect to add customer info
-        return view('dasma.account.customer-info', [
-            'order' => $order,
-            'addresses' => $addresses
-        ]);
+            // Redirect to add customer info
+            return view('dasma.account.customer-info', [
+                'order' => $order,
+                'addresses' => $addresses
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Something went wrong, ' . $th->getMessage());
+        }
         
     }
     

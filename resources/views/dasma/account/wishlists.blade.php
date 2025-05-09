@@ -66,7 +66,7 @@
               </div>
             </div>
           @empty
-              <div class="mb-3 flex flex-col items-center justify-between rounded bg-white px-4 py-5 shadow sm:flex-row sm:py-4">Empty wishlist!</div>
+              <div class="mb-3 flex flex-col items-center justify-center rounded bg-white px-4 py-5 shadow sm:flex-row sm:py-4">Empty wishlist!</div>
           @endforelse
 
           {{-- Pagination --}}

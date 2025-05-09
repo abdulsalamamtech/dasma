@@ -32,9 +32,9 @@
                         </div>
                         <div class="mt-5 grid grid-cols-1 gap-5 md:mt-8 md:grid-cols-2">
                             <div class="">
-                                <label for="name_displayed" class="mb-2 block font-hk text-secondary">Email Verified</label>
+                                <label for="name_displayed" class="mb-2 block font-hk text-secondary">Email Verification</label>
                                 <input type="text" class="form-input" id="name_displayed"
-                                    value="{{ request()->user()->email_verified_at }}" disabled>
+                                    value="{{ request()->user()->email_verified_at ?? 'Not Verified' }}" disabled>
                             </div>
                             <div class="">
                                 <label for="email" class="mb-2 block font-hk text-secondary">Registered On</label>
