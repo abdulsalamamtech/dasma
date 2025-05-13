@@ -16,7 +16,10 @@
 
                     {{-- Return back --}}
                     <div class="flex justify-end py-2 mb-4">
-                      <a href="{{ route('admin.orders.index') }}" class="flex gap-2 items-center text-xl text-green-500 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
+                      <a 
+                      {{-- href="{{ route('admin.orders.index') }}"  --}}
+                      href="{{ url()->previous() }}"
+                      class="flex gap-2 items-center text-xl text-green-500 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
                         <i class="fa fa-arrow-left"></i>
                         <span>Back</span>
                       </a>
@@ -54,13 +57,15 @@
                                 </div>
     
                                 <div class="flex justify-between items-start">
-                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Order Items No:</div>
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Order items no:</div>
                                 <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $order->items_count ?? 0 }}</div>
                                 </div>
     
                                 <div class="flex justify-between items-start">
-                                <div class="w-1/3 text-gray-700 dark:text-gray-300">total Amount:</div>
-                                <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ App\Helpers\Setup::currency()}} {{ $order->total_amount ?? 0 }}</div>
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Total amount:</div>
+                                <div class="w-7/12 text-gray-500 dark:text-gray-400">
+                                    {{ App\Helpers\Setup::currency('sign') }}{{Number::format( $order->total_amount?? 0)}}
+                                </div>
                                 </div>
     
                                 <div class="flex justify-between items-start">
@@ -136,9 +141,9 @@
                                 </div>
     
                                 <div class="flex justify-between items-start">
-                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Customer's Note:</div>
+                                <div class="w-1/3 text-gray-700 dark:text-gray-300">Customer's note:</div>
                                 <div class="w-7/12 text-gray-500 dark:text-gray-400">
-                                    {{$order->note}}
+                                    {{$order->note ?? 'nill'}}
                                 </div>
                                 </div>
     
@@ -237,18 +242,18 @@
                                                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All</a>
                                         </li>
                                         <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Active</a>
+                                            <a href="#?status=pending"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pending</a>
                                         </li>
                                         <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Inactive</a>
+                                            <a href="#?status=successful"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Successful</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
         
-                            <form class="w-full max-w-md mx-auto" action="{{ route('admin.products.index') }}">
+                            <form class="w-full max-w-md mx-auto" action="#">
                                 <label for="default-search" class="mb-1 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -283,13 +288,13 @@
                                             User
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Payment Method
+                                            Payment method
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Amount Paid
+                                            Amount paid
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Ref No.
+                                            Ref no.
                                         </th>
                                         <th scope="col" class="px-6 py-3">
                                             Date
@@ -332,7 +337,7 @@
                                                     {{$transaction->payment_method}}
                                                 </td>
                                                 <td class="px-6 py-4">
-                                                        {{$transaction->amount}}
+                                                    {{ App\Helpers\Setup::currency('sign') }}{{Number::format($transaction->amount ?? 0)}}
                                                 </td>
                                                 <td class="px-6 py-4">
                                                     {{$transaction->reference}}
@@ -383,9 +388,9 @@
                         {{-- Paginate --}}
                         <div class="text-center pt-4 dark:text-gray-100">
                             <div class="px-8">
-                                {{-- @if (isset($products) && !empty($products))
-                                    {{ $products->links() }}
-                                @endif --}}
+                                @if (isset($transactions) && !empty($transactions))
+                                    {{ $transactions->withQueryString()->links() }}
+                                @endif
                             </div>
                         </div>
         
@@ -399,7 +404,6 @@
             {{-- End Payment Transaction --}}
 
         </div>
-
 
     </div>
 @endsection

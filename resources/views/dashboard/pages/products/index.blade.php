@@ -260,22 +260,22 @@ $app_brand = [
                             <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="dropdownActionButton">
                                 <li>
-                                    <a href="#"
+                                    <a href="{{ route('admin.products.index') }}"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All</a>
                                 </li>
                                 <li>
-                                    <a href="#"
+                                    <a href="#status=active"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Active</a>
                                 </li>
                                 <li>
-                                    <a href="#"
+                                    <a href="#status=inactive"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Inactive</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
-                    <form class="w-full max-w-md mx-auto" action="{{ route('admin.products.index') }}">
+                    <form class="w-full max-w-md mx-auto" action="#">
                         <label for="default-search" class="mb-1 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -660,7 +660,7 @@ $app_brand = [
                                     </div>
                                 @empty
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <td colspan="10" class="text-center p-8">Center unavailable</td>
+                                        <td colspan="10" class="text-center p-8">Products unavailable</td>
                                     </tr>
                                 @endforelse
                             @endisset
@@ -672,7 +672,7 @@ $app_brand = [
                 <div class="text-center pt-4 dark:text-gray-100">
                     <div class="px-8">
                         @if (isset($products) && !empty($products))
-                            {{ $products->links() }}
+                            {{ $products->withQueryString()->links() }}
                         @endif
                     </div>
                 </div>

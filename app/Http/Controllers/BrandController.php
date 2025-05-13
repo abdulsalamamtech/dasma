@@ -21,7 +21,7 @@ class BrandController extends Controller
             $search = request('search');
             $brands = $this->search($search);
         }else{
-            $brands = Brand::with(['banner'])
+            $brands = Brand::with(['banner', 'products'])
                 ->latest()
                 ->paginate();
         }
@@ -77,7 +77,7 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        $brand->load(['banner']);
+        $brand->load(['banner', 'products']);
 
         // return $brand;
         return view('dashboard.pages.brands.show', [
@@ -148,7 +148,8 @@ class BrandController extends Controller
      * Search for brand
      */
     private function search(string  $search){
-        $brands = Brand::where('name', 'LIKE', '%'.$search.'%')
+        $brands = Brand::with(['banner', 'products'])
+            ->where('name', 'LIKE', '%'.$search.'%')
             ->latest()
             ->paginate();
 

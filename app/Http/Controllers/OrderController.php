@@ -21,10 +21,18 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with(['user', 'address', 'items'])
-            ->withCount('items')
-            ->latest()
-            ->paginate();
+        if (request()->filled('status') 
+        && in_array(request()->input('status'), $this->availableStatus())) {
+            $orders = $this->filterByStatus();
+        }else if (request()->filled('search') ){
+            $search = request()->input('search');
+            $orders = $this->search($search);
+        }else{
+            $orders = Order::with(['user', 'address', 'items'])
+                ->withCount('items')
+                ->latest()
+                ->paginate();
+        }
         // return $orders;
         return view('dashboard.pages.orders.index', [
             'orders' => $orders,
@@ -100,5 +108,59 @@ class OrderController extends Controller
         ]);
     }
 
+    // available order status
+    public function availableStatus(){
+        return [
+                'pending',
+                'confirmed',
+                'processing',
+                'shipped',
+                'cancel',
+                'received',
+                'rejected',
+                'returned',
+                'refunded'
+        ];
+    }
+
+
+    // Get order by status
+    public function filterByStatus()
+    {
+        if (request()->filled('status')) {
+            $orders = Order::with(['user', 'address', 'items'])
+                ->where('status', request()->input('status'))
+                ->withCount('items')
+                ->latest()
+                ->paginate();
+        }
+        return $orders ?? [];
+    }
+
+    // search order
+    public function search($search)
+    {
+        if ($search) {
+            $orders = Order::with(['user', 'address', 'items'])
+                ->WhereAny([
+                    'user_id',
+                    'total_amount',
+                    'coupon',
+                    'note',
+                    'status',
+                    'address_id',
+                    'discount',
+                    'total_after_discount',
+                    'coupon_id',
+                    'shipping_fee',
+                    'total_payable_amount',
+                    'total_weight',
+                ], 'like', "%$search%")
+                ->withCount('items')
+                ->latest()
+                ->paginate();
+        }
+        return $orders ?? [];
+    }
 
 }

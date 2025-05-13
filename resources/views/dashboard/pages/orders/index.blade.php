@@ -36,199 +36,6 @@ $app_brand = [
                     <!-- Header Section -->
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300">Orders</h2>
-                        {{-- <button class="px-4 md:px-4 py-2 bg-yellow-800 text-white rounded-md hover:bg-yellow-700"
-                        data-modal-target="addUserModal" data-modal-show="addUserModal">
-                            <i class='fa fa-pencil-square-o'></i>
-                            <span class="pl-2">Add Product</span>
-                        </button> --}}
-
-
-                        {{-- Add Data --}}
-                        <!-- Add Data modal -->
-                        <div id="addUserModal" tabindex="-1" aria-hidden="true"
-                            class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                            <div class="relative w-full max-w-2xl max-h-full bg-white">
-                                <!-- Modal content -->
-                                <form action="{{ route('admin.products.store') }}" method="POST"
-                                    class="relative bg-white rounded-lg shadow dark:bg-gray-700" enctype="multipart/form-data">
-
-                                    @method('POST')
-                                    @csrf
-
-                                    <!-- Modal header -->
-                                    <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                            Add Product
-                                        </h3>
-                                        <button type="button"
-                                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                            data-modal-hide="addUserModal">
-                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                fill="none" viewBox="0 0 14 14">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                            </svg>
-                                            <span class="sr-only">Close modal</span>
-                                        </button>
-                                    </div>
-                                    <!-- Modal body -->
-                                    <div class="p-6 space-y-6">
-
-                                        <div class="grid grid-cols-6 gap-6">
-
-
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <label for="first-name"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    Name
-                                                </label>
-                                                <input type="text" name="name" id="name"
-                                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                    placeholder="Egyptian Bag" required="">
-                                            </div>
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <label for="stock"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    Number In Stock</label>
-                                                <input type="number" name="stock" id="stock" value="10"
-                                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                    placeholder="10" required="">
-                                            </div>
-
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <label for="price"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    Current Price</label>
-                                                <input type="number" name="price" id="price"
-                                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                    placeholder="950" required="">
-                                            </div>
-
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <label for="initial_price"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    <del>Initial Price</del>
-                                                </label>
-                                                <input type="number" name="initial_price" id="initial_price"
-                                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                    placeholder="1050" required="">
-                                            </div>
-
-                                        </div>
-
-                                        {{-- brand, category and promotion --}}
-                                        <div class="grid grid-cols-3 gap-6">
-                                            <div class="">
-                                                <label for="brand"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
-                                                <select type="text" name="brand_id" id="brand"
-                                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                    placeholder="type of center" required="" value="">
-                                                    <option value="">select a brand</option>
-                                                    @forelse ($brands as $brand)
-                                                        <option value="{{ $brand->id }}">
-                                                            <div class="flex items-center gap-2">
-                                                                <img src="{{ $brand->banner->url }}" alt="image">
-                                                                <span>{{ $brand->name }}</span>
-                                                            </div>
-                                                        </option>
-                                                    @empty
-                                                        <option value="">brands unavailable</option>
-                                                    @endforelse
-                                                </select>
-                                            </div>
-
-                                            <div class="">
-                                                <label for="category"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                                                <select type="text" name="category_id" id="category"
-                                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                    placeholder="category" required="" value="">
-                                                    <option value="">select a category</option>
-                                                    @forelse ($categories as $category)
-                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                    @empty
-                                                        <option value="">categories unavailable</option>
-                                                    @endforelse
-                                                </select>
-                                            </div>
-
-                                            <div class="">
-                                                <label for="promotion"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Promotion</label>
-                                                <select type="text" name="promotion_id" id="type"
-                                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                    placeholder="promotion" required="" value="">
-                                                    <option value="">select a promotion</option>
-                                                    @forelse ($promotions as $promotion)
-                                                        <option value="{{ $promotion->id }}">
-                                                            {{ $promotion->discount  .'% '. $promotion->title}}
-                                                        </option>
-                                                    @empty
-                                                        <option value="">promotions unavailable</option>
-                                                    @endforelse
-                                                </select>
-                                            </div>                                            
-                                        </div>
-
-                                        {{-- Uplaod Image --}}
-                                        <div class="col-span-12">
-                                            <label for="banner"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                Upload Product Banner Image (2MB Max)                                    </label>
-                                            <input type="file" name="banner" id="banner"
-                                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                placeholder="Profile Image" required="">
-                                        </div> 
-
-                                        {{-- Colors and sizes --}}
-                                        <div class="grid grid-cols-6 gap-6">
-
-
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <label for="color"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    Color
-                                                </label>
-                                                <input type="color" name="colors" id="color"
-                                                    class="w-full p-2.5 h-10" value="#ffffff" 
-                                                    class="shadow-sm bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                    placeholder="#ffffff" required="">
-                                            </div>
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <label for="sizes"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    Size</label>
-                                                <input type="number" name="sizes" id="sizes"
-                                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                    placeholder="XL or 40" required="">
-                                            </div>
-                                        </div>
-
-                                        {{-- Descriptions --}}
-                                        <div class="col-span-12">
-                                            <label for="description"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                Product Description
-                                            </label>
-                                            <textarea type="description" name="description" id="description"
-                                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                placeholder="product description"></textarea>
-                                        </div>
-
-                                    </div>
-                                    <!-- Modal footer -->
-                                    <div
-                                        class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                                        <button type="submit"
-                                            class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
-                                            Save
-                                         </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
                     </div>
 
 
@@ -253,22 +60,34 @@ $app_brand = [
                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                     aria-labelledby="dropdownActionButton">
                                     <li>
-                                        <a href="#"
+                                        <a href="{{ route('admin.orders.index') }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All</a>
                                     </li>
                                     <li>
-                                        <a href="#"
-                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Active</a>
+                                        <a href="{{ route('admin.orders.index') }}?status=pending"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pending</a>
                                     </li>
                                     <li>
-                                        <a href="#"
-                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Inactive</a>
+                                        <a href="{{ route('admin.orders.index') }}?status=confirmed"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Confirmed</a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('admin.orders.index') }}?status=processing"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Processing</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin.orders.index') }}?status=shipped"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Shipped</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admin.orders.index') }}?status=received"
+                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Received</a>
+                                    </li>                                                                                                        
                                 </ul>
                             </div>
                         </div>
 
-                        <form class="w-full max-w-md mx-auto" action="{{ route('admin.products.index') }}">
+                        <form class="w-full max-w-md mx-auto" action="{{ route('admin.orders.index') }}">
                             <label for="default-search" class="mb-1 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -362,8 +181,7 @@ $app_brand = [
                                                 {{$order->items_count}}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{ App\Helpers\Setup::currency()}}
-                                                {{$order->total_amount}}
+                                                {{ App\Helpers\Setup::currency('sign') }}{{Number::format( $order->total_amount?? 0)}}
                                             </td>
                                             <td class="px-6 py-4">
                                                 <div>
@@ -571,7 +389,7 @@ $app_brand = [
                                         </div>
                                     @empty
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <td colspan="10" class="text-center p-8">Center unavailable</td>
+                                            <td colspan="10" class="text-center p-8">Order unavailable</td>
                                         </tr>
                                     @endforelse
                                 @endisset
@@ -583,7 +401,7 @@ $app_brand = [
                     <div class="text-center pt-4 dark:text-gray-100">
                         <div class="px-8">
                             @if (isset($orders) && !empty($orders))
-                                {{ $orders->links() }}
+                                {{ $orders->withQueryString()->links() }}
                             @endif
                         </div>
                     </div>

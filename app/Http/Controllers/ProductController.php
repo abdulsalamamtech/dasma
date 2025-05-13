@@ -19,9 +19,16 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with(['category', 'brand', 'promotion', 'banner', 'variations'])
-            ->latest()
-            ->paginate();
+        if (request()->filled('status') 
+        && in_array(request()->input('status'),['active', 'inactive'])) {
+            $products = $this->filterByStatus();
+        }else if(request()->filled('search')){
+            $products = $this->search();
+        }else{
+            $products = Product::with(['category', 'brand', 'promotion', 'banner', 'variations'])
+                ->latest()
+                ->paginate();
+        }
         // return $products;
         return view('dashboard.pages.products.index', [
             'products' => $products,
@@ -100,8 +107,6 @@ class ProductController extends Controller
         ]);
     }
 
-
-
     /**
      * Update the specified resource in storage.
      */
@@ -166,6 +171,58 @@ class ProductController extends Controller
 
     }
 
+    // Get order by status
+    public function filterByStatus()
+    {
+        if (request()->filled('status')) {
+            $products = Product::with(['category', 'brand', 'promotion', 'banner', 'variations'])
+                ->where('status', request()->input('status'))
+                ->latest()
+                ->paginate();
+        }
+        return $products ?? [];
+    }
+
+    // search product by admin
+    public function search()
+    {
+        $query = request('query');
+        $products = Product::with(['category', 'brand', 'promotion', 'banner', 'variations'])
+            ->where('active')
+            // ->when('active', function($query){
+            //     if ($query == 'active') {
+            //         # code...
+            //         return true;
+            //     } else {
+            //         # code...
+            //         return false;
+            //     }
+                
+            // })
+            ->whereAny([
+                'category_id',
+                'brand_id',
+                'promotion_id',
+                'banner_id',
+                'name',
+                'slug',
+                'description',
+                'price',
+                'initial_price',
+                'stock',
+                'weight',
+                'tag',
+                'views',
+                'sku',
+                'color',
+                'size',
+            ], 'LIKE', "%$query%")
+            ->latest()
+            ->paginate();
+
+        // dd($products);
+        return $products ?? [];
+    }
 
     /**
      * Display listing of product.
@@ -200,6 +257,7 @@ class ProductController extends Controller
     {
         $query = request('query');
         $products = Product::with(['banner'])
+            // ->where('active')
             ->whereAny([
                 'category_id',
                 'brand_id',

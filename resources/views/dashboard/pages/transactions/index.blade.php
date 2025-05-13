@@ -353,7 +353,7 @@
                                                     {{$transaction->payment_method}}
                                                 </td>
                                                 <td class="px-6 py-4">
-                                                        {{$transaction->amount}}
+                                                        {{ App\Helpers\Setup::currency('sign') }}{{Number::format($transaction->amount)}}
                                                 </td>
                                                 <td class="px-6 py-4">
                                                     {{$transaction->reference}}
