@@ -114,7 +114,7 @@ class Product extends Model
         }elseif ($productTag == 'new') {
             return 'text-v-green';
         }else{
-            return 'text-v-green';
+            return 'text-v-blue';
         }
     }
     

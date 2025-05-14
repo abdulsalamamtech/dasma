@@ -114,6 +114,7 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         if($product->name !== $data['name']){
+            $data['slug'] = Str::slug($data['name']);
             while (Product::where('slug', $data['slug'])->where('id', '!=', $product->id)->exists()) {
                 $data['slug'] = $data['slug']. '-'. rand(1000, 9999);
             }

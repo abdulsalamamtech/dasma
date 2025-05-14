@@ -283,4 +283,10 @@ Adding Middleware and auth
         });
     
     }
+
+```
+## config/log-viewer.php
+- php artisan vendor:publish --tag="log-viewer-config"
+```php
+    'middleware' => ['web', 'auth'],
 ```
