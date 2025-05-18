@@ -81,10 +81,10 @@
             We aim for you to get the ultimate stylish look at an affordable price
             </h3>
             <p class="font-hkbold mt-8 text-lg text-secondary md:mt-12">
-            Elmer Howard
+            Oladayo Oladimeji
             </p>
             <p class="mt-1 font-hk text-secondary md:text-lg">
-            CEO & Co-Founder
+            CEO & Founder
             </p>
         </div>
         <div class="mb-16 w-full bg-cover bg-center bg-no-repeat sm:mb-20 lg:mb-24"
@@ -131,14 +131,25 @@
                 dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua.
             </p>
-            <div
+            {{-- <div
                 class="relative mx-auto flex h-64 cursor-pointer items-center justify-center bg-cover bg-center bg-no-repeat sm:h-80 md:h-100 lg:h-128"
                 style="background-image:url(/assets/img/unlicensed/video-image.png)" @click="modal = true">
                 <i class="bx bx-play-circle z-0 text-9xl text-white opacity-75"></i>
+            </div> --}}
+            <div
+                class="mx-auto flex h-64 cursor-pointer items-center justify-center bg-cover bg-center bg-no-repeat sm:h-80 md:h-100 lg:h-128"
+                >
+                {{-- Adding youtube video --}}
+                <iframe width="100%" height="380px" src="https://www.youtube.com/embed/cfD7uCWXxZk" title="Modern PHP in 2025: Tools You NEED to Know!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" muted allowfullscreen></iframe>
+
             </div>
             </div>
         </div>
-        <div class="mb-16 text-center sm:mb-20 lg:mb-24">
+
+
+
+        {{-- User Profile --}}
+        {{-- <div class="mb-16 text-center sm:mb-20 lg:mb-24">
             <h3
             class="text-center font-butler text-2xl leading-tight text-secondary sm:text-3xl md:text-4.5xl lg:text-5xl">
             Our Reviews
@@ -264,7 +275,10 @@
                 </div>
             </div>
             </div>
-        </div>
+        </div> --}}
+
+
+
         </div>
     </div>
     <!-- End: Main Page Content -->

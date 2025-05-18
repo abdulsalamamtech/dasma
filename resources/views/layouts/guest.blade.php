@@ -24,7 +24,7 @@
             <div>
                 <a href="/">
                     <div class="h-auto text-3xl pt-4 font-bold">
-                        <span class="text-[#2D1B15]">DAS</span><span class="text-red-500">MA</span>
+                        <span class="text-[#2D1B15] dark:text-gray-300">DAS</span><span class="text-red-500">MA</span>
                     </div>
                 </a>
                 <div class="text-center">collection</div>

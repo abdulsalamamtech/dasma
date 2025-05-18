@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,25 +15,23 @@ class HomeController extends Controller
     public function index()
     {
 
-        // $user = User::inRandomOrder()->get();
-        // return $user;
-
         // Latest Products
         $new_arrivals = Product::with(['banner'])
             ->latest()
-            ->limit(25)
+            ->limit(20)
+            // ->toRawSql();
             ->get();
         // return  $new_arrivals;
 
         $new_collections = Product::with(['banner'])
-            ->groupBy('brand_id')
+            ->groupBy('category_id')
             ->inRandomOrder()
-            ->limit(25)
+            ->limit(20)
             ->get();
         // return  $new_collections;
 
         $new_collection_two = Product::with(['banner'])
-            ->groupBy('category_id')
+            ->groupBy('brand_id')
             ->inRandomOrder()
             ->limit(25)
             ->get();
@@ -41,19 +40,19 @@ class HomeController extends Controller
         $new_collection_three = Product::with(['banner'])
             ->groupBy('promotion_id')
             ->inRandomOrder()
-            ->limit(25)
+            ->limit(22)
             ->get();
         // return  $new_collection_three;                
 
         $trending = Product::with(['banner'])
             ->inRandomOrder()
-            ->limit(25)
+            ->limit(24)
             ->get();
         // return $trending;     
         
         $products = Product::with(['banner'])
             ->inRandomOrder()
-            ->limit(25)
+            ->limit(26)
             ->get();
         // return $products;
 

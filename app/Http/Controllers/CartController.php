@@ -81,7 +81,10 @@ class CartController extends Controller
      */
     public function show(Cart $cart)
     {
-        $cart->load(['product']);
+        // $cart->load(['product']);
+        $cart = Cart::with(['product'])->where('id', $cart->id)
+            ->where('user_id', ActorHelper::getUserId())
+            ->get();
         return $cart;
     }
 

@@ -31,6 +31,8 @@ return new class extends Migration
             $table->double('weight')->default(0.01);
             $table->string('size')->nullable();
             $table->boolean('active')->default(true);
+            // advertised (true when email is sent out to the users)
+            $table->boolean('advertised')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -55,13 +55,7 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Orders</span>
                         <span
                             class="inline-flex items-center justify-center w-3 h-3 p-3 text-sm font-medium text-yellow-800 bg-yellow-100 rounded-full ms-3 dark:bg-yellow-900 dark:text-yellow-300">
-                            {{-- @if(Auth::user()->role == 'admin')
-                                {{ Number::abbreviate($lost_assets->count() ?? 0)}}
-                            @else
-                                {{ Number::abbreviate(Auth::user()->lostAssets->count() ?? 0)}}
-                            @endif --}}
-                            {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['centers']?? 0) }} --}}
-                            
+                                {{ Number::abbreviate($totalConfirmedOrders ?? 0)}}
                         </span>
                     </a>
                 </li>
@@ -163,7 +157,7 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Messages</span>
                         <span
                             class="inline-flex items-center justify-center w-3 h-3 p-3 text-sm font-medium text-red-800 bg-red-100 rounded-full ms-3 dark:bg-red-900 dark:text-red-300">
-                            {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['user']['unverified']?? 0) }} --}}
+                            {{ Number::abbreviate($unreadMessages ?? 0) }}
                         </span>
                     </a>
                 </li>

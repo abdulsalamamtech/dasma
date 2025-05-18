@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Log;
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * [Admin] Display a listing of the resource.
      */
     public function index()
     {
@@ -81,6 +81,14 @@ class OrderController extends Controller
 
         try {
             //code...
+            // Check if the order status is confirmed and the update status is pending
+            if ($order->status == 'confirmed' && $data['status'] == 'pending') {
+                return redirect()->back()->with('error', 'You cannot change the order status to pending, customer has already paid');
+            }
+            // Check if the order status is pending and the update status is confirmed
+            if ($order->status == 'pending' && $data['status'] == 'confirmed') {
+                return redirect()->back()->with('error', 'You cannot change the order status to confirmed, customer has not paid yet');
+            }
     
             // Store the resource
             $order->update($data);

@@ -90,7 +90,11 @@
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
                             <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                                <strong class="text-red-500">-0.1%</strong>&nbsp;than yesterday
+                                <strong class="text-green-500">
+                                    {{ Number::abbreviate((
+                                    (($dashboard['products']['total'] + 100)/ $dashboard['products']['total'])
+                                    ), 2) }}%
+                                </strong>&nbsp;than last month
                             </p>
                         </div>
                     </div>
@@ -131,12 +135,16 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- ₦ {{ Number::abbreviate(auth()->user()->statistics()['admin']['transactions']['amount'] ?? 0, 2) }} --}}
+                                ₦ {{ Number::abbreviate($dashboard['transactions']['this_month'] ?? 0, 1) }}
                             </h4>
                         </div>
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
                             <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                                <strong class="text-green-500">+5%</strong>&nbsp;than last week
+                                 <strong class="text-green-500">
+                                    {{ Number::abbreviate((
+                                    (($dashboard['transactions']['this_month'] + 100)/ $dashboard['transactions']['this_month'])
+                                    ), 2) }}%
+                                </strong>&nbsp;than last month
                             </p>
                         </div>
                     </div>
@@ -153,12 +161,16 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['users']['total'] ?? 0) }} --}}
+                                {{ Number::abbreviate($dashboard['orders']['this_month'] ?? 0, 1) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
                             <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                                <strong class="text-green-500">+3%</strong>&nbsp;than last month
+                                 <strong class="text-green-500">
+                                    {{ Number::abbreviate((
+                                    (($dashboard['orders']['this_month'] + 100)/ $dashboard['orders']['this_month'])
+                                    ), 2) }}%
+                                </strong>&nbsp;than last week
                             </p>
                         </div>
                     </div>
@@ -180,12 +192,16 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['users']['new_users'] ?? 0) }} --}}
+                                    {{ Number::abbreviate($dashboard['users']['this_month'] ?? 0, 1) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
                             <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                                <strong class="text-red-500">-0.1%</strong>&nbsp;than yesterday
+                                <strong class="text-green-500">
+                                    {{ Number::abbreviate((
+                                    (($dashboard['users']['this_month'] + 100)/ $dashboard['users']['this_month'])
+                                    ), 2) }}%
+                                </strong>&nbsp;than last month
                             </p>
                         </div>
                     </div>
@@ -201,7 +217,7 @@
                                 Subscribers</p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                0
+                                {{ Number::abbreviate($dashboard['statistics']['subscribers'] ?? 0, 1) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -226,7 +242,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['centers']?? 0) }} --}}
+                                {{ Number::abbreviate($dashboard['statistics']['brands'] ?? 0, 1) }}
                             </h4>
                         </div>
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
@@ -247,7 +263,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['events']?? 0) }} --}}
+                                {{ Number::abbreviate($dashboard['statistics']['categories'] ?? 0, 1) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -269,7 +285,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['booked_events']?? 0) }} --}}
+                                {{ Number::abbreviate($dashboard['statistics']['promotions'] ?? 0, 1) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -290,7 +306,7 @@
                                 Returned Orders</p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['cancel_events'] ?? 0) }} --}}
+                                0
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -315,7 +331,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['centers']?? 0) }} --}}
+                                {{ Number::abbreviate($dashboard['statistics']['wishlists'] ?? 0, 1) }}
                             </h4>
                         </div>
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
@@ -336,7 +352,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['events']?? 0) }} --}}
+                                {{ Number::abbreviate($dashboard['statistics']['carts'] ?? 0, 1) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -358,7 +374,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['booked_events']?? 0) }} --}}
+                                {{ Number::abbreviate($dashboard['statistics']['assets'] ?? 0, 1) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -379,7 +395,7 @@
                                 Messages</p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['cancel_events'] ?? 0) }} --}}
+                                {{ Number::abbreviate($dashboard['statistics']['messages'] ?? 0, 1) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">

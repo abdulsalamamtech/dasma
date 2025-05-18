@@ -28,6 +28,9 @@ class Product extends Model
         'sku',
         'color',
         'size',
+        'active',
+        // 'advertised', // this is used to check if the product is advertised
+        'advertised',
     ];
 
 
@@ -40,6 +43,7 @@ class Product extends Model
         'color' => 'string',
         'size' => 'string',
     ];
+
 
     public function category(){
         return $this->belongsTo(Category::class);
@@ -89,13 +93,18 @@ class Product extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function cartItem(){
+
+    public function cartItem()
+    { 
         // Check if the user is authenticated
         // if (!auth()->check()) {
         //     return null; // or handle the case when the user is not authenticated
         // }
         // Retrieve the cart item for the authenticated user
         // and the current product
+
+        info('Product Cart User ID', [ActorHelper::getUserId()]);
+        info('Product ID', [$this->id]);
 
         return Cart::where('user_id', ActorHelper::getUserId())
             ->where('product_id', $this->id)

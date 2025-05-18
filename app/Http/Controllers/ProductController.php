@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * [Admin] Display a listing of the resource.
      */
     public function index()
     {
@@ -226,27 +226,71 @@ class ProductController extends Controller
     }
 
     /**
-     * Display listing of product.
+     * Display listing of product on stores page.
      */
     public function listProduct()
     {
-        $products = Product::with(['banner'])
-            ->latest()
-            ->paginate();
+        // Check request if category slug is present
+        if (request()->filled('category')) {
+            $category = request('category');
+            $products = Product::with(['banner'])
+                ->whereHas('category', function ($q) use ($category) {
+                    $q->where('slug', $category);
+                })
+                ->latest()
+                ->paginate();
+        } else if (request()->filled('brand')) {
+            $brand = request('brand');
+            $products = Product::with(['banner'])
+                ->whereHas('brand', function ($q) use ($brand) {
+                    $q->where('slug', $brand);
+                })
+                ->latest()
+                ->paginate();
+        } else if (request()->filled('promotion')) {
+            $promotion = request('promotion');
+            $products = Product::with(['banner'])
+                ->whereHas('promotion', function ($q) use ($promotion) {
+                    $q->where('title', $promotion);
+                })
+                ->latest()
+                ->paginate();
+        } else {
+            // Get all products
+            $products = Product::with(['banner'])
+            // The random order might not be necessary here
+                ->inRandomOrder()
+                ->latest()
+                ->paginate();
+        }
         // return $products;
         return view('dasma.store', [
             'products' => $products
         ]);
     }
+
+
     /**
      * Display a product.
      */
     public function showProduct(Product $product)
     {
+        $p = $product->toArray();
+        $keywords = $p_array = array_values($p);
+        $related_products = $this?->searchRelatedProducts($keywords);
         $product->load(['category', 'brand', 'promotion', 'banner', 'variations.asset']);
+        
+        // $related_products = Product::with(['banner'])
+        //     ->inRandomOrder()
+        //     ->limit(24)
+        //     ->get();
+        // return $related_products;  
+        
+        
         // return $product;
         return view('dasma.product', [
-            'product' => $product
+            'product' => $product,
+            'related_products' => $related_products,
         ]);
     }
 
@@ -284,5 +328,69 @@ class ProductController extends Controller
         return view('dasma.search', [
             'products' => $products
         ]);
+    }
+
+
+    // Search related product
+    private function searchRelatedProducts($keywords){
+
+        // $query = $request->input('query'); // The search query
+        // $keywords = explode(' ', $query); // Split the query into multiple keywords
+        $products = Product::where(function ($q) use ($keywords) {
+            foreach ($keywords as $keyword) {
+                $q->orWhereAny([
+                    'category_id',
+                    'brand_id',
+                    'promotion_id',
+                    'banner_id',
+                    'name',
+                    'slug',
+                    'description',
+                    'price',
+                    'initial_price',
+                    'stock',
+                    'weight',
+                    'tag',
+                    'views',
+                    'sku',
+                    'color',
+                    'size',
+                ], 'LIKE', "%$keyword%");
+            }
+        })
+        ->orWhereHas('category', function ($q) use ($keywords) {
+            foreach ($keywords as $keyword) {
+                $q->orWhereAny([
+                    'name',
+                    'slug',
+                ], 'LIKE', "%$keyword%");
+            }
+        })
+        ->orWhereHas('brand', function ($q) use ($keywords) {
+            foreach ($keywords as $keyword) {
+                $q->orWhereAny([
+                    'banner_id',
+                    'name',
+                    'slug'
+                ], 'LIKE', "%$keyword%");
+            }
+        })->orWhereHas('promotion', function ($q) use ($keywords) {
+            foreach ($keywords as $keyword) {
+                $q->orWhereAny([
+                    'title',
+                    'description',
+                    'banner_id',
+                    // 'discount',
+                    'start_date',
+                    'end_date',
+                    'discount',
+                    'active',
+                ], 'LIKE', "%$keyword%");
+            }
+        })
+        ->get();
+
+        // dd($products);
+        return $products;
     }
 }

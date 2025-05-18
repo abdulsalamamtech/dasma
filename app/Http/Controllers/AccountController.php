@@ -180,7 +180,7 @@ class AccountController extends Controller
     {
         $order_items = OrderItems::with(['order', 'product.banner'])
             ->where('order_id', $order->id)
-            // ->where('user_id', ActorHelper::getUserId())
+            ->where('user_id', ActorHelper::getUserId())
             ->latest()
             ->paginate();
 

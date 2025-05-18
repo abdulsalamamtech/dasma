@@ -73,13 +73,13 @@
               </li>
 
               {{-- Collections and Categories --}}
-              <li class="group mr-10 hidden lg:block">
+              {{-- <li class="group mr-10 hidden lg:block">
                 <div class="flex items-center border-b-2 border-white transition-colors group-hover:border-primary">
                   <span
                     class="cursor-pointer px-2 font-hk text-lg text-secondary transition-all group-hover:font-bold group-hover:text-primary">Collections</span>
                   <i class="bx bx-chevron-down px-2 pl-2 text-secondary transition-colors group-hover:text-primary"></i>
                 </div>
-                {{-- Update the collection margin based on the page margin 36, 40 --}}
+                <!-- Update the collection margin based on the page margin 36, 4 -->
                 <div
                   class="pointer-events-none absolute top-0 left-0 right-0 z-50 mx-auto mt-32 w-2/3 pt-10 opacity-0 group-hover:pointer-events-auto group-hover:opacity-100">
                   <div class="relative flex rounded-b bg-white p-8 shadow-lg transition-all">
@@ -184,7 +184,51 @@
                     </div>
                   </div>
                 </div>
+              </li> --}}
+
+              <li class="group mr-10 hidden lg:block">
+                <div class="flex items-center border-b-2 border-white transition-colors group-hover:border-primary">
+                  <span
+                    class="cursor-pointer px-2 font-hk text-lg text-secondary transition-all group-hover:font-bold group-hover:text-primary">Categories</span>
+                  <i class="bx bx-chevron-down px-2 pl-2 text-secondary transition-colors group-hover:text-primary"></i>
+                </div>
+                <!-- Update the collection margin based on the page margin 36, 4 -->
+                <div
+                  class="pointer-events-none absolute top-0 left-0 right-0 z-50 mx-auto mt-32 w-2/3 pt-10 opacity-0 group-hover:pointer-events-auto group-hover:opacity-100">
+                  <div class="relative flex rounded-b bg-white shadow-lg transition-all">
+                    <div class="relative flex-1">
+                      <ul class="grid grid-cols-4 p-6 gap-3 justify-start text-left">
+                        @forelse ($categories as $category)
+                          <li>
+                            <a href="{{ route('stores.list') . '?category=' . $category->slug }}"
+                              class="border-b border-transparent font-hk text-sm leading-loose text-secondary-lighter hover:border-primary">{{ $category->name }}</a>
+                          </li>
+                        @empty
+                          <li>
+                            <a href="{{ route('stores.list')}}"
+                              class="border-b border-transparent font-hk text-sm leading-loose text-secondary-lighter hover:border-primary">All</a>
+                          </li>
+                        @endforelse
+                        <li>
+                          <a href="{{ route('stores.list') . '?category=accessories' }}"
+                            class="border-b border-transparent font-hk text-sm leading-loose text-secondary-lighter hover:border-primary">Accessories</a>
+                        </li>
+                        <li>
+                          <a href="{{ route('stores.list') . '?category=accessories' }}"
+                            class="border-b border-transparent font-hk text-sm leading-loose text-secondary-lighter hover:border-primary">Accessories</a>
+                        </li>
+                        <li>
+                          <a href="{{ route('stores.list') . '?category=accessories' }}"
+                            class="border-b border-transparent font-hk text-sm leading-loose text-secondary-lighter hover:border-primary">Accessories</a>
+                        </li>                        
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </li>
+
+         
+
 
               {{-- About --}}
               <li class="mr-10">

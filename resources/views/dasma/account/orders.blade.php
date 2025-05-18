@@ -61,8 +61,7 @@
                             <span
                                 class="font-hkbold block pt-3 pb-2 text-center text-sm uppercase text-secondary sm:hidden">Total Price</span>
                             <span class="font-hk text-secondary">
-                                {{ App\Helpers\Setup::currency('sign') }}
-                                {{ $order->total_amount ?? 0 }}
+                                {{ App\Helpers\Setup::currency('sign') }}{{ $order->total_amount ?? 0 }}
                             </span>
                         </div>
                         {{-- Discount --}}
@@ -71,8 +70,7 @@
                             <span
                                 class="font-hkbold block pt-3 pb-2 text-center text-sm uppercase text-secondary sm:hidden">Discount Price</span>
                             <span class="font-hk text-secondary">
-                                {{ App\Helpers\Setup::currency('sign') }}
-                                {{ $order->discount ?? 0 }}
+                                {{ App\Helpers\Setup::currency('sign') }}{{ $order->discount ?? 0 }}
                             </span>
                         </div> 
                         {{-- Shipping fee --}}
@@ -81,8 +79,7 @@
                             <span
                                 class="font-hkbold block pt-3 pb-2 text-center text-sm uppercase text-secondary sm:hidden">Shipping Fee</span>
                             <span class="font-hk text-secondary">
-                                {{ App\Helpers\Setup::currency('sign') }}
-                                {{ $order->shipping_fee ?? 0 }}
+                                {{ App\Helpers\Setup::currency('sign') }}{{ $order->shipping_fee ?? 0 }}
                             </span>
                         </div>
                         {{-- Total Payment --}}
@@ -91,8 +88,7 @@
                             <span
                                 class="font-hkbold block pt-3 pb-2 text-center text-sm uppercase text-secondary sm:hidden">Total Payment</span>
                             <span class="font-hk text-secondary">
-                                {{ App\Helpers\Setup::currency('sign') }}
-                                {{ $order->total_payable_amount ?? 0 }}
+                                {{ App\Helpers\Setup::currency('sign') }}{{ $order->total_payable_amount ?? 0 }}
                             </span>
                         </div>
                         {{-- Status --}}

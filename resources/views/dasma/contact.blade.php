@@ -85,7 +85,7 @@
               </h4>
               <p class="font-hk text-secondary">+234 80 9135 3393</p>
               <h4 class="pt-8 font-hk text-lg font-bold uppercase text-secondary sm:text-xl">
-                WORKING HOURS
+                WORKING HOURS              
               </h4>
               <p class="pt-3 font-hk text-lg font-bold text-secondary">
                 Week-days
@@ -95,6 +95,8 @@
               </p>
               <p class="pt-3 font-hk text-lg font-bold text-secondary">
                 Weekend
+                {{-- FAQ --}}
+                <span id="faq"></span>
               </p>
               <p class="font-hk text-secondary">
                 <span class="text-primary">(Chat) :</span>Sat - Sun: 9.00 AM to 4.00 PM
@@ -176,8 +178,7 @@
                   </button>
                 </form>
               @endif
-              {{-- FAQ --}}
-              {{-- <span id="faq"></span> --}}
+
             </div>
           </div>
 

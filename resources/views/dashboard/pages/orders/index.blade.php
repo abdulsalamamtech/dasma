@@ -243,7 +243,7 @@ $app_brand = [
                                         <!-- Edit user modal 1 -->
                                         <div id="editUserModal{{ $order->id }}" tabindex="-1" aria-hidden="true"
                                             class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                            <div class="relative w-full max-w-2xl max-h-full bg-white">
+                                            <div class="relative w-full max-w-2xl max-h-full bg-white dark:bg-gray-700">
                                                 <!-- Modal content -->
                                                 <form action="{{ route('admin.orders.update', $order->id) }}" method="POST" enctype="multipart/form-data"
                                                     class="relative rounded-lg shadow bg-white dark:bg-gray-700">
@@ -313,6 +313,10 @@ $app_brand = [
                                                                     <option value="">promotions unavailable</option>
                                                                 @endforelse
                                                             </select>
+                                                            <h6
+                                                                class="block my-2 text-sm font-medium text-green-900 dark:text-green-400">
+                                                                Customer is going to receive an email notification
+                                                            </h6>                                                            
                                                         </div>
                                                         <div id="accordion-collapse" data-accordion="collapse">
                                                             {{-- Order Information --}}

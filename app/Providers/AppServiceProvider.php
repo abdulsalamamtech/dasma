@@ -20,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        // For debugging purpose on the log files
         LogViewer::auth(function ($request) {
             // if(!auth()->user()){
             //     return redirect()->back()->with('error', 'please login');
@@ -30,6 +32,41 @@ class AppServiceProvider extends ServiceProvider
                 'abdulsalamamtech@gmail.com',
             ]);
         });
+
+
+        // Display categories to the views for navigation purpose
+        view()->composer('dasma.*', function ($view) {
+            // $categories = \App\Models\Category::latest()->get();
+            // $view->with('categories', $categories);
+            // pass brands, categories and promotions to the view
+            $categories = \App\Models\Category::latest()->get();
+            $brands = \App\Models\Brand::latest()->get();
+            $promotions = \App\Models\Promotion::latest()->get();
+
+            $view->with('categories', $categories);
+
+        });
+
+
+        // Admin dashboard
+        view()->composer('dashboard.*', function ($view) {
+            // $categories = \App\Models\Category::latest()->get();
+            // $view->with('categories', $categories);
+            // pass brands, categories and promotions to the view
+            // $brands = \App\Models\Brand::latest()->get();
+            // $promotions = \App\Models\Promotion::latest()->get();
+
+            // Count messages where status is unread
+            $unreadMessages = \App\Models\Message::where('status', 'unread')->count();
+
+            // Check if user is admin and pass total pending and confirmed orders
+            $totalPendingOrders = \App\Models\Order::where('status', 'pending')->count();
+            $totalConfirmedOrders = \App\Models\Order::where('status', 'confirmed')->count();
+            $view->with('totalPendingOrders', $totalPendingOrders)
+                ->with('unreadMessages', $unreadMessages)
+                ->with('totalConfirmedOrders', $totalConfirmedOrders);
+        });
+
     
     }
 }

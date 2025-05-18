@@ -133,17 +133,23 @@
 
   
   <!-- Start: Trending -->
+  @if ($trending)
     @include('dasma.home.trending')
+  @endif
   <!-- End: Trending -->
 
 
   <!-- Start: New Season | Stylish | Summer Collections -->
+  @if ($new_collections && $new_collection_two && $new_collection_three)
     @include('dasma.home.new-collections')
+  @endif
   <!-- End: New Season | Stylish | Summer Collections -->
 
 
   <!-- Start: Brands | New Arrival | On Sale -->
-    {{-- @include('dasma.home.new-arrivals') --}}
+  @if ($new_arrivals)
+    @include('dasma.home.new-arrivals')
+  @endif
   <!-- End: Brands | New Arrival | On Sale -->
 
 

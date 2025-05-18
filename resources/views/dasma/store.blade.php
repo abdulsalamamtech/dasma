@@ -113,7 +113,7 @@
           {{-- Pagination --}}
           <div class="mx-auto py-16">
                 @if (isset($products) && !empty($products) && $products->links())
-                    {{ $products->links() }}
+                    {{ $products->withQueryString()->links() }}
                 @endif
           </div> 
       </div>

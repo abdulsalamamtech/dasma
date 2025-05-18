@@ -25,11 +25,11 @@ Route::prefix('/account')->name('account.')->middleware('auth')->group(function 
     //     return view('dasma.account.dashboard');
     // })->name('account');
 
+    // Route::get('/cart', function () {
+    //     return view('dasma.account.cart');
+    // })->name('cart');
 
-    Route::get('/cart', function () {
-        return view('dasma.account.cart');
-    })->name('cart');
-
+    
     Route::apiResource('carts', CartController::class)->middleware('auth');
     Route::apiResource('wishlists', WishlistController::class);
     Route::get('cart-card-details', [CartController::class, 'cartCardDetails'])->name('carts.card-details');

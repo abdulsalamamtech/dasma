@@ -76,6 +76,7 @@
         category_id [belongs to a category]
         brand_id [nullable belongs to a brand]
         promotion_id [nullable belongs to a promotion]
+    advertised (false | true)
 
 ## product_variations [max of 4 asset images per product]
     product_id [belongs to a product]
@@ -289,4 +290,132 @@ Adding Middleware and auth
 - php artisan vendor:publish --tag="log-viewer-config"
 ```php
     'middleware' => ['web', 'auth'],
+```
+
+
+
+## Search In Laravel
+```php
+
+use Illuminate\Http\Request;
+
+public function search(Request $request)
+{
+    $query = $request->input('query'); // The search query
+    $keywords = explode(' ', $query); // Split the query into multiple keywords
+
+    $products = Product::where(function ($q) use ($keywords) {
+        foreach ($keywords as $keyword) {
+            $q->orWhere('name', 'LIKE', "%{$keyword}%")
+              ->orWhere('description', 'LIKE', "%{$keyword}%")
+              ->orWhere('sku', 'LIKE', "%{$keyword}%");
+        }
+    })->get();
+
+    return view('products.index', compact('products'));
+}
+
+
+public function scopeSearch($query, $keywords)
+{
+    return $query->where(function ($q) use ($keywords) {
+        foreach ($keywords as $keyword) {
+            $q->orWhere('name', 'LIKE', "%{$keyword}%")
+              ->orWhere('description', 'LIKE', "%{$keyword}%")
+              ->orWhere('sku', 'LIKE', "%{$keyword}%");
+        }
+    });
+}
+
+
+public function search(Request $request)
+{
+    $query = $request->input('query'); // The search query
+    $keywords = explode(' ', $query); // Split the query into multiple keywords
+
+    $products = Product::search($keywords)->get();
+
+    return view('products.index', compact('products'));
+}
+
+## With Eloquent Relationship
+
+$products = Product::where(function ($q) use ($keywords) {
+    foreach ($keywords as $keyword) {
+        $q->orWhere('name', 'LIKE', "%{$keyword}%")
+          ->orWhere('description', 'LIKE', "%{$keyword}%")
+          ->orWhere('sku', 'LIKE', "%{$keyword}%");
+    }
+})
+->orWhereHas('category', function ($q) use ($keywords) {
+    foreach ($keywords as $keyword) {
+        $q->where('name', 'LIKE', "%{$keyword}%");
+    }
+})
+->orWhereHas('brand', function ($q) use ($keywords) {
+    foreach ($keywords as $keyword) {
+        $q->where('name', 'LIKE', "%{$keyword}%");
+    }
+})
+->get();
+
+
+$products = Product::search($keywords)->paginate(10);
+
+
+
+<form action="{{ route('products.search') }}" method="GET">
+    <input type="text" name="query" placeholder="Search products..." value="{{ request('query') }}">
+    <button type="submit">Search</button>
+</form>
+
+@if($products->isNotEmpty())
+    <ul>
+        @foreach($products as $product)
+            <li>{{ $product->name }} - {{ $product->sku }}</li>
+        @endforeach
+    </ul>
+@else
+    <p>No products found.</p>
+@endif
+
+
+
+
+$products = Product::where(function ($q) use ($keywords) {
+    foreach ($keywords as $keyword) {
+        $q->orWhereAny([
+            'category_id',
+            'brand_id',
+            'promotion_id',
+            'banner_id',
+            'name',
+            'slug',
+            'description',
+            'price',
+            'initial_price',
+            'stock',
+            'weight',
+            'tag',
+            'views',
+            'sku',
+            'color',
+            'size',
+        ], 'LIKE', "%$keyword%");
+    }
+})->get();
+return $products;
+```
+
+
+
+## passing data to all view
+- [Video Tutorial](https://www.youtube.com/watch?v=Lu9zjLdUGY0)
+>> AppServiceProvider.php >> boot()
+```php
+    view()->composer('dasma.*', function ($view) {
+        $products = \App\Models\Product::latest()->get();
+        $view->with('products', $products);
+    });
+
 ```

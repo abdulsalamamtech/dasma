@@ -339,15 +339,15 @@
           <div class="ml-0 w-full sm:ml-10 lg:ml-0 lg:w-1/3 lg:pl-6 xl:pl-8 2xl:w-1/4">
             <div class="text-center lg:text-right">
               <h2 class="font-hkbold text-2xl tracking-wide text-white lg:text-xl xl:text-2xl 2xl:text-3xl">
-                New season, matching outfits
+                New season, Available In All Sizes
               </h2>
               <p class="pt-1 font-hk text-lg text-secondary-lighter">
                 Featured Collection
               </p>
               <div class="block lg:hidden">
-                <a href="{{ route('stores.show', $new_collections->first()?->slug) }}"
+                <a href="{{ route('stores.list'). '?category=' . $new_collections?->first()?->category->slug }}"
                   class="mt-4 inline-block rounded bg-primary px-5 py-4 font-hk text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary-light focus:outline-none md:px-8 md:py-5">
-                  View All Shoes
+                  View All Products
                 </a>
               </div>
             </div>
@@ -361,9 +361,9 @@
               <div
                 class="group absolute inset-0 mx-auto flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
                 <a 
-                  href="{{ route('stores.show', $new_collections->first()?->slug) }}"
+                  href="{{ route('stores.list'). '?category=' . $new_collections?->first()?->category->slug }}"
                   class="inline-block rounded bg-primary px-5 py-4 font-hk text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary-light focus:outline-none md:px-8 md:py-5">
-                    View All Product
+                    View All Products
                 </a>
               </div>
             </div>
@@ -381,9 +381,9 @@
                 Featured Collection
               </p>
               <div class="block lg:hidden">
-                <a href="index.html"
+                <a href="{{ route('stores.list'). '?brand=' . $new_collection_two?->first()?->brand->slug }}"
                   class="mt-4 inline-block rounded bg-primary px-5 py-4 font-hk text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary-light focus:outline-none md:px-8 md:py-5">View
-                  All Designs
+                  All Products
                 </a>
               </div>
             </div>
@@ -396,9 +396,10 @@
               </div>
               <div
                 class="group absolute inset-0 mx-auto flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
-                <a href="{{ route('stores.show', $new_collection_two?->first()?->slug) }}"
+                {{-- Show related category --}}
+                <a href="{{ route('stores.list'). '?brand=' . $new_collection_two?->first()?->brand->slug }}"
                   class="inline-block rounded bg-primary px-5 py-4 font-hk text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary-light focus:outline-none md:px-8 md:py-5">View
-                  All Product</a>
+                  All Products</a>
               </div>
             </div>
           </div>
@@ -1055,13 +1056,13 @@
           <div class="ml-6 w-full sm:ml-10 lg:ml-0 lg:w-1/3 lg:pl-6 xl:pl-8 2xl:w-1/4">
             <div class="text-center lg:text-right">
               <h2 class="font-hkbold text-2xl tracking-wide text-white lg:text-xl xl:text-2xl 2xl:text-3xl">
-                Summer? You need special collections
+                Summer? Special Collections
               </h2>
               <p class="pt-1 font-hk text-lg text-secondary-lighter">
                 Featured Collection
               </p>
               <div class="block lg:hidden">
-                <a href="{{ route('stores.show', $new_collection_three->first()?->slug) }}"
+                <a href="{{ route('stores.list'). '?promotion=' . $new_collection_three?->first()?->promotion->title }}"
                   class="mt-4 inline-block rounded bg-primary px-5 py-4 font-hk text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary-light focus:outline-none md:px-8 md:py-5">View
                   All Special Collections
                 </a>
@@ -1070,13 +1071,13 @@
             <div class="group relative hidden lg:block">
               <div
                 class="ml-auto mb-auto mt-8 h-56 bg-cover bg-center bg-no-repeat xl:mt-10 xl:h-68 2xl:mt-14 2xl:h-88"
-                style="background-image:url({{ $new_collections->first()?->banner->url ?? '/assets/img/unlicensed/collection-shoes.jpg' }})"></div>
+                style="background-image:url({{ $new_collection_three->first()?->banner->url ?? '/assets/img/unlicensed/collection-shoes.jpg' }})"></div>
               <div
                 class="pointer-events-none absolute inset-0 overflow-hidden bg-secondary opacity-0 transition-all group-hover:pointer-events-auto group-hover:opacity-75">
               </div>
               <div
                 class="group absolute inset-0 mx-auto flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
-                <a href="{{ route('stores.show', $new_collection_three->first()?->slug) }}"
+                <a href="{{ route('stores.list'). '?promotion=' . $new_collection_three?->first()?->promotion->title }}"
                   class="inline-block rounded bg-primary px-5 py-4 font-hk text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary-light focus:outline-none md:px-8 md:py-5">
                   View Special Collections
                 </a>

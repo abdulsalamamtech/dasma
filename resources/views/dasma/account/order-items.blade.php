@@ -57,8 +57,7 @@
                             <span
                                 class="font-hkbold block pt-3 pb-2 text-center text-sm uppercase text-secondary sm:hidden">Unit Price</span>
                             <span class="font-hk text-secondary">
-                                {{ App\Helpers\Setup::currency('sign') }}
-                                {{ $item->price }}
+                                {{ App\Helpers\Setup::currency('sign') }}{{ $item->price }}
                             </span>
                         </div>
                         <div
@@ -66,8 +65,7 @@
                             <span
                                 class="font-hkbold block pt-3 pb-2 text-center text-sm uppercase text-secondary sm:hidden">Total Price</span>
                             <span class="font-hk text-secondary">
-                                {{ App\Helpers\Setup::currency('sign') }}
-                                {{ $item->quantity * $item->price }}
+                                {{ App\Helpers\Setup::currency('sign') }}{{ $item->quantity * $item->price }}
                             </span>
                         </div>
                         <div class="w-full text-center sm:w-3/10 sm:text-right md:w-1/4 xl:w-1/5">

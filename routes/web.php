@@ -10,20 +10,10 @@ use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 
-
-
-
-
-// Route::get('/', function () {
-//     // return view('welcome');
-//     return view('dasma.index');
-// });
-
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
 
 Route::get('/dashboard', function () {
-    // return view('dashboard');
     return redirect()->route('account.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -39,15 +29,6 @@ require __DIR__.'/account.php';
 
 
 
-
-
-
-// DASMA APP
-Route::get('/dasma', function () {
-    return view('dasma.index');
-})->name('index');
-
-
 // Search product
 Route::get('search', [ProductController::class, 'searchProduct'])->name('search');
 
@@ -55,15 +36,15 @@ Route::get('search', [ProductController::class, 'searchProduct'])->name('search'
 Route::get('stores', [ProductController::class, 'listProduct'])->name('stores.list');
 Route::get('stores/{product:slug}', [ProductController::class, 'showProduct'])->name('stores.show');
 
+Route::get('contact', [MessageController::class, 'create'])->name('message.create');
+Route::post('contact', [MessageController::class, 'store'])->name('message.store');
 
-// Carts Routes
-// Route::post('carts', [CartController::class, 'store'])->name('carts.store');
-// Route::delete('carts/{cart}', [CartController::class, 'destroy'])->name('carts.delete');
+// Newsletter
+Route::post('newsletters', [NewsletterController::class, 'store'])->name('newsletters.store');
 
 
-// Wishlists Route
-// Route::post('wishlists', [WishlistController::class, 'store'])->name('wishlists.store');
-// Route::delete('wishlists/{wishlist}', [WishlistController::class, 'destroy'])->name('wishlists.delete');
+
+
 
 
 Route::get('/dasma/product', function () {
@@ -79,11 +60,6 @@ Route::get('/dasma/contact', function () {
     return view('dasma.contact');
 })->name('contact');
 
-Route::get('contact', [MessageController::class, 'create'])->name('message.create');
-Route::post('contact', [MessageController::class, 'store'])->name('message.store');
-
-// Newsletter
-Route::post('newsletters', [NewsletterController::class, 'store'])->name('newsletters.store');
 
 
 Route::get('/dasma/terms-and-conditions', function () {
@@ -94,14 +70,6 @@ Route::get('/dasma/terms-and-conditions', function () {
 
 
 
-
-
-
-
-
-Route::get('/fallback', function () {
-    return view('dashboard.dashboard');
-})->name('fallback');
 
 
 Route::get('states', function(){
@@ -147,9 +115,12 @@ Route::get('states', function(){
     return $states;
 });
 
+Route::get('/fallback', function () {
+    return redirect()->route('index')->with('error', 'page not found');
+})->name('fallback');
 
 // Last Route
 Route::fallback(function () {
     // ...
-    return view('dashboard.dashboard')->with('error', 'page not found');
+    return redirect()->route('index')->with('error', 'page not found');
 });
