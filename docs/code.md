@@ -1,5 +1,3 @@
-
-
 -----------------------------------------------
 Chat Library
 
@@ -63,7 +61,9 @@ git push -u origin main
 ---
 
 ### **2. Push to Multiple Repositories (Optional)**
-If you want to push to both the old and new repositories, add a second remote:  
+
+If you want to push to both the old and new repositories, add a second remote:
+
 ```bash
 git remote add newrepo <NEW_REPOSITORY_URL>
 git push -u newrepo main
@@ -72,7 +72,9 @@ git push -u newrepo main
 ---
 
 ### **3. Clone and Push to a New Repository (Alternative)**
+
 If you haven't cloned the repository yet, follow these steps:
+
 ```bash
 git clone <NEW_REPOSITORY_URL>
 cd <repo-folder>
@@ -83,49 +85,45 @@ git push -u origin main
 
 Let me know if you need more details! 🚀
 
-
----------------------------------------------------------
-
+---
 
 Here’s a beautiful and elegant color palette for your brand based on Brown, Gold, Wine, White, and Grey with Tailwind CSS color classes:
 
 1. Primary Colors (Brand Identity)
-Brown → #6D4C41 (Tailwind: bg-[#6D4C41])
-Gold → #D4AF37 (Tailwind: bg-[#D4AF37])
-Wine → #722F37 (Tailwind: bg-[#722F37])
+   Brown → #6D4C41 (Tailwind: bg-[#6D4C41])
+   Gold → #D4AF37 (Tailwind: bg-[#D4AF37])
+   Wine → #722F37 (Tailwind: bg-[#722F37])
 2. Secondary Colors (Accent and Neutral)
-White → #FFFFFF (Tailwind: bg-white)
-Light Grey → #E0E0E0 (Tailwind: bg-[#E0E0E0])
-Dark Grey → #424242 (Tailwind: bg-[#424242])
+   White → #FFFFFF (Tailwind: bg-white)
+   Light Grey → #E0E0E0 (Tailwind: bg-[#E0E0E0])
+   Dark Grey → #424242 (Tailwind: bg-[#424242])
 
-
-
----------------------------------------------------------
+---
 
 module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        brand: {
-          brown: '#6D4C41',
-          gold: '#D4AF37',
-          wine: '#722F37',
-          white: '#FFFFFF',
-          lightGrey: '#E0E0E0',
-          darkGrey: '#424242',
-        },
-      },
-    },
-  },
-  plugins: [],
+theme: {
+extend: {
+colors: {
+brand: {
+brown: '#6D4C41',
+gold: '#D4AF37',
+wine: '#722F37',
+white: '#FFFFFF',
+lightGrey: '#E0E0E0',
+darkGrey: '#424242',
+},
+},
+},
+},
+plugins: [],
 }
 
+---
 
+### 20 Best Laravel Packages to Optimize Performance, Security, and SEO in 2025
 
-----------------------------------------------------
+> https://www.cloudways.com/blog/best-laravel-packages/
 
+## Laravel Spatie Backup DB
 
-
-
-
-
+> https://alemsbaja.hashnode.dev/how-to-use-the-laravel-backup-package-by-spatie-in-a-laravel-application

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('message_id')->constrained()->onDelete('cascade');
             $table->text('message');
-            $table->timestamps();
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
