@@ -124,3 +124,6 @@ Route::fallback(function () {
     // ...
     return redirect()->route('index')->with('error', 'page not found');
 });
+
+
+// Last Code
