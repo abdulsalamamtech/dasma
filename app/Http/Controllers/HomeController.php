@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Customization;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,6 +15,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        // Customization
+        $customizations = Customization::with(['category', 'banner'])
+            ->latest()
+            ->limit(20)
+            ->get();
+        // return $customizations;
 
         // Latest Products
         $new_arrivals = Product::with(['banner'])
@@ -57,6 +65,7 @@ class HomeController extends Controller
         // return $products;
 
         return view('dasma.index', [
+            'customizations' => $customizations,
             'products' => $products,
             'new_arrivals' => $new_arrivals,
             'new_collections' => $new_collections,

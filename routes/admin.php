@@ -5,6 +5,7 @@ use App\Http\Controllers\AssetController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomizationController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\MessageRepliesController;
 use App\Http\Controllers\NewsletterController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -59,6 +61,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Orders routes
     Route::apiResource('orders', OrderController::class);
     
+
+    // Customization routes
+    Route::apiResource('customizations', CustomizationController::class);
+    // Customization routes
+    Route::get('/customizations/types/home', [CustomizationController::class, 'index'])->name('customizations.home');
+    Route::get('/customizations/types/trending', [CustomizationController::class, 'trending'])->name('customizations.trending');
+    Route::get('/customizations/types/new-arrivals', [CustomizationController::class, 'newArrivals'])->name('customizations.new-arrivals');
 
     // Transactions routes
     Route::apiResource('transactions', TransactionController::class)

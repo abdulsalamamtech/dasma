@@ -107,6 +107,18 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Promotion</span>
                     </a>
                 </li>   
+
+                <li class="">
+                    <a href="{{ route('admin.customizations.index') }}"
+                        class="{{ request()->routeIs('admin.customizations.*')? 'text-white bg-['.$app_brand['bg-color'].']' :''; }}
+                        flex items-center p-2 text-gray-900 hover:text-gray-100 rounded-lg dark:text-white hover:bg-[{{ $app_brand['primary'] }}] dark:hover:bg-gray-700 group">
+                        <div
+                            class="flex-shrink-0 w-8 h-5 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+                            <i class="fa fa-flag"></i>
+                        </div>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Customizations</span>
+                    </a>
+                </li> 
                 
                 <li class="">
                     <a href="{{ route('admin.assets.index') }}"
