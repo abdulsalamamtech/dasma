@@ -1,17 +1,22 @@
 {{-- New Collections --}}
 
   <div class="container max-w-full">
-    <div class="relative">
+    <div class="relative" style="background-image: url(/assets/img/bg-products.png)">
       <!-- Background Collection Image -->
-      <div class="absolute inset-y-0 right-0 w-full bg-cover bg-center bg-no-repeat"
-        style="background-image: url(/assets/img/bg-products.png)"></div>
+      {{-- <div class="absolute inset-y-0 right-0 w-full bg-cover bg-center bg-no-repeat"
+        style="background-image: url(/assets/img/bg-products.png)"></div> --}}
       <div
-        class="2xl:max-w-screen-xxl relative z-10 mx-auto w-5/6 md:max-w-screen-sm lg:ml-auto lg:mr-0 lg:max-w-full xl:mr-16 xl:w-5/6 2xl:mx-auto">
+        {{-- class="2xl:max-w-screen-xxl relative z-10 mx-auto w-5/6 md:max-w-screen-sm lg:ml-auto lg:mr-0 lg:max-w-full xl:mr-16 xl:w-5/6 2xl:mx-auto" --}}
+        class="mx-auto lg:ml-auto lg:mr-0 lg:max-w-full md:px-8"
+        >
       
         <!-- New Season Collection -->
         <div class="flex flex-col-reverse items-center py-16 lg:flex-row">
 
-          <div class="border border-red-500 relative mt-8 ml-6 w-full bg-white px-4 pt-8 pb-6 sm:ml-10 lg:mt-0 lg:ml-0 lg:w-3/5 2xl:w-3/4">
+          <div 
+          {{-- class="border border-red-500 relative mt-8 ml-6 w-full bg-white px-4 pt-8 pb-6 sm:ml-10 lg:mt-0 lg:ml-0 lg:w-3/5 2xl:w-3/4"> --}}
+            class="border border-red-500 relative mt-8 mx-6 w-full bg-white px-4 pt-8 pb-6 sm:ml-10 lg:mt-0 lg:ml-auto lg:w-3/5 2xl:w-3/4">
+
             <div class="collection-slider">
               <div class="splide__track">
                 <div class="splide__list">

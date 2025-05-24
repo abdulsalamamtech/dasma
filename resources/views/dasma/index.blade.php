@@ -25,12 +25,13 @@
                   class="py-48 px-5 text-center sm:w-5/6 sm:px-10 sm:text-left md:px-12 lg:w-3/4 xl:w-2/3 xl:px-24">
                   <h3 class="font-butler text-3xl font-medium text-secondary sm:text-4xl md:text-5xl lg:text-6xl">
                     {{-- Dasma New Men’s <br> Outdoor Collection --}}
-                    {{ $customizations?->title }}
+                    {{ $customizations?->title }} 
                   </h3>
-                  <a href="{{ route('stores.list'). '?category=' . $customizations?->category?->slug }}" class="btn btn-primary btn-lg mt-8">Know more</a>
+                  <a href="{{ route('stores.list'). '?category=' . $customizations?->category?->slug }}" class="btn btn-primary btn-lg mt-8">Know more {{ $loop->index == 1 }} </a>
                 </div>
               </div>
             </li>
+                                 
           @empty
             {{-- Test Slider Images --}}
             <li class="splide__slide">
@@ -100,12 +101,13 @@
   <!-- End: Home Page Slide Show | Shipping Policy -->
 
 
-
   
   <!-- Start: Trending -->
-  @if ($trending)
-    @include('dasma.home.trending')
-  @endif
+  <div id="trending">
+    @if ($trending)
+      @include('dasma.home.trending')
+    @endif
+  </div>
   <!-- End: Trending -->
 
 
@@ -115,12 +117,19 @@
   @endif
   <!-- End: New Season | Stylish | Summer Collections -->
 
+  
+ <!-- Start: Brands -->
+  @if ($brands)
+    @include('dasma.home.brands')
+  @endif
+  <!-- End: Brands -->
 
-  <!-- Start: Brands | New Arrival | On Sale -->
+
+  <!-- Start: New Arrival | On Sale -->
   @if ($new_arrivals)
     @include('dasma.home.new-arrivals')
   @endif
-  <!-- End: Brands | New Arrival | On Sale -->
+  <!-- End: New Arrival | On Sale -->
 
 
 </div>

@@ -2,35 +2,14 @@
 
   <div class="container">
 
-    <!-- Start: Our Brand Logos -->
-    <div class="border-b border-grey-dark pt-16 pb-5 sm:pt-20 sm:pb-12">
-      <h4 class="text-center font-hk text-xl uppercase text-secondary">
-        Our Brands
-      </h4>
-      <div class="grid grid-cols-2 gap-5 pt-8 sm:grid-cols-3 lg:grid-cols-6">
-        <img src="/assets/img/brand-01.png" alt="brand logo"
-          class="mb-8 h-24 w-full object-cover sm:mb-10 lg:mb-0" />
-        <img src="/assets/img/brand-02.png" alt="brand logo"
-          class="mb-8 h-24 w-full object-cover sm:mb-10 lg:mb-0" />
-        <img src="/assets/img/brand-03.png" alt="brand logo"
-          class="mb-8 h-24 w-full object-cover sm:mb-10 lg:mb-0" />
-        <img src="/assets/img/brand-04.png" alt="brand logo"
-          class="mb-8 h-24 w-full object-cover sm:mb-10 lg:mb-0" />
-        <img src="/assets/img/brand-05.png" alt="brand logo"
-          class="mb-8 h-24 w-full object-cover sm:mb-10 lg:mb-0" />
-        <img src="/assets/img/brand-06.png" alt="brand logo"
-          class="mb-8 h-24 w-full object-cover sm:mb-10 lg:mb-0" />
-      </div>
-    </div>
-    {{-- End: Our Brand Logos --}}
 
     <!-- Start: New Arrival -->
     <div class="relative mt-10 mb-12 w-full py-5 sm:mb-6 sm:py-16 md:mt-16 md:mb-12 lg:mb-28">
       <div class="relative z-20 h-80 bg-cover bg-left bg-no-repeat sm:h-100 md:h-108 lg:h-120 lg:w-6/11 xl:w-3/5"
         style="background-image:url({{ $new_arrivals?->first()?->banner?->url ?? '/assets/img/unlicensed/coupon-image.jpg' }})"></div>
       <div
-        class="right-0 bottom-0 ml-auto h-80 bg-cover bg-right bg-no-repeat sm:h-100 md:h-108 lg:absolute lg:h-120 lg:w-6/11 xl:w-3/5"
-        style="background-image: url(/assets/img/bg-coupon.png)">
+        class="right-0 bottom-0 ml-auto h-auto bg-cover bg-right bg-no-repeat sm:h-100 md:h-108 lg:absolute lg:h-120 lg:w-6/11 xl:w-3/5"
+        style="background-image: url('/assets/img/bg-coupon.png')">
         <div
           class="mx-auto w-5/6 py-14 text-center sm:w-3/5 sm:py-20 lg:w-full lg:pr-8 lg:pl-40 lg:text-left xl:py-24 xl:pl-80">
           <span class="font-hk text-lg font-medium uppercase text-white md:text-xl">New Arrivals</span>

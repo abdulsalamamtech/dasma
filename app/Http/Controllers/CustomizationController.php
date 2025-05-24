@@ -17,24 +17,13 @@ class CustomizationController extends Controller
     public function index()
     {
 
-        if(request()->filled('search')){
-            $search = request('search');
-            $brands = $this->search($search);
-        }else{
-            $brands = Brand::with(['banner', 'products'])
-                ->latest()
-                ->paginate();
-        }
-
         // categories
         $categories = Category::with('products')->get() ?? [];
-
 
         $customizations = Customization::with(['category', 'banner'])->paginate() ?? [];
         // return $customizations;
         return view('dashboard.pages.customizations.index', [
             'customizations' => $customizations,
-            'brands' => $brands,
             'categories' => $categories,
         ]);
 
@@ -150,7 +139,17 @@ class CustomizationController extends Controller
     // Trending customizations
     public function trending()
     {
-        return redirect()->route('admin.customizations.index');
+        // return redirect()->route('admin.customizations.index');
+
+                // categories
+        $categories = Category::with('products')->get() ?? [];
+
+        $customizations = Customization::with(['category', 'banner'])->paginate() ?? [];
+        // return $customizations;
+        return view('dashboard.pages.customizations.trending', [
+            'customizations' => $customizations,
+            'categories' => $categories,
+        ]);
     }
 
     // New Arrivals customizations

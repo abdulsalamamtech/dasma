@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Customization;
 use App\Models\Product;
@@ -18,10 +19,20 @@ class HomeController extends Controller
 
         // Customization
         $customizations = Customization::with(['category', 'banner'])
+            // ->groupBy('type')
+            ->inRandomOrder()
             ->latest()
-            ->limit(20)
-            ->get();
+            ->limit(20);
+
+        $trends = $customizations->limit(3)->get();
+        $customizations = $customizations->get();
         // return $customizations;
+
+
+        // $trends = $customizations->filter(function ($customization) {
+        //     return $customization->type === 'trend';
+        // });
+        // return $trends;
 
         // Latest Products
         $new_arrivals = Product::with(['banner'])
@@ -57,21 +68,28 @@ class HomeController extends Controller
             ->limit(24)
             ->get();
         // return $trending;     
-        
+
         $products = Product::with(['banner'])
             ->inRandomOrder()
             ->limit(26)
             ->get();
         // return $products;
 
+
+        // Brands
+        $brands = Brand::with(['banner'])->inRandomOrder()->latest()->limit(6)->get();
+        // return $brands;
+
         return view('dasma.index', [
             'customizations' => $customizations,
+            'trends' => $trends,
             'products' => $products,
             'new_arrivals' => $new_arrivals,
             'new_collections' => $new_collections,
             'new_collection_two' => $new_collection_two,
             'new_collection_three' => $new_collection_three,
             'trending' => $trending,
+            'brands' => $brands,
         ]);
     }
 }

@@ -34,9 +34,6 @@
                             <a href="{{ route('admin.customizations.trending') }}"
                                 class="inline-block py-4 px-8 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Trending</a>
                         @endif
-
-                        <a href="{{ route('admin.customizations.trending') }}"
-                            class="inline-block py-4 px-8 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Trending</a>
                     </li>
                     <li class="me-2">
                         @if (request()->routeIs('admin.customizations.new-arrivals'))
