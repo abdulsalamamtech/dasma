@@ -12,10 +12,10 @@ function collectionSliders() {
       pagination: false,
       breakpoints: {
         1440: {
-          perPage: 2,
+          perPage: 3,
         },
         1024: {
-          perPage: 2,
+          perPage: 3,
         },
         768: {
           perPage: 2,
