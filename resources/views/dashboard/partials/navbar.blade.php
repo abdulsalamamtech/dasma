@@ -54,7 +54,7 @@
                             <span class="sr-only">Open user menu</span>
                             <img class="w-8 h-8 rounded-full"
                                 src="
-                                    @isset(Auth::user()->userProfile->image->path)
+                                    @isset(Auth::user()?->userProfile?->image?->path)
                                         {{ asset('storage/profiles/' . Auth::user()->userProfile->image->path) }}
                                     @else
                                         {{ '/dasma-banners/20250523_084533.jpg' ?? 'https://flowbite.com/docs/images/people/profile-picture-5.jpg' }}
