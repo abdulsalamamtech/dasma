@@ -36,6 +36,6 @@ jobs:
             php artisan view:clear  # Clear the view cache
             php artisan route:cache  # Clear the route cache
 
-            npm install  # Install dependencies
-            npm run build  # Build the Node app
+            # npm install  # Install dependencies
+            # npm run build  # Build the Node app
           EOF

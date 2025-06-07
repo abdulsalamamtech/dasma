@@ -17,8 +17,16 @@
                     class="pt-5 font-butler text-3xl font-medium leading-tight text-white sm:text-4xl md:text-4.5xl xl:text-5xl">
                     New Design & Outfits Up to 20% Off
                 </h2>
-                <a href="{{ route('stores.show', $new_arrivals?->first()?->slug) ?? route('stores.list') }}"
-                    class="btn btn-primary btn-lg mt-8 md:mt-10">Get it now</a>
+                @if ($new_arrivals?->first()?->slug)
+                    <a href="{{ route('stores.show', $new_arrivals?->first()?->slug) }}"
+                        class="btn btn-primary btn-lg mt-8 md:mt-10">
+                        Get it now
+                    </a>
+                @else
+                    <a href="{{ route('stores.list') }}" class="btn btn-primary btn-lg mt-8 md:mt-10">
+                        Get it now
+                    </a>
+                @endif
             </div>
         </div>
     </div>
