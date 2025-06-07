@@ -93,7 +93,11 @@
                         <div class="border-t border-blue-gray-50 p-4">
                             <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
                                 <strong class="text-green-500">
-                                    {{ Number::abbreviate(($dashboard['products']['total'] + 100) / $dashboard['products']['total'], 2) }}%
+                                    @if ($dashboard['products']['total'])
+                                        {{ Number::abbreviate(($dashboard['products']['total'] + 100) / $dashboard['products']['total'], 2) }}%
+                                    @else
+                                        {{ Number::abbreviate(0, 2) }}%
+                                    @endif
                                 </strong>&nbsp;than last month
                             </p>
                         </div>
@@ -141,10 +145,11 @@
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
                             <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
                                 <strong class="text-green-500">
-                                    {{ Number::abbreviate(
-                                        ($dashboard['transactions']['this_month'] + 100) / $dashboard['transactions']['this_month'],
-                                        2,
-                                    ) }}%
+                                    @if ($dashboard['transactions']['this_month'])
+                                        {{ Number::abbreviate(($dashboard['transactions']['this_month'] + 100) / $dashboard['transactions']['this_month'], 2) }}%
+                                    @else
+                                        {{ Number::abbreviate(0, 2) }}%
+                                    @endif
                                 </strong>&nbsp;than last month
                             </p>
                         </div>
@@ -168,7 +173,11 @@
                         <div class="border-t border-blue-gray-50 p-4">
                             <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
                                 <strong class="text-green-500">
-                                    {{ Number::abbreviate(($dashboard['orders']['this_month'] + 100) / $dashboard['orders']['this_month'], 2) }}%
+                                    @if ($dashboard['orders']['this_month'])
+                                        {{ Number::abbreviate(($dashboard['orders']['this_month'] + 100) / $dashboard['orders']['this_month'], 2) }}%
+                                    @else
+                                        {{ Number::abbreviate(0, 2) }}%
+                                    @endif
                                 </strong>&nbsp;than last week
                             </p>
                         </div>
@@ -197,7 +206,11 @@
                         <div class="border-t border-blue-gray-50 p-4">
                             <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
                                 <strong class="text-green-500">
-                                    {{ Number::abbreviate(($dashboard['users']['this_month'] + 100) / $dashboard['users']['this_month'], 2) }}%
+                                    @if ($dashboard['users']['this_month'])
+                                        {{ Number::abbreviate(($dashboard['users']['this_month'] + 100) / $dashboard['users']['this_month'], 2) }}%
+                                    @else
+                                        {{ Number::abbreviate(0, 2) }}%
+                                    @endif
                                 </strong>&nbsp;than last month
                             </p>
                         </div>
