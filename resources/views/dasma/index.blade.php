@@ -42,7 +42,7 @@
                   <h3 class="font-butler text-3xl font-medium text-secondary sm:text-4xl md:text-5xl lg:text-6xl">
                     Dasma New Men’s <br> Outdoor Collection
                   </h3>
-                  <a href="collection-grid.html" class="btn btn-primary btn-lg mt-8">Know more</a>
+                  <a href="{{route('stores.list')}}" class="btn btn-primary btn-lg mt-8">Know more</a>
                 </div>
               </div>
             </li>
