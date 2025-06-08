@@ -6,6 +6,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomizationController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\MessageRepliesController;
 use App\Http\Controllers\NewsletterController;
@@ -78,6 +79,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Transactions routes
     Route::apiResource('newsletters', NewsletterController::class)
     ->except(['store']);
+
+    Route::apiResource('faqs', FaqController::class);
+
 
     // Cart routes
     // Route::apiResource('carts', CartController::class);
