@@ -13,10 +13,10 @@ class UserController extends Controller
     public function index()
     {
         // Search for users
-        if(request()->filled('search')){
+        if (request()->filled('search')) {
             $search = request('search');
             $users = $this->search($search);
-        }else{
+        } else {
             $users = User::with(['orders'])
                 ->latest()
                 ->paginate();
@@ -24,7 +24,7 @@ class UserController extends Controller
         // return $brands;
         return view('dashboard.pages.users.index', [
             'users' => $users
-        ]);        
+        ]);
     }
 
     /**
@@ -84,9 +84,13 @@ class UserController extends Controller
     /**
      * Search a specified resource from storage.
      */
-    public function search(string $search){
-        return User::where('name', 'like', '%'.$search.'%')
-            ->orWhere('email', 'like', '%'.$search.'%')
+    public function search(string $search)
+    {
+        return User::whereAny(
+            ['name', 'email',  'role'],
+            'like',
+            "%{$search}%"
+        )
             ->latest()
             ->paginate();
     }

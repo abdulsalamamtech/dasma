@@ -36,15 +36,15 @@
                                                 @isset($user_profile?->image->path)
                                                     {{asset('storage/profiles/'.$user_profile?->image->path)}}
                                                 @else
-                                                    {{'/img/img1.jpg'}}
+                                                    {{ '/dasma-banners/20250523_084533.jpg' ?? 'https://flowbite.com/docs/images/people/profile-picture-5.jpg' }}
                                                 @endisset
                                             "/>
                                         </div>
-                                        <div>
-                                        <x-input-label for="image" :value="__('Picture')" />
-                                        <x-text-input id="image" name="image" type="file" class="block w-full mt-1" :value="old('image')" autofocus autocomplete="name" />
-                                        <x-input-error class="mt-2" :messages="$errors->get('image')" />
-                                        </div>
+                                        {{-- <div>
+                                            <x-input-label for="image" :value="__('Picture')" />
+                                            <x-text-input id="image" name="image" type="file" class="block w-full mt-1" :value="old('image')" autofocus autocomplete="name" />
+                                            <x-input-error class="mt-2" :messages="$errors->get('image')" />
+                                        </div> --}}
                                     </div>
                                     
                                     <div class="flex items-center gap-4">
@@ -60,8 +60,9 @@
                                         </div>
                                     </div>
                                     
+                                {{-- 
                                     <div class="flex items-center gap-4">
-                                        <div>
+                                        {{-- <div>
                                             <x-input-label for="phone_number" :value="__('Phone number')" />
                                             <x-text-input id="phone_number" name="phone_number" type="tel" class="block w-full mt-1" placeholder="090********" :value="old('phone_number', $user_profile->phone_number ?? '')" required autofocus autocomplete="name" />
                                             <x-input-error class="mt-2" :messages="$errors->get('phone_number')" />
@@ -93,7 +94,7 @@
                                     </div>
                                     <div class="flex items-center gap-4">
                                         <x-primary-button>{{ __('Save') }}</x-primary-button>
-                                    </div>
+                                    </div> --}}
                                 </form>
                                 
                             </section>

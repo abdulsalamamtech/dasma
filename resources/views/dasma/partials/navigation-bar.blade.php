@@ -260,61 +260,24 @@
             }">
                 <div class="flex items-center justify-between" @click="isParentAccordionOpen = !isParentAccordionOpen">
                     <span class="block font-hk font-medium transition-colors"
-                        :class="isParentAccordionOpen ? 'text-primary' : 'text-secondary'">Collections</span>
+                        :class="isParentAccordionOpen ? 'text-primary' : 'text-secondary'">Categories</span>
                     <i class="bx text-xl text-secondary"
                         :class="isParentAccordionOpen ? 'bx-chevron-down' : 'bx-chevron-left'"></i>
                 </div>
                 <div class="transition-all"
                     :class="isParentAccordionOpen ? 'max-h-infinite' : 'max-h-0 overflow-hidden'">
-                    <div x-data="{
-                        isAccordionOpen: false
-                    }">
-                        <div class="flex items-center pt-3" @click="isAccordionOpen = !isAccordionOpen">
-                            <i class="bx pr-3 text-xl transition-colors"
-                                :class="isAccordionOpen ? 'bx-chevron-down text-secondary' :
-                                    'bx-chevron-right text-grey-darkest'"></i>
-                            <a :class='isAccordionOpen ? \' text-primary\' : \'text-grey-darkest\''
-                                class='font-hk font-medium transition-colors' href='collection-grid.html'>Men's
-                                Fashion</a>
+                    
+                    @forelse ($categories as $category)
+                    <div class="flex items-center pt-3">
+                        <i class="bx bx-chevron-right pr-3 text-xl text-grey-darkest"></i>
+                        <a class='font-hk font-medium text-grey-darkest' href="{{ route('stores.list') . '?category=' . $category->slug }}">{{ $category->name }}</a>
+                    </div>
+                    @empty
+                        <div class="flex items-center pt-3">
+                            <i class="bx bx-chevron-right pr-3 text-xl text-grey-darkest"></i>
+                            <a class='font-hk font-medium text-grey-darkest' href="{{ route('stores.list') }}">All</a>
                         </div>
-                        <div class="pl-12 transition-all"
-                            :class="isAccordionOpen ? 'max-h-infinite' : 'max-h-0 overflow-hidden'">
-                            <a class='mt-2 block font-hk font-medium text-secondary'
-                                href='collection-grid.html'>T-Shirts</a>
-                            <a class='mt-2 block font-hk font-medium text-secondary'
-                                href='collection-grid.html'>Shirts</a>
-                            <a class='mt-2 block font-hk font-medium text-secondary' href='collection-grid.html'>Men’s
-                                Bags</a>
-                            <a class='mt-2 block font-hk font-medium text-secondary'
-                                href='collection-grid.html'>Travel
-                                Essentials</a>
-                        </div>
-                    </div>
-                    <div class="flex items-center pt-3">
-                        <i class="bx bx-chevron-right pr-3 text-xl text-grey-darkest"></i>
-                        <a class='font-hk font-medium text-grey-darkest' href='collection-grid.html'>Women's
-                            Fashion</a>
-                    </div>
-                    <div class="flex items-center pt-3">
-                        <i class="bx bx-chevron-right pr-3 text-xl text-grey-darkest"></i>
-                        <a class='font-hk font-medium text-grey-darkest' href='collection-grid.html'>Baggage</a>
-                    </div>
-                    <div class="flex items-center pt-3">
-                        <i class="bx bx-chevron-right pr-3 text-xl text-grey-darkest"></i>
-                        <a class='font-hk font-medium text-grey-darkest' href='collection-grid.html'>Camp</a>
-                    </div>
-                    <div class="flex items-center pt-3">
-                        <i class="bx bx-chevron-right pr-3 text-xl text-grey-darkest"></i>
-                        <a class='font-hk font-medium text-grey-darkest' href='collection-grid.html'>Personal Care</a>
-                    </div>
-                    <div class="flex items-center pt-3">
-                        <i class="bx bx-chevron-right pr-3 text-xl text-grey-darkest"></i>
-                        <a class='font-hk font-medium text-grey-darkest' href='collection-grid.html'>Backpacks</a>
-                    </div>
-                    <div class="flex items-center pt-3">
-                        <i class="bx bx-chevron-right pr-3 text-xl text-grey-darkest"></i>
-                        <a class='font-hk font-medium text-grey-darkest' href='collection-grid.html'>Pullovers</a>
-                    </div>
+                    @endforelse
                 </div>
             </div>
             <a class='block w-full cursor-pointer border-b border-grey-dark py-3 font-hk font-medium text-secondary'
