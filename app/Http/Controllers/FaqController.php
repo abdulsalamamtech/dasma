@@ -33,6 +33,14 @@ class FaqController extends Controller
     public function store(StoreFaqRequest $request)
     {
         $data = $request->validated();
+        // created by
+        $data['created_by'] = auth()->id(); // Assuming you want to store the ID of the authenticated user
+        // Set default status if not provided
+        $data['status'] = $data['status'] ?? 'draft'; // Default to 'draft' if not provided
+        // Create the FAQ
+        if (empty($data['category'])) {
+            $data['category'] = 'General'; // Default category if not provided
+        }
         $faq = faq::create($data);
         return redirect()->route('admin.faqs.index')->with('success', 'FAQ created successfully.');
     }
@@ -42,7 +50,9 @@ class FaqController extends Controller
      */
     public function show(faq $faq)
     {
-        return view('faqs.show', compact('faq'));
+        return view('dashboard.pages.faqs.show', [
+            'faq' => $faq
+        ]);
     }
 
     /**
@@ -51,7 +61,7 @@ class FaqController extends Controller
     public function update(UpdateFaqRequest $request, faq $faq)
     {
         $faq->update($request->validated());
-        return redirect()->route('faqs.index')->with('success', 'FAQ updated successfully.');
+        return redirect()->route('admin.faqs.index')->with('success', 'FAQ updated successfully.');
     }
 
     /**
@@ -60,14 +70,21 @@ class FaqController extends Controller
     public function destroy(faq $faq)
     {
         $faq->delete();
-        return redirect()->route('faqs.index')->with('success', 'FAQ deleted successfully.');
+        return redirect()->route('admin.faqs.index')->with('success', 'FAQ deleted successfully.');
     }
 
     /**
      * Search for faqs
      */
     private function search(string  $search){
-        $faqs = Faq::where('question', 'LIKE', '%'.$search.'%')
+        $faqs = Faq::whereAny(
+                ['question', 'answer', 'category'],
+                'like',
+                "%{$search}%"
+            )
+            ->orWhereHas('createdBy', function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
             ->latest()
             ->paginate();
 

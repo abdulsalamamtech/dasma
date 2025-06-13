@@ -25,7 +25,7 @@ class StoreFaqRequest extends FormRequest
             'question' => 'required|string|max:255',
             'answer' => 'required|string',
             'status' => 'nullable|string|in:draft,published,archived',
-            'category' => 'nullable|string|max:100',
+            'category' => 'nullable|string|in:general,technical,billing,other', // Example categories
             // 'created_by' => 'required|exists:users,id', // Ensure the user exists
         ];
     }

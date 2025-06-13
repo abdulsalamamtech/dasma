@@ -59,32 +59,23 @@
 
                                         <div class="w-100 text-center">Basic Information</div>
 
-                                        {{-- Uplaod Image --}}
-                                        {{-- <div class="col-span-12">
-                                            <label for="local_councils"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                Upload faq Logo                                           </label>
-                                            <input type="file" name="banner" id="banner"
-                                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                placeholder="Profile Image" required="">
-                                        </div>  --}}
                                         {{-- Enter name --}}
                                         <div class="col-span-12">
-                                            <label for="local_councils"
+                                            <label for="question_name"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                 Enter Question
                                             </label>
-                                            <input type="text" name="name" id="name"
+                                            <input type="text" name="question" id="question_name"
                                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                 placeholder="what is DASMA" required="">
                                         </div>
                                         {{-- Descriptions --}}
                                         <div class="col-span-12">
-                                            <label for="description"
+                                            <label for="answer_description"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                 Answer Description
                                             </label>
-                                            <textarea type="description" name="description" id="description"
+                                            <textarea type="text" name="answer" id="answer_description"
                                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                 placeholder="DASMA is simple brand name for DASMA collection"></textarea>
                                         </div>
@@ -98,7 +89,7 @@
                                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                     placeholder="type of category" required="" value="">
                                                     {{-- <option value="">select a category</option> --}}
-                                                    <option value="published" selected>general</option>
+                                                    <option value="general" selected>general</option>
                                                     <option value="technical">technical</option>
                                                     <option value="billing">billing</option>
                                                     {{-- <option value="">category unavailable</option> --}}
@@ -112,7 +103,7 @@
                                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                     placeholder="status" required="" value="">
                                                     {{-- <option value="">select a status</option> --}}
-                                                    <option value="published" selected>published</option>
+                                                    <option value="published" selected>published (show to users)</option>
                                                     <option value="draft">draft</option>
                                                     <option value="archived">archived</option>
                                                     {{-- <option value="">status unavailable</option> --}}
@@ -212,10 +203,10 @@
                                         ID
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Name
+                                        Question | Category
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Product No.
+                                        Answer
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Status
@@ -247,12 +238,15 @@
                                                     alt="Jese image">
                                             </th> --}}
                                             <td class="px-6 py-4">
-                                                {{ $faq->name }}
+                                                {{ $faq->question }}
                                                 <br>
-                                                {{ $faq->slug }}
+                                                <span class="text-sm font-bold text-gray-500 dark:text-gray-400">
+                                                    {{-- Category --}}
+                                                    {{ $faq->category }}
+                                                </span>
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{ $faq->products_count }}
+                                                {{ $faq->answer }}
                                             </td>
                                             <td class="px-6 py-4">
                                                 {{ $faq->status }}
@@ -389,34 +383,63 @@
                                                         </button>
                                                     </div>
                                                     <!-- Modal body -->
-                                                    <div class="p-6 space-y-6 bg-white dark:bg-gray-700">
+                                                    <div class="p-6 space-y-6">
 
                                                         <div class="w-100 text-center">Basic Information</div>
 
-                                                        {{-- Uplaod Image --}}
-                                                        {{-- <div class="col-span-12">
-                                                            <div class="p-4">
-                                                                <img class="w-10 h-10" src="{{ $faq->banner->url ?? '/images/africa.jpg' }}"
-                                                                        alt="Jese image" type="image">
-                                                            </div>
-                                                            <label for="local_councils"
-                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                                Upload faq Logo</label>
-                                                            <input type="file" name="banner" id="banner"
-                                                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                placeholder="Profile Image">
-                                                        </div>   --}}
                                                         {{-- Enter name --}}
                                                         <div class="col-span-12">
-                                                            <label for="local_councils"
+                                                            <label for="question_name"
                                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                                Enter faq Name </label>
-                                                            <input type="text" name="name" id="name"
-                                                                value="{{ $faq->name }}"
+                                                                Enter Question
+                                                            </label>
+                                                            <input type="text" name="question" id="question_name" value="{{ $faq->question }}"
                                                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                placeholder="bags" required="">
+                                                                placeholder="what is DASMA" required="">
                                                         </div>
-                                                    </div>
+                                                        {{-- Descriptions --}}
+                                                        <div class="col-span-12">
+                                                            <label for="answer_description"
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                                Answer Description
+                                                            </label>
+                                                            <textarea type="text" name="answer" id="answer_description"
+                                                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                placeholder="DASMA is simple brand name for DASMA collection">{{ $faq->answer }}</textarea>
+                                                        </div>
+                                                        {{-- category and promotion --}}
+                                                        <div class="grid grid-cols-2 gap-6">
+                                                            {{-- general, technical, billing --}}
+                                                            <div class="">
+                                                                <label for="category"
+                                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                                                                <select type="text" name="category" id="category"
+                                                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                    placeholder="type of category" required="" value="">
+                                                                    {{-- <option value="">select a category</option> --}}
+                                                                    <option value="general" @selected($faq->category == 'general')>general</option>
+                                                                    <option value="technical" @selected($faq->category == 'technical')>technical</option>
+                                                                    <option value="billing" @selected($faq->category == 'billing')>billing</option>
+                                                                    {{-- <option value="">category unavailable</option> --}}
+                                                                </select>
+                                                            </div>
+                                                            {{-- draft, published, archived --}}
+                                                            <div class="">
+                                                                <label for="status"
+                                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                                                                <select type="text" name="status" id="status"
+                                                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                    placeholder="status" required="" value="">
+                                                                    {{-- <option value="">select a status</option> --}}
+                                                                    <option value="published" @selected($faq->status == 'published')>published (show to users)</option>
+                                                                    <option value="draft" @selected($faq->status == 'draft')>draft</option>
+                                                                    <option value="archived" @selected($faq->status == 'archived')>archived</option>
+                                                                    {{-- <option value="">status unavailable</option> --}}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>                                                    
                                                     <!-- Modal footer -->
                                                     <div
                                                         class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600 bg-white dark:bg-gray-700">

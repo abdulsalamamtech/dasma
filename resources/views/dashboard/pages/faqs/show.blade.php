@@ -25,34 +25,34 @@
                       {{-- ID --}}
                       <div class="flex justify-between items-start">
                           <div class="w-1/3 text-gray-700 dark:text-gray-300">ID:</div>
-                          <div class="w-7/12 text-gray-500 dark:text-gray-400"> #{{ $brand->id }}</div>
+                          <div class="w-7/12 text-gray-500 dark:text-gray-400"> #{{ $faq->id }}</div>
                       </div>
 
                       {{-- Name --}}
                       <div class="flex justify-between items-start">
-                          <div class="w-1/3 text-gray-700 dark:text-gray-300">Name:</div>
-                          <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $brand->name }}</div>
+                          <div class="w-1/3 text-gray-700 dark:text-gray-300">Question:</div>
+                          <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $faq->question }}</div>
                       </div>
 
                       <div class="flex justify-between items-start">
-                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Products No:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $brand->products_count ?? 0 }}</div>
+                        <div class="w-1/3 text-gray-700 dark:text-gray-300">Category:</div>
+                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $faq->category ?? 'N/A' }}</div>
                       </div>
 
 
                       <div class="flex justify-between items-start">
                         <div class="w-1/3 text-gray-700 dark:text-gray-300">Status:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">Active</div>
+                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $faq->status ?? 'Active' }}</div>
                       </div>
 
                       <div class="flex justify-between items-start">
                         <div class="w-1/3 text-gray-700 dark:text-gray-300">Updated at:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $brand->updated_at }}</div>
+                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $faq->updated_at }}</div>
                       </div>
 
                       <div class="flex justify-between items-start">
                         <div class="w-1/3 text-gray-700 dark:text-gray-300">Created at:</div>
-                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $brand->created_at }}</div>
+                        <div class="w-7/12 text-gray-500 dark:text-gray-400">{{ $faq->created_at }}</div>
                       </div>
 
                     </div>

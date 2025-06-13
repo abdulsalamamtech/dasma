@@ -68,6 +68,8 @@
             </div>
           </div>
 
+
+
           {{-- Contact info and form --}}
           <div class="flex flex-col justify-between pb-16 md:pb-20 lg:flex-row lg:pb-24">
             {{-- Contact info --}}
@@ -95,8 +97,6 @@
               </p>
               <p class="pt-3 font-hk text-lg font-bold text-secondary">
                 Weekend
-                {{-- FAQ --}}
-                <span id="faq"></span>
               </p>
               <p class="font-hk text-secondary">
                 <span class="text-primary">(Chat) :</span>Sat - Sun: 9.00 AM to 4.00 PM
@@ -180,6 +180,11 @@
               @endif
 
             </div>
+          </div>
+          
+          {{-- FAQ --}}
+          <div>
+              <span id="faq"></span>
           </div>
 
           {{-- Frequently ask questions --}}
