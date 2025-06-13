@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\UpdateMessageRequest;
+use App\Models\Faq;
 use App\Models\Message;
 
 class MessageController extends Controller
@@ -34,8 +35,13 @@ class MessageController extends Controller
      */
     public function create()
     {
-        return view('dasma.contact');
-    }    
+        $data = [
+            'message' => $message ?? null,
+            'faqs' => Faq::where('status', 'published')->paginate(1),
+        ];
+        // return view('dasma.contact');
+        return view('dasma.contact', $data);
+    }
 
     /**
      * Display the specified resource.
@@ -46,6 +52,7 @@ class MessageController extends Controller
         // session()->flash('success', 'message sent!');
         return view('dasma.contact', [
             'message' => $message,
+            'faqs' => Faq::where('status', 'published')->paginate(),
         ]);
     }
 
@@ -62,7 +69,7 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        
+
         $message->delete();
         return redirect()->route('admin.messages.index')->with('success', 'Message deleted successfully');
     }

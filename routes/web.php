@@ -23,9 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
-require __DIR__.'/admin.php';
-require __DIR__.'/account.php';
+require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';
+require __DIR__ . '/account.php';
 
 
 
@@ -38,13 +38,11 @@ Route::get('stores/{product:slug}', [ProductController::class, 'showProduct'])->
 
 Route::get('contact', [MessageController::class, 'create'])->name('message.create');
 Route::post('contact', [MessageController::class, 'store'])->name('message.store');
+Route::get('contact', [MessageController::class, 'create'])->name('contact');
+
 
 // Newsletter
 Route::post('newsletters', [NewsletterController::class, 'store'])->name('newsletters.store');
-
-
-
-
 
 
 Route::get('/dasma/product', function () {
@@ -56,9 +54,6 @@ Route::get('/dasma/about', function () {
     return view('dasma.about');
 })->name('about');
 
-Route::get('/dasma/contact', function () {
-    return view('dasma.contact');
-})->name('contact');
 
 
 
@@ -72,8 +67,8 @@ Route::get('/dasma/terms-and-conditions', function () {
 
 
 
-Route::get('states', function(){
-    $states=[
+Route::get('states', function () {
+    $states = [
         "Abia",
         "Adamawa",
         "Akwa-Ibom",

@@ -41,14 +41,14 @@ class FaqController extends Controller
         if (empty($data['category'])) {
             $data['category'] = 'General'; // Default category if not provided
         }
-        $faq = faq::create($data);
+        $faq = Faq::create($data);
         return redirect()->route('admin.faqs.index')->with('success', 'FAQ created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(faq $faq)
+    public function show(Faq $faq)
     {
         return view('dashboard.pages.faqs.show', [
             'faq' => $faq
@@ -58,7 +58,7 @@ class FaqController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFaqRequest $request, faq $faq)
+    public function update(UpdateFaqRequest $request, Faq $faq)
     {
         $faq->update($request->validated());
         return redirect()->route('admin.faqs.index')->with('success', 'FAQ updated successfully.');
@@ -67,7 +67,7 @@ class FaqController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(faq $faq)
+    public function destroy(Faq $faq)
     {
         $faq->delete();
         return redirect()->route('admin.faqs.index')->with('success', 'FAQ deleted successfully.');
