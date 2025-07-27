@@ -99,7 +99,7 @@ class Paystack
             'name' => $payment_data['name'],
             'email' => $payment_data['email'],
             // Convert to kobo
-            'amount' => $payment_data['amount'] * 100,
+            'amount' => ((int) $payment_data['amount'] * 100),
             // 'subaccount'=> $payment_data['payment_id'],
 
             // Test payment account information
@@ -116,6 +116,7 @@ class Paystack
             'callback_url' => $payment_data['redirect_url'] ?? url()->previous(),
 
         ];
+        // dd($payment_data , $data);
         try {
             $response = Http::withToken(config('services.paystack.secret'))
                 ->post(config('services.paystack.url') . '/transaction/initialize', $data);

@@ -3,15 +3,18 @@
 @section('content')
     <!-- Start: Main Page Content -->
     <div class="container pt-10 lg:w-100">
+
+        
+        {{-- Statistical widget --}}
         <div class="rounded-lg dark:border-gray-700 mt-20">
 
             {{-- Statistica widge --}}
-            <div class="p-6 my-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
-
+            <div class="ml-auto h-auto bg-cover bg-center bg-no-repeat p-6 my-6"
+                        style="background-image:url(/assets/img/about-hero.png)">
                 {{-- Row One --}}
                 <div class="grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4 mb-4">
                     <div
-                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        class="dark:bg-orange-900 dark:text-orange-300 dark:border-orange-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-gray-100 shadow-sm">
                         <div
                             class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -51,7 +54,7 @@
                     </div>
                     
                     <div
-                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        class="dark:bg-orange-900 dark:text-orange-300 dark:border-orange-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-gray-100 shadow-sm">
                         <div
                             class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -76,9 +79,9 @@
                             </p>
                         </div>
                     </div>
-
+    
                     <div
-                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        class="dark:bg-orange-900 dark:text-orange-300 dark:border-orange-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
                         <div
                             class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
                             <i class="fa fa-cube"></i>
@@ -98,9 +101,9 @@
                             </p>
                         </div>
                     </div>
-
+    
                     <div
-                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        class="dark:bg-orange-900 dark:text-orange-300 dark:border-orange-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
                         <div
                             class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
                             <i class="fa fa-th-large"></i>
@@ -119,8 +122,9 @@
                             </p>
                         </div>
                     </div>
-                </div>  
+                </div> 
             </div>
+            
         </div>
     </div>
     <!-- End: Main Page Content -->

@@ -339,6 +339,8 @@ class CartController extends Controller
             // $res[] = floor($num); 678
             // return $res;
 
+            // return $totalPayAmount;
+
             $payment_data = [
                 'name' => $order->address->first_name . ' ' . $order->address->first_name,
                 'email' => request()->user()->email,
@@ -346,6 +348,7 @@ class CartController extends Controller
                 'payment_id' => $order->id,
                 'redirect_url' => URL('account/orders'),
             ];
+            // return $payment_data;
             $PSP = Paystack::make($payment_data);
             if($PSP['success']){
                 // Record The transaction
