@@ -285,8 +285,10 @@ class ProductController extends Controller
         //     ->limit(24)
         //     ->get();
         // return $related_products;  
-        
-        
+
+        // Increment the views count
+        $product->increment('views');
+
         // return $product;
         return view('dasma.product', [
             'product' => $product,
@@ -324,9 +326,19 @@ class ProductController extends Controller
             ->latest()
             ->paginate();
 
+        // Get all products
+        $related_products = Product::with(['banner'])
+        // The random order might not be necessary here
+            ->inRandomOrder()
+            ->latest()
+            ->limit(24)->get();
+
+        // dd($related_products);
+
         // return $products;
         return view('dasma.search', [
-            'products' => $products
+            'products' => $products,
+            'related_products' => $related_products,
         ]);
     }
 
