@@ -163,22 +163,22 @@
                                 <div class="mb-5 sm:mb-0">
                                     <label for="name" class="mb-2 block font-hk text-secondary">Name</label>
                                     <input type="text" placeholder="Enter your name" class="form-input" name="name"
-                                        id="name" />
+                                        id="name" value="{{ old('name') ?? '' }}" />
                                 </div>
                                 <div class="">
                                     <label for="email" class="mb-2 block font-hk text-secondary">Email address</label>
-                                    <input type="text" placeholder="Enter your email" class="form-input" name="email"
-                                        id="email" />
+                                    <input type="email" placeholder="Enter your email" class="form-input" name="email"
+                                        id="email" value="{{ old('email') ?? '' }}" />
                                 </div>
                             </div>
                             <div class="mb-8 w-full">
                                 <label for="subject" class="mb-2 block font-hk text-secondary">Subject</label>
                                 <input type="text" placeholder="Enter your subject" class="form-input" name="subject"
-                                    id="subject" />
+                                    id="subject" value="{{ old('subject') ?? '' }}" />
                             </div>
                             <div class="mb-8 w-full">
                                 <label for="message" class="mb-2 block font-hk text-secondary">Message</label>
-                                <textarea rows="5" placeholder="Enter your message" class="form-textarea" name="message" id="message"></textarea>
+                                <textarea rows="5" placeholder="Enter your message" class="form-textarea" name="message" id="message">{{ old('message') }}</textarea>
                             </div>
                             <button class="btn btn-primary" aria-label="Submit button">
                                 SUBMIT

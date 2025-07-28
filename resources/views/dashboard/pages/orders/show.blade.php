@@ -523,7 +523,7 @@
                                                                 </li>
                                                                 <li>
                                                                     {{-- Deactivate --}}
-                                                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                                    <a href="{{ route('admin.users.show', $transaction->user->id) }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                                         View user
                                                                     </a>
                                                                 </li>

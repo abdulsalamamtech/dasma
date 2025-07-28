@@ -108,7 +108,7 @@
                               <!-- Add Data modal -->
                               <div id="addUserModal" tabindex="-1" aria-hidden="true"
                                   class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                  <div class="relative w-full max-w-2xl max-h-full bg-white">
+                                  <div class="relative w-full max-w-2xl max-h-full bg-white dark:bg-gray-700">
                                       <!-- Modal content -->
                                       <form action="{{ route('admin.products.product-variations.store', $product->id) }}" method="POST"
                                           class="relative bg-white rounded-lg shadow dark:bg-gray-700" enctype="multipart/form-data">
@@ -190,7 +190,7 @@
                                                       <label for="sizes"
                                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                           Size</label>
-                                                      <input type="number" name="size" id="sizes" value="{{ $product->sizes }}"
+                                                      <input type="text" name="size" id="sizes" value="{{ $product->sizes }}"
                                                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                           placeholder="XL or 40" required="">
                                                   </div>
@@ -401,7 +401,7 @@
                                               <!-- Edit user modal 1 -->
                                               <div id="editUserModal{{ $product->id }}" tabindex="-1" aria-hidden="true"
                                                   class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                                  <div class="relative w-full max-w-2xl max-h-full bg-white">
+                                                  <div class="relative w-full max-w-2xl max-h-full bg-white dark:bg-gray-700">
                                                       <!-- Modal content -->
                                                       <form 
                                                             action="{{ route('admin.products.product-variations.update',[$product->product->id, $product->id]) }}" 
@@ -487,7 +487,7 @@
                                                                       <label for="sizes"
                                                                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                                           Size</label>
-                                                                      <input type="number" name="size" id="sizes" value="{{ $product->size }}"
+                                                                      <input type="text" name="size" id="sizes" value="{{ $product->size }}"
                                                                           class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                                           placeholder="XL or 40" required="">
                                                                   </div>
