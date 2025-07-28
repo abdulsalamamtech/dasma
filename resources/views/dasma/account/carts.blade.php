@@ -171,6 +171,21 @@
                     <div class="pt-8 sm:pt-12 w-100">
                         <a href="{{ route('stores.list') }}" class="btn btn-outline">Continue Shopping</a>
                     </div>
+
+                    {{-- view cart and wishlist --}}
+                    <div class="flex items-center pt-8">
+                        <a href="{{ route('account.carts.index') }}"
+                            class="flex items-center font-hk text-secondary transition-colors hover:text-primary border border-secondary hover:border-primary px-4 py-2 rounded">
+                            <i class="bx bxs-cart text-lg"></i>
+                            <span class="pl-2">View Cart</span>
+                        </a>
+                        <span class="px-2 font-hk text-secondary">.</span>
+                        <a href="{{ route('account.wishlists.index') }}"
+                            class="flex items-center font-hk text-secondary transition-colors hover:text-primary border border-secondary hover:border-primary px-4 py-2 rounded">
+                            <i class="bx bxs-heart text-lg"></i>
+                            <span class="pl-2">View Wishlist</span>
+                        </a>
+                    </div>                     
                 </div>
 
 

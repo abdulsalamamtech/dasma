@@ -82,7 +82,7 @@
                             </li>
                             <li>
                                 <form method="post" action="{{ route('logout') }}"
-                                    class="hover:bg-red-300 dark:hover:bg-gray-700">
+                                    class="hover:bg-red-300 dark:hover:bg-gray-700 bg-red-500">
                                     @csrf
                                     <button type="submit"
                                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group">

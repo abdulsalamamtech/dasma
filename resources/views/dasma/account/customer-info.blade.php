@@ -150,13 +150,14 @@
                               <div class="py-4 md:py-5">
                                 @if (isset($addresses) && !empty($addresses))
                                   <select type="text" name="address_id" placeholder="You address" class="form-input mb-4 sm:mb-5" id="address">
-                                    <option value="1">No.234 dakata</option>
+                                    {{-- <option value="1">No.234 dakata</option> --}}
                                     @forelse ($addresses as $address)
-                                      <option value="{{ $address->id }}">
+                                      <option value="{{ $address->id }}" @selected($address->id == $order->address_id)>
                                         {{ $address->street . ' ' . $address->city . ' ' . $address->state }}
                                       </option>  
-                                      @empty
-                                      @endforelse
+                                    @empty
+                                      <option value="">No address found</option>
+                                    @endforelse
                                   </select>
                                 @else    
                                   <div @click="activeTab = 'new-address'" >

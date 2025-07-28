@@ -6,7 +6,7 @@
       <div class="container">
           <div class="relative flex mb-6">
               <div class="ml-auto h-56 w-3/4 bg-cover bg-center bg-no-repeat lg:h-68"
-                  style="background-image:url(/assets/img/unlicensed/hero-image-04.jpg)"></div>
+                  style="background-image:url(/assets/img/about-hero.png)"></div>
               <div class="c-hero-gradient-bg absolute top-0 left-0 h-56 w-full bg-cover bg-no-repeat lg:h-68">
                   <div class="py-20 px-6 sm:px-12 lg:px-20 text-center md:text-left">
                       <h1 class="font-butler text-2xl text-white sm:text-3xl md:text-4.5xl lg:text-5xl">

@@ -208,7 +208,7 @@
                                                 {{$brand?->products?->count()}}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{$brand->status}}
+                                                {{$brand->name ? 'Active' : 'Inactive'}}
                                             </td>
                                             <td class="px-6 py-4">
 

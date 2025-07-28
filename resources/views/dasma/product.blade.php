@@ -8,7 +8,10 @@
             <div class="container">
                 <div class="relative flex">
                     <div class="ml-auto h-56 w-3/4 bg-cover bg-center bg-no-repeat lg:h-68"
-                        style="background-image:url(/assets/img/unlicensed/hero-image-04.jpg)"></div>
+                        {{-- style="background-image:url(/assets/img/unlicensed/hero-image-04.jpg)" --}}
+                        {{-- /assets/img/about-hero.png --}}
+                        style="background-image:url(/assets/img/about-hero.png)"
+                        ></div>
                     <div class="c-hero-gradient-bg absolute top-0 left-0 h-56 w-full bg-cover bg-no-repeat lg:h-68">
                         <div class="py-20 px-6 sm:px-12 lg:px-20">
                             <h1 class="font-butler text-2xl text-white sm:text-3xl md:text-4.5xl lg:text-5xl">
@@ -218,6 +221,7 @@
                             @endif
                         </div>
 
+
                         {{-- Product SKU --}}
                         <div class="flex pb-2">
                             <p class="font-hk text-secondary">SKU:</p>
@@ -228,6 +232,22 @@
                         <p class="font-hk text-secondary">
                             <span class="pr-2">Categories:</span>{{ $product->category->name }}
                         </p>
+
+
+                        {{-- view cart and wishlist --}}
+                        <div class="flex items-center pt-8">
+                            <a href="{{ route('account.carts.index') }}"
+                                class="flex items-center font-hk text-secondary transition-colors hover:text-primary border border-secondary hover:border-primary px-4 py-2 rounded">
+                                <i class="bx bxs-cart text-lg"></i>
+                                <span class="pl-2">View Cart</span>
+                            </a>
+                            <span class="px-2 font-hk text-secondary">.</span>
+                            <a href="{{ route('account.wishlists.index') }}"
+                                class="flex items-center font-hk text-secondary transition-colors hover:text-primary border border-secondary hover:border-primary px-4 py-2 rounded">
+                                <i class="bx bxs-heart text-lg"></i>
+                                <span class="pl-2">View Wishlist</span>
+                            </a>
+                        </div>                           
                     </div>
                 </div>
 

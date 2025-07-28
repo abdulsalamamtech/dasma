@@ -84,7 +84,8 @@
                         class="dark:bg-orange-900 dark:text-orange-300 dark:border-orange-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
                         <div
                             class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
-                            <i class="fa fa-cube"></i>
+                            {{-- <i class="fa fa-cube"></i> --}}
+                            <i class="bx bxs-cart text-lg"></i>
                         </div>
                         <div class="p-4 text-right">
                             <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
@@ -106,7 +107,8 @@
                         class="dark:bg-orange-900 dark:text-orange-300 dark:border-orange-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
                         <div
                             class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
-                            <i class="fa fa-th-large"></i>
+                            <i class="bx bxs-box text-lg"></i>
+
                         </div>
                         <div class="p-4 text-right">
                             <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">

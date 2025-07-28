@@ -44,7 +44,10 @@
                         </div>
                         <div class="w-1/5 text-right">
                           {{-- Change address --}}
-                          <a href="{{ url()->previous() }}" class="font-hk text-primary underline">Change</a>
+                          {{-- <a href="{{ url()->previous() }}" class="font-hk text-primary underline">Change</a> --}}
+                          {{-- route('account.proceed-to-checkout', $order->id) --}}
+                          <a href="{{ route('account.proceed-to-checkout', $order->id) }}" class="font-hk text-primary underline">Change</a>
+
                         </div>
                       </div>
                       <div class="flex pt-2">
