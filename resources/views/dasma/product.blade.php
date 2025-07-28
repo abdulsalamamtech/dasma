@@ -88,9 +88,12 @@
                                 </p>
                             </div>
                             <div class="flex items-center pt-3">
-                                <span class="font-hk text-2xl text-secondary">${{ $product->price }}</span>
-                                <span
-                                    class="pl-5 font-hk text-xl text-grey-darker line-through">${{ $product->initial_price }}</span>
+                                <span class="font-hk text-2xl text-secondary">
+                                    {{ App\Helpers\Setup::currency('sign') }}{{ $product->price }}
+                                </span>
+                                <span class="pl-5 font-hk text-xl text-grey-darker line-through">
+                                    {{ App\Helpers\Setup::currency('sign') }}{{ $product->initial_price }}
+                                </span>
                             </div>
                             <div class="flex items-center pt-3 pb-8">
                                 <div class="flex items-center">
@@ -110,7 +113,7 @@
                             </p>
                         </div>
                         <p class="pb-5 font-hk text-secondary">
-                            {{ Str::limit($product->description, 50, '...') }}
+                            {{ Str::limit($product->description, 50, '...') ?? $product->name }}
                         </p>
 
                         {{-- START: Product Color --}}
@@ -257,7 +260,7 @@
                             class="tab-pane bg-grey-light py-10 transition-opacity md:py-16" role="tabpanel">
                             <div class="mx-auto w-5/6 text-center sm:text-left">
                                 <div class="font-hk text-base text-secondary">
-                                    {{ $product->description }}
+                                    {{ $product->description ?? 'No description available.' }}
                                     <br>
                                 </div>
                             </div>
