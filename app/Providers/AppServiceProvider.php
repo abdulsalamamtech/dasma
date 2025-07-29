@@ -69,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
             $thisMonthMessages = \App\Models\Message::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
 
             info([
-                "user" => request()->user()->email,
+                "user" => request()?->user()?->email,
                 "data" => ["all_msg" => $allMessages, "unread_msg" => $unreadMessages, "read_msg" => $readMessages, "this_month_msg" => $thisMonthMessages]
             ]);
 
