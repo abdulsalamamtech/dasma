@@ -32,6 +32,12 @@ class Order extends Model
         // 'status' => OrderStatusEnum::class,
     ];
 
+    // custom order id from order
+    public function orderNo(){
+        // ODR{{ date('Y') }}-{{ $order->id }} 
+        return "ORD" . $this->created_at->format('ymd') . '-' . $this->id;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
