@@ -28,7 +28,7 @@
             {{-- Product --}}
             @forelse ($products as $product)
                 {{-- START: Product Card --}}
-                <div class="group relative w-full lg:last:hidden xl:last:block">
+                <div class="group relative w-full lg:last:hidden xl:last:block" title="{{ $product->name }}">
                     <div class="relative flex items-center justify-center rounded" data-id="{{ $product->id }}">
                         <div class="h-68 w-full bg-cover bg-center bg-no-repeat"
                             style="background-image:url({{ $product->banner->url }})"></div>
@@ -89,15 +89,13 @@
                             {{-- initial price --}}
                             <div>
                                 <del class="font-hk text-base font-bold text-primary">
-                                    {{ App\Helpers\Setup::currency('sign') }}
-                                    {{ $product->initial_price }}
+                                    {{ App\Helpers\Setup::currency('sign') }} {{ $product->initial_price }}
                                 </del>
                             </div>
                             {{-- selling price --}}
                             <div>
                                 <span class="font-hk text-xl font-bold text-primary">
-                                    {{ App\Helpers\Setup::currency('sign') }}
-                                    {{ $product->price }}
+                                    {{ App\Helpers\Setup::currency('sign') }} {{ $product->price }}
                                 </span>
                             </div>
                         </div>

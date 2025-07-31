@@ -73,7 +73,7 @@
                 @forelse ($related_products as $product)
                     {{-- START: Product Card --}}
                 <div class="splide__slide group relative pt-16 md:pt-0">
-                    <div class="sm:px-5 lg:px-4">
+                    <div class="sm:px-5 lg:px-4" title="{{ $product->name }}">
                         <div class="relative flex items-center justify-center rounded" data-id="{{ $product->id }}">
                             <div class="h-68 w-full bg-cover bg-center bg-no-repeat"
                                 style="background-image:url({{ $product->banner->url }})"></div>
@@ -115,6 +115,7 @@
                         </div>
                         <div class="flex items-center justify-between pt-6">
                             <div>
+                                {{-- Display product name and rating --}}
                                 <h3 class="font-hk text-base text-secondary">{{ $product->name }}</h3>
                                 <div class="flex items-center">
                                     <div class="flex items-center">
@@ -134,15 +135,13 @@
                                 {{-- initial price --}}
                                 <div>
                                     <del class="font-hk text-base font-bold text-primary">
-                                        {{ App\Helpers\Setup::currency('sign') }}
-                                        {{ $product->initial_price }}
+                                        {{ App\Helpers\Setup::currency('sign') }} {{ $product->initial_price }}
                                     </del>
                                 </div>
                                 {{-- selling price --}}
                                 <div>
                                     <span class="font-hk text-xl font-bold text-primary">
-                                        {{ App\Helpers\Setup::currency('sign') }}
-                                        {{ $product->price }}
+                                        {{ App\Helpers\Setup::currency('sign') }} {{ $product->price }}
                                     </span>
                                 </div>
                             </div>

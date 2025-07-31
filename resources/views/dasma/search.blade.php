@@ -32,7 +32,7 @@
                     {{-- Product --}}
                     @forelse ($products as $product)
                         {{-- START: Product Card --}}
-                        <div class="group relative w-full lg:last:hidden xl:last:block">
+                        <div class="group relative w-full lg:last:hidden xl:last:block" title="{{ $product->name }}">
                             <div class="relative flex items-center justify-center rounded" data-id="{{ $product->id }}">
                                 <div class="h-68 w-full bg-cover bg-center bg-no-repeat"
                                     style="background-image:url({{ $product->banner->url }})"></div>
