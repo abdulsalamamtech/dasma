@@ -29,7 +29,7 @@
                         <!-- Add Data modal -->
                         <div id="addUserModal" tabindex="-1" aria-hidden="true"
                             class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                            <div class="relative w-full max-w-2xl max-h-full bg-white">
+                            <div class="relative w-full max-w-2xl max-h-full bg-white dark:bg-gray-700">
                                 <!-- Modal content -->
                                 <form action="{{ route('admin.categories.store') }}" method="POST"
                                     class="relative bg-white rounded-lg shadow dark:bg-gray-700" enctype="multipart/form-data">
@@ -114,15 +114,15 @@
                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                     aria-labelledby="dropdownActionButton">
                                     <li>
-                                        <a href="#"
+                                        <a href="{{ route('admin.categories.index') }}"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All</a>
                                     </li>
                                     <li>
-                                        <a href="#"
+                                        <a href="{{ route('admin.categories.index') }}?status=active"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Active</a>
                                     </li>
                                     <li>
-                                        <a href="#"
+                                        <a href="{{ route('admin.categories.index') }}?status=inactive"
                                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Inactive</a>
                                     </li>
                                 </ul>
@@ -205,7 +205,15 @@
                                                 {{$category->products_count}}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{$category->status}}
+                                                @if ($category->products_count > 0)
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
+                                                        Active
+                                                    </span>
+                                                @else
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300">
+                                                        Inactive
+                                                    </span>
+                                                @endif
                                             </td>
                                             <td class="px-6 py-4">
 
@@ -276,7 +284,7 @@
                                         <!-- Edit user modal 1 -->
                                         <div id="editUserModal{{ $category->id }}" tabindex="-1" aria-hidden="true"
                                             class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                            <div class="relative w-full max-w-2xl max-h-full bg-white">
+                                            <div class="relative w-full max-w-2xl max-h-full bg-white dark:bg-slate-700">
                                                 <!-- Modal content -->
                                                 <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" enctype="multipart/form-data"
                                                     class="relative rounded-lg shadow bg-white dark:bg-gray-700">
@@ -303,21 +311,8 @@
                                                     <!-- Modal body -->
                                                     <div class="p-6 space-y-6 bg-white dark:bg-gray-700">
 
-                                                        <div class="w-100 text-center">Basic Information</div>
+                                                        <div class="w-100 text-center dark:text-gray-200">Basic Information</div>
 
-                                                        {{-- Uplaod Image --}}
-                                                        {{-- <div class="col-span-12">
-                                                            <div class="p-4">
-                                                                <img class="w-10 h-10" src="{{ $category->banner->url ?? '/images/africa.jpg' }}"
-                                                                        alt="Jese image" type="image">
-                                                            </div>
-                                                            <label for="local_councils"
-                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                                Upload category Logo</label>
-                                                            <input type="file" name="banner" id="banner"
-                                                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                placeholder="Profile Image">
-                                                        </div>   --}}
                                                         {{-- Enter name --}}
                                                         <div class="col-span-12">
                                                             <label for="local_councils"

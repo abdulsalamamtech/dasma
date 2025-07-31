@@ -35,7 +35,7 @@
                             {{-- Product Tag --}}
                             <div class="absolute top-0 right-0 m-4 rounded-full bg-white px-5 py-1">
                                 <p class="{{ $product->tagDesign() }} font-hk font-bold text-sm uppercase tracking-wide">
-                                    {{ $product->tag }}
+                                    {{ $product->tag ?? 'trend' }}
                                 </p>
                             </div>
                         <div
@@ -105,7 +105,11 @@
                 </div>
                 {{-- END: Product Card --}}
             @empty
-                <p>No products found.</p>
+                <div class="col-span-12 text-center">
+                    <h2 class="font-butler text-3xl text-red-400 md:text-4xl lg:text-4.5xl">
+                        No products found.
+                    </h2>
+                </div>
             @endforelse
 
           </div>
@@ -116,6 +120,15 @@
                     {{ $products->withQueryString()->links() }}
                 @endif
           </div> 
+
+        {{-- Start: Related Products --}}
+        @if ($related_products)
+            {{-- @include('dasma.home.related-products', ['products' => $related_products]) --}}
+            @include('dasma.home.related-products')
+        @endif
+        {{-- End: Related Products --}}
+        
+        
       </div>
     </div>
     <!-- End: Main Page Content -->

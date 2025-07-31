@@ -110,7 +110,7 @@
                         {{-- END: Product Card --}}
                     @empty
                         <div class="col-span-12 text-center">
-                            <h2 class="font-butler text-3xl text-secondary md:text-4xl lg:text-4.5xl">
+                            <h2 class="font-butler text-3xl text-red-500 md:text-4xl lg:text-4.5xl">
                                 No products found.
                             </h2>
                         </div>

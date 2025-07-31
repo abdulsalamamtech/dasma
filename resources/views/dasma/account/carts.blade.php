@@ -152,8 +152,13 @@
                                 </div>
                                 {{-- End of cart item --}}
                             @empty
-                                <div class="flex justify-center items-center text-center text-secondary p-4">
-                                    Your cart is empty
+                                {{-- <div class="flex justify-center items-center text-center text-secondary p-4">
+                                   
+                                </div> --}}
+                                <div class="col-span-12 text-center pt-4">
+                                    <h2 class="font-butler text-3xl text-red-500 md:text-4xl lg:text-4.5xl">
+                                        Your cart is empty
+                                    </h2>
                                 </div>
                             @endforelse
 

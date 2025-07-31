@@ -47,7 +47,7 @@
                         <div class="w-full border-b border-grey-dark pb-4 text-center sm:w-1/5 sm:border-b-0 sm:pb-0">
                             <span
                                 class="font-hkbold block pt-3 pb-2 text-center text-sm uppercase text-secondary sm:hidden">S/N</span>
-                            <span class="font-hk text-secondary">OD{{ $order->id . $order->items->count() }}</span>
+                            <span class="font-hk text-secondary">{{ $order->orderNo()}}</span>
                         </div>
                         {{-- Quantity --}}
                         <div class="w-full border-b border-grey-dark pb-4 text-center sm:w-1/5 sm:border-b-0 sm:pb-0">
