@@ -15,11 +15,12 @@ class CategoryController extends Controller
     public function index()
     {
         // Search for categories
-        if(request()->filled('search')){
+        if (request()->filled('search')) {
             $search = request('search');
             $categories = $this->search($search);
-        }else{
+        } else {
             $categories = Category::with(['products'])
+                ->withCount('products')
                 ->latest()
                 ->paginate();
         }
@@ -67,11 +68,11 @@ class CategoryController extends Controller
 
         // check if slug exists and add random number
         while (Category::where('slug', $data['slug'])->where('id', '!=', $category->id)->exists()) {
-            $data['slug'] = $data['slug']. '-'. rand(1000, 9999);
+            $data['slug'] = $data['slug'] . '-' . rand(1000, 9999);
         }
 
         // update the category slug
-        if($request->filled('name')){
+        if ($request->filled('name')) {
             $data['slug'] = Str::slug($data['name']);
         }
 
@@ -91,14 +92,14 @@ class CategoryController extends Controller
         $category->delete();
         $message = "category deleted successfully";
         return redirect()->back()->with('success', $message);
-
     }
 
     /**
      * Search for categories
      */
-    private function search(string  $search){
-        $categories = Category::where('name', 'LIKE', '%'.$search.'%')
+    private function search(string  $search)
+    {
+        $categories = Category::where('name', 'LIKE', '%' . $search . '%')
             ->withCount(['products'])
             ->latest()
             ->paginate();

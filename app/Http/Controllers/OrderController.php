@@ -151,6 +151,7 @@ class OrderController extends Controller
         if ($search) {
             $orders = Order::with(['user', 'address', 'items'])
                 ->WhereAny([
+                    'id',
                     'user_id',
                     'total_amount',
                     'coupon',
