@@ -5,19 +5,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
-    <title>DASMA - Home | store, ecommerce and more</title>
-    <link rel="canonical" href="https://elyssi.redpixelthemes.com" />
-    <meta property="og:title" content="Home | Elyssi Template" />
+    <title>DASMA - Premium Fabrics for Every Occasion</title>
+    <link rel="canonical" href="https://dasmacollection.com" />
+    <meta property="og:title" content="Home | DASMA Premium Fabrics for Every Occasion" />
     <meta property="og:locale" content="en_US" />
     <meta name="theme-color" content="#f35627" />
-    <meta property="og:url" content="https://elyssi.redpixelthemes.com/" />
+    <meta property="og:url" content="/dasma-banners/dasma-logo-temp.jpg" />
     <meta name="description"
-        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
+        content="DASMA – Premium Fabrics for Every Occasion : “Celebrating Life in Luxury Fabrics.”" />
 
-    <meta property="og:site_name" content="DASMA e-commerce" />
-    <meta property="og:image" content="/assets/img/social.jpg" />
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:site_name" content="DASMA e-commerce website" />
+    <meta property="og:image" content="/dasma-banners/dasma-logo-temp.jpg" />
+    <link rel="icon" type="image/png" href="/dasma-banners/dasma-logo-temp.jpg" />
+    <meta name="twitter:card" content="DASMA – Premium Fabrics for Every Occasion : “Celebrating Life in Luxury Fabrics.”" />
     <meta name="twitter:site" content="@tailwindmade" />
 
     <link rel="stylesheet" href="/npm/boxicons-2.0.5/css/boxicons.min.css" />

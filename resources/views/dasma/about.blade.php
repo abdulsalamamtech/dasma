@@ -3,7 +3,7 @@
 @section('content')
     <!-- Start: Main Page Content -->
     <div>
-        <div class="container">
+        <div class="container pt-10 lg:w-100">
         <div class="relative flex">
             <div class="ml-auto h-56 w-3/4 bg-cover bg-center bg-no-repeat lg:h-68"
             style="background-image:url(/assets/img/about-hero.png)"></div>
@@ -27,45 +27,32 @@
             Get To Know Us
             </h1>
             <p class="mx-auto mt-6 mb-12 text-center font-hk text-base text-secondary lg:mt-10 lg:w-3/4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Risus ultricies tristique nulla aliquet enim tortor at auctor. Mattis vulputate enim
-            nulla aliquet porttitor lacus luctus accumsan. Volutpat ac tincidunt vitae semper quis lectus nulla at. Odio
-            euismod lacinia at quis.
+                DASMA – Premium Fabrics for Every Occasion : “Celebrating Life in Luxury Fabrics.”
             </p>
             <div class="flex flex-col justify-between text-center sm:text-left md:flex-row">
             <div class="md:w-1/2">
                 <div class="px-4">
-                <div class="aspect-w-16 aspect-h-11">
-                    <img src="/assets/img/unlicensed/about-image-01.png" alt="column image" class="object-cover" />
-                </div>
-                <p class="mt-10 font-hk text-base text-secondary">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Dignissim diam quis enim lobortis scelerisque. Suspendisse interdum consectetur
-                    libero id faucibus nisl tincidunt eget nullam. Morbi non arcu risus quis varius quam quisque id diam.
-                    Lectus proin nibh nisl condimentum. Sed cras ornare arcu dui vivamus. Placerat vestibulum lectus
-                    mauris ultrices. A iaculis at erat pellentesque adipiscing commodo elit at. Euismod lacinia at quis
-                    risus. <br /> <br /> Mattis nunc sed blandit libero. Turpis egestas sed tempus urna. Morbi quis
-                    commodo odio aenean sed adipiscing diam. Euismod quis viverra nibh cras pulvinar mattis nunc sed
-                    blandit. Amet mauris commodo quis imperdiet massa tincidunt. Faucibus ornare suspendisse sed nisi
-                    lacus sed viverra tellus. Id semper risus in hendrerit gravida rutrum. Eget nunc scelerisque viverra
-                    mauris in. Tortor vitae purus faucibus ornare suspendisse sed nisi lacus. Justo eget magna fermentum
-                    iaculis eu non diam phasellus vestibulum.
-                </p>
+                    <div class="aspect-w-16 aspect-h-11">
+                        <img src="/assets/img/unlicensed/post-08.jpg" alt="column image" class="object-cover" />
+                    </div>
+                    <h2 class="mt-10">Who We Are</h2>
+                    <p class="mt-2 font-hk text-base text-secondary">
+                        •	DASMA supplies high-quality fabrics for everyday elegance and special events. <br>
+                        •	We offer lace, Ankara, gini, Kampala, sheda, and more — perfect for aso ebi and celebrations.
+                    </p>
                 </div>
             </div>
             <div class="mt-12 md:mt-0 md:w-1/2">
                 <div class="px-4">
-                <div class="aspect-w-16 aspect-h-11">
-                    <img src="/assets/img/unlicensed/about-image-02.jpg" alt="column image" class="object-cover" />
-                </div>
-                <p class="mt-10 font-hk text-base text-secondary">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Dignissim diam quis enim lobortis scelerisque. Suspendisse interdum consectetur
-                    libero id faucibus nisl tincidunt eget nullam. Morbi non arcu risus quis varius quam quisque id diam.
-                    <br /> <br /> Mattis nunc sed blandit libero. Turpis egestas sed tempus urna. Morbi quis commodo odio
-                    aenean sed adipiscing diam. Euismod quis viverra nibh cras pulvinar mattis nunc sed blandit. Amet
-                    mauris commodo quis imperdiet massa tincidunt.
-                </p>
+                    <div class="aspect-w-16 aspect-h-11">
+                        <img src="/assets/img/unlicensed/purse-1.png" alt="column image" class="object-cover" />
+                    </div>
+                    <h2 class="mt-10">Why Choose DASMA?</h2>
+                    <p class="mt-2 font-hk text-base text-secondary">
+                        •	Wide Variety: From vibrant prints to luxurious lace. <br>
+                        •	Quality You Can Trust: Carefully sourced, premium-grade fabrics. <br>
+                        •	Event Ready: Fabrics that make weddings, parties, and occasions unforgettable.                    
+                    </p>                
                 </div>
             </div>
             </div>
@@ -73,7 +60,7 @@
         <div class="mb-16 text-center md:mt-5 md:mb-20 lg:mb-24">
             <div class="mx-auto h-56 w-56 overflow-hidden rounded-full">
             <div class="aspect-w-1 aspect-h-1">
-                <img src="/assets/img/unlicensed/team-01.jpg" alt="profile image" class="object-cover" />
+                <img src="/dasma-banners/oladayo-img-logo.jpg" alt="profile image" class="object-cover" />
             </div>
             </div>
             <h3
@@ -97,9 +84,7 @@
                     Our Mission
                 </h4>
                 <p class="pt-6 font-hk text-base text-white md:pt-8">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. <br /><br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    "To provide high-quality fabrics that enhance your style and confidence, making every occasion special."
                 </p>
                 </div>
             </div>
@@ -109,12 +94,7 @@
                     Our Vision
                 </h4>
                 <p class="pt-6 font-hk text-base text-white md:pt-8">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. <br /><br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br /><br /> Lorem
-                    ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.
+                    "To become the leading fabric brand, and later expand into ready-to-wear fashion and lifestyle products."
                 </p>
                 </div>
             </div>
@@ -127,9 +107,7 @@
                 Dasma is a Stockholm-based, fashion and creativity company
             </h3>
             <p class="mx-auto mt-8 mb-12 font-hk text-secondary sm:mt-10 md:text-lg lg:pb-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
+                We are a Stockholm-based fashion and creativity company, specializing in high-quality fabrics for everyday elegance and special events. Our mission is to provide you with the finest fabrics that enhance your style and confidence, making every occasion special. We offer a wide variety of fabrics, including lace, Ankara, gini, Kampala, sheda, and more, perfect for aso ebi and celebrations. Our carefully sourced, premium-grade fabrics ensure that you get the ultimate stylish look at an affordable price.
             </p>
             {{-- <div
                 class="relative mx-auto flex h-64 cursor-pointer items-center justify-center bg-cover bg-center bg-no-repeat sm:h-80 md:h-100 lg:h-128"
