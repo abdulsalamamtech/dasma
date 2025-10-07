@@ -34,7 +34,8 @@ return new class extends Migration
                 'received',
                 'rejected',
                 'returned',
-                'refunded'
+                'refunded',
+                'delivered' // recently added
             ])->default('pending');
             $table->timestamps();
             $table->softDeletes();

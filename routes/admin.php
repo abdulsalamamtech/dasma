@@ -76,7 +76,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Customers routes
     Route::apiResource('users', UserController::class);
-    // Transactions routes
+    // Newsletter routes
     Route::apiResource('newsletters', NewsletterController::class)
     ->except(['store']);
 
