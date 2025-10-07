@@ -127,7 +127,8 @@ class OrderController extends Controller
                 'received',
                 'rejected',
                 'returned',
-                'refunded'
+                'refunded',
+                'delivered'
         ];
     }
 

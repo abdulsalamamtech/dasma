@@ -54,28 +54,34 @@
                    <a href="{{ route('index') }}"
                        class="font-butler text-4xl uppercase tracking-wider text-white">Dasma.</a>
                    <div class="flex items-center justify-center pt-5">
-                       <a href="https://www.google.com/" class="group">
+                       <a href="https://facebok.com/dasmacollection" class="group">
                            <div
                                class="mr-5 flex items-center rounded-full bg-white px-2 py-2 transition-colors group-hover:bg-primary">
                                <i class="bx bxl-facebook text-secondary transition-colors group-hover:text-white"></i>
                            </div>
                        </a>
-                       <a href="https://www.google.com/" class="group">
+                       <a href="https://www.youtube.com/@dasmacollection" class="group">
                            <div
                                class="mr-5 flex items-center rounded-full bg-white px-2 py-2 transition-colors group-hover:bg-primary">
-                               <i class="bx bxl-twitter text-secondary transition-colors group-hover:text-white"></i>
+                               <i class="bx bxl-youtube text-secondary transition-colors group-hover:text-white"></i>
                            </div>
                        </a>
-                       <a href="https://www.google.com/" class="group">
+                       <a href="https://www.instagram.com/dasmacollection/" class="group">
                            <div
                                class="mr-5 flex items-center rounded-full bg-white px-2 py-2 transition-colors group-hover:bg-primary">
                                <i class="bx bxl-instagram text-secondary transition-colors group-hover:text-white"></i>
                            </div>
                        </a>
-                       <a href="https://www.google.com/" class="group">
+                       <a href="https://www.tiktok.com/@dasmacollection" class="group">
                            <div
                                class="mr-5 flex items-center rounded-full bg-white px-2 py-2 transition-colors group-hover:bg-primary">
-                               <i class="bx bxl-pinterest text-secondary transition-colors group-hover:text-white"></i>
+                               {{-- <i class="bsl bx-tiktok text-secondary transition-colors group-hover:text-white"></i> --}}
+                               <svg class="bx bxl-tiktok text-secondary transition-colors group-hover:text-white" 
+                                xmlns="http://www.w3.org/2000/svg" width="20" height="20"  
+                                fill="currentColor" viewBox="0 0 24 24" >
+                                <!--Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free-->
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 3 3 0 0 1 .88.13V9.4a7 7 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a5 5 0 0 1-1-.1z"></path>
+                                </svg>
                            </div>
                        </a>
                    </div>
