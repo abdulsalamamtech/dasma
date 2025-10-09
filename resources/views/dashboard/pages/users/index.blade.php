@@ -358,8 +358,8 @@
                                     <th scope="row"
                                         class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                         <img class="w-10 h-10 rounded-full"
-                                            src="{{ '/dasma-banners/20250523_084533.jpg' ?? 'https://flowbite.com/docs/images/people/profile-picture-5.jpg' }}"
-                                            alt="Jese image">
+                                            src="{{ asset('/dasma-banners/oladayo-img-logo.jpg') ?? 'https://flowbite.com/docs/images/people/profile-picture-5.jpg' }}"
+                                            alt="Profile image">
                                         <div class="ps-3">
                                             <div class="text-base font-semibold">{{ $user->name }}</div>
                                             <div class="font-normal text-gray-500">({{ $user->role ?? 'customer' }})</div>
