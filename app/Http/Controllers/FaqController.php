@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFaqRequest;
 use App\Http\Requests\UpdateFaqRequest;
 use App\Models\Faq;
+use Illuminate\Support\Facades\Auth;
 
 class FaqController extends Controller
 {
@@ -15,10 +16,10 @@ class FaqController extends Controller
     {
         // Fetch all FAQs from the database
         // Search for faqs
-        if(request()->filled('search')){
+        if (request()->filled('search')) {
             $search = request('search');
             $faqs = $this->search($search);
-        }else{
+        } else {
             $faqs = Faq::latest()->paginate();
         }
         // return $faqs;
@@ -32,9 +33,11 @@ class FaqController extends Controller
      */
     public function store(StoreFaqRequest $request)
     {
+
         $data = $request->validated();
         // created by
-        $data['created_by'] = auth()->id(); // Assuming you want to store the ID of the authenticated user
+        $data['created_by'] = $request->user()->id;
+
         // Set default status if not provided
         $data['status'] = $data['status'] ?? 'draft'; // Default to 'draft' if not provided
         // Create the FAQ
@@ -76,12 +79,13 @@ class FaqController extends Controller
     /**
      * Search for faqs
      */
-    private function search(string  $search){
+    private function search(string  $search)
+    {
         $faqs = Faq::whereAny(
-                ['question', 'answer', 'category'],
-                'like',
-                "%{$search}%"
-            )
+            ['question', 'answer', 'category'],
+            'like',
+            "%{$search}%"
+        )
             ->orWhereHas('createdBy', function ($query) use ($search) {
                 $query->where('name', 'like', "%{$search}%");
             })
@@ -89,5 +93,5 @@ class FaqController extends Controller
             ->paginate();
 
         return $faqs;
-    }    
+    }
 }
