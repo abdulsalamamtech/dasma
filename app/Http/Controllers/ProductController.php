@@ -20,9 +20,6 @@ class ProductController extends Controller
     public function index()
     {
 
-        // Get active promotions
-        $activePromotions = Promotion::active()->get();
-        return $activePromotions;
         if (request()->filled('status') 
         && in_array(request()->input('status'),['active', 'inactive'])) {
             $products = $this->filterByStatus();

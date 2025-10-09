@@ -134,9 +134,6 @@ $app_brand = [
                                         Address
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Date
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
                                         Status
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -194,6 +191,9 @@ $app_brand = [
                                                     <div>
                                                         Order No. {{$order?->orderNo()}}
                                                     </div>
+                                                    <div class="text-sm text-gray-500 text-dark:text-gray-400 italic font-semibold">
+                                                        {{$order?->created_at?->format('D d, M Y')}}
+                                                    </div>
                                                 </div>
                                             </td>
                                             {{-- Address --}}
@@ -209,9 +209,6 @@ $app_brand = [
                                                         {{$order->address?->street . ' ' . $order->address?->city . ' ' . $order->address?->state . ' ' . $order->address?->country}}
                                                     </div>
                                                 </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {{$order->created_at->format('D d, M Y')}}
                                             </td>
                                             <td class="px-6 py-4">
                                                 {{$order->status}}

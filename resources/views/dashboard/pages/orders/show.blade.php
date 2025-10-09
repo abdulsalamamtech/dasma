@@ -196,7 +196,7 @@
                             <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
                                 <div class="grid grid-cols-4 gap-6">
                                     @forelse ($order->items as $item)
-                                    <div class="border border-gray-400 shadow-sm p-3 text-gray-900 dark:text-white">
+                                    <a href="{{ route('admin.products.show', $item->product->id) }}" class="border border-gray-400 shadow-sm p-3 text-gray-900 dark:text-white">
                                         <img src="{{ $item->product->banner->url }}" alt="{{ $item->product->name }}" class="w-[100%] h-[250px] pb-4">
                                         <h4><span class="text-gray-500 pb-2">Name: </span>{{ $item->product->name }}</h4>
                                         <div class="flex items-center justify-between pb-2">
@@ -206,7 +206,7 @@
                                         </div>
                                         <h4><span class="text-gray-500 pb-2">Price: </span>{{  $item->price }}</h4>
                                         <h4><span class="text-gray-500 pb-2">Total: </span>{{ App\Helpers\Setup::currency() .' '.  ($item->price * $item->quantity)}}</h4>
-                                    </div>
+                                    </a>
                                     @empty
                                         <div>unable to load order items</div>
                                     @endforelse

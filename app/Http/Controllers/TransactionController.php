@@ -27,9 +27,36 @@ class TransactionController extends Controller
                 ->latest()
                 ->paginate();
         }
-        // return $brands;
+
+        // All transactions data
+        $transaction_data = Transaction::all();
+        // total
+        $data['total'] = $transaction_data;
+        // total amount
+        $data['total_amount'] = $transaction_data->sum('amount');
+        // pending
+        $data['pending'] = $transaction_data->where('status', 'pending');
+        // successful
+        $data['successful'] = $transaction_data->where('status', 'successful');
+        // failed
+        $data['failed'] = $transaction_data->where('status', 'failed');
+        // abandoned
+        $data['abandoned'] = $transaction_data->where('status', 'abandoned');
+        // refunded
+        $data['refunded'] = $transaction_data->where('status', 'refunded');
+        // this month
+        $data['this_month'] = $transaction_data->where('created_at', '>=', now()->startOfMonth());
+        // last month
+        $data['last_month'] = $transaction_data->whereBetween('created_at', [now()->subMonth()->startOfMonth(), now()->subMonth()->endOfMonth()]);
+        // last 3 months
+        $data['last_3_months'] = $transaction_data->whereBetween('created_at', [now()->subMonths(3)->startOfMonth(), now()->endOfMonth()]);
+        // this year
+        $data['this_year'] = $transaction_data->where('created_at', '>=', now()->startOfYear());
+
+        // return $data;
         return view('dashboard.pages.transactions.index', [
-            'transactions' => $transactions
+            'transactions' => $transactions,
+            'data' => $data
         ]);
     }
 

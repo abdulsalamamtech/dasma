@@ -30,7 +30,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- ₦ {{ Number::abbreviate(auth()->user()->statistics()['admin']['transactions']['amount'] ?? 0, 2) }} --}}
+                                ₦ {{ Number::abbreviate($data['total_amount'] ?? 0, 2) }}
                             </h4>
                         </div>
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
@@ -60,7 +60,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['transactions']['total'] ?? 0, 2) }} --}}
+                                {{ Number::abbreviate($data['total']->count() ?? 0, 2) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -91,7 +91,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- ₦ {{ Number::abbreviate(auth()->user()->statistics()['admin']['transactions']['success_amount'] ?? 0, 2) }} --}}
+                                ₦ {{ Number::abbreviate($data['successful']->sum('amount') ?? 0, 2) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -112,7 +112,7 @@
                                 Successful Total</p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['transactions']['success_total'] ?? 0, 2) }} --}}
+                                {{ Number::abbreviate($data['successful']->count() ?? 0, 2) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -123,7 +123,7 @@
                     </div>
                 </div>
 
-                <div class="grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
+                <div class="grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4 mb-4">
                     <!-- Card -->
                     <div
                         class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
@@ -137,7 +137,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- ₦ {{ Number::abbreviate(auth()->user()->statistics()['admin']['transactions']['pending_amount'] ?? 0) }} --}}
+                                ₦ {{ Number::abbreviate($data['pending']->sum('amount') ?? 0) }}
                             </h4>
                         </div>
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
@@ -158,7 +158,7 @@
                                 Pending Total</p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['transactions']['pending_total'] ?? 0, 2) }} --}}
+                                {{ Number::abbreviate($data['pending']->count() ?? 0, 2) }}
                             </h4>
                         </div>
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
@@ -179,7 +179,7 @@
                                 This Month Amount</p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- ₦ {{ Number::abbreviate(auth()->user()->statistics()['admin']['installment_amount'] ?? 0, 2) }} --}}
+                                ₦ {{ Number::abbreviate($data['this_month']->sum('amount') ?? 0, 2) }}
                             </h4>
                         </div>
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
@@ -200,7 +200,33 @@
                                 Total This Month</p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->user()->statistics()['admin']['installments'] ?? 0, 2) }} --}}
+                                {{ Number::abbreviate($data['this_month']->count() ?? 0, 2) }}
+                            </h4>
+                        </div>
+                        <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-green-500">+0.0%</strong>&nbsp;than last week
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
+                    <!-- Card -->
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <i class="fa fa-money text-white text-xl"></i>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Last Month Transactions
+                            </p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                ₦ {{ Number::abbreviate($data['last_month']->sum('amount') ?? 0) }}
                             </h4>
                         </div>
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
@@ -209,9 +235,71 @@
                             </p>
                         </div>
                     </div>
+                    <!-- Card -->
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <i class="fa fa-money text-white text-xl"></i>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Last Month Total</p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                {{ Number::abbreviate($data['last_month']->count() ?? 0, 2) }}
+                            </h4>
+                        </div>
+                        <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-green-500">+0.1%</strong>&nbsp;than last week
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Card -->
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <i class="fa fa-money text-white text-xl"></i>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                This Year Amount</p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                ₦ {{ Number::abbreviate($data['this_year']->sum('amount') ?? 0, 2) }}
+                            </h4>
+                        </div>
+                        <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-green-500">+5%</strong>&nbsp;than last week
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Card -->
+                    <div
+                        class="dark:bg-gray-700 dark:text-gray-300 dark:border-gray-700 relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 border border-blue-gray-100 shadow-sm">
+                        <div
+                            class="bg-clip-border mt-4 mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-gray-900 to-gray-800 text-white shadow-gray-900/20 absolute grid h-12 w-12 place-items-center">
+                            <i class="fa fa-money text-white text-xl"></i>
+                        </div>
+                        <div class="p-4 text-right">
+                            <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
+                                Total This Year</p>
+                            <h4
+                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
+                                {{ Number::abbreviate($data['this_year']->count() ?? 0, 2) }}
+                            </h4>
+                        </div>
+                        <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
+                            <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                                <strong class="text-green-500">+0.0%</strong>&nbsp;than last week
+                            </p>
+                        </div>
+                    </div>
 
                 </div>
-
             </div>
             {{-- End of Statistics --}}
 
@@ -255,16 +343,16 @@
                                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                         aria-labelledby="dropdownActionButton">
                                         <li>
-                                            <a href="#"
+                                            <a href="{{ route('admin.transactions.index') }}"
                                                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All</a>
                                         </li>
                                         <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Active</a>
+                                            <a href="{{ route('admin.transactions.index', ['status' => 'successful']) }}"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Successful</a>
                                         </li>
                                         <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Inactive</a>
+                                            <a href="{{ route('admin.transactions.index', ['status' => 'pending']) }}"
+                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pending</a>
                                         </li>
                                     </ul>
                                 </div>

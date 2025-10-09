@@ -364,7 +364,7 @@
                                 <div id="editmessageModal{{ $message->id }}" tabindex="-1" aria-hidden="true"
                                     class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                     <div
-                                        class="relative w-full max-w-2xl max-h-full bg-white dark:bg-slate-700 dark:bg-gray-700">
+                                        class="relative w-full max-w-2xl max-h-full bg-white  dark:bg-slate-700 dark:bg-gray-700">
                                         <!-- Modal content -->
                                         <form class="relative bg-white rounded-lg shadow dark:bg-gray-700"
                                             action="{{ route('admin.message-replies.store') }}" method="POST">
@@ -390,7 +390,7 @@
                                                 </button>
                                             </div>
                                             <!-- Modal body -->
-                                            <div class="p-6 space-y-6 dark:bg-gray-700">
+                                            <div class="p-6 space-y-6 bg-white dark:bg-gray-700">
                                                 <div class="grid grid-cols-6 gap-6">
                                                     <div class="col-span-6 sm:col-span-3">
                                                         <label for="first-name"
@@ -437,7 +437,7 @@
                                                     {{-- Order Information --}}
                                                     <h2 id="accordion-collapse-heading-1{{ $message->id }}">
                                                         <button type="button"
-                                                            class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 bg-gray-600 gap-3"
+                                                            class="flex items-center justify-between w-full p-5 font-medium rtl:text-right  bg-white text-gray-500 border border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 bg-gray-100 gap-3"
                                                             data-accordion-target="#accordion-collapse-body-1{{ $message->id }}"
                                                             aria-expanded="false"
                                                             aria-controls="accordion-collapse-body-1{{ $message->id }}">
@@ -453,7 +453,7 @@
                                                     </h2>
                                                     <div id="accordion-collapse-body-1{{ $message->id }}" class="hidden"
                                                         aria-labelledby="accordion-collapse-heading-1{{ $message->id }}">
-                                                        <div class="p-5 border border-gray-200 dark:border-gray-700">
+                                                        <div class="p-5 border  bg-white border-gray-200 dark:border-gray-700">
 
                                                             {{-- Product Items Image --}}
                                                             <div
