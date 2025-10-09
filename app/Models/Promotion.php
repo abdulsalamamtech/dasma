@@ -37,5 +37,12 @@ class Promotion extends Model
         return $this->hasMany(Product::class);
     }
 
+    // active scope
+    public function scopeActive($query){
+        return $query
+        ->where('active', true)
+        ->where('end_date', '>=', now());
+    }
+
     
 }

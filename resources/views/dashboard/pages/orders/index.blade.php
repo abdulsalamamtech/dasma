@@ -338,13 +338,13 @@ $app_brand = [
                                                                 <div class="col-span-12 bg-white dark:bg-gray-700">
                                                                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                                                                         @forelse ($order?->items as $item)
-                                                                        <div class="border border-gray-400 shadow-sm p-3 text-gray-900 dark:text-white">
-                                                                            <img src="{{ $item?->product?->banner?->url }}" alt="{{ $item?->product?->name }}" class="w-12 h-12">
-                                                                            <h4><span class="text-gray-500">Name: </span>{{ $item?->product?->name }}</h4>
-                                                                            <h4><span class="text-gray-500">Qty: </span>{{  $item?->quantity }}</h4>
-                                                                            <h4><span class="text-gray-500">Price: </span>{{  $item?->price }}</h4>
-                                                                            <h4><span class="text-gray-500">Total: </span>{{ App\Helpers\Setup::currency() .' '.  ($item?->price * $item?->quantity)}}</h4>
-                                                                        </div>
+                                                                            <a href="{{ route('admin.products.show', $item?->product?->id) }}" class="border border-gray-400 shadow-sm p-3 text-gray-900 dark:text-white">
+                                                                                <img src="{{ $item?->product?->banner?->url }}" alt="{{ $item?->product?->name }}" class="w-12 h-12">
+                                                                                <h4><span class="text-gray-500">Name: </span>{{ $item?->product?->name }}</h4>
+                                                                                <h4><span class="text-gray-500">Qty: </span>{{  $item?->quantity }}</h4>
+                                                                                <h4><span class="text-gray-500">Price: </span>{{  $item?->price }}</h4>
+                                                                                <h4><span class="text-gray-500">Total: </span>{{ App\Helpers\Setup::currency() .' '.  ($item?->price * $item?->quantity)}}</h4>
+                                                                            </a>
                                                                         @empty
                                                                             <div>unable to load order items</div>
                                                                         @endforelse

@@ -42,9 +42,10 @@ class AppServiceProvider extends ServiceProvider
             // pass brands, categories and promotions to the view
             $categories = \App\Models\Category::latest()->get();
             $brands = \App\Models\Brand::latest()->get();
-            $promotions = \App\Models\Promotion::latest()->get();
+            $active_promotion = \App\Models\Promotion::active()->inRandomOrder()->first();
 
-            $view->with('categories', $categories);
+            $view->with('categories', $categories)
+                ->with('active_promotion', $active_promotion);
 
         });
 

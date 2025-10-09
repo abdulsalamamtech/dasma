@@ -16,10 +16,13 @@
 
                     {{-- Return back --}}
                     <div class="flex justify-end py-2 mb-4">
-                      <a href="{{ route('admin.products.index') }}" class="flex gap-2 items-center text-xl text-green-500 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
-                        <i class="fa fa-arrow-left"></i>
-                        <span>Back</span>
-                      </a>
+                      {{-- <a href="{{ route('admin.products.index') }}"  --}}
+                        <a href="{{ url()->previous() }}"
+                            class="flex gap-2 items-center text-xl text-green-500 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
+                            <i class="fa fa-arrow-left"></i>
+                            <span>Back</span>
+                        </a>
+                      {{-- </a> --}}
                     </div>
                     <div class="overflow-hidden rounded-md mb-4">
                       <!-- Map image placeholder, replace src with actual image link -->
