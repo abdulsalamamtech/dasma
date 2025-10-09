@@ -21,9 +21,25 @@ class NewsletterController extends Controller
         } else{
             $newsletters = Newsletter::latest()->paginate();
         }
-        // return $newsletters;
+
+                // All newsletters data
+        $newsletter_data = Newsletter::all();
+        // total
+        $data['total'] = $newsletter_data;
+        // this month
+        $data['this_month'] = $newsletter_data->where('created_at', '>=', now()->startOfMonth())->count();
+        // last month
+        $data['last_month'] = $newsletter_data->whereBetween('created_at', [now()->subMonth()->startOfMonth(), now()->subMonth()->endOfMonth()])->count();
+        // this year
+        $data['this_year'] = $newsletter_data->where('created_at', '>=', now()->startOfYear())->count();    
+        // last year
+        $data['last_year'] = $newsletter_data->whereBetween('created_at', [now()->subYear()->startOfYear(), now()->subYear()->endOfYear()])->count();       
+        // total count
+        $data['total_count'] = $newsletter_data->count();
+        // return $data;
         return view('dashboard.pages.newsletters.index', [
             'newsletters' => $newsletters,
+            'data' => $data,
         ]);
     }
 

@@ -21,9 +21,41 @@ class UserController extends Controller
                 ->latest()
                 ->paginate();
         }
-        // return $brands;
+
+        // All users data
+        $users_data = User::all();
+        // total
+        $data['total'] = $users_data;
+        // total customers
+        $data['total_customers'] = $users_data->where('role', 'customer')->count();
+        // total admins
+        $data['total_admins'] = $users_data->where('role', 'admin')->count();
+        // total customers with orders
+        $data['total_customers_with_orders'] = $users_data->filter(function ($user) {
+            return $user->orders->count() > 0;
+        })->count();
+        // total customers without orders
+        $data['total_customers_without_orders'] = $users_data->filter(function ($user) {
+            return $user->orders->count() == 0;
+        })->count();
+        // verified users
+        $data['total_verified_users'] = $users_data->whereNotNull('email_verified_at')->count();
+        // unverified users
+        $data['total_unverified_users'] = $users_data->whereNull('email_verified_at')->count();
+        // tnew users this month
+        $data['new_users_this_month'] = $users_data->where('created_at', '>=', now()->subMonth())->count();
+        // new users this year
+        $data['new_users_this_year'] = $users_data->where('created_at', '>=', now()->subYear())->count();
+        // total count
+        $data['total_count'] = $users_data->count();
+        // share with all views
+        // view()->share('users_count', $users_data);
+
+        // return $data;
+
         return view('dashboard.pages.users.index', [
-            'users' => $users
+            'users' => $users,
+            'data' => $data
         ]);
     }
 

@@ -28,7 +28,7 @@
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->newsletter()->statistics()['admin']['newsletters']['total'] ?? 0) }} --}}
+                                {{ Number::abbreviate($data['total_count'] ?? 0) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -51,11 +51,11 @@
                         </div>
                         <div class="p-4 text-right">
                             <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
-                                New newsletters
+                                This Month
                             </p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->newsletter()->statistics()['admin']['newsletters']['new_newsletters'] ?? 0) }} --}}
+                                {{ Number::abbreviate($data['this_month'] ?? 0) }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -74,10 +74,10 @@
                         </div>
                         <div class="p-4 text-right">
                             <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
-                                Verified newsletters</p>
+                                This Year</p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->newsletter()->statistics()['admin']['newsletters']['verified'] ?? 0) }} --}}
+                                {{ Number::abbreviate($data['this_year'] ?? 0) }}
                             </h4>
                         </div>
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
@@ -96,10 +96,11 @@
                         </div>
                         <div class="p-4 text-right">
                             <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
-                                Pending newsletters</p>
+                                Last year</p>
                             <h4
                                 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                {{-- {{ Number::abbreviate(auth()->newsletter()->statistics()['admin']['newsletters']['pending'] ?? 0) }}                                 --}}
+                                {{ Number::abbreviate($data['last_year'] ?? 0) }}
+
                             </h4>
                         </div>
                         <div class="dark:border-gray-500 border-t border-blue-gray-50 p-4">
@@ -240,9 +241,9 @@
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
                                             @if ($newsletter->deleted_at)
-                                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Verified
-                                            @else
                                                 <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Pending
+                                            @else
+                                                <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Verified
                                             @endif
                                         </div>
                                     </td>

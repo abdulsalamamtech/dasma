@@ -57,7 +57,7 @@
                                     @isset(Auth::user()?->userProfile?->image?->path)
                                         {{ asset('storage/profiles/' . Auth::user()->userProfile->image->path) }}
                                     @else
-                                        {{ '/dasma-banners/20250523_084533.jpg' ?? 'https://flowbite.com/docs/images/people/profile-picture-5.jpg' }}
+                                        {{ '/dasma-banners/oladayo-img-logo.jpg'?? 'https://flowbite.com/docs/images/people/profile-picture-5.jpg' }}
                                     @endisset
                                     "
                                 alt="user photo">
