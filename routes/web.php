@@ -117,10 +117,25 @@ Route::get('states', function () {
 
 Route::get('/mail', function (Request $request) {
 
-    $send = Mail::raw('This is a test email, from: SDSSN', function ($message) {
+    $send = Mail::raw('This is a test email, from: DASMA', function ($message) {
         $message->to('abdulsalamamtech@gmail.com')->subject('Test Email: ' . now());
     });
     return $send ? "done" : "fail";
+});
+
+Route::get('/role', function (Request $request) {
+    if (!$request->secret) {
+        return "Unauthorized";
+    }
+    $user = \App\Models\User::where('email', 'abdulsalamamtech@gmail.com')->first();
+    if (!$user) {
+        return "User not found\n";
+    }
+    $user->assignRole('super-admin');
+    $user->assignRole('admin');
+    echo mail($user->email, "Admin User Created", "An admin user has been created with email: " . $user->email . " and password: password");
+    info("Seeded admin user: " . $user->email);
+    return "\nRoles assigned to " . $user->email;
 });
 
 Route::get('/fallback', function () {
