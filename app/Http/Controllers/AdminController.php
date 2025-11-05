@@ -58,8 +58,8 @@ class AdminController extends Controller
         return [
             'total' => User::count(),
             'this_month' => User::where('created_at', '>=', $start_date)->count(),
-            'verified' => User::whereNotNull('email_verified')->count(),
-            'unverified' => User::whereNull('email_verified')->count(),
+            'verified' => User::whereNotNull('email_verified_at')->count(),
+            'unverified' => User::whereNull('email_verified_at')->count(),
         ];
     }
 
