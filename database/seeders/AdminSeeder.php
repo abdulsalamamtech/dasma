@@ -41,6 +41,16 @@ class AdminSeeder extends Seeder
             info("Seeded admin user: " . $user->email);
         }
 
+        // if(!User::where('email', 'abdulsalamamtech@gmail.com')->exists()) {
+        //     $user = User::create([
+        //         'name' => 'Admin User',
+        //         'email' => 'abdulsalamamtech@gmail.com',
+        //         'password' => bcrypt('password'), // Use bcrypt for password hashing
+        //         'email_verified_at' => now(),
+        //     ]);
+        //     $user->assignRole('super-admin');
+        // }        
+
 
         $user = User::where('email', 'abdulsalamamtech@gmail.com')->first();
         $user->assignRole('super-admin');
