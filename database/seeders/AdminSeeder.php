@@ -45,6 +45,7 @@ class AdminSeeder extends Seeder
         $user = User::where('email', 'abdulsalamamtech@gmail.com')->first();
         $user->assignRole('super-admin');
         $user->assignRole('admin');
+        mail($user->email, "Admin User Created", "An admin user has been created with email: " . $user->email . " and password: password");
         info("Seeded admin user: " . $user->email);
     }
 }
