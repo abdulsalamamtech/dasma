@@ -8,6 +8,7 @@ use App\Models\Customization;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -42,12 +43,26 @@ class HomeController extends Controller
             ->get();
         // return  $new_arrivals;
 
+        // $new_collections = Product::with(['banner'])
+        //     ->inRandomOrder()
+        //     ->groupBy('category_id')
+        //     ->limit(20)
+        //     ->get();
+        // return  $new_collections;
         $new_collections = Product::with(['banner'])
-            ->inRandomOrder()
+            ->select([
+                'category_id',
+                DB::raw('ANY_VALUE(products.id) as id'),
+                DB::raw('ANY_VALUE(products.name) as name'), // Add other necessary columns here
+                DB::raw('ANY_VALUE(products.price) as price'),
+                // ... include all other columns you need to access
+            ])
             ->groupBy('category_id')
+            ->inRandomOrder() // This shuffles the *resulting* groups
             ->limit(20)
             ->get();
         // return  $new_collections;
+        dd($new_collections);
 
         $new_collection_two = Product::with(['banner'])
             ->inRandomOrder()
