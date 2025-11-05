@@ -49,12 +49,23 @@ class HomeController extends Controller
         //     ->limit(20)
         //     ->get();
         // return  $new_collections;
-        $new_collections = Product::with(['banner'])
-            ->select("*")
-            ->groupBy('category_id')
-            ->inRandomOrder() // This shuffles the *resulting* groups
-            ->limit(20)
-            ->get();
+
+
+        // 1. Fetch relevant products (e.g., limit the total pool for performance)
+        //    We apply 'inRandomOrder()' to the entire set first to make the selection random.
+        $products = Product::with(['banner'])
+            ->inRandomOrder()
+            ->get(); // Fetches all results into a Collection
+
+        // 2. Group the results by category_id using Laravel Collections
+        $groupedCollections = $products->groupBy('category_id');
+        // 3. Optional: Flatten the groups if you only want the *first* product from each group
+        //    and limit the total number of final products to 20.
+        $new_collections = $groupedCollections->map(function ($products_in_group) {
+            // We already randomized the full list before grouping, so taking the first item
+            // of each group effectively gives a random product from that category.
+            return $products_in_group->first();
+        })->take(20);
         // return  $new_collections;
         // dd($new_collections);
 
