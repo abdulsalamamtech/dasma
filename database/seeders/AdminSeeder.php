@@ -21,6 +21,7 @@ class AdminSeeder extends Seeder
                 'email' => 'abdulsalamamtech@gmail.com',
                 'password' => bcrypt('password'), // Use bcrypt for password hashing by default
                 'email_verified_at' => now(),
+                'role' => 'admin',
             ]);
             $user->assignRole('super-admin');
             $user->assignRole('admin');
@@ -33,10 +34,17 @@ class AdminSeeder extends Seeder
                 'email' => 'contact@dasmacollection.com',
                 'password' => bcrypt('password'), // Use bcrypt for password hashing by default
                 'email_verified_at' => now(),
+                'role' => 'admin',
             ]);
             $user->assignRole('super-admin');
             $user->assignRole('admin');
             info("Seeded admin user: " . $user->email);
         }
+
+
+        $user = User::where('email', 'abdulsalamamtech@gmail.com')->first();
+        $user->assignRole('super-admin');
+        $user->assignRole('admin');
+        info("Seeded admin user: " . $user->email);
     }
 }
