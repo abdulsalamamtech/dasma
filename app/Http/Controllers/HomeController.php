@@ -55,13 +55,20 @@ class HomeController extends Controller
         //    We apply 'inRandomOrder()' to the entire set first to make the selection random.
         $products = Product::with(['banner'])
             ->inRandomOrder()
+            ->limit(40)
             ->get(); // Fetches all results into a Collection
 
         // 2. Group the results by category_id using Laravel Collections
-        $groupedCollections = $products->groupBy('category_id');
+        $categoryCollections = $products->groupBy('category_id');
+        $brandCollections = $products->groupBy('brand_id');
+        $promotionCollections = $products->groupBy('promotion_id');
+
+
+
+
         // 3. Optional: Flatten the groups if you only want the *first* product from each group
         //    and limit the total number of final products to 20.
-        $new_collections = $groupedCollections->map(function ($products_in_group) {
+        $new_collections = $categoryCollections->map(function ($products_in_group) {
             // We already randomized the full list before grouping, so taking the first item
             // of each group effectively gives a random product from that category.
             return $products_in_group->first();
@@ -69,19 +76,31 @@ class HomeController extends Controller
         // return  $new_collections;
         // dd($new_collections);
 
-        $new_collection_two = Product::with(['banner'])
-            ->inRandomOrder()
-            ->groupBy('brand_id')
-            ->limit(25)
-            ->get();
+        // $new_collection_two = Product::with(['banner'])
+        //     ->inRandomOrder()
+        //     ->groupBy('brand_id')
+        //     ->limit(25)
+        //     ->get();
         // return  $new_collection_two;
 
-        $new_collection_three = Product::with(['banner'])
-            ->inRandomOrder()
-            ->groupBy('promotion_id')
-            ->limit(22)
-            ->get();
-        // return  $new_collection_three;                
+        $new_collection_two = $brandCollections->map(function ($products_in_group) {
+            // We already randomized the full list before grouping, so taking the first item
+            // of each group effectively gives a random product from that category.
+            return $products_in_group->first();
+        })->take(20);
+
+        // $new_collection_three = Product::with(['banner'])
+        //     ->inRandomOrder()
+        //     ->groupBy('promotion_id')
+        //     ->limit(22)
+        //     ->get();
+        // return  $new_collection_three;   
+
+        $new_collection_three = $promotionCollections->map(function ($products_in_group) {
+            // We already randomized the full list before grouping, so taking the first item
+            // of each group effectively gives a random product from that category.
+            return $products_in_group->first();
+        })->take(20);
 
         $trending = Product::with(['banner'])
             ->inRandomOrder()
