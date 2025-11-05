@@ -7,7 +7,11 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
+
 
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -108,6 +112,15 @@ Route::get('states', function () {
         "Zamfara"
     ];
     return $states;
+});
+
+
+Route::get('/mail', function (Request $request) {
+
+    $send = Mail::raw('This is a test email, from: SDSSN', function ($message) {
+        $message->to('abdulsalamamtech@gmail.com')->subject('Test Email: ' . now());
+    });
+    return $send ? "done" : "fail";
 });
 
 Route::get('/fallback', function () {
