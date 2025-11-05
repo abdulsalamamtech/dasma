@@ -43,22 +43,22 @@ class HomeController extends Controller
         // return  $new_arrivals;
 
         $new_collections = Product::with(['banner'])
-            ->groupBy('category_id')
             ->inRandomOrder()
+            ->groupBy('category_id')
             ->limit(20)
             ->get();
         // return  $new_collections;
 
         $new_collection_two = Product::with(['banner'])
-            ->groupBy('brand_id')
             ->inRandomOrder()
+            ->groupBy('brand_id')
             ->limit(25)
             ->get();
         // return  $new_collection_two;
 
         $new_collection_three = Product::with(['banner'])
-            ->groupBy('promotion_id')
             ->inRandomOrder()
+            ->groupBy('promotion_id')
             ->limit(22)
             ->get();
         // return  $new_collection_three;                
