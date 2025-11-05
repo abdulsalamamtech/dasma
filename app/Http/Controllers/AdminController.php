@@ -54,6 +54,15 @@ class AdminController extends Controller
      */
     public function users()
     {
+
+        // Count of users that HAVE been verified (where the column is NOT null)
+        $verifiedCount = User::where('email_verified_at', '!=', null)->count();
+        // Count of users that have NOT been verified (where the column IS null)
+        $unverifiedCount = User::where('email_verified_at', '=', null)->count();
+
+        info("Verified Users: $verifiedCount");
+        info("Unverified Users: $unverifiedCount");
+
         $start_date = $this->customData()['this_month'];
         return [
             'total' => User::count(),
@@ -145,10 +154,11 @@ class AdminController extends Controller
             'assets' => Asset::count(),
             'messages' => Message::count(),
         ];
-    }    
+    }
 
 
-    public function customData(){
+    public function customData()
+    {
         return [
             'this_month' => request('start_date') ? request('start_date') : now()->setDateTimeFrom('first day of this month'),
             'last_month' => request('start_date') ? request('start_date') : now()->setDateTimeFrom('first day of last month'),
