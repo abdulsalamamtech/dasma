@@ -23,10 +23,11 @@ class UserRoleSeeder extends Seeder
                     'updated_at' => now()
                 ]
             );
+            info("Seeded role: " . $role->value);
         }
-        $this->call([
-            DatabaseSeeder::class,
-            // Add other seeders here
-        ]);
+        // $this->call([
+        //     DatabaseSeeder::class,
+        //     // Add other seeders here
+        // ]);
     }
 }

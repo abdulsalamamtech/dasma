@@ -24,5 +24,14 @@ class DatabaseSeeder extends Seeder
             ]);
             $user->assignRole('super-admin');
         }
+
+
+
+        $this->call([
+            UserRoleSeeder::class,
+            AdminSeeder::class
+            // Add other seeders here
+        ]);
+        // php artisan db:seed
     }
 }
