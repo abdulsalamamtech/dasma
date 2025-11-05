@@ -26,13 +26,20 @@ jobs:
             git pull origin main  # Pull the latest changes from main branch
             composer install  # Install dependencies
             
+            # display a message with timestamp
+            date +"%Y-%m-%d %T Starting deployment..."
+            echo "Running migrations and seeders..."
             # php artisan db:seed
-            php artisan migrate --force  # Migrate the database
+            # php artisan migrate --force  # Migrate the database
+            php artisan migrate --seed  # Migrate and seed the database
             php artisan optimize:clear  # Clear the optimization
             php artisan cache:clear  # Clear the cache
             php artisan view:clear  # Clear the view cache
             php artisan route:clear  # Clear the route cache
             php artisan optimize  # Optimize the app
-            # npm install  # Install dependencies
-            # npm run build  # Build the Node app
+            npm install  # Install dependencies
+            npm run build  # Build the Node app
+            # display a message with timestamp
+            date +"%Y-%m-%d %T Deployment completed."
+            echo "Deployment to staging server completed successfully."
           EOF
