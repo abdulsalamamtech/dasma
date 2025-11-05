@@ -1061,7 +1061,7 @@
           <div class="ml-6 w-full sm:ml-10 lg:ml-0 lg:w-1/3 lg:pl-6 xl:pl-8 2xl:w-1/4">
             <div class="text-center lg:text-right">
               <h2 class="font-hkbold text-2xl tracking-wide text-white lg:text-xl xl:text-2xl 2xl:text-3xl">
-                Summer? Special Collections
+                Special Collections
               </h2>
               <p class="pt-1 font-hk text-lg text-secondary-lighter">
                 Featured Collection

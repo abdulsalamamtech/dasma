@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="max-width: 2080px ; margin: auto;">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -17,7 +17,8 @@
     <meta property="og:site_name" content="DASMA e-commerce website" />
     <meta property="og:image" content="/dasma-banners/dasma-logo-temp.jpg" />
     <link rel="icon" type="image/png" href="/dasma-banners/dasma-logo-temp.jpg" />
-    <meta name="twitter:card" content="DASMA – Premium Fabrics for Every Occasion : “Celebrating Life in Luxury Fabrics.”" />
+    <meta name="twitter:card"
+        content="DASMA – Premium Fabrics for Every Occasion : “Celebrating Life in Luxury Fabrics.”" />
     <meta name="twitter:site" content="@tailwindmade" />
 
     <link rel="stylesheet" href="/npm/boxicons-2.0.5/css/boxicons.min.css" />
