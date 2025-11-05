@@ -72,7 +72,7 @@ class HomeController extends Controller
             // We already randomized the full list before grouping, so taking the first item
             // of each group effectively gives a random product from that category.
             return $products_in_group->first();
-        })->take(20);
+        })->take(20)->shuffle();
         // return  $new_collections;
         // dd($new_collections);
 
@@ -100,7 +100,7 @@ class HomeController extends Controller
             // We already randomized the full list before grouping, so taking the first item
             // of each group effectively gives a random product from that category.
             return $products_in_group->first();
-        })->take(20);
+        })->take(20)->shuffle();
 
         $trending = Product::with(['banner'])
             ->inRandomOrder()
