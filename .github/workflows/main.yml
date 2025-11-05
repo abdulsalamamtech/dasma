@@ -23,12 +23,13 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_IP }} << 'EOF'
             cd ${{ secrets.APP_PATH }} # Navigate to the staging folder
 
-            git pull origin main  # Pull the latest changes from main branch
-            composer install  # Install dependencies
-            
             # display a message with timestamp
             date +"%Y-%m-%d %T Starting deployment..."
             echo "Running migrations and seeders..."
+
+            git pull origin main  # Pull the latest changes from main branch
+            composer install  # Install dependencies
+            
             # php artisan db:seed
             # php artisan migrate --force  # Migrate the database
             php artisan migrate --seed  # Migrate and seed the database
@@ -39,6 +40,7 @@ jobs:
             php artisan optimize  # Optimize the app
             npm install  # Install dependencies
             npm run build  # Build the Node app
+            
             # display a message with timestamp
             date +"%Y-%m-%d %T Deployment completed."
             echo "Deployment to staging server completed successfully."
