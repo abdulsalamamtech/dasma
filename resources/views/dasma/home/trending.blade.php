@@ -9,7 +9,7 @@
         <div class="mx-auto px-10 text-center lg:mx-0 lg:text-left">
             <div class="pb-4 md:pb-10 lg:w-3/4 lg:pt-10 xl:w-2/3">
                 <h1 class="font-butler text-3xl text-secondary md:text-4xl lg:text-4.5xl">
-                    Trending Dasma Collections
+                    Trending Dasma Collections - Celebrating Life in Luxury
                 </h1>
                 <p class="pt-4 font-hk text-lg text-secondary-lighter">
                     Checkout our newest trends this coming season
