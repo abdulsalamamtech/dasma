@@ -576,11 +576,11 @@ $app_brand = [
                                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Promotion</label>
                                                             <select type="text" name="promotion_id" id="type"
                                                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-600 focus:border-yellow-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                placeholder="promotion" required="" value="">
+                                                                placeholder="promotion" value="">
                                                                 <option value="">select a promotion</option>
                                                                 @forelse ($promotions as $promotion)
-                                                                    <option value="{{ $promotion->id }}" @selected($promotion->id == $product->promotion->id)>
-                                                                        {{ $promotion->discount  .'% '. $promotion->title}}
+                                                                    <option value="{{ $promotion?->id }}" @selected($promotion?->id == $product?->promotion->id)>
+                                                                        {{ $promotion?->discount  .'% '. $promotion?->title}}
                                                                     </option>
                                                                 @empty
                                                                     <option value="">promotions unavailable</option>
