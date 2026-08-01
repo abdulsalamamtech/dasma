@@ -1067,7 +1067,7 @@
                 Featured Collection
               </p>
               <div class="block lg:hidden">
-                <a href="{{ route('stores.list'). '?promotion=' . $new_collection_three?->first()?->promotion->title }}"
+                <a href="{{ route('stores.list'). '?promotion=' . $new_collection_three?->first()?->promotion?->title }}"
                   class="mt-4 inline-block rounded bg-primary px-5 py-4 font-hk text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary-light focus:outline-none md:px-8 md:py-5">View
                   All Special Collections
                 </a>
