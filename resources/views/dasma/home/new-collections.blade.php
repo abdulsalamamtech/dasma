@@ -770,7 +770,7 @@
                                       </div>
                                   @endif
                               </div>
-                              <a href="{{ route('stores.show', $product->slug) }}"
+                              <a href="{{ route('stores.show', $product?->slug) }}"
                                   class="mr-3 flex items-center rounded-full bg-white px-3 py-3 transition-all hover:bg-primary-light">
                                   <img src="/assets/img/icons/icon-search.svg" class="h-6 w-6" alt="icon search" />
                               </a>
@@ -783,7 +783,7 @@
                       </div>
                       <div class="flex items-center justify-between pt-6">
                           <div>
-                              <h3 class="font-hk text-sm text-secondary">{{ $product->name }}</h3>
+                              <h3 class="font-hk text-sm text-secondary">{{ $product?->name }}</h3>
                               <div class="flex items-center">
                                   <div class="flex items-center">
                                       <i class="bx bxs-star text-primary"></i>
@@ -793,7 +793,7 @@
                                       <i class="bx bxs-star-half text-primary"></i>
                                   </div>
                                   <p class="ml-2 font-hk text-sm text-secondary">
-                                      ({{ 50 + $product->id }})
+                                      ({{ 50 + $product?->id }})
                                   </p>
                               </div>
                           </div>
@@ -802,13 +802,13 @@
                               {{-- initial price --}}
                               <div>
                                   <del class="font-hk text-base font-bold text-primary">
-                                      {{ App\Helpers\Setup::currency('sign') }}{{ $product->initial_price }}
+                                      {{ App\Helpers\Setup::currency('sign') }}{{ $product?->initial_price }}
                                   </del>
                               </div>
                               {{-- selling price --}}
                               <div>
                                   <span class="font-hk text-xl font-bold text-primary">
-                                      {{ App\Helpers\Setup::currency('sign') }}{{ $product->price }}
+                                      {{ App\Helpers\Setup::currency('sign') }}{{ $product?->price }}
                                   </span>
                               </div>
                           </div>
@@ -1076,13 +1076,13 @@
             <div class="group relative hidden lg:block">
               <div
                 class="ml-auto mb-auto mt-8 h-56 bg-cover bg-center bg-no-repeat xl:mt-10 xl:h-68 2xl:mt-14 2xl:h-88"
-                style="background-image:url({{ $new_collection_three->first()?->banner->url ?? '/assets/img/unlicensed/collection-shoes.jpg' }})"></div>
+                style="background-image:url({{ $new_collection_three->first()?->banner?->url ?? '/assets/img/unlicensed/collection-shoes.jpg' }})"></div>
               <div
                 class="pointer-events-none absolute inset-0 overflow-hidden bg-secondary opacity-0 transition-all group-hover:pointer-events-auto group-hover:opacity-75">
               </div>
               <div
                 class="group absolute inset-0 mx-auto flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
-                <a href="{{ route('stores.list'). '?promotion=' . $new_collection_three?->first()?->promotion->title }}"
+                <a href="{{ route('stores.list'). '?promotion=' . $new_collection_three?->first()?->promotion?->title }}"
                   class="inline-block rounded bg-primary px-5 py-4 font-hk text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-primary-light focus:outline-none md:px-8 md:py-5">
                   View Special Collections
                 </a>
