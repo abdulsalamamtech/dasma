@@ -579,7 +579,7 @@ $app_brand = [
                                                                 placeholder="promotion" value="">
                                                                 <option value="">select a promotion</option>
                                                                 @forelse ($promotions as $promotion)
-                                                                    <option value="{{ $promotion?->id }}" @selected($promotion?->id == $product?->promotion->id)>
+                                                                    <option value="{{ $promotion?->id }}" @selected($promotion?->id == $product?->promotion?->id)>
                                                                         {{ $promotion?->discount  .'% '. $promotion?->title}}
                                                                     </option>
                                                                 @empty
